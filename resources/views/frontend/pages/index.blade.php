@@ -12,7 +12,7 @@
                           data-speed="400"
                           data-start="1500"
                           data-easing="easeOutBack">
-                         <img src="img/banner/ban2.png" alt="Image 1">
+                         <img src="{{url('frontend/img/banner/ban2.png')}}" alt="Image 1">
                      </div>
                      <div class="caption lfr slide_title"
                           data-x="670"
@@ -55,7 +55,7 @@
                  <!-- 2nd slide  -->
                  <li data-transition="fade" data-slotamount="8" data-masterspeed="700" data-delay="9400" data-thumb="">
                      <!-- THE MAIN IMAGE IN THE FIRST SLIDE -->
-                     <img src="img/banner/banner_bg.jpg" alt="">
+                     <img src="{{url('frontend/img/banner/banner_bg.jpg')}}" alt="">
                      <div class="caption lft slide_title"
                           data-x="10"
                           data-y="125"
@@ -96,7 +96,7 @@
                           data-speed="400"
                           data-start="2000"
                           data-easing="easeOutBack"  >
-                         <img src="img/banner/man.png" alt="man">
+                         <img src="{{url('frontend/img/banner/man.png')}}" alt="man">
                      </div>
                      <div class="caption lft slide_item_right"
                           data-x="330"
@@ -104,21 +104,21 @@
                           data-speed="500"
                           data-start="5000"
                           data-easing="easeOutBack">
-                         <img src="img/banner/test_man.png" id="rev-hint2" alt="txt img">
+                         <img src="{{url('frontend/img/banner/test_man.png')}}" id="rev-hint2" alt="txt img">
                      </div>
 
                  </li>
 
                  <!-- 3rd slide  -->
                  <li data-transition="fade" data-slotamount="7" data-masterspeed="300" data-delay="9400" data-thumb="">
-                     <img src="img/banner/red-bg.jpg" alt="">
+                     <img src="{{url('frontend/img/banner/red-bg.jpg')}}" alt="">
                      <div class="caption lfl slide_item_right"
                           data-x="10"
                           data-y="105"
                           data-speed="1200"
                           data-start="1500"
                           data-easing="easeOutBack">
-                         <img src="img/banner/imac.png" alt="Image 1">
+                         <img src="{{url('frontend/img/banner/imac.png')}}" alt="Image 1">
                      </div>
                      <div class="caption lfl slide_item_right"
                           data-x="25"
@@ -126,7 +126,7 @@
                           data-speed="1200"
                           data-start="2000"
                           data-easing="easeOutBack">
-                         <img src="img/banner/tab.png" alt="Image 1">
+                         <img src="{{url('frontend/img/banner/tab.png')}}" alt="Image 1">
                      </div>
                      <div class="caption lfl slide_item_right"
                           data-x="200"
@@ -134,7 +134,7 @@
                           data-speed="1200"
                           data-start="2500"
                           data-easing="easeOutBack">
-                         <img src="img/banner/mobile.png" alt="Image 1">
+                         <img src="{{url('frontend/img/banner/mobile.png')}}" alt="Image 1">
                      </div>
                      <div class="caption lfl slide_item_right"
                           data-x="250"
@@ -142,7 +142,7 @@
                           data-speed="1200"
                           data-start="3000"
                           data-easing="easeOutBack">
-                         <img src="img/banner/laptop.png" alt="Image 1">
+                         <img src="{{url('frontend/img/banner/laptop.png')}}" alt="Image 1">
                      </div>
                      <div class="caption lfl slide_item_right"
                           data-x="165"
@@ -150,7 +150,7 @@
                           data-speed="500"
                           data-start="5000"
                           data-easing="easeOutBack">
-                         <img src="img/banner/text_imac.png" id="rev-hint1" alt="Image 1">
+                         <img src="{{url('frontend/img/banner/text_imac.png" id="rev-hint1')}}" alt="Image 1">
                      </div>
 
                      <div class="caption lfr slide_title slide_item_left yellow-txt"
@@ -249,7 +249,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-sm-6 text-center">
-                    <img src="img/property-img.png" alt="">
+                    <img src="{{url('frontend/img/property-img.png')}}" alt="">
                 </div>
                 <div class="col-lg-6 col-sm-6">
                     <h1>flat & modern trend design</h1>
@@ -291,7 +291,7 @@
                             <div id="news" class="tab-pane active">
                                 <article class="media">
                                     <a class="pull-left thumb p-thumb">
-                                        <img src="img/product1.jpg" alt="">
+                                        <img src="{{url('frontend/img/product1.jpg')}}" alt="">
                                     </a>
                                     <div class="media-body">
                                         <a href="#" class=" p-head">News Tittle goes here</a>
@@ -300,7 +300,7 @@
                                 </article>
                                 <article class="media">
                                     <a class="pull-left thumb p-thumb">
-                                        <img src="img/product2.png" alt="">
+                                        <img src="{{url('frontend/img/product2.png')}}" alt="">
                                     </a>
                                     <div class="media-body">
                                         <a href="#" class=" p-head">News Tittle goes here 2</a>
@@ -309,7 +309,7 @@
                                 </article>
                                 <article class="media">
                                     <a class="pull-left thumb p-thumb">
-                                        <img src="img/product1.jpg" alt="">
+                                        <img src="{{url('frontend/img/product1.jpg')}}" alt="">
                                     </a>
                                     <div class="media-body">
                                         <a href="#" class=" p-head">News Tittle goes here 3</a>
@@ -363,7 +363,7 @@
                             <ul class="slides about-flex-slides">
                                 <li>
                                     <div class="about-testimonial-image ">
-                                        <img alt="" src="img/testimonial-img-1.jpg">
+                                        <img alt="" src="{{url('frontend/img/testimonial-img-1.jpg')}}">
                                     </div>
                                     <a class="about-testimonial-author" href="#">Ericson Reagan</a>
                                     <span class="about-testimonial-company">ABC Realestate LLC</span>
@@ -375,7 +375,7 @@
                                 </li>
                                 <li>
                                     <div class="about-testimonial-image ">
-                                        <img alt="" src="img/avatar2.jpg">
+                                        <img alt="" src="{{url('frontend/img/avatar2.jpg')}}">
                                     </div>
                                     <a class="about-testimonial-author" href="#">Jonathan Smith</a>
                                     <span class="about-testimonial-company">DEF LLC</span>
@@ -400,12 +400,12 @@
                 <ul class="bxslider">
                     <li>
                         <div class="element item view view-tenth" data-zlname="reverse-effect">
-                            <img src="img/works/img1.jpg" alt="" />
+                            <img src="{{url('frontend/img/works/img1.jpg')}}" alt="" />
                             <div class="mask">
                                 <a data-zl-popup="link" href="javascript:;">
                                     <i class="icon-link"></i>
                                 </a>
-                                <a data-zl-popup="link2" class="fancybox" rel="group" href="img/works/img1.jpg">
+                                <a data-zl-popup="link2" class="fancybox" rel="group" href="{{url('frontend/img/works/img1.jpg')}}">
                                     <i class="icon-search"></i>
                                 </a>
                             </div>
@@ -413,12 +413,12 @@
                     </li>
                     <li>
                         <div class="element item view view-tenth" data-zlname="reverse-effect">
-                            <img src="img/works/img2.jpg" alt="" />
+                            <img src="{{url('frontend/img/works/img2.jpg')}}" alt="" />
                             <div class="mask">
                                 <a data-zl-popup="link" href="javascript:;">
                                     <i class="icon-link"></i>
                                 </a>
-                                <a data-zl-popup="link2" class="fancybox" rel="group" href="img/works/img2.jpg">
+                                <a data-zl-popup="link2" class="fancybox" rel="group" href="{{url('frontend/img/works/img2.jpg')}}">
                                     <i class="icon-search"></i>
                                 </a>
                             </div>
@@ -426,12 +426,12 @@
                     </li>
                     <li>
                         <div class="element item view view-tenth" data-zlname="reverse-effect">
-                            <img src="img/works/img3.jpg" alt="" />
+                            <img src="{{url('frontend/img/works/img3.jpg')}}" alt="" />
                             <div class="mask">
                                 <a data-zl-popup="link" href="javascript:;">
                                     <i class="icon-link"></i>
                                 </a>
-                                <a data-zl-popup="link2" class="fancybox" rel="group" href="img/works/img3.jpg">
+                                <a data-zl-popup="link2" class="fancybox" rel="group" href="{{url('frontend/img/works/img3.jpg')}}">
                                     <i class="icon-search"></i>
                                 </a>
                             </div>
@@ -439,12 +439,12 @@
                     </li>
                     <li>
                         <div class="element item view view-tenth" data-zlname="reverse-effect">
-                            <img src="img/works/img4.jpg" alt="" />
+                            <img src="{{url('frontend/img/works/img4.jpg')}}" alt="" />
                             <div class="mask">
                                 <a data-zl-popup="link" href="javascript:;">
                                     <i class="icon-link"></i>
                                 </a>
-                                <a data-zl-popup="link2" class="fancybox" rel="group" href="img/works/img4.jpg">
+                                <a data-zl-popup="link2" class="fancybox" rel="group" href="{{url('frontend/img/works/img4.jpg')}}">
                                     <i class="icon-search"></i>
                                 </a>
                             </div>
@@ -452,12 +452,12 @@
                     </li>
                     <li>
                         <div class="element item view view-tenth" data-zlname="reverse-effect">
-                            <img src="img/works/img5.jpg" alt="" />
+                            <img src="{{url('frontend/img/works/img5.jpg')}}" alt="" />
                             <div class="mask">
                                 <a data-zl-popup="link" href="javascript:;">
                                     <i class="icon-link"></i>
                                 </a>
-                                <a data-zl-popup="link2" class="fancybox" rel="group" href="img/works/img5.jpg">
+                                <a data-zl-popup="link2" class="fancybox" rel="group" href="{{url('frontend/img/works/img5.jpg')}}">
                                     <i class="icon-search"></i>
                                 </a>
                             </div>
@@ -465,12 +465,12 @@
                     </li>
                     <li>
                         <div class="element item view view-tenth" data-zlname="reverse-effect">
-                            <img src="img/works/img6.jpg" alt="" />
+                            <img src="{{url('frontend/img/works/img6.jpg')}}" alt="" />
                             <div class="mask">
                                 <a data-zl-popup="link" href="javascript:;">
                                     <i class="icon-link"></i>
                                 </a>
-                                <a data-zl-popup="link2" class="fancybox" rel="group" href="img/works/img6.jpg">
+                                <a data-zl-popup="link2" class="fancybox" rel="group" href="{{url('frontend/img/works/img6.jpg')}}">
                                     <i class="icon-search"></i>
                                 </a>
                             </div>
@@ -478,12 +478,12 @@
                     </li>
                     <li>
                         <div class="element item view view-tenth" data-zlname="reverse-effect">
-                            <img src="img/works/img7.jpg" alt="" />
+                            <img src="{{url('frontend/img/works/img7.jpg')}}" alt="" />
                             <div class="mask">
                                 <a data-zl-popup="link" href="javascript:;">
                                     <i class="icon-link"></i>
                                 </a>
-                                <a data-zl-popup="link2" class="fancybox" rel="group" href="img/works/img7.jpg">
+                                <a data-zl-popup="link2" class="fancybox" rel="group" href="{{url('frontend/img/works/img7.jpg')}}">
                                     <i class="icon-search"></i>
                                 </a>
                             </div>
@@ -491,12 +491,12 @@
                     </li>
                     <li>
                         <div class="element item view view-tenth" data-zlname="reverse-effect">
-                            <img src="img/works/img1.jpg" alt="" />
+                            <img src="{{url('frontend/img/works/img1.jpg')}}" alt="" />
                             <div class="mask">
                                 <a data-zl-popup="link" href="javascript:;">
                                     <i class="icon-link"></i>
                                 </a>
-                                <a data-zl-popup="link2" class="fancybox" rel="group" href="img/works/img1.jpg">
+                                <a data-zl-popup="link2" class="fancybox" rel="group" href="{{url('frontend/img/works/img1.jpg')}}">
                                     <i class="icon-search"></i>
                                 </a>
                             </div>
@@ -527,11 +527,11 @@
                  <div class="row">
                      <div class="col-lg-12 text-center">
                          <ul class="list-unstyled">
-                             <li><a href="#"><img src="img/clients/logo1.png" alt=""></a></li>
-                             <li><a href="#"><img src="img/clients/logo2.png" alt=""></a></li>
-                             <li><a href="#"><img src="img/clients/logo3.png" alt=""></a></li>
-                             <li><a href="#"><img src="img/clients/logo4.png" alt=""></a></li>
-                             <li><a href="#"><img src="img/clients/logo5.png" alt=""></a></li>
+                             <li><a href="#"><img src="{{url('frontend/img/clients/logo1.png')}}" alt=""></a></li>
+                             <li><a href="#"><img src="{{url('frontend/img/clients/logo2.png')}}" alt=""></a></li>
+                             <li><a href="#"><img src="{{url('frontend/img/clients/logo3.png')}}" alt=""></a></li>
+                             <li><a href="#"><img src="{{url('frontend/img/clients/logo4.png')}}" alt=""></a></li>
+                             <li><a href="#"><img src="{{url('frontend/img/clients/logo5.png')}}" alt=""></a></li>
                          </ul>
                      </div>
                  </div>
