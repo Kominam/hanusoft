@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('url_gmail')->nullable();
             $table->string('url_github')->nullable();
             $table->string('url_avt')->nullable();
-            $table->integer('group_id')->unsigned();
+            $table->integer('group_id')->unsigned()->nullable();
             $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();

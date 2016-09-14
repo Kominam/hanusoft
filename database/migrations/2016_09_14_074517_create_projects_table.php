@@ -18,7 +18,7 @@ class CreateProjectsTable extends Migration
             $table->string('name');
             $table->string('description')->nullable();
             $table->tinyInteger('status');
-            $table->integer('group_id')->unsigned();
+            $table->integer('group_id')->unsigned()->nullable();
             $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
             $table->integer('lang_code_id')->unsigned();
             $table->foreign('lang_code_id')->references('id')->on('lang_codes')->onDelete('cascade');
