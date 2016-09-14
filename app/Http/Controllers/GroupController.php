@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use App\Group;
+
 class GroupController extends Controller
 {
     //
@@ -16,13 +18,11 @@ class GroupController extends Controller
     }
     public function add(Request $request) {
     	$group = new Group;
-    	// get attrubute from request
-
-
-
-
-
-
+    	// get attrubute from request include name and description
+      $group->name = $request->name;
+      $group->description = $request->description;
+      $group->lang_code_id = $request->lang_code_id;
+      //save
     	$group->save();
     	// return to list page
     }
@@ -37,9 +37,10 @@ class GroupController extends Controller
    	public function edit(Request $request, $id) {
    		$group= Group:: find($id);
    		// set new value for attribute of this project
-
-
-
+      $group->name = $request->name;
+      $group->description = $request->description;
+      $group->lang_code_id = $request->lang_code_id;
+      //save
    		$group->save();
    		// return to list page
    	}

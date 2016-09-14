@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use App\Post;
+
 class PostController extends Controller
 {
     //Add
@@ -15,10 +17,9 @@ class PostController extends Controller
     public function add(Request $request) {
     	$post = new Post;
     	// get attrubute from request
-
-
-
-
+      $post->title = $request->title;
+      $post->content = $request->content;
+      //save
     	$post->save();
     	// return to list page
     }
@@ -33,7 +34,8 @@ class PostController extends Controller
    	public function edit(Request $request, $id) {
    		$post= Post:: find($id);
    		// set new value for attribute of this project
-
+      $post->title = $request->title;
+      $post->content = $request->content;
 
 
    		$post->save();

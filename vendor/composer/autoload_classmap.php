@@ -6,11 +6,11 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddLangCodeToUsersTable' => $baseDir . '/database/migrations/2016_09_14_080949_add_lang_code_to_users_table.php',
     'CreateAdminsTable' => $baseDir . '/database/migrations/2016_09_10_140402_create_admins_table.php',
     'CreateGroupTable' => $baseDir . '/database/migrations/2016_09_14_073731_create_group_table.php',
     'CreateLanguageCodesTable' => $baseDir . '/database/migrations/2016_09_14_073415_create_language_codes_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
-    'CreatePostUserTable' => $baseDir . '/database/migrations/2016_09_14_080007_create_post_user_table.php',
     'CreatePostsTable' => $baseDir . '/database/migrations/2016_09_14_075446_create_posts_table.php',
     'CreateProjectUserTable' => $baseDir . '/database/migrations/2016_09_14_075832_create_project_user_table.php',
     'CreateProjectsTable' => $baseDir . '/database/migrations/2016_09_14_074517_create_projects_table.php',
@@ -457,6 +457,7 @@ return array(
     'PHP_Token_XOR_EQUAL' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_YIELD' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_YIELD_FROM' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
+    'RemoveLangCodeToUsersTable' => $baseDir . '/database/migrations/2016_09_14_082433_remove_lang_code_to_users_table.php',
     'SebastianBergmann\\CodeCoverage\\CodeCoverage' => $vendorDir . '/phpunit/php-code-coverage/src/CodeCoverage.php',
     'SebastianBergmann\\CodeCoverage\\CoveredCodeNotExecutedException' => $vendorDir . '/phpunit/php-code-coverage/src/Exception/CoveredCodeNotExecutedException.php',
     'SebastianBergmann\\CodeCoverage\\Driver\\Driver' => $vendorDir . '/phpunit/php-code-coverage/src/Driver/Driver.php',

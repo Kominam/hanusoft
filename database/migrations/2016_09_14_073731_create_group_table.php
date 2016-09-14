@@ -16,7 +16,7 @@ class CreateGroupTable extends Migration
         Schema::create('groups', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->timestamps();
             $table->integer('lang_code_id')->unsigned();
             $table->foreign('lang_code_id')->references('id')->on('lang_codes')->onDelete('cascade');

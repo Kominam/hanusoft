@@ -9,10 +9,16 @@ class Project extends Model
     //
     //
     protected $table="projects";
-    protected $fillable =['id', 'name'];
+    protected $fillable =['id', 'name', 'description', 'status', 'group_id','lang_code_id'];
     public $timestamp =true;
 
-   /* public function product() {
-    	return $this->hasMany('App\Product');
-    }*/
+    public function group() {
+    	return $this->belongsTo('App\Group');
+    }
+    public function language() {
+    	return $this->belongsTo('App\Language')
+    }
+    public function members() {
+    	return $this->belongsToMany('App\Member');
+    }
 }
