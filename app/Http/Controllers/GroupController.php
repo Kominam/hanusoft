@@ -17,6 +17,7 @@ class GroupController extends Controller
     	//return form to add new group
     }
     public function add(Request $request) {
+      //missing validator 
     	$group = new Group;
     	// get attrubute from request include name and description
       $group->name = $request->name;
