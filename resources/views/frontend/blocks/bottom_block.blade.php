@@ -1,39 +1,85 @@
-<!--footer start-->
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-sm-3">
-                    <h1>contact info</h1>
-                    <address>
-                        <p>Address: No.28-63877 street</p>
-                        <p>lorem ipsum city, Country</p>
 
-                        <p>Phone : (123) 456-7890</p>
-                        <p>Fax : (123) 456-7890</p>
-                        <p>Email : <a href="javascript:;">support@vectorlab.com</a></p>
-                    </address>
-                </div>
-                <div class="col-lg-5 col-sm-5">
-                    <h1>latest tweet</h1>
-                    <div class="tweet-box">
-                        <i class="icon-twitter"></i>
-                        <em>Please follow <a href="javascript:;">@nettus</a> for all future updates of us! <a href="javascript:;">twitter.com/vectorlab</a></em>
+
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="footer-ribbon">
+                <span>Get in Touch</span>
+            </div>
+            <div class="col-md-3">
+                <div class="newsletter">
+                    <h4>Newsletter</h4>
+                    <p>Keep up on our always evolving product features and technology. Enter your e-mail and subscribe to our newsletter.</p>
+                    <div class="alert alert-success hidden" id="newsletterSuccess">
+                        <strong>Success!</strong> You've been added to our email list.
                     </div>
+                    <div class="alert alert-danger hidden" id="newsletterError"></div>
+                    <form id="newsletterForm" action="http://preview.oklerthemes.com/Hanusoft/3.7.0/php/newsletter-subscribe.php" method="POST">
+                        <div class="input-group">
+                            <input class="form-control" placeholder="Email Address" name="newsletterEmail" id="newsletterEmail" type="text">
+                            <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit">Go!</button>
+                            </span>
+                        </div>
+                    </form>
                 </div>
-                <div class="col-lg-3 col-sm-3 col-lg-offset-1">
-                    <h1>stay connected</h1>
-                    <ul class="social-link-footer list-unstyled">
-                        <li><a href="#"><i class="icon-facebook"></i></a></li>
-                        <li><a href="#"><i class="icon-google-plus"></i></a></li>
-                        <li><a href="#"><i class="icon-dribbble"></i></a></li>
-                        <li><a href="#"><i class="icon-linkedin"></i></a></li>
-                        <li><a href="#"><i class="icon-twitter"></i></a></li>
-                        <li><a href="#"><i class="icon-skype"></i></a></li>
-                        <li><a href="#"><i class="icon-github"></i></a></li>
-                        <li><a href="#"><i class="icon-youtube"></i></a></li>
+            </div>
+            <div class="col-md-3">
+                <h4>Latest Tweets</h4>
+                <div id="tweet" class="twitter" data-plugin-tweets data-plugin-options='{"username": "oklerthemes", "count": 2}'>
+                    <p>Please wait...</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="contact-details">
+                    <h4>Contact Us</h4>
+                    <ul class="contact">
+                        <li>
+                            <p><i class="fa fa-map-marker"></i> <strong>Address:</strong> Km9 Nguyen Trai, Thanh Xuan, Ha Noi, Viet Nam</p>
+                        </li>
+                        <li>
+                            <p><i class="fa fa-phone"></i> <strong>Phone:</strong> (123) 456-7890</p>
+                        </li>
+                        <li>
+                            <p><i class="fa fa-envelope"></i> <strong>Email:</strong> <a href="mailto:mail@example.com">mail@example.com</a></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <ul class="social-icons">
+                        <li class="facebook"><a href="../../../www.facebook.com/index.html" target="_blank" data-placement="bottom" data-tooltip title="Facebook">Facebook</a></li>
+                        <li class="twitter"><a href="../../../www.twitter.com/index.html" target="_blank" data-placement="bottom" data-tooltip title="Twitter">Twitter</a></li>
+                        <li class="linkedin"><a href="../../../www.linkedin.com/index.html" target="_blank" data-placement="bottom" data-tooltip title="Linkedin">Linkedin</a></li>
                     </ul>
                 </div>
             </div>
         </div>
-    </footer>
-    <!--footer end-->
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-1">
+                    <a href="index-2.html" class="logo">
+                    <img alt="Hanusoft Website Template" class="img-responsive" src="{{url('frontend/img/logo-footer.png')}}">
+                    </a>
+                </div>
+                <div class="col-md-7">
+                    <p>© Copyright 2015. All Rights Reserved.</p>
+                </div>
+                <div class="col-md-4">
+                    <nav id="sub-menu">
+                        <ul>
+                            <li><a href="page-faq.html">FAQ's</a></li>
+                            <li><a href="sitemap.html">Sitemap</a></li>
+                            <li><a href="{{route('contact')}}">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
