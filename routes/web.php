@@ -35,6 +35,14 @@ Route::get('/members', ['as' => 'members', function () {
 	return view('frontend.pages.members');
 }]);
 
+Route::get('/posts', ['as' => 'posts', function () {
+	return view('frontend.pages.posts');
+}]);
+
+Route::get('/projects', ['as' => 'projects', function () {
+	return view('frontend.pages.projects');
+}]);
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');

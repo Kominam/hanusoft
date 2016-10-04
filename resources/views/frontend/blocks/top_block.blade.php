@@ -1,6 +1,3 @@
-@extends('frontend.pages.master')
-
-
 <div class="body">
 <header id="header">
     <div class="container">
@@ -47,10 +44,10 @@
                 <ul class="nav nav-pills nav-main" id="mainMenu">
                     <li class="active"><a href={{route('index')}}>Home</a></li>
                     <li><a href={{route('about')}}>About</a></li>
-                    <li><a href="">Service</a></li>
-                    <li><a href="">Members </a></li>
-                    <li><a href="">Project</a></li>
-                    <li><a href="">Post</a></li>
+                    <li><a href={{route('services')}}>Service</a></li>
+                    <li><a href={{route('members')}}>Members </a></li>
+                    <li><a href={{route('projects')}}>Project</a></li>
+                    <li><a href={{route('posts')}}>Post</a></li>
                     <li><a href={{route('contact')}}>Contact</a></li>
                 </ul>
             </nav>
