@@ -46,7 +46,7 @@ Route::get('/projects', ['as' => 'projects', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
-
+Route::get('/admin', 'AdminController@index');
 Route::get('admin/login', 'AdminAuth\LoginController@showLoginForm');
 Route::post('admin/login', 'AdminAuth\LoginController@login');
 Route::get('admin/logout', 'AdminAuth\Controller@logout');

@@ -51,4 +51,37 @@ class GroupController extends Controller
    		$group->delete();
    		//return to list
    	}
+
+    public function addLangCode() {
+
+    }
+
+    public function resetLangCode() {
+
+    }
+
+
+    public function getAllProject() {
+
+    }
+
+    public function getAllMemeber() {
+
+    }
+
+    public function assignProject() {
+
+    }
+
+    public function removeAssign() {
+
+    }
+
+    public function addMember() {
+
+    }
+
+    public function removeMember() {
+      
+    }
 }

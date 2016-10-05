@@ -17,7 +17,7 @@ class Group extends Model
     public function language() {
     	return $this->belongsTo('App\Language');
     }
-    public function members() {
-    	return $this->hasMany('App\Members');
+    public function users() {
+    	return $this->hasMany('App\User');
     }
 }
