@@ -41,7 +41,7 @@
                             <p><i class="fa fa-phone"></i> <strong>Phone:</strong> (123) 456-7890</p>
                         </li>
                         <li>
-                            <p><i class="fa fa-envelope"></i> <strong>Email:</strong> <a href="mailto:mail@example.com">mail@example.com</a></p>
+                            <p><i class="fa fa-envelope"></i> <strong>Email:</strong> <a href="mailto:hanusoft@gmail.com">hanusoft@gmail.com</a></p>
                         </li>
                     </ul>
                 </div>
@@ -62,12 +62,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-1">
-                    <a href="index-2.html" class="logo">
+                    <a href="{{route('index')}}" class="logo">
                     <img alt="Hanusoft Website Template" class="img-responsive" src="{{url('frontend/img/logo-footer.png')}}">
                     </a>
                 </div>
                 <div class="col-md-7">
-                    <p>© Copyright 2015. All Rights Reserved.</p>
+                    <p>© Copyright 2016. All Rights Reserved.</p>
                 </div>
                 <div class="col-md-4">
                     <nav id="sub-menu">
