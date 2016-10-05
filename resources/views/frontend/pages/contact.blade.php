@@ -2,13 +2,13 @@
 @section('content')
 <div class="body">
 <div role="main" class="main">
+
     <section class="page-top">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li><a href="#">Home</a></li>
-                        <li class="active">Contact Us</li>
+                        {!! Breadcrumbs::render('contact') !!}
                     </ul>
                 </div>
             </div>

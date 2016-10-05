@@ -338,7 +338,7 @@
                           <div class="testimonial-arrow-down"></div>
                           <div class="testimonial-author">
                             <div class="img-thumbnail img-thumbnail-small">
-                              <img src="'{{url('frontend/img/clients/client-1.jpg')}}" alt="">
+                              <img src="{{url('frontend/img/clients/client-1.jpg')}}" alt="">
                             </div>
                             <p><strong>John Smith</strong><span>CEO & Founder - Okler</span></p>
                           </div>

@@ -10,8 +10,8 @@
 
     <title>HanuSoft</title>
 
-    <!-- Web Fonts  -->
-    <link href="../../../fonts.googleapis.com/cssfb2f.css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light" rel="stylesheet" type="text/css">
+    {{-- <!-- Web Fonts  -->
+    <link href="http://fonts.googleapis.com/cssfb2f.css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light" rel="stylesheet" type="text/css"> --}}
 
     <!-- Vendor CSS -->
     <link rel="stylesheet" href="{{url('frontend/vendor/bootstrap/bootstrap.css')}}">

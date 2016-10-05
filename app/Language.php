@@ -18,7 +18,7 @@ class Language extends Model
     public function projects() {
     	return $this->hasMany('App\Project');
     }
-    public function members() {
-        return $this->belongsToMany('App\Member');
+    public function users() {
+        return $this->belongsToMany('App\User');
     }
 }
