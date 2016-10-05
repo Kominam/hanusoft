@@ -139,12 +139,7 @@
                         <div class="form-group">
                             <div class="col-md-4">
                                 <div class="captcha form-control">
-                                    <div class="captcha-image">
-                                        <img id="captcha-image" src="php/simple-php-captcha/simple-php-captcha.php/porto/3.7.0/php/simple-php-captcha/simple-php-captcha943a.png?_CAPTCHA&amp;t=0.63040000+1425567791" alt="CAPTCHA code">												
-                                    </div>
-                                    <div class="captcha-refresh">
-                                        <a href="#" id="refreshCaptcha"><i class="fa fa-refresh"></i></a>
-                                    </div>
+                                  {!! captcha_img() !!} 
                                 </div>
                             </div>
                             <div class="col-md-8">
