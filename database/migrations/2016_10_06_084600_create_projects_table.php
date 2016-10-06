@@ -15,14 +15,11 @@ class CreateProjectsTable extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('description')->nullable();
-            $table->tinyInteger('status');
-            $table->integer('group_id')->unsigned()->nullable();
-            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
-            $table->integer('lang_code_id')->unsigned();
-            $table->foreign('lang_code_id')->references('id')->on('lang_codes')->onDelete('cascade');
+            $table->string('name')->unique();
+            $table->string('link_preview');
             $table->timestamps();
+            $table->integer('type_id')->unsigned();
+            $table->foreign('type_id')->references('id')->on('projecttypes')->onDelete('cascade');
         });
     }
 
