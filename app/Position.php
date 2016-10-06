@@ -4,18 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Skill extends Model
+class Position extends Model
 {
     //
-    protected $table="skills";
+    protected $table="positions";
     protected $fillable =['id', 'name', 'description'];
     public $timestamp =true;
 
     public function users() {
-    	return $this->belongsToMany('App\User');
+    	 return $this->hasMany('App\User');
     }
-    public function projects() {
-    	return $this->belongsToMany('App\Project');
-    }
-
 }

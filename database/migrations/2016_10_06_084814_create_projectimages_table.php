@@ -18,7 +18,7 @@ class CreateProjectimagesTable extends Migration
             $table->timestamps();
             $table->string('img_name');
             $table->string('desciption')->nullable();
-             $table->integer('project_id')->unsigned();
+            $table->integer('project_id')->unsigned();
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
         });
     }
