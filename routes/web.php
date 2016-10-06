@@ -35,12 +35,24 @@ Route::get('/members', ['as' => 'members', function () {
 	return view('frontend.pages.members');
 }]);
 
+Route::get('/member_detail', ['as' => 'member_detail', function () {
+	return view('frontend.pages.member_detail');
+}]);
+
 Route::get('/posts', ['as' => 'posts', function () {
 	return view('frontend.pages.posts');
 }]);
 
+Route::get('/post_detail', ['as' => 'post_detail', function () {
+	return view('frontend.pages.post_detail');
+}]);
+
 Route::get('/projects', ['as' => 'projects', function () {
 	return view('frontend.pages.projects');
+}]);
+
+Route::get('/single_project', ['as' => 'single_project', function (){
+	return view('frontend.pages.single_project');
 }]);
 
 Auth::routes();
