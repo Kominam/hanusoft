@@ -8,12 +8,20 @@ use App\Http\Requests;
 
 use App\User;
 
+use App\Repositories\Contracts\MemberRepositoryInterface;
+
 class MemberController extends Controller
 {
-    //
-    public function updateProfile() {
-    	// check Auth:check
-    	// if login => can allow update profile
-    	// else return view login
+    protected $memberRepository;
+
+    public function __construct(MemberRepositoryInterface $memberRepository)
+    {
+        $this->memberRepository= $memberRepository;
+    }
+     public function index()
+    {
+        $members = $this->memberRepository->all();
+
+        dd($members);
     }
 }

@@ -17,6 +17,7 @@ class CreateProjectsTable extends Migration
             $table->increments('id');
             $table->string('name')->unique();
             $table->string('link_preview');
+            $table->text('description');
             $table->timestamps();
             $table->integer('type_id')->unsigned();
             $table->foreign('type_id')->references('id')->on('projecttypes')->onDelete('cascade');

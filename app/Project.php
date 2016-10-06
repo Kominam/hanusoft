@@ -9,7 +9,8 @@ class Project extends Model
     //
     //
     protected $table="projects";
-    protected $fillable =['id', 'name', 'description', 'link_preview', 'type_id'];
+    protected $fillable =['name', 'description', 'link_preview'];
+    protected $guarded = ['id', 'type_id'];
     public $timestamp =true;
 
     public function type() {

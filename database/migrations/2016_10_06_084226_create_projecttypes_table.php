@@ -16,7 +16,7 @@ class CreateProjecttypesTable extends Migration
         Schema::create('projecttypes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('email')->unique();
             $table->string('address')->nullable();
-            $table->string('bio')->nullable();
+            $table->text('bio')->nullable();
             $table->string('url_fb')->nullable();
             $table->string('url_gmail')->nullable();
             $table->string('url_github')->nullable();
