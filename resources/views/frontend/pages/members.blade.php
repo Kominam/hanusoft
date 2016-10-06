@@ -32,7 +32,7 @@
             <ul class="team-list sort-destination" data-sort-id="team">
                 <li class="col-md-3 col-sm-6 col-xs-12 isotope-item leadership">
                     <div class="team-item thumbnail">
-                        <a href="members_detail.html" class="thumb-info team">
+                        <a href="{{route('member_detail')}}" class="thumb-info team">
                         <img class="img-responsive" alt="" src="{{url('frontend/img/team/team-1.jpg')}}">
                         <span class="thumb-info-title">
                         <span class="thumb-info-inner">John Doe</span>
@@ -51,7 +51,7 @@
                 </li>
                 <li class="col-md-3 col-sm-6 col-xs-12 isotope-item marketing">
                     <div class="team-item thumbnail">
-                        <a href="members_detail.html" class="thumb-info team">
+                        <a href="{{route('member_detail')}}" class="thumb-info team">
                         <img class="img-responsive" alt="" src="{{url('frontend/img/team/team-2.jpg')}}">
                         <span class="thumb-info-title">
                         <span class="thumb-info-inner">Jessica Doe</span>
@@ -70,7 +70,7 @@
                 </li>
                 <li class="col-md-3 col-sm-6 col-xs-12 isotope-item development">
                     <div class="team-item thumbnail">
-                        <a href="members_detail.html" class="thumb-info team">
+                        <a href="{{route('member_detail')}}" class="thumb-info team">
                         <img class="img-responsive" alt="" src="{{url('frontend/img/team/team-3.jpg')}}">
                         <span class="thumb-info-title">
                         <span class="thumb-info-inner">Rick Edward Doe</span>
@@ -89,7 +89,7 @@
                 </li>
                 <li class="col-md-3 col-sm-6 col-xs-12 isotope-item design">
                     <div class="team-item thumbnail">
-                        <a href="members_detail.html" class="thumb-info team">
+                        <a href="{{route('member_detail')}}" class="thumb-info team">
                         <img class="img-responsive" alt="" src="{{url('frontend/img/team/team-4.jpg')}}">
                         <span class="thumb-info-title">
                         <span class="thumb-info-inner">Melinda Wolosky</span>
@@ -108,7 +108,7 @@
                 </li>
                 <li class="col-md-3 col-sm-6 col-xs-12 isotope-item development">
                     <div class="team-item thumbnail">
-                        <a href="members_detail.html" class="thumb-info team">
+                        <a href="{{route('member_detail')}}" class="thumb-info team">
                         <img class="img-responsive" alt="" src="{{url('frontend/img/team/team-5.jpg')}}">
                         <span class="thumb-info-title">
                         <span class="thumb-info-inner">Robert Doe</span>
@@ -127,7 +127,7 @@
                 </li>
                 <li class="col-md-3 col-sm-6 col-xs-12 isotope-item marketing">
                     <div class="team-item thumbnail">
-                        <a href="members_detail.html" class="thumb-info team">
+                        <a href="{{route('member_detail')}}" class="thumb-info team">
                         <img class="img-responsive" alt="" src="{{url('frontend/img/team/team-6.jpg')}}">
                         <span class="thumb-info-title">
                         <span class="thumb-info-inner">Melissa Doe</span>
@@ -146,7 +146,7 @@
                 </li>
                 <li class="col-md-3 col-sm-6 col-xs-12 isotope-item development">
                     <div class="team-item thumbnail">
-                        <a href="members_detail.html" class="thumb-info team">
+                        <a href="{{route('member_detail')}}" class="thumb-info team">
                         <img class="img-responsive" alt="" src="{{url('frontend/img/team/team-7.jpg')}}">
                         <span class="thumb-info-title">
                         <span class="thumb-info-inner">Will Doe</span>
@@ -165,7 +165,7 @@
                 </li>
                 <li class="col-md-3 col-sm-6 col-xs-12 isotope-item development">
                     <div class="team-item thumbnail">
-                        <a href="members_detail.html" class="thumb-info team">
+                        <a href="{{route('member_detail')}}" class="thumb-info team">
                         <img class="img-responsive" alt="" src="{{url('frontend/img/team/team-8.jpg')}}">
                         <span class="thumb-info-title">
                         <span class="thumb-info-inner">Jerry Doe</span>

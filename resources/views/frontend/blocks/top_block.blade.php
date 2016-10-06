@@ -48,7 +48,7 @@
                     <li><a href={{route('members')}}>Members </a></li>
                     <li><a href={{route('projects')}}>Project</a></li>
                     <li><a href={{route('posts')}}>Post</a></li>
-                    <li><a href={{route('contact')}}>Contact</a></li>
+                    <li><a href={{route('contact')}}>Contact</a></li>                    
                 </ul>
             </nav>
         </div>

@@ -42,13 +42,13 @@
                             <span class="month">Jan</span>
                         </div>
                         <div class="post-content">
-                            <h2><a href="posts_detail.html">Post Format - Image Gallery</a></h2>
+                            <h2><a href="{{route('post_detail')}}">Post Format - Image Gallery</a></h2>
                             <p>Euismod atras vulputate iltricies etri elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nunc dui, tristique in semper vel, congue sed ligula. Nam dolor ligula, faucibus id sodales in, auctor fringilla libero. Pellentesque pellentesque tempor tellus eget hendrerit. Morbi id aliquam ligula. Aliquam id dui sem. Proin rhoncus consequat nisl, eu ornare mauris tincidunt vitae. [...]</p>
                             <div class="post-meta">
                                 <span><i class="fa fa-user"></i> By <a href="#">John Doe</a> </span>
                                 <span><i class="fa fa-tag"></i> <a href="#">Duis</a>, <a href="#">News</a> </span>
                                 <span><i class="fa fa-comments"></i> <a href="#">12 Comments</a></span>
-                                <a href="posts_detail.html" class="btn btn-xs btn-primary pull-right">Read more...</a>
+                                <a href="{{route('post_detail')}}" class="btn btn-xs btn-primary pull-right">Read more...</a>
                             </div>
                         </div>
                     </article>
@@ -61,13 +61,13 @@
                             <span class="month">Jan</span>
                         </div>
                         <div class="post-content">
-                            <h2><a href="posts_detail.html">Post Format - Single Image</a></h2>
+                            <h2><a href="{{route('post_detail')}}">Post Format - Single Image</a></h2>
                             <p>Euismod atras vulputate iltricies etri elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nunc dui, tristique in semper vel, congue sed ligula. Nam dolor ligula, faucibus id sodales in, auctor fringilla libero. Pellentesque pellentesque tempor tellus eget hendrerit. Morbi id aliquam ligula. Aliquam id dui sem. Proin rhoncus consequat nisl, eu ornare mauris tincidunt vitae. [...]</p>
                             <div class="post-meta">
                                 <span><i class="fa fa-user"></i> By <a href="#">John Doe</a> </span>
                                 <span><i class="fa fa-tag"></i> <a href="#">Duis</a>, <a href="#">News</a> </span>
                                 <span><i class="fa fa-comments"></i> <a href="#">12 Comments</a></span>
-                                <a href="posts_detail.html" class="btn btn-xs btn-primary pull-right">Read more...</a>
+                                <a href="{{route('post_detail')}}" class="btn btn-xs btn-primary pull-right">Read more...</a>
                             </div>
                         </div>
                     </article>
@@ -80,13 +80,13 @@
                             <span class="month">Jan</span>
                         </div>
                         <div class="post-content">
-                            <h2><a href="posts_detail.html">Post Format - Video</a></h2>
+                            <h2><a href="{{route('post_detail')}}">Post Format - Video</a></h2>
                             <p>Euismod atras vulputate iltricies etri elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nunc dui, tristique in semper vel, congue sed ligula. Nam dolor ligula, faucibus id sodales in, auctor fringilla libero. Pellentesque pellentesque tempor tellus eget hendrerit. Morbi id aliquam ligula. Aliquam id dui sem. Proin rhoncus consequat nisl, eu ornare mauris tincidunt vitae. [...]</p>
                             <div class="post-meta">
                                 <span><i class="fa fa-user"></i> By <a href="#">John Doe</a> </span>
                                 <span><i class="fa fa-tag"></i> <a href="#">Duis</a>, <a href="#">News</a> </span>
                                 <span><i class="fa fa-comments"></i> <a href="#">12 Comments</a></span>
-                                <a href="posts_detail.html" class="btn btn-xs btn-primary pull-right">Read more...</a>
+                                <a href="{{route('post_detail')}}" class="btn btn-xs btn-primary pull-right">Read more...</a>
                             </div>
                         </div>
                     </article>
@@ -99,13 +99,13 @@
                             <span class="month">Jan</span>
                         </div>
                         <div class="post-content">
-                            <h2><a href="posts_detail.html">Post Format - Audio</a></h2>
+                            <h2><a href="{{route('post_detail')}}">Post Format - Audio</a></h2>
                             <p>Euismod atras vulputate iltricies etri elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nunc dui, tristique in semper vel, congue sed ligula. Nam dolor ligula, faucibus id sodales in, auctor fringilla libero. Pellentesque pellentesque tempor tellus eget hendrerit. Morbi id aliquam ligula. Aliquam id dui sem. Proin rhoncus consequat nisl, eu ornare mauris tincidunt vitae. [...]</p>
                             <div class="post-meta">
                                 <span><i class="fa fa-user"></i> By <a href="#">John Doe</a> </span>
                                 <span><i class="fa fa-tag"></i> <a href="#">Duis</a>, <a href="#">News</a> </span>
                                 <span><i class="fa fa-comments"></i> <a href="#">12 Comments</a></span>
-                                <a href="posts_detail.html" class="btn btn-xs btn-primary pull-right">Read more...</a>
+                                <a href="{{route('post_detail')}}" class="btn btn-xs btn-primary pull-right">Read more...</a>
                             </div>
                         </div>
                     </article>
@@ -123,7 +123,7 @@
                                 <span><i class="fa fa-user"></i> By <a href="#">John Doe</a> </span>
                                 <span><i class="fa fa-tag"></i> <a href="#">Duis</a>, <a href="#">News</a> </span>
                                 <span><i class="fa fa-comments"></i> <a href="#">12 Comments</a></span>
-                                <a href="posts_detail.html" class="btn btn-xs btn-primary pull-right">Read more...</a>
+                                <a href="{{route('post_detail')}}" class="btn btn-xs btn-primary pull-right">Read more...</a>
                             </div>
                         </div>
                     </article>
@@ -166,13 +166,13 @@
                                     <li>
                                         <div class="post-image">
                                             <div class="img-thumbnail">
-                                                <a href="posts_detail.html">
+                                                <a href="{{route('post_detail')}}">
                                                 <img src="{{url('frontend/img/blog/blog-thumb-1.jpg')}}" alt="">
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="post-info">
-                                            <a href="posts_detail.html">Nullam Vitae Nibh Un Odiosters</a>
+                                            <a href="{{route('post_detail')}}">Nullam Vitae Nibh Un Odiosters</a>
                                             <div class="post-meta">
                                                 Jan 10, 2013
                                             </div>
@@ -181,13 +181,13 @@
                                     <li>
                                         <div class="post-image">
                                             <div class="img-thumbnail">
-                                                <a href="posts_detail.html">
+                                                <a href="{{route('post_detail')}}">
                                                 <img src="{{url('frontend/img/blog/blog-thumb-2.jpg')}}" alt="">
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="post-info">
-                                            <a href="posts_detail.html">Vitae Nibh Un Odiosters</a>
+                                            <a href="{{route('post_detail')}}">Vitae Nibh Un Odiosters</a>
                                             <div class="post-meta">
                                                 Jan 10, 2013
                                             </div>
@@ -196,13 +196,13 @@
                                     <li>
                                         <div class="post-image">
                                             <div class="img-thumbnail">
-                                                <a href="posts_detail.html">
+                                                <a href="{{route('post_detail')}}">
                                                 <img src="{{url('frontend/img/blog/blog-thumb-3.jpg')}}" alt="">
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="post-info">
-                                            <a href="posts_detail.html">Odiosters Nullam Vitae</a>
+                                            <a href="{{route('post_detail')}}">Odiosters Nullam Vitae</a>
                                             <div class="post-meta">
                                                 Jan 10, 2013
                                             </div>
@@ -215,13 +215,13 @@
                                     <li>
                                         <div class="post-image">
                                             <div class="img-thumbnail">
-                                                <a href="posts_detail.html">
+                                                <a href="{{route('post_detail')}}">
                                                 <img src="{{url('frontend/img/blog/blog-thumb-2.jpg')}}" alt="">
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="post-info">
-                                            <a href="posts_detail.html">Vitae Nibh Un Odiosters</a>
+                                            <a href="{{route('post_detail')}}">Vitae Nibh Un Odiosters</a>
                                             <div class="post-meta">
                                                 Jan 10, 2013
                                             </div>
@@ -230,13 +230,13 @@
                                     <li>
                                         <div class="post-image">
                                             <div class="img-thumbnail">
-                                                <a href="posts_detail.html">
+                                                <a href="{{route('post_detail')}}">
                                                 <img src="{{url('frontend/img/blog/blog-thumb-3.jpg')}}" alt="">
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="post-info">
-                                            <a href="posts_detail.html">Odiosters Nullam Vitae</a>
+                                            <a href="{{route('post_detail')}}">Odiosters Nullam Vitae</a>
                                             <div class="post-meta">
                                                 Jan 10, 2013
                                             </div>
@@ -245,13 +245,13 @@
                                     <li>
                                         <div class="post-image">
                                             <div class="img-thumbnail">
-                                                <a href="posts_detail.html">
+                                                <a href="{{route('post_detail')}}">
                                                 <img src="{{url('frontend/img/blog/blog-thumb-1.jpg')}}" alt="">
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="post-info">
-                                            <a href="posts_detail.html">Nullam Vitae Nibh Un Odiosters</a>
+                                            <a href="{{route('post_detail')}}">Nullam Vitae Nibh Un Odiosters</a>
                                             <div class="post-meta">
                                                 Jan 10, 2013
                                             </div>

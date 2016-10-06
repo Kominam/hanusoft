@@ -31,7 +31,7 @@
     <ul class="portfolio-list sort-destination full-width" data-sort-id="portfolio">
         <li class="isotope-item websites">
             <div class="portfolio-item img-thumbnail">
-                <a href="single-project.html" class="thumb-info secundary">
+                <a href="{{route('single_project')}}" class="thumb-info secundary">
                 <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project.jpg')}}">
                 <span class="thumb-info-title">
                 <span class="thumb-info-inner">SEO</span>
@@ -45,7 +45,7 @@
         </li>
         <li class="isotope-item brands">
             <div class="portfolio-item img-thumbnail">
-                <a href="single-project.html" class="thumb-info secundary">
+                <a href="{{route('single_project')}}" class="thumb-info secundary">
                 <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project-1.jpg')}}">
                 <span class="thumb-info-title">
                 <span class="thumb-info-inner">Okler</span>
@@ -59,7 +59,7 @@
         </li>
         <li class="isotope-item websites">
             <div class="portfolio-item img-thumbnail">
-                <a href="single-project.html" class="thumb-info secundary">
+                <a href="{{route('single_project')}}" class="thumb-info secundary">
                 <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project-7.jpg')}}">
                 <span class="thumb-info-title">
                 <span class="thumb-info-inner">The Code</span>
@@ -73,7 +73,7 @@
         </li>
         <li class="isotope-item websites">
             <div class="portfolio-item img-thumbnail">
-                <a href="single-project.html" class="thumb-info secundary">
+                <a href="{{route('single_project')}}" class="thumb-info secundary">
                 <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project-4.jpg')}}">
                 <span class="thumb-info-title">
                 <span class="thumb-info-inner">The Code</span>
@@ -87,7 +87,7 @@
         </li>
         <li class="isotope-item websites">
             <div class="portfolio-item img-thumbnail">
-                <a href="single-project.html" class="thumb-info secundary">
+                <a href="{{route('single_project')}}" class="thumb-info secundary">
                 <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project-5.jpg')}}">
                 <span class="thumb-info-title">
                 <span class="thumb-info-inner">SEO</span>
@@ -101,7 +101,7 @@
         </li>
         <li class="isotope-item brands">
             <div class="portfolio-item img-thumbnail">
-                <a href="single-project.html" class="thumb-info secundary">
+                <a href="{{route('single_project')}}" class="thumb-info secundary">
                 <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project-6.jpg')}}">
                 <span class="thumb-info-title">
                 <span class="thumb-info-inner">Okler</span>
@@ -115,7 +115,7 @@
         </li>
         <li class="isotope-item logos">
             <div class="portfolio-item img-thumbnail">
-                <a href="single-project.html" class="thumb-info secundary">
+                <a href="{{route('single_project')}}" class="thumb-info secundary">
                 <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project-5.jpg')}}">
                 <span class="thumb-info-title">
                 <span class="thumb-info-inner">The Fly</span>
@@ -129,7 +129,7 @@
         </li>
         <li class="isotope-item logos">
             <div class="portfolio-item img-thumbnail">
-                <a href="single-project.html" class="thumb-info secundary">
+                <a href="{{route('single_project')}}" class="thumb-info secundary">
                 <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project-2.jpg')}}">
                 <span class="thumb-info-title">
                 <span class="thumb-info-inner">The Fly</span>
@@ -143,7 +143,7 @@
         </li>
         <li class="isotope-item brands">
             <div class="portfolio-item img-thumbnail">
-                <a href="single-project.html" class="thumb-info secundary">
+                <a href="{{route('single_project')}}" class="thumb-info secundary">
                 <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project-1.jpg')}}">
                 <span class="thumb-info-title">
                 <span class="thumb-info-inner">Okler</span>
@@ -157,7 +157,7 @@
         </li>
         <li class="isotope-item websites">
             <div class="portfolio-item img-thumbnail">
-                <a href="single-project.html" class="thumb-info secundary">
+                <a href="{{route('single_project')}}" class="thumb-info secundary">
                 <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project-6.jpg')}}">
                 <span class="thumb-info-title">
                 <span class="thumb-info-inner">SEO</span>
