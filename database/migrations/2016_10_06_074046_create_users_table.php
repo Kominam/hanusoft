@@ -18,12 +18,12 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('password');
             $table->string('email')->unique();
-            $table->string('address')->nullable();
-            $table->text('bio')->nullable();
-            $table->string('url_fb')->nullable();
-            $table->string('url_gmail')->nullable();
-            $table->string('url_github')->nullable();
-            $table->string('url_avt')->nullable();
+            $table->string('address')->default('empty');
+            $table->text('bio');
+            $table->string('url_fb')->default('empty');
+            $table->string('url_gmail')->default('empty');
+            $table->string('url_github')->default('empty');
+            $table->string('url_avt')->default('empty');
             $table->integer('position_id')->unsigned();
             $table->foreign('position_id')->references('id')->on('positions')->onDelete('cascade');
             $table->rememberToken();

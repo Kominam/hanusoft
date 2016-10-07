@@ -22,20 +22,26 @@
         <div class="container">
             <ul class="nav nav-pills sort-source secundary pull-right" data-sort-id="portfolio" data-option-key="filter">
                 <li data-option-value="*" class="active"><a href="#">Show All</a></li>
-                <li data-option-value=".websites"><a href="#">Websites</a></li>
-                <li data-option-value=".logos"><a href="#">Logos</a></li>
-                <li data-option-value=".brands"><a href="#">Brands</a></li>
+                <li data-option-value=".Website"><a href="#">Websites</a></li>
+                <li data-option-value=".Application"><a href="#">Applications</a></li>
+                <li data-option-value=".Brand"><a href="#">Brands</a></li>
+                 <li data-option-value=".Logo"><a href="#">Logos</a></li>
             </ul>
         </div>
     </div>
     <ul class="portfolio-list sort-destination full-width" data-sort-id="portfolio">
+        @foreach($projects as $project)
         <li class="isotope-item websites">
             <div class="portfolio-item img-thumbnail">
                 <a href="{{route('single_project')}}" class="thumb-info secundary">
-                <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project.jpg')}}">
+                @foreach ($project->images as $key=>$image)
+                    @if($key == 0)
+                         <img alt="" class="img-responsive" src="{{url('frontend/img/projects/'.$image->img_name)}}">
+                    @endif
+                @endforeach   
                 <span class="thumb-info-title">
-                <span class="thumb-info-inner">SEO</span>
-                <span class="thumb-info-type">Website</span>
+                <span class="thumb-info-inner">{{$project->name}}</span>
+                <span class="thumb-info-type">{{$project->type->name}}</span>
                 </span>
                 <span class="thumb-info-action">
                 <span title="Universal" class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
@@ -43,132 +49,8 @@
                 </a>
             </div>
         </li>
-        <li class="isotope-item brands">
-            <div class="portfolio-item img-thumbnail">
-                <a href="{{route('single_project')}}" class="thumb-info secundary">
-                <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project-1.jpg')}}">
-                <span class="thumb-info-title">
-                <span class="thumb-info-inner">Okler</span>
-                <span class="thumb-info-type">Brand</span>
-                </span>
-                <span class="thumb-info-action">
-                <span title="Universal" class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
-                </span>
-                </a>
-            </div>
-        </li>
-        <li class="isotope-item websites">
-            <div class="portfolio-item img-thumbnail">
-                <a href="{{route('single_project')}}" class="thumb-info secundary">
-                <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project-7.jpg')}}">
-                <span class="thumb-info-title">
-                <span class="thumb-info-inner">The Code</span>
-                <span class="thumb-info-type">Website</span>
-                </span>
-                <span class="thumb-info-action">
-                <span title="Universal" class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
-                </span>
-                </a>
-            </div>
-        </li>
-        <li class="isotope-item websites">
-            <div class="portfolio-item img-thumbnail">
-                <a href="{{route('single_project')}}" class="thumb-info secundary">
-                <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project-4.jpg')}}">
-                <span class="thumb-info-title">
-                <span class="thumb-info-inner">The Code</span>
-                <span class="thumb-info-type">Website</span>
-                </span>
-                <span class="thumb-info-action">
-                <span title="Universal" class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
-                </span>
-                </a>
-            </div>
-        </li>
-        <li class="isotope-item websites">
-            <div class="portfolio-item img-thumbnail">
-                <a href="{{route('single_project')}}" class="thumb-info secundary">
-                <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project-5.jpg')}}">
-                <span class="thumb-info-title">
-                <span class="thumb-info-inner">SEO</span>
-                <span class="thumb-info-type">Website</span>
-                </span>
-                <span class="thumb-info-action">
-                <span title="Universal" class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
-                </span>
-                </a>
-            </div>
-        </li>
-        <li class="isotope-item brands">
-            <div class="portfolio-item img-thumbnail">
-                <a href="{{route('single_project')}}" class="thumb-info secundary">
-                <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project-6.jpg')}}">
-                <span class="thumb-info-title">
-                <span class="thumb-info-inner">Okler</span>
-                <span class="thumb-info-type">Brand</span>
-                </span>
-                <span class="thumb-info-action">
-                <span title="Universal" class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
-                </span>
-                </a>
-            </div>
-        </li>
-        <li class="isotope-item logos">
-            <div class="portfolio-item img-thumbnail">
-                <a href="{{route('single_project')}}" class="thumb-info secundary">
-                <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project-5.jpg')}}">
-                <span class="thumb-info-title">
-                <span class="thumb-info-inner">The Fly</span>
-                <span class="thumb-info-type">Logo</span>
-                </span>
-                <span class="thumb-info-action">
-                <span title="Universal" class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
-                </span>
-                </a>
-            </div>
-        </li>
-        <li class="isotope-item logos">
-            <div class="portfolio-item img-thumbnail">
-                <a href="{{route('single_project')}}" class="thumb-info secundary">
-                <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project-2.jpg')}}">
-                <span class="thumb-info-title">
-                <span class="thumb-info-inner">The Fly</span>
-                <span class="thumb-info-type">Logo</span>
-                </span>
-                <span class="thumb-info-action">
-                <span title="Universal" class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
-                </span>
-                </a>
-            </div>
-        </li>
-        <li class="isotope-item brands">
-            <div class="portfolio-item img-thumbnail">
-                <a href="{{route('single_project')}}" class="thumb-info secundary">
-                <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project-1.jpg')}}">
-                <span class="thumb-info-title">
-                <span class="thumb-info-inner">Okler</span>
-                <span class="thumb-info-type">Brand</span>
-                </span>
-                <span class="thumb-info-action">
-                <span title="Universal" class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
-                </span>
-                </a>
-            </div>
-        </li>
-        <li class="isotope-item websites">
-            <div class="portfolio-item img-thumbnail">
-                <a href="{{route('single_project')}}" class="thumb-info secundary">
-                <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project-6.jpg')}}">
-                <span class="thumb-info-title">
-                <span class="thumb-info-inner">SEO</span>
-                <span class="thumb-info-type">Website</span>
-                </span>
-                <span class="thumb-info-action">
-                <span title="Universal" class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
-                </span>
-                </a>
-            </div>
-        </li>
+        @endforeach
+
     </ul>
 </div>
 <section class="call-to-action featured footer no-arrow">

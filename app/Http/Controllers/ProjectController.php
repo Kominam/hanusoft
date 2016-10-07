@@ -21,7 +21,7 @@ class ProjectController extends Controller
     {
         $projects = $this->projectRepository->all();
 
-        dd($projects);
+        return view('frontend.pages.projects' ,['projects' => $projects]);
     }
     //Add
     public function showAddForm() {
@@ -47,6 +47,5 @@ class ProjectController extends Controller
    	public function delete($id) {
    		$this->projectRepository->delete($id);
    	}
-
 
 }

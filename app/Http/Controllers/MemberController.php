@@ -22,6 +22,6 @@ class MemberController extends Controller
     {
         $members = $this->memberRepository->all();
 
-        dd($members);
+        return view('frontend.pages.members',['members' =>$members]);
     }
 }

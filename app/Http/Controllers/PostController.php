@@ -8,21 +8,30 @@ use App\Http\Requests;
 
 use App\Post;
 
+use App\Repositories\Contracts\PostRepositoryInterface;
+
 class PostController extends Controller
 {
+    protected $postRepository;
+
+    public function __construct(PostRepositoryInterface $postRepository)
+    {
+        $this->postRepository= $postRepository;
+    }
+     public function index()
+    {
+        $posts = $this->postRepository->all();
+
+        dd($posts);
+    }
     //Add
     public function showAddForm() {
     	//return form to add new group
     }
     public function add(Request $request) {
-    	$post = new Post;
-    	// get attrubute from request
-      $post->title = $request->title;
-      $post->content = $request->content;
-      //save
-    	$post->save();
-    	// return to list page
+         $this->postRepository->create($request);
     }
+    
 
    	//EDIT
 
@@ -32,19 +41,10 @@ class PostController extends Controller
    	}
 
    	public function edit(Request $request, $id) {
-   		$post= Post:: find($id);
-   		// set new value for attribute of this project
-      $post->title = $request->title;
-      $post->content = $request->content;
-
-
-   		$post->save();
-   		// return to list page
+   		  $this->postRepository->update($request, $id);
    	}
 
    	public function delete($id) {
-   		$post= Post:: find($id);
-   		$post->delete();
-   		//return to list
+   		$this->postRepository->delete($id);
    	}
 }

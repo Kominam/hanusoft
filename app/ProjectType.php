@@ -12,7 +12,7 @@ class ProjectType extends Model
     public $timestamp =true;
 
     public function projects() {
-    	return $this->hasMany('App\project');
+    	return $this->hasMany('App\Project');
     }
 
 }
