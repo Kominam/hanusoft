@@ -15,7 +15,8 @@ class PostRepository implements PostRepositoryInterface
 
     public function all()
     {
-        return Post::all();
+
+        return Post::paginate(5);
     }
 
     public function find($id)

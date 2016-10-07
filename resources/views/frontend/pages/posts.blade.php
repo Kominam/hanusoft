@@ -22,7 +22,7 @@
         <div class="row">
             <div class="col-md-9">
                 <div class="posts_details">
-                    <article class="post post-large">
+                    {{-- <article class="post post-large">
                         <div class="post-image">
                             <div class="owl-carousel" data-plugin-options='{"items":1}'>
                                 <div>
@@ -51,7 +51,9 @@
                                 <a href="{{route('post_detail')}}" class="btn btn-xs btn-primary pull-right">Read more...</a>
                             </div>
                         </div>
-                    </article>
+                    </article> --}}
+                    @foreach ($posts as $post)
+                    <?php $rest = substr($post->content,0,450); ?>
                     <article class="post post-large">
                         <div class="post-image single">
                             <img class="img-thumbnail" src="{{url('frontend/img/blog/blog-image-2.jpg')}}" alt="">
@@ -61,17 +63,18 @@
                             <span class="month">Jan</span>
                         </div>
                         <div class="post-content">
-                            <h2><a href="{{route('post_detail')}}">Post Format - Single Image</a></h2>
-                            <p>Euismod atras vulputate iltricies etri elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nunc dui, tristique in semper vel, congue sed ligula. Nam dolor ligula, faucibus id sodales in, auctor fringilla libero. Pellentesque pellentesque tempor tellus eget hendrerit. Morbi id aliquam ligula. Aliquam id dui sem. Proin rhoncus consequat nisl, eu ornare mauris tincidunt vitae. [...]</p>
+                            <h2><a href="{{route('post_detail')}}">{{$post->tittle}}</a></h2>
+                            <p>{{$rest}}[...]</p>
                             <div class="post-meta">
-                                <span><i class="fa fa-user"></i> By <a href="#">John Doe</a> </span>
+                                <span><i class="fa fa-user"></i> By <a href="#">{{$post->user->name}}</a> </span>
                                 <span><i class="fa fa-tag"></i> <a href="#">Duis</a>, <a href="#">News</a> </span>
                                 <span><i class="fa fa-comments"></i> <a href="#">12 Comments</a></span>
                                 <a href="{{route('post_detail')}}" class="btn btn-xs btn-primary pull-right">Read more...</a>
                             </div>
                         </div>
                     </article>
-                    <article class="post post-large">
+                    @endforeach
+                   {{--  <article class="post post-large">
                         <div class="post-video">
                             <iframe src="http://player.vimeo.com/video/28614006?color=0088CC" width="1280" height="720" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
                         </div>
@@ -126,12 +129,13 @@
                                 <a href="{{route('post_detail')}}" class="btn btn-xs btn-primary pull-right">Read more...</a>
                             </div>
                         </div>
-                    </article>
+                    </article> --}}
+
                     <ul class="pagination pagination-lg pull-right">
                         <li><a href="#">«</a></li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
+                             @for ($i=1; $i< $posts->lastPage()+1;$i++)
+                <li><a href="{!! str_replace('/?', '?', $posts->url($i))!!}">{{$i}}</a></li>
+                @endfor
                         <li><a href="#">»</a></li>
                     </ul>
                 </div>

@@ -19,6 +19,7 @@ return array(
     'CreateProjectsTable' => $baseDir . '/database/migrations/2016_10_06_084600_create_projects_table.php',
     'CreateProjecttypesTable' => $baseDir . '/database/migrations/2016_10_06_084226_create_projecttypes_table.php',
     'CreateReplyCommentsTable' => $baseDir . '/database/migrations/2016_10_06_233319_create_reply_comments_table.php',
+    'CreateResourcesTable' => $baseDir . '/database/migrations/2016_10_07_083833_create_resources_table.php',
     'CreateSkillUserTable' => $baseDir . '/database/migrations/2016_10_06_085234_create_skill_user_table.php',
     'CreateSkillsTable' => $baseDir . '/database/migrations/2016_10_06_083939_create_skills_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2016_10_06_074046_create_users_table.php',

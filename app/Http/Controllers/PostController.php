@@ -20,9 +20,14 @@ class PostController extends Controller
     }
      public function index()
     {
-        $posts = $this->postRepository->all();
+      $posts = $this->postRepository->all();
 
-        dd($posts);
+       return view('frontend.pages.posts', ['posts' => $posts]);
+    }
+
+    public function show($id) {
+      $post = $this->postRepository->find($id);
+      dd($post);
     }
     //Add
     public function showAddForm() {
