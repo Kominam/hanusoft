@@ -181,7 +181,7 @@
     </div>
 </div>
 @endsection
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&AMP;sensor=false"></script>
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBPeM7t3PgqmMYE-lkT2oIDybq4fCb498Y"></script>
 <script>
 
     //google map

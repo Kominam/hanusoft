@@ -11,8 +11,7 @@ class PositionTableSeeder extends Seeder
      */
     public function run()
     {
-        //
-        DB::table('positions')->insert([
+     	 DB::table('positions')->insert([
              array('name'=>'Leadership'),
              array('name'=>'Design'),
              array('name'=>'Development'),
