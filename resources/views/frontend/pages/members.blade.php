@@ -33,7 +33,7 @@
                 @foreach($members as $member)
                 <li class="col-md-3 col-sm-6 col-xs-12 isotope-item {{$member->position->name}}">
                     <div class="team-item thumbnail">
-                        <a href="{{route('member_detail')}}" class="thumb-info team">
+                        <a href="{{route('member_detail', ['id'=>$member->id])}}" class="thumb-info team">
                        
                         <img class="img-responsive" alt="" src="{{url('frontend/img/team/'.$member->url_avt)}}">
                         <span class="thumb-info-title">

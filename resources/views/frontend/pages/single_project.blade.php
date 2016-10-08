@@ -23,10 +23,10 @@
         <div class="portfolio-title">
             <div class="row">
                 <div class="portfolio-nav-all col-md-1">
-                    <a href="portfolio-single-project.html" data-tooltip data-original-title="Back to list"><i class="fa fa-th"></i></a>
+                    <a href="{{route('projects')}}" data-tooltip data-original-title="Back to list"><i class="fa fa-th"></i></a>
                 </div>
                 <div class="col-md-10 center">
-                    <h2 class="shorter">Lorem Ipsum Dolor</h2>
+                    <h2 class="shorter">{{$project->name}}</h2>
                 </div>
                 <div class="portfolio-nav col-md-1">
                     <a href="portfolio-single-project.html" class="portfolio-nav-prev" data-tooltip data-original-title="Previous"><i class="fa fa-chevron-left"></i></a>
@@ -38,21 +38,14 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="owl-carousel" data-plugin-options='{"items": 1}'>
+                       @foreach($project->images as $image)
                     <div>
                         <div class="thumbnail">
-                            <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project.jpg')}}">
+
+                            <img alt="" class="img-responsive" src="{{url('frontend/img/projects/'. $image->img_name)}}">
                         </div>
                     </div>
-                    <div>
-                        <div class="thumbnail">
-                            <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project-1.jpg')}}">
-                        </div>
-                    </div>
-                    <div>
-                        <div class="thumbnail">
-                            <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project-2.jpg')}}">
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
             <div class="col-md-8">
@@ -67,23 +60,22 @@
                                     <i class="fa fa-calendar"></i> 21 November 2013
                                 </li>
                                 <li>
-                                    <i class="fa fa-tags"></i> <a href="#">Brand</a>, <a href="#">Design</a>
+                                    <i class="fa fa-tags"></i> <a href="#">{{$project->type->name}}</a></a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <h4>Project <strong>Description</strong></h4>
-                <p class="taller">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus nibh sed elimttis adipiscing. Fusce in hendrerit purus. Suspendisse potenti. Proin quis eros odio, dapibus dictum mauris. Donec nisi libero, adipiscing id pretium eget, consectetur sit amet leo. Nam at eros quis mi egestas fringilla non nec purus.</p>
-                <a href="#" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>Live Preview</a> <span class="arrow hlb" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
+                <p class="taller">{{$project->description}}</p>
+                <a href="{{$project->link_preview}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>Live Preview</a> <span class="arrow hlb" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
                 <ul class="portfolio-details">
                     <li>
                         <p><strong>Skills:</strong></p>
                         <ul class="list list-skills icons list-unstyled list-inline">
-                            <li><i class="fa fa-check-circle"></i> Design</li>
-                            <li><i class="fa fa-check-circle"></i> HTML/CSS</li>
-                            <li><i class="fa fa-check-circle"></i> Javascript</li>
-                            <li><i class="fa fa-check-circle"></i> Backend</li>
+                            @foreach($project->skills as $skill)
+                            <li><i class="fa fa-check-circle"></i>{{$skill->name}}</li>
+                            @endforeach
                         </ul>
                     </li>
                     <li>
@@ -99,13 +91,18 @@
                 <h3>Related <strong>Work</strong></h3>
             </div>
             <ul class="portfolio-list">
+            @foreach($related_projects as $related_project)
                 <li class="col-md-3 col-xs-6">
                     <div class="portfolio-item thumbnail">
-                        <a href="portfolio-single-project.html" class="thumb-info">
-                        <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project.jpg')}}">
+                        <a href={{route('single_project',['id'=> $related_project->id])}} class="thumb-info">
+                         @foreach ($related_project->images as $key=>$image)
+                    @if($key == 0)
+                         <img alt="" class="img-responsive" src="{{url('frontend/img/projects/'.$image->img_name)}}">
+                    @endif
+                @endforeach  
                         <span class="thumb-info-title">
-                        <span class="thumb-info-inner">SEO</span>
-                        <span class="thumb-info-type">Website</span>
+                        <span class="thumb-info-inner">{{$related_project->name}}</span>
+                        <span class="thumb-info-type">{{$related_project->type->name}}</span>
                         </span>
                         <span class="thumb-info-action">
                         <span title="Universal" class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
@@ -113,48 +110,7 @@
                         </a>
                     </div>
                 </li>
-                <li class="col-md-3 col-xs-6">
-                    <div class="portfolio-item thumbnail">
-                        <a href="portfolio-single-project.html" class="thumb-info">
-                        <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project-1.jpg')}}">
-                        <span class="thumb-info-title">
-                        <span class="thumb-info-inner">Okler</span>
-                        <span class="thumb-info-type">Brand</span>
-                        </span>
-                        <span class="thumb-info-action">
-                        <span title="Universal" class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
-                        </span>
-                        </a>
-                    </div>
-                </li>
-                <li class="col-md-3 col-xs-6">
-                    <div class="portfolio-item thumbnail">
-                        <a href="portfolio-single-project.html" class="thumb-info">
-                        <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project-2.jpg')}}">
-                        <span class="thumb-info-title">
-                        <span class="thumb-info-inner">The Fly</span>
-                        <span class="thumb-info-type">Logo</span>
-                        </span>
-                        <span class="thumb-info-action">
-                        <span title="Universal" class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
-                        </span>
-                        </a>
-                    </div>
-                </li>
-                <li class="col-md-3 col-xs-6">
-                    <div class="portfolio-item thumbnail">
-                        <a href="portfolio-single-project.html" class="thumb-info">
-                        <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project-3.jpg')}}">
-                        <span class="thumb-info-title">
-                        <span class="thumb-info-inner">The Code</span>
-                        <span class="thumb-info-type">Website</span>
-                        </span>
-                        <span class="thumb-info-action">
-                        <span title="Universal" class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
-                        </span>
-                        </a>
-                    </div>
-                </li>
+            @endforeach
             </ul>
         </div>
     </div>

@@ -27,7 +27,7 @@ class PostController extends Controller
 
     public function show($id) {
       $post = $this->postRepository->find($id);
-      dd($post);
+      return view('frontend.pages.post_detail',['post'=>$post]);
     }
     //Add
     public function showAddForm() {

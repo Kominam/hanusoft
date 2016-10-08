@@ -22,4 +22,8 @@ class Post extends Model
     public function resources() {
         return $this->hasMany('App\Resource');
     }
+
+    public function type() {
+        return $this->belongsTo('App\PostType');
+    }
 }

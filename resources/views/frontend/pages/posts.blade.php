@@ -63,13 +63,13 @@
                             <span class="month">Jan</span>
                         </div>
                         <div class="post-content">
-                            <h2><a href="{{route('post_detail')}}">{{$post->tittle}}</a></h2>
+                            <h2><a href="{{route('post_detail',['id'=>$post->id])}}">{{$post->tittle}}</a></h2>
                             <p>{{$rest}}[...]</p>
                             <div class="post-meta">
                                 <span><i class="fa fa-user"></i> By <a href="#">{{$post->user->name}}</a> </span>
                                 <span><i class="fa fa-tag"></i> <a href="#">Duis</a>, <a href="#">News</a> </span>
                                 <span><i class="fa fa-comments"></i> <a href="#">12 Comments</a></span>
-                                <a href="{{route('post_detail')}}" class="btn btn-xs btn-primary pull-right">Read more...</a>
+                                <a href="{{route('post_detail',['id'=>$post->id])}}" class="btn btn-xs btn-primary pull-right">Read more...</a>
                             </div>
                         </div>
                     </article>
@@ -170,13 +170,13 @@
                                     <li>
                                         <div class="post-image">
                                             <div class="img-thumbnail">
-                                                <a href="{{route('post_detail')}}">
+                                                <a href="#">
                                                 <img src="{{url('frontend/img/blog/blog-thumb-1.jpg')}}" alt="">
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="post-info">
-                                            <a href="{{route('post_detail')}}">Nullam Vitae Nibh Un Odiosters</a>
+                                            <a href="#">Nullam Vitae Nibh Un Odiosters</a>
                                             <div class="post-meta">
                                                 Jan 10, 2013
                                             </div>
@@ -185,13 +185,13 @@
                                     <li>
                                         <div class="post-image">
                                             <div class="img-thumbnail">
-                                                <a href="{{route('post_detail')}}">
+                                                <a href="#">
                                                 <img src="{{url('frontend/img/blog/blog-thumb-2.jpg')}}" alt="">
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="post-info">
-                                            <a href="{{route('post_detail')}}">Vitae Nibh Un Odiosters</a>
+                                            <a href="#">Vitae Nibh Un Odiosters</a>
                                             <div class="post-meta">
                                                 Jan 10, 2013
                                             </div>
@@ -200,13 +200,13 @@
                                     <li>
                                         <div class="post-image">
                                             <div class="img-thumbnail">
-                                                <a href="{{route('post_detail')}}">
+                                                <a href="#">
                                                 <img src="{{url('frontend/img/blog/blog-thumb-3.jpg')}}" alt="">
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="post-info">
-                                            <a href="{{route('post_detail')}}">Odiosters Nullam Vitae</a>
+                                            <a href="#">Odiosters Nullam Vitae</a>
                                             <div class="post-meta">
                                                 Jan 10, 2013
                                             </div>
@@ -219,13 +219,13 @@
                                     <li>
                                         <div class="post-image">
                                             <div class="img-thumbnail">
-                                                <a href="{{route('post_detail')}}">
+                                                <a href="#">
                                                 <img src="{{url('frontend/img/blog/blog-thumb-2.jpg')}}" alt="">
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="post-info">
-                                            <a href="{{route('post_detail')}}">Vitae Nibh Un Odiosters</a>
+                                            <a href="#">Vitae Nibh Un Odiosters</a>
                                             <div class="post-meta">
                                                 Jan 10, 2013
                                             </div>
@@ -234,13 +234,13 @@
                                     <li>
                                         <div class="post-image">
                                             <div class="img-thumbnail">
-                                                <a href="{{route('post_detail')}}">
+                                                <a href="#">
                                                 <img src="{{url('frontend/img/blog/blog-thumb-3.jpg')}}" alt="">
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="post-info">
-                                            <a href="{{route('post_detail')}}">Odiosters Nullam Vitae</a>
+                                            <a href="#">Odiosters Nullam Vitae</a>
                                             <div class="post-meta">
                                                 Jan 10, 2013
                                             </div>
@@ -249,13 +249,13 @@
                                     <li>
                                         <div class="post-image">
                                             <div class="img-thumbnail">
-                                                <a href="{{route('post_detail')}}">
+                                                <a href="#">
                                                 <img src="{{url('frontend/img/blog/blog-thumb-1.jpg')}}" alt="">
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="post-info">
-                                            <a href="{{route('post_detail')}}">Nullam Vitae Nibh Un Odiosters</a>
+                                            <a href="{{-- {{route('post_detail')}}" --}}>Nullam Vitae Nibh Un Odiosters</a>
                                             <div class="post-meta">
                                                 Jan 10, 2013
                                             </div>

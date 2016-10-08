@@ -12,7 +12,7 @@ class Skill extends Model
     public $timestamp =true;
 
     public function users() {
-    	return $this->belongsToMany('App\User');
+    	return $this->belongsToMany('App\User')->withPivot('level');
     }
     public function projects() {
     	return $this->belongsToMany('App\Project');

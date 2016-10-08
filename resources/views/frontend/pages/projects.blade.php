@@ -31,9 +31,9 @@
     </div>
     <ul class="portfolio-list sort-destination full-width" data-sort-id="portfolio">
         @foreach($projects as $project)
-        <li class="isotope-item websites">
+        <li class="isotope-item {{$project->type->name}}">
             <div class="portfolio-item img-thumbnail">
-                <a href="{{route('single_project')}}" class="thumb-info secundary">
+                <a href="{{route('single_project', ['id'=> $project->id])}}" class="thumb-info secundary">
                 @foreach ($project->images as $key=>$image)
                     @if($key == 0)
                          <img alt="" class="img-responsive" src="{{url('frontend/img/projects/'.$image->img_name)}}">

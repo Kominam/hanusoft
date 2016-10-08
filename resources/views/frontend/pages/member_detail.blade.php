@@ -22,7 +22,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <div class="owl-carousel" data-plugin-options='{"items": 1}'>
+            <div class="thumbnail">
+                            <img alt="" height="300" class="img-responsive" src="{{url('frontend/img/team/'.$member->url_avt)}}">
+                        </div>
+               {{--  <div class="owl-carousel" data-plugin-options='{"items": 1}'>
                     <div>
                         <div class="thumbnail">
                             <img alt="" height="300" class="img-responsive" src="{{url('frontend/img/team/team-3.jpg')}}">
@@ -33,17 +36,17 @@
                             <img alt="" height="300" class="img-responsive" src="{{url('frontend/img/team/team-9.jpg')}}">
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
             <div class="col-md-8">
-                <h2 class="shorter">Joe <strong>Doe</strong></h2>
-                <h4>Web Designer</h4>
+                <h2 class="shorter"><strong>{{$member->name}}</strong></h2>
+                <h4>{{$member->position->name}}</h4>
                 <span class="thumb-info-social-icons">
-                <a data-tooltip data-placement="bottom" target="_blank" href="../../../www.facebook.com/index.html" data-original-title="Facebook"><i class="fa fa-facebook"></i><span>Facebook</span></a>
-                <a data-tooltip data-placement="bottom" href="../../../www.twitter.com/index.html" data-original-title="Twitter"><i class="fa fa-twitter"></i><span>Twitter</span></a>
-                <a data-tooltip data-placement="bottom" href="../../../www.linkedin.com/index.html" data-original-title="Linkedin"><i class="fa fa-linkedin"></i><span>Linkedin</span></a>
+                <a data-tooltip data-placement="bottom" target="_blank" href="{{$member->url_fb}}" data-original-title="Facebook"><i class="fa fa-facebook"></i><span>Facebook</span></a>
+                <a data-tooltip data-placement="bottom" href="{{$member->url_fb}}" data-original-title="Twitter"><i class="fa fa-twitter"></i><span>Twitter</span></a>
+                <a data-tooltip data-placement="bottom" href="{{$member->url_fb}}" data-original-title="Linkedin"><i class="fa fa-linkedin"></i><span>Linkedin</span></a>
                 </span>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pellentesque neque eget diam posuere porta. Quisque ut nulla at nunc <a href="#">vehicula</a> lacinia. Proin adipiscing porta tellus, ut feugiat nibh adipiscing sit amet. In eu justo a felis faucibus ornare vel id metus. Vestibulum ante ipsum primis in faucibus.</p>
+                <p>{{$member->bio}}</p>
                 <ul class="list icons list-unstyled">
                     <li><i class="fa fa-check"></i> Fusce sit amet orci quis arcu vestibulum vestibulum sed ut felis.</li>
                     <li><i class="fa fa-check"></i> Phasellus in risus quis lectus iaculis vulputate id quis nisl.</li>
@@ -53,15 +56,18 @@
         </div>
         <hr class="tall" />
         <div class="row center">
-            <div class="col-md-3">
+            @foreach ($member->skills as $skill)
+                 <div class="col-md-3">
                 <div class="circular-bar">
-                    <div class="circular-bar-chart" data-percent="75" data-plugin-options='{"barColor": "#E36159"}'>
-                        <strong>HTML/CSS</strong>
-                        <label><span class="percent">75</span>%</label>
+                    <div class="circular-bar-chart" data-percent="{{$skill->pivot->level}}" data-plugin-options='{"barColor": "#E36159"}'>
+                        <strong>{{$skill->name}}</strong>
+                        <label><span class="percent">{{$skill->pivot->level}}</span>%</label>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            @endforeach
+           
+            {{-- <div class="col-md-3">
                 <div class="circular-bar">
                     <div class="circular-bar-chart" data-percent="85" data-plugin-options='{"barColor": "#0088CC", "delay": 300}'>
                         <strong>Design</strong>
@@ -84,7 +90,7 @@
                         <label><span class="percent">95</span>%</label>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
     <section class="parallax" data-stellar-background-ratio="0.5" style="background-image: url(img/parallax-transparent.jpg);">
@@ -118,13 +124,18 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </div>
             <ul class="portfolio-list">
+            @foreach($member->projects as $project)
                 <li class="col-md-3">
                     <div class="portfolio-item thumbnail">
-                        <a href="portfolio-single-project.html" class="thumb-info">
-                        <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project.jpg')}}">
+                        <a href="{{route('single_project',['id'=>$project->id])}}" class="thumb-info">
+                           @foreach ($project->images as $key=>$image)
+                                @if($key == 0)
+                                     <img alt="" class="img-responsive" src="{{url('frontend/img/projects/'.$image->img_name)}}">
+                                @endif
+                            @endforeach
                         <span class="thumb-info-title">
-                        <span class="thumb-info-inner">SEO</span>
-                        <span class="thumb-info-type">Website</span>
+                        <span class="thumb-info-inner">{{$project->name}}</span>
+                        <span class="thumb-info-type">{{$project->type->name}}</span>
                         </span>
                         <span class="thumb-info-action">
                         <span title="Universal" class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
@@ -132,7 +143,8 @@
                         </a>
                     </div>
                 </li>
-                <li class="col-md-3">
+                @endforeach
+              {{--   <li class="col-md-3">
                     <div class="portfolio-item thumbnail">
                         <a href="portfolio-single-project.html" class="thumb-info">
                         <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project-1.jpg')}}">
@@ -173,7 +185,7 @@
                         </span>
                         </a>
                     </div>
-                </li>
+                </li> --}}
             </ul>
         </div>
     </div>

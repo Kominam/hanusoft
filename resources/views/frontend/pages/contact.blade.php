@@ -56,66 +56,6 @@
                     </div>
                     <div class="row">
                         <div class="form-group">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label>Checkboxes</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="checkbox-group" data-msg-required="Please select at least one option.">
-                                            <label class="checkbox-inline">
-                                            <input type="checkbox" name="checkboxes[]" id="inlineCheckbox1" value="option1"> 1
-                                            </label>
-                                            <label class="checkbox-inline">
-                                            <input type="checkbox" name="checkboxes[]" id="inlineCheckbox2" value="option2"> 2
-                                            </label>
-                                            <label class="checkbox-inline">
-                                            <input type="checkbox" name="checkboxes[]" id="inlineCheckbox3" value="option3"> 3
-                                            </label>
-                                            <label class="checkbox-inline">
-                                            <input type="checkbox" name="checkboxes[]" id="inlineCheckbox2" value="option4"> 4
-                                            </label>
-                                            <label class="checkbox-inline">
-                                            <input type="checkbox" name="checkboxes[]" id="inlineCheckbox3" value="option5"> 5
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label>Radios</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="radio-group" data-msg-required="Please select one option.">
-                                            <label class="radio-inline">
-                                            <input type="radio" name="radios" id="inlineRadio1" value="option1"> 1
-                                            </label>
-                                            <label class="radio-inline">
-                                            <input type="radio" name="radios" id="inlineRadio2" value="option2"> 2
-                                            </label>
-                                            <label class="radio-inline">
-                                            <input type="radio" name="radios" id="inlineRadio3" value="option3"> 3
-                                            </label>
-                                            <label class="radio-inline">
-                                            <input type="radio" name="radios" id="inlineRadio2" value="option4"> 4
-                                            </label>
-                                            <label class="radio-inline">
-                                            <input type="radio" name="radios" id="inlineRadio3" value="option5"> 5
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group">
                             <div class="col-md-12">
                                 <label>Attachment</label>
                                 <input type="file" name="attachment" id="attachment">

@@ -6,12 +6,14 @@
     <meta name="description" content="">
     <meta name="author" content="HanuSoft">
     <meta name="keyword" content="HanuSoft, Websites, Coder">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" href="img/favicon.png">
 
     <title>HanuSoft</title>
 
     {{-- <!-- Web Fonts  -->
     <link href="http://fonts.googleapis.com/cssfb2f.css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light" rel="stylesheet" type="text/css"> --}}
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 
     <!-- Vendor CSS -->
     <link rel="stylesheet" href="{{url('frontend/vendor/bootstrap/bootstrap.css')}}">

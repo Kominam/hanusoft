@@ -33,9 +33,7 @@ Route::get('/services', ['as' => 'services', function () {
 
 Route::get('/members', ['as' => 'members', 'uses' => 'MemberController@index']);
 
-Route::get('/member_detail', ['as' => 'member_detail', function () {
-	return view('frontend.pages.member_detail');
-}]);
+Route::get('/member_detail/{id}', ['as' => 'member_detail', 'uses' => 'MemberController@show']);
 
 Route::get('/posts', ['as' => 'posts','uses' => 'PostController@index']);
 
@@ -43,10 +41,9 @@ Route::get('/post_detail/{id}', ['as' => 'post_detail','uses' => 'PostController
 
 Route::get('/projects', ['as' => 'projects', 'uses' => 'ProjectController@index']);
 
-Route::get('/single_project', ['as' => 'single_project', function (){
-	return view('frontend.pages.single_project');
-}]);
+Route::get('/single_project/{id}', ['as' => 'single_project','uses' => 'ProjectController@show']);
 
+Route::post('post-comment', ['as' => 'post-comment', 'uses' => 'CommentController@create']);
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
@@ -56,7 +53,7 @@ Route::post('admin/login', 'AdminAuth\LoginController@login');
 Route::get('admin/logout', 'AdminAuth\Controller@logout');
 Route::get('/admin/register', 'AdminAuth\RegisterController@showRegistrationForm');
 Route::post('/admin/register', ['as' => 'admin.register.post', 'uses' => 'AdminAuth\RegisterController@register']);
-Route::get('test', 'PostController@index');
+Route::get('test/{id}', 'PostController@show');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');

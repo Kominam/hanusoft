@@ -32,9 +32,17 @@ class RepositoryServiceProvider extends ServiceProvider
             'App\Repositories\Contracts\MemberRepositoryInterface',
             'App\Repositories\Eloquents\MemberRepository'
         );
-          $this->app->bind(
+        $this->app->bind(
             'App\Repositories\Contracts\PostRepositoryInterface',
             'App\Repositories\Eloquents\PostRepository'
+        );
+        $this->app->bind(
+            'App\Repositories\Contracts\CommentRepositoryInterface',
+            'App\Repositories\Eloquents\CommentRepository'
+        );
+        $this->app->bind(
+            'App\Repositories\Contracts\ReplyCommentRepositoryInterface',
+            'App\Repositories\Eloquents\ReplyCommentRepository'
         );
     }
 }

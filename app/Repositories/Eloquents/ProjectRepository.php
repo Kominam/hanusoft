@@ -24,6 +24,10 @@ class ProjectRepository implements ProjectRepositoryInterface
         return Project::find($id);
     }
 
+    public function findRelated($id, $type_id) {
+      return Project::where('id','!=',$id)->where('type_id','=', $type_id)->take(4)->get();
+    }
+
     public function defineRequiredSkill($skills, $project) {
     		$project->skills()->attach($skills);
     		$project->save();

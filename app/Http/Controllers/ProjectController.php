@@ -23,6 +23,14 @@ class ProjectController extends Controller
 
         return view('frontend.pages.projects' ,['projects' => $projects]);
     }
+
+    public function show($id) {
+       $project = $this->projectRepository->find($id);
+
+       $related_projects = $this->projectRepository->findRelated($id,$project->type_id);
+
+      return view('frontend.pages.single_project' ,['project' => $project, 'related_projects'=>$related_projects]);
+    }
     //Add
     public function showAddForm() {
     	//return form to add new group

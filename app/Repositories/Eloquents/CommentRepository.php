@@ -9,6 +9,8 @@ use App\Comment;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Validator;
+use Event;
+use App\Events\CommentWasSent;
 
 class CommentRepository implements CommentRepositoryInterface
 {
@@ -24,16 +26,20 @@ class CommentRepository implements CommentRepositoryInterface
               'content'=>'required',
         ], $messages);
         if ($validator->fails()) {
-            return redirect('/')->withErrors($validator)->withInput();
+            return back()->withErrors($validator)->withInput();
         }
-    	$comment= Comment::create(['name' => $request->name, 
-    								'content' => $request->content, 
-    								'email' => $request->email
-                    ]);
+      $comment= new Comment;
+      $comment->name = $request->name;
+      $comment->email = $request->email;
+      $comment->content = $request->content;
     	//Define author for this project
       $comment->post_id = $request->post_id;
     	
     	$comment->save();
+
+      Event::fire(new CommentWasSent($comment));
+
+      return $comment;
     }
 
    
