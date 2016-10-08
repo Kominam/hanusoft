@@ -42,13 +42,13 @@
             </ul>
             <nav class="nav-main mega-menu">
                 <ul class="nav nav-pills nav-main" id="mainMenu">
-                    <li class="active"><a href={{route('index')}}>Home</a></li>
-                    <li><a href={{route('about')}}>About</a></li>
-                    <li><a href={{route('services')}}>Service</a></li>
-                    <li><a href={{route('members')}}>Members </a></li>
-                    <li><a href={{route('projects')}}>Project</a></li>
-                    <li><a href={{route('posts')}}>Post</a></li>
-                    <li><a href={{route('contact')}}>Contact</a></li>                    
+                    <li class="{{ Route::currentRouteNamed('index') ? 'active' : '' }}"><a href={{route('index')}}>Home</a></li>
+                    <li class="{{ Route::currentRouteNamed('about') ? 'active' : '' }}"><a href={{route('about')}}>About</a></li>
+                    <li class="{{ Route::currentRouteNamed('services') ? 'active' : '' }}"><a href={{route('services')}}>Service</a></li>
+                    <li class="{{ Route::currentRouteNamed('members') ? 'active' : '' }}"><a href={{route('members')}}>Members </a></li>
+                    <li class="{{ Route::currentRouteNamed('projects') ? 'active' : '' }}"><a href={{route('projects')}}>Project</a></li>
+                    <li class="{{ Route::currentRouteNamed('posts') ? 'active' : '' }}"><a href={{route('posts')}}>Post</a></li>
+                    <li class="{{ Route::currentRouteNamed('contact') ? 'active' : '' }}"><a href={{route('contact')}}>Contact</a></li>                    
                 </ul>
             </nav>
         </div>

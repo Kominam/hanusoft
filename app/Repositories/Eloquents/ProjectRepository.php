@@ -116,6 +116,9 @@ class ProjectRepository implements ProjectRepositoryInterface
     public function delete($id) {
     	return Project::destroy($id);
     }
+    public function countAll(){
+      return Project::count();
+    }
 
 
 }

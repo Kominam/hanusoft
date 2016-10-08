@@ -22,6 +22,5 @@ class DatabaseSeeder extends Seeder
     	$this->call(MemberProjectTableSeeder::class);
     	$this->call(PostTypeTableSeeder::class);
       $this->call(PostTableSeeder::class);
-    	$this->call(PostTypeTableSeeder::class);
     }
 }

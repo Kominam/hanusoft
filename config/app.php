@@ -180,6 +180,7 @@ return [
         App\Providers\RepositoryServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class,
+        App\Providers\ViewComposerServiceProvider::class,
 
     ],
 

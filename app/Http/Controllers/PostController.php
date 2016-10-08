@@ -52,4 +52,9 @@ class PostController extends Controller
    	public function delete($id) {
    		$this->postRepository->delete($id);
    	}
+
+     public function filterByCategory($id) {
+        $posts = $this->postRepository->filterByCategory($id);
+        return view('frontend.pages.posts', ['posts' => $posts]);
+     }
 }

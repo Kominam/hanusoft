@@ -53,22 +53,22 @@
                         </div>
                     </article> --}}
                     @foreach ($posts as $post)
-                    <?php $rest = substr($post->content,0,450); ?>
                     <article class="post post-large">
                         <div class="post-image single">
                             <img class="img-thumbnail" src="{{url('frontend/img/blog/blog-image-2.jpg')}}" alt="">
                         </div>
                         <div class="post-date">
-                            <span class="day">10</span>
-                            <span class="month">Jan</span>
+                            <span class="day">{{$post->created_at->format('d')}}</span>
+                            <span class="month">
+                            {{substr($post->created_at->format('F'),0,3)}}</span>
                         </div>
                         <div class="post-content">
                             <h2><a href="{{route('post_detail',['id'=>$post->id])}}">{{$post->tittle}}</a></h2>
-                            <p>{{$rest}}[...]</p>
+                            <p>{{substr($post->content,0,450)}}[...]</p>
                             <div class="post-meta">
                                 <span><i class="fa fa-user"></i> By <a href="#">{{$post->user->name}}</a> </span>
-                                <span><i class="fa fa-tag"></i> <a href="#">Duis</a>, <a href="#">News</a> </span>
-                                <span><i class="fa fa-comments"></i> <a href="#">12 Comments</a></span>
+                                <span><i class="fa fa-tag"></i> <a href="#">{{$post->type->name}}</a></span>
+                                <span><i class="fa fa-comments"></i> <a href="#">{{$post->comments->count()}} Comments</a></span>
                                 <a href="{{route('post_detail',['id'=>$post->id])}}" class="btn btn-xs btn-primary pull-right">Read more...</a>
                             </div>
                         </div>
@@ -153,11 +153,9 @@
                     <hr />
                     <h4>Categories</h4>
                     <ul class="nav nav-list primary push-bottom">
-                        <li><a href="#">Design</a></li>
-                        <li><a href="#">Photos</a></li>
-                        <li><a href="#">Videos</a></li>
-                        <li><a href="#">Lifestyle</a></li>
-                        <li><a href="#">Technology</a></li>
+                    @foreach ($all_post_cate as $post_cate)
+                        <li><a href="{{route('browse-post-by-cate', $post_cate->id)}}">{{$post_cate->name}}</a></li>
+                    @endforeach
                     </ul>
                     <div class="tabs">
                         <ul class="nav nav-tabs">
@@ -167,100 +165,44 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="popularPosts">
                                 <ul class="simple-post-list">
+                                @foreach($popular_posts as $ppost)
                                     <li>
                                         <div class="post-image">
                                             <div class="img-thumbnail">
-                                                <a href="#">
+                                                <a href="{{route('post_detail', $ppost->id)}}">
                                                 <img src="{{url('frontend/img/blog/blog-thumb-1.jpg')}}" alt="">
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="post-info">
-                                            <a href="#">Nullam Vitae Nibh Un Odiosters</a>
+                                            <a href="{{route('post_detail', $ppost->id)}}">{{$ppost->tittle}}</a>
                                             <div class="post-meta">
-                                                Jan 10, 2013
+                                                {{$ppost->created_at->toFormattedDateString()}}
                                             </div>
                                         </div>
                                     </li>
-                                    <li>
-                                        <div class="post-image">
-                                            <div class="img-thumbnail">
-                                                <a href="#">
-                                                <img src="{{url('frontend/img/blog/blog-thumb-2.jpg')}}" alt="">
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="post-info">
-                                            <a href="#">Vitae Nibh Un Odiosters</a>
-                                            <div class="post-meta">
-                                                Jan 10, 2013
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="post-image">
-                                            <div class="img-thumbnail">
-                                                <a href="#">
-                                                <img src="{{url('frontend/img/blog/blog-thumb-3.jpg')}}" alt="">
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="post-info">
-                                            <a href="#">Odiosters Nullam Vitae</a>
-                                            <div class="post-meta">
-                                                Jan 10, 2013
-                                            </div>
-                                        </div>
-                                    </li>
+                                @endforeach
                                 </ul>
                             </div>
                             <div class="tab-pane" id="recentPosts">
                                 <ul class="simple-post-list">
+                                @foreach ($recent_posts as $rpost)
                                     <li>
                                         <div class="post-image">
                                             <div class="img-thumbnail">
-                                                <a href="#">
+                                                <a href="{{route('post_detail', $rpost->id)}}">
                                                 <img src="{{url('frontend/img/blog/blog-thumb-2.jpg')}}" alt="">
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="post-info">
-                                            <a href="#">Vitae Nibh Un Odiosters</a>
+                                           <a href="{{route('post_detail', $rpost->id)}}">{{$rpost->tittle}}</a>
                                             <div class="post-meta">
-                                                Jan 10, 2013
+                                                 {{$rpost->created_at->toFormattedDateString()}}
                                             </div>
                                         </div>
                                     </li>
-                                    <li>
-                                        <div class="post-image">
-                                            <div class="img-thumbnail">
-                                                <a href="#">
-                                                <img src="{{url('frontend/img/blog/blog-thumb-3.jpg')}}" alt="">
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="post-info">
-                                            <a href="#">Odiosters Nullam Vitae</a>
-                                            <div class="post-meta">
-                                                Jan 10, 2013
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="post-image">
-                                            <div class="img-thumbnail">
-                                                <a href="#">
-                                                <img src="{{url('frontend/img/blog/blog-thumb-1.jpg')}}" alt="">
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="post-info">
-                                            <a href="{{-- {{route('post_detail')}}" --}}>Nullam Vitae Nibh Un Odiosters</a>
-                                            <div class="post-meta">
-                                                Jan 10, 2013
-                                            </div>
-                                        </div>
-                                    </li>
+                                @endforeach
                                 </ul>
                             </div>
                         </div>

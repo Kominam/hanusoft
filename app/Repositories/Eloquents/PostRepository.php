@@ -77,5 +77,9 @@ class PostRepository implements PostRepositoryInterface
     	return Post::destroy($id);
     }
 
+    public function filterByCategory($id){
+      return Post::where('type_id', '=', $id)->paginate(5);
+     }
+
 
 }

@@ -7,14 +7,13 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li><a href="#">Home</a></li>
-                        <li class="active">About Us</li>
+                       {!! Breadcrumbs::render('memberdetail',$member) !!}
                     </ul>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h1>About Me</h1>
+                    <h1>About {{$member->name}}</h1>
                 </div>
             </div>
         </div>

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class PositionTableSeeder extends Seeder
 {
@@ -12,10 +13,10 @@ class PositionTableSeeder extends Seeder
     public function run()
     {
      	 DB::table('positions')->insert([
-             array('name'=>'Leadership'),
-             array('name'=>'Design'),
-             array('name'=>'Development'),
-             array('name'=>'Tester')
+             array('name'=>'Leadership','created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+             array('name'=>'Design','created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+             array('name'=>'Development','created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+             array('name'=>'Tester','created_at' => Carbon::now(),'updated_at' => Carbon::now())
         ]);
     }
 }

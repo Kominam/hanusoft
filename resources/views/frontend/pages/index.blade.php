@@ -253,7 +253,7 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="recent-posts push-bottom">
-                    <h2>Latest <strong>Blog</strong> Posts</h2>
+                    <h2>Latest <strong>Posts</strong></h2>
                     <div class="row">
                       <div class="owl-carousel" data-plugin-options='{"items": 1}'>
                         <div>
@@ -385,13 +385,18 @@
         </div>
 
         <ul class="portfolio-list sort-destination full-width">
+          @foreach ($all_project as $project)
           <li class="isotope-item">
             <div class="portfolio-item img-thumbnail">
-              <a href="portfolio-single-project.html" class="thumb-info secundary">
-                <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project.jpg')}}">
+              <a href="{{route('single_project', $project->id)}}" class="thumb-info secundary">
+                @foreach ($project->images as $key=>$image)
+                    @if($key == 0)
+                         <img alt="" class="img-responsive" src="{{url('frontend/img/projects/'.$image->img_name)}}">
+                    @endif
+                @endforeach 
                 <span class="thumb-info-title">
-                  <span class="thumb-info-inner">SEO</span>
-                  <span class="thumb-info-type">Website</span>
+                  <span class="thumb-info-inner">{{$project->name}}</span>
+                  <span class="thumb-info-type">{{$project->type->name}}</span>
                 </span>
                 <span class="thumb-info-action">
                   <span title="Universal" class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
@@ -399,62 +404,7 @@
               </a>
             </div>
           </li>
-          <li class="isotope-item">
-            <div class="portfolio-item img-thumbnail">
-              <a href="portfolio-single-project.html" class="thumb-info secundary">
-                <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project-1.jpg')}}">
-                <span class="thumb-info-title">
-                  <span class="thumb-info-inner">Okler</span>
-                  <span class="thumb-info-type">Brand</span>
-                </span>
-                <span class="thumb-info-action">
-                  <span title="Universal" class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
-                </span>
-              </a>
-            </div>
-          </li>
-          <li class="isotope-item">
-            <div class="portfolio-item img-thumbnail">
-              <a href="portfolio-single-project.html" class="thumb-info secundary">
-                <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project-7.jpg')}}">
-                <span class="thumb-info-title">
-                  <span class="thumb-info-inner">The Code</span>
-                  <span class="thumb-info-type">Website</span>
-                </span>
-                <span class="thumb-info-action">
-                  <span title="Universal" class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
-                </span>
-              </a>
-            </div>
-          </li>
-          <li class="isotope-item">
-            <div class="portfolio-item img-thumbnail">
-              <a href="portfolio-single-project.html" class="thumb-info secundary">
-                <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project-4.jpg')}}">
-                <span class="thumb-info-title">
-                  <span class="thumb-info-inner">The Code</span>
-                  <span class="thumb-info-type">Website</span>
-                </span>
-                <span class="thumb-info-action">
-                  <span title="Universal" class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
-                </span>
-              </a>
-            </div>
-          </li>
-          <li class="isotope-item">
-            <div class="portfolio-item img-thumbnail">
-              <a href="portfolio-single-project.html" class="thumb-info secundary">
-                <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project-5.jpg')}}">
-                <span class="thumb-info-title">
-                  <span class="thumb-info-inner">SEO</span>
-                  <span class="thumb-info-type">Website</span>
-                </span>
-                <span class="thumb-info-action">
-                  <span title="Universal" class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
-                </span>
-              </a>
-            </div>
-          </li>
+          @endforeach
         </ul>
 
         <section class="parallax" data-stellar-background-ratio="0.5" style="background-image: url(frontend/img/parallax-image.jpg);">

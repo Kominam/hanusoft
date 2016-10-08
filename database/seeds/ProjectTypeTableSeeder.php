@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class ProjectTypeTableSeeder extends Seeder
 {
@@ -13,10 +14,10 @@ class ProjectTypeTableSeeder extends Seeder
     {
         //
          DB::table('projecttypes')->insert([
-             array('name'=>'Website'),
-             array('name'=>'Application'),
-             array('name'=>'Brand'),
-             array('name'=>'Logo'),
+             array('name'=>'Website','created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+             array('name'=>'Application','created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+             array('name'=>'Brand','created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+             array('name'=>'Logo','created_at' => Carbon::now(),'updated_at' => Carbon::now()),
         ]);
     }
 }

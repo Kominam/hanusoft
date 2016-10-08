@@ -7,14 +7,13 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li><a href="#">Home</a></li>
-                        <li class="active">Portfolio</li>
+                       {!! Breadcrumbs::render('single_project', $project) !!}
                     </ul>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h1>Single Project</h1>
+                    <h1>{{$project->name}}</h1>
                 </div>
             </div>
         </div>
@@ -29,8 +28,12 @@
                     <h2 class="shorter">{{$project->name}}</h2>
                 </div>
                 <div class="portfolio-nav col-md-1">
-                    <a href="portfolio-single-project.html" class="portfolio-nav-prev" data-tooltip data-original-title="Previous"><i class="fa fa-chevron-left"></i></a>
-                    <a href="portfolio-single-project.html" class="portfolio-nav-next" data-tooltip data-original-title="Next"><i class="fa fa-chevron-right"></i></a>
+                    @if ($prev_project !="#")
+                          <a href="{{route('single_project', $prev_project)}}" class="portfolio-nav-prev" data-tooltip data-original-title="Previous"><i class="fa fa-chevron-left"></i></a>
+                    @endif
+                    @if ($next_project !="#")
+                    <a href="{{route('single_project', $next_project)}}" class="portfolio-nav-next" data-tooltip data-original-title="Next"><i class="fa fa-chevron-right"></i></a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -57,10 +60,10 @@
                                     <a href="#" data-tooltip data-original-title="Like"><i class="fa fa-heart"></i>14</a>
                                 </li>
                                 <li>
-                                    <i class="fa fa-calendar"></i> 21 November 2013
+                                    <i class="fa fa-calendar"></i>{{$project->created_at->format(' jS  F Y ')}}
                                 </li>
                                 <li>
-                                    <i class="fa fa-tags"></i> <a href="#">{{$project->type->name}}</a></a>
+                                    <i class="fa fa-tags"></i> <a href="{{url('/projects#'.$project->type->name)}}">{{$project->type->name}}</a></a>
                                 </li>
                             </ul>
                         </div>

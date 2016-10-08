@@ -28,8 +28,20 @@ class ProjectController extends Controller
        $project = $this->projectRepository->find($id);
 
        $related_projects = $this->projectRepository->findRelated($id,$project->type_id);
+       $num_project = $this->projectRepository->countAll();
+       if ($project->id===1) {
+          $next_project_id = $project->id +1;
+          $previous_project_id = "#";
+       } else if($project->id===$num_project){
+           $next_project_id ="#";
+           $previous_project_id =$project->id -1;
+       } else {
+          $next_project_id = $project->id +1;
+           $previous_project_id =$project->id -1;
+       }
+       
 
-      return view('frontend.pages.single_project' ,['project' => $project, 'related_projects'=>$related_projects]);
+      return view('frontend.pages.single_project' ,['project' => $project, 'related_projects'=>$related_projects, 'next_project' =>$next_project_id, 'prev_project'=> $previous_project_id]);
     }
     //Add
     public function showAddForm() {

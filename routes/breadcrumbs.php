@@ -34,7 +34,7 @@ Breadcrumbs::register('projects', function($breadcrumbs)
     $breadcrumbs->push('Projects', route('projects'));
 });
 
-// Home > Contact
+// Home > Post
 Breadcrumbs::register('posts', function($breadcrumbs)
 {
     $breadcrumbs->parent('home');
@@ -46,5 +46,22 @@ Breadcrumbs::register('contact', function($breadcrumbs)
 {
     $breadcrumbs->parent('home');
     $breadcrumbs->push('Contact', route('contact'));
+});
+
+//Home > Members > MemberID
+Breadcrumbs::register('memberdetail', function($breadcrumbs, $member) {
+    $breadcrumbs->parent('members');
+    $breadcrumbs->push($member->name, route('member_detail', $member->id));
+});
+//Home > Projects > Single_Porject
+Breadcrumbs::register('single_project', function($breadcrumbs, $project) {
+    $breadcrumbs->parent('projects');
+    $breadcrumbs->push($project->name, route('single_project', $project->id));
+});
+
+//Home > Projects > Single_Post
+Breadcrumbs::register('single_post', function($breadcrumbs, $post) {
+    $breadcrumbs->parent('posts');
+    $breadcrumbs->push($post->tittle, route('post_detail', $post->id));
 });
 

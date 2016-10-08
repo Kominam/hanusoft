@@ -42,8 +42,10 @@ Route::get('/post_detail/{id}', ['as' => 'post_detail','uses' => 'PostController
 Route::get('/projects', ['as' => 'projects', 'uses' => 'ProjectController@index']);
 
 Route::get('/single_project/{id}', ['as' => 'single_project','uses' => 'ProjectController@show']);
-
+Route::get('post/by-category/{id}', ['as' => 'browse-post-by-cate','uses' => 'PostController@filterByCategory']);
 Route::post('post-comment', ['as' => 'post-comment', 'uses' => 'CommentController@create']);
+
+Route::get('send-mail','HomeController@contact');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
@@ -53,7 +55,7 @@ Route::post('admin/login', 'AdminAuth\LoginController@login');
 Route::get('admin/logout', 'AdminAuth\Controller@logout');
 Route::get('/admin/register', 'AdminAuth\RegisterController@showRegistrationForm');
 Route::post('/admin/register', ['as' => 'admin.register.post', 'uses' => 'AdminAuth\RegisterController@register']);
-Route::get('test/{id}', 'PostController@show');
+Route::get('test/{id}', 'PostController@filterByCategory');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
