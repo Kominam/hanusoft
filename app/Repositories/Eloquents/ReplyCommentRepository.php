@@ -8,6 +8,8 @@ use App\ReplyComment;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Validator;
+use Event;
+use App\Events\SomeOneReplyComment;
 
 class ReplyCommentRepository implements ReplyCommentRepositoryInterface
 {
@@ -23,16 +25,20 @@ class ReplyCommentRepository implements ReplyCommentRepositoryInterface
               'content'=>'required',
         ], $messages);
         if ($validator->fails()) {
-            return redirect('/')->withErrors($validator)->withInput();
+            return back()->withErrors($validator)->withInput();
         }
-    	$reply_comment= ReplyComment::create(['name' => $request->name, 
-    								'content' => $request->content, 
-    								'email' => $request->email
-                    ]);
+        $reply_comment = new ReplyComment;
+        $reply_comment->name = $request->name;
+        $reply_comment->content = $request->content;
+
     	//Define author for this project
-      $comment->comment_id = $request->comment_id;
+        $reply_comment->comment_id = $request->comment_id;
     	
-    	$comment->save();
+    	  $reply_comment->save();
+
+        Event::fire(new SomeOneReplyComment($reply_comment));
+
+        return $reply_comment;
     }
 
    

@@ -66,8 +66,8 @@
                             <h2><a href="{{route('post_detail',['id'=>$post->id])}}">{{$post->tittle}}</a></h2>
                             <p>{{substr($post->content,0,450)}}[...]</p>
                             <div class="post-meta">
-                                <span><i class="fa fa-user"></i> By <a href="#">{{$post->user->name}}</a> </span>
-                                <span><i class="fa fa-tag"></i> <a href="#">{{$post->type->name}}</a></span>
+                                <span><i class="fa fa-user"></i> By <a href="{{ route('member_detail',$post->user->id) }}">{{$post->user->name}}</a> </span>
+                                <span><i class="fa fa-tag"></i> <a href={{route('browse-post-by-cate', $post->type->id)}}>{{$post->type->name}}</a></span>
                                 <span><i class="fa fa-comments"></i> <a href="#">{{$post->comments->count()}} Comments</a></span>
                                 <a href="{{route('post_detail',['id'=>$post->id])}}" class="btn btn-xs btn-primary pull-right">Read more...</a>
                             </div>

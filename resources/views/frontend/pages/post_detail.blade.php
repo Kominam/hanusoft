@@ -45,7 +45,7 @@
                             <h2><a href="#">{{$post->tittle}}</a></h2>
                             <div class="post-meta">
                                 <span><i class="fa fa-user"></i> By <a href={{route('member_detail',$post->user->id)}}>{{$post->user->name}}</a> </span>
-                                <span><i class="fa fa-tag"></i> <a href="#">{{$post->type->name}}</a></span>
+                                <span><i class="fa fa-tag"></i> <a href="{{ route('browse-post-by-cate', $post->type->id)}}">{{$post->type->name}}</a></span>
                                 <span><i class="fa fa-comments"></i> <a href="#">{{$post->comments->count()}} Comments</a></span>
                             </div>
                             <p>{{$post->content}}</p>
@@ -72,9 +72,9 @@
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim ornare nisi, vitae mattis nulla ante id dui. </p>
                             </div>
                             <div class="post-block post-comments clearfix" id="post_comment">
-                                <h3><i class="fa fa-comments"></i>Comments ({{$post->comments->count()}})</h3>
+                                <h3 id="cmt_count"><i class="fa fa-comments"></i>Comments ({{$post->comments->count()}})</h3>
                                 @if ($post->comments->count()===0)
-                                    <h5>Be the first person comment on this post</h5>
+                                    <div id="if_no_cmt"><h5>Be the first person comment on this post</h5></div>
                                 @endif
                                 <ul class="comments">
                                     @foreach($post->comments as $comment)
@@ -144,7 +144,7 @@
                                                 <span class="comment-by">
                                                 <strong>{{$comment->name}}</strong>
                                                 <span class="pull-right">
-                                                <span id=""> <a href="#"><i class="fa fa-reply"></i> Reply</a></span>
+                                                <span id=""> <a href="#replycomment{{$comment->id}}"><i class="fa fa-reply"></i> Reply</a></span>
                                                 </span>
                                                 </span>
                                                 <p>{{$comment->content}}</p>
@@ -218,7 +218,6 @@
                              $("#submit-btn").click(function() {
                                     $("#submit-btn").text('Loading...').button("refresh");
                                    var post_id = "{{$post->id}}";
-                                   console.log(post_id);
                                    var name = $('#name').val();
                                    var email = $('#email').val();
                                    var content = $('#comment').val();
@@ -231,10 +230,13 @@
                                                  $('#name').val("");
                                                  $('#email').val("");
                                                  $('#comment').val("");
+                                                if ($("#if_no_cmt").length > 0){
+                                                    $("#if_no_cmt").remove();
+                                                }
+                                              
                                         }
                                    });
-                                });  
-                          
+                                });                          
                           });
 
                         </script>
