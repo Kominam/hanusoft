@@ -21,19 +21,21 @@
     </head>
     <body class="login-body">
         <div class="container">
-            <form class="form-signin" action="index.html">
+            <form class="form-signin" method="POST" action="{{ url('/member/login') }}" >
                 <h2 class="form-signin-heading">sign in now</h2>
                 <div class="login-wrap">
-                    <input type="text" class="form-control" placeholder="User ID" autofocus>
-                    <input type="password" class="form-control" placeholder="Password">
+                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                    <input type="text" class="form-control" placeholder="User ID" autofocus name="email">
+                    <input type="password" class="form-control" placeholder="Password" name="password">
                     <label class="checkbox">
                     <input type="checkbox" value="remember-me"> Remember me
                     <span class="pull-right">
                     <a data-toggle="modal" href="#myModal"> Forgot Password?</a>
                     </span>
                     </label>
-                    <button class="btn btn-lg btn-login btn-block" type="submit">Sign in</button>
-                    <p>or you can sign in via social network</p>
+                    <input class="btn btn-lg btn-login btn-block" type="submit">
+            </form> 
+            <p>or you can sign in via social network</p>
                     <div class="login-social-link">
                         <a href="index.html" class="facebook">
                         <i class="icon-facebook"></i>
@@ -61,17 +63,19 @@
                             </div>
                             <div class="modal-body">
                                 <p>Enter your e-mail address below to reset your password.</p>
-                                <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
+                                <form method="POST" action="{{ url('/password/email') }}">
+                                <input type="text"  placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
                             </div>
                             <div class="modal-footer">
                                 <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
                                 <button class="btn btn-success" type="button">Submit</button>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- modal -->
-            </form>
+
         </div>
     </body>
     <!-- js placed at the end of the document so the pages load faster -->
