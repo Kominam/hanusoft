@@ -69,4 +69,7 @@ class RegisterController extends Controller
             'position_id' =>1
         ]);
     }
+     protected function showRegistrationForm() {
+        return view('backend.pages.register');
+    }
 }
