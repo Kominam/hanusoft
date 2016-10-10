@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Mail;
-use App\Mail\ContactMail;
 
 class HomeController extends Controller
 {
@@ -28,13 +26,6 @@ class HomeController extends Controller
         return view('home');
     }
 
-     public function contact()
-    {
-        $myEmail = 'haiwind95@gmail.com';
-        Mail::to($myEmail)->send(new ContactMail());
-
-        
-        dd("Mail Send Successfully");
-    }
+   
 
 }
