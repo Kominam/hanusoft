@@ -44,10 +44,10 @@
     <!--common script for all pages-->
     <script src="{{url('backend/js/common-scripts.js')}}"></script>
 
-    <!--script for this page-->
+    {{-- <!--script for this page-->
     <script src="{{url('backend/js/sparkline-chart.js')}}"></script>
     <script src="{{url('backend/js/easy-pie-chart.js')}}"></script>
-    <script src="{{url('backend/js/count.js')}}"></script>
+    <script src="{{url('backend/js/count.js')}}"></script> --}}
 
   <script>
 

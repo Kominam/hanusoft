@@ -31,6 +31,43 @@ Route::get('/services', ['as' => 'services', function () {
 	return view('frontend.pages.services');
 }]);
 
+// Route for backend
+Route::get('/ahihi', ['as' => 'ahihi', function () {
+	return view('backend.pages.index');
+}]);
+
+Route::get('/mail', ['as' => 'mail', function() {
+	return view('backend.pages.mail');
+}]);
+
+Route::get('/form_component', ['as' => 'form_component', function() {
+	return view('backend.pages.form_component');
+}]);
+
+Route::get('/form_wizard', ['as' => 'form_wizard', function() {
+	return view('backend.pages.form_wizard');
+}]);
+
+Route::get('/form_validation', ['as' => 'form_validation', function() {
+	return view('backend.pages.form_validation');
+}]);
+
+Route::get('/basic_table', ['as' => 'basic_table', function() {
+	return view('backend.pages.basic_table');
+}]);
+
+Route::get('/morris', ['as' => 'morris', function() {
+	return view('backend.pages.morris');
+}]);
+
+Route::get('/xchart', ['as' => 'xchart', function() {
+	return view('backend.pages.xchart');
+}]);
+
+Route::get('/signin', ['as' => 'signin', function() {
+	return view('backend.pages.login');
+}]);
+
 Route::get('/members', ['as' => 'members', 'uses' => 'MemberController@index']);
 
 Route::get('/member_detail/{id}', ['as' => 'member_detail', 'uses' => 'MemberController@show']);
