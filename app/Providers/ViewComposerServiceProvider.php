@@ -29,18 +29,18 @@ class ViewComposerServiceProvider extends ServiceProvider
         });
         //Popular posts
         View::composer(['frontend.pages.posts', 'frontend.pages.post_detail'], function ($view) {
-                $popular_posts = Post::take(3)->get()->sortByDesc(function($post)
+                $popular_posts = Post::get()->sortByDesc(function($post)
                 {
                     return $post->comments->count();
-                });
+                })->take(3);
             $view->with('popular_posts', $popular_posts);
         });
         //Recent posts
         View::composer(['frontend.pages.posts', 'frontend.pages.post_detail'], function ($view) {
-                $recent_posts = Post::take(3)->get()->sortByDesc(function($post)
+                $recent_posts = Post::get()->sortByDesc(function($post)
                 {
                     return $post->created_at;
-                });
+                })->take(3);
             $view->with('recent_posts', $recent_posts);
         });
         //All Project

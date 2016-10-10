@@ -132,11 +132,16 @@
                     </article> --}}
 
                     <ul class="pagination pagination-lg pull-right">
-                        <li><a href="#">«</a></li>
-                             @for ($i=1; $i< $posts->lastPage()+1;$i++)
-                <li><a href="{!! str_replace('/?', '?', $posts->url($i))!!}">{{$i}}</a></li>
-                @endfor
-                        <li><a href="#">»</a></li>
+                         @if ($posts->currentPage()!==1)
+                            <li><a href="{{$posts->previousPageUrl()}}">«</a></li>
+                         @endif
+                         @for ($i=1; $i< $posts->lastPage()+1;$i++)
+                            <li class="{{ ($posts->currentPage()==$i) ? 'active' : '' }}"><a href="{!! $posts->url($i)!!}">{{$i}}</a></li>   
+                        @endfor
+                        @if ($posts->currentPage()!== $posts->lastPage())
+                            <li><a href="{{$posts->nextPageUrl()}}">»</a></li>
+                        @endif
+                       
                     </ul>
                 </div>
             </div>
