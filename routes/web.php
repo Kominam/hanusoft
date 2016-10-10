@@ -70,6 +70,10 @@ Route::get('/signin', ['as' => 'signin', function() {
 	return view('backend.pages.login');
 }]);
 
+Route::get('/signup', ['as' => 'register', function() {
+	return view('backend.pages.register');
+}]);
+
 Route::get('/profile', ['as' => 'profile', function(){
 	return view('backend.pages.profile');
 }]);
