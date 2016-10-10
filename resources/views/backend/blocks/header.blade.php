@@ -252,17 +252,6 @@
             </li>
             <li class="sub-menu">
                 <a href="javascript:;" >
-                <i class="icon-laptop"></i>
-                <span>Layouts</span>
-                </a>
-                <ul class="sub">
-                    <li><a  href="boxed_page.html">Boxed Page</a></li>
-                    <li><a  href="horizontal_menu.html">Horizontal Menu</a></li>
-                    <li><a  href="language_switch_bar.html">Language Switch Bar</a></li>
-                </ul>
-            </li>
-            <li class="sub-menu">
-                <a href="javascript:;" >
                 <i class="icon-cogs"></i>
                 <span>Components</span>
                 </a>
@@ -322,13 +311,7 @@
                 <span>Extra</span>
                 </a>
                 <ul class="sub">
-                    <li><a  href="blank.html">Blank Page</a></li>
-                    <li><a  href="lock_screen.html">Lock Screen</a></li>
-                    <li><a  href="profile.html">Profile</a></li>
-                    <li><a  href="invoice.html">Invoice</a></li>
-                    <li><a  href="search_result.html">Search Result</a></li>
-                    <li><a  href="404.html">404 Error</a></li>
-                    <li><a  href="500.html">500 Error</a></li>
+                    <li><a  href="{{route('profile')}}">Profile</a></li>
                 </ul>
             </li>
             <li>

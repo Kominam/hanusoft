@@ -70,6 +70,14 @@ Route::get('/signin', ['as' => 'signin', function() {
 	return view('backend.pages.login');
 }]);
 
+Route::get('/profile', ['as' => 'profile', function(){
+	return view('backend.pages.profile');
+}]);
+
+Route::get('/profile-edit', ['as' => 'profile-edit', function(){
+	return view('backend.pages.profile-edit');
+}]);
+
 Route::get('/members', ['as' => 'members', 'uses' => 'MemberController@index']);
 
 Route::get('/member_detail/{id}', ['as' => 'member_detail', 'uses' => 'MemberController@show']);
