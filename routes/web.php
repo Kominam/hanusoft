@@ -23,6 +23,8 @@ Route::get('/contact', ['as' => 'contact', function() {
 	return view('frontend.pages.contact');
 }]);
 
+Route::post('send-contact','ContactController@contact');
+
 Route::get('/about', ['as' => 'about', function () {
 	return view('frontend.pages.about');
 }]);
@@ -45,7 +47,6 @@ Route::get('/single_project/{id}', ['as' => 'single_project','uses' => 'ProjectC
 Route::get('post/by-category/{id}', ['as' => 'browse-post-by-cate','uses' => 'PostController@filterByCategory']);
 Route::post('post-comment', ['as' => 'post-comment', 'uses' => 'CommentController@create']);
 
-Route::get('send-mail','HomeController@contact');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');

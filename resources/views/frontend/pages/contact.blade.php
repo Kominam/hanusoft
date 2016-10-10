@@ -26,8 +26,8 @@
             <div class="col-md-6">
                 <div class="offset-anchor" id="contact-sent"></div>
                 <h2 class="short"><strong>Contact</strong> Us</h2>
-                <form id="contactFormAdvanced" action="http://preview.oklerthemes.com/porto/3.7.0/contact-us-advanced.php#contact-sent" method="POST" enctype="multipart/form-data">
-                    <input type="hidden" value="true" name="emailSent" id="emailSent">
+                <form id="contactFormAdvanced" action="{{ url('send-contact') }}" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="_token" value="{{csrf_token()}}">
                     <div class="row">
                         <div class="form-group">
                             <div class="col-md-6">
@@ -43,22 +43,8 @@
                     <div class="row">
                         <div class="form-group">
                             <div class="col-md-12">
-                                <label>Subject</label>
-                                <select data-msg-required="Please enter the subject." class="form-control" name="subject" id="subject" required>
-                                    <option value=""></option>
-                                    <option value="Option 1">Option 1</option>
-                                    <option value="Option 2">Option 2</option>
-                                    <option value="Option 3">Option 3</option>
-                                    <option value="Option 4">Option 4</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group">
-                            <div class="col-md-12">
-                                <label>Attachment</label>
-                                <input type="file" name="attachment" id="attachment">
+                                <label>Subject *</label>
+                                  <input type="text" value="" data-msg-required="Please enter your subject." maxlength="100" class="form-control" name="subject" id="subject" required>
                             </div>
                         </div>
                     </div>
@@ -94,7 +80,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <input type="submit" id="contactFormSubmit" value="Send Message" class="btn btn-primary btn-lg pull-right" data-loading-text="Loading...">
+                            <input type="submit" value="Send Message" id="contactFormSubmit" class="btn btn-primary btn-lg pull-right">
                         </div>
                     </div>
                 </form>
