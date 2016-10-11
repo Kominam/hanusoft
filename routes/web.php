@@ -132,3 +132,6 @@
 	Route::post('/admin/register', ['as' => 'admin.register.post', 'uses' => 'AdminAuth\RegisterController@register']);*/
 	 Route::get('test/{id}', 'PostController@getArrCommentID');
 	
+	 //Social Login
+    Route::get('/redirect/{provider}', 'SocialAuthController@redirect');
+    Route::get('/callback/{provider}', 'SocialAuthController@callback');

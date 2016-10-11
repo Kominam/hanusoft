@@ -37,7 +37,7 @@
             </form> 
             <p>or you can sign in via social network</p>
                     <div class="login-social-link">
-                        <a href="index.html" class="facebook">
+                        <a href="{{ url('/redirect/facebook') }}" class="facebook">
                         <i class="icon-facebook"></i>
                         Facebook
                         </a>

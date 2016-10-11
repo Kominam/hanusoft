@@ -181,6 +181,7 @@ return [
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class,
         App\Providers\ViewComposerServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
 
     ],
 
@@ -230,6 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
         'Captcha' => Mews\Captcha\Facades\Captcha::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 
     ],
 
