@@ -41,6 +41,18 @@
 		Route::get('/basic_table', ['as' => 'basic_table', function() {
 		return view('backend.pages.basic_table');
 		}]);
+
+		Route::get('/dynamic_table', ['as' => 'dynamic_table', function() {
+		return view('backend.pages.dynamic_table');
+		}]);
+
+		Route::get('/advanced_table', ['as' => 'advanced_table', function() {
+		return view('backend.pages.advanced_table');
+		}]);
+
+		Route::get('/editable_table', ['as' => 'editable_table', function() {
+		return view('backend.pages.editable_table');
+		}]);
 		
 		Route::get('/morris', ['as' => 'morris', function() {
 		return view('backend.pages.morris');

@@ -5,7 +5,7 @@
         <div data-original-title="Toggle Navigation" data-placement="right" class="icon-reorder tooltips"></div>
     </div>
     <!--logo start-->
-    <a href="{{route('index')}}" class="logo">Flat<span>lab</span></a>
+    <a href="{{url('/member/index')}}" class="logo">Flat<span>lab</span></a>
     <!--logo end-->
     <div class="nav notify-row" id="top_menu">
         <!--  notification start -->
@@ -227,7 +227,7 @@
                 </a>
                 <ul class="dropdown-menu extended logout">
                     <div class="log-arrow-up"></div>
-                    <li><a href="#"><i class=" icon-suitcase"></i>Profile</a></li>
+                    <li><a href="{{route('profile')}}"><i class=" icon-suitcase"></i>Profile</a></li>
                     <li><a href="#"><i class="icon-cog"></i> Settings</a></li>
                     <li><a href="#"><i class="icon-bell-alt"></i> Notification</a></li>
                     <li><a href="{{ url('/member/logout') }}"><i class="icon-key"></i>Log out</a></li>
@@ -281,8 +281,8 @@
                 <ul class="sub">
                     <li><a  href="{{route('basic_table')}}">Basic Table</a></li>
                     <li><a  href="responsive_table.html">Responsive Table</a></li>
-                    <li><a  href="dynamic_table.html">Dynamic Table</a></li>
-                    <li><a  href="advanced_table.html">Advanced Table</a></li>
+                    <li><a  href="{{route('dynamic_table')}}">Dynamic Table</a></li>
+                    <li><a  href="{{route('advanced_table')}}">Advanced Table</a></li>
                     <li><a  href="editable_table.html">Editable Table</a></li>
                 </ul>
             </li>
@@ -302,7 +302,7 @@
                     <li><a  href="{{route('morris')}}">Morris</a></li>
                     <li><a  href="chartjs.html">Chartjs</a></li>
                     <li><a  href="flot_chart.html">Flot Charts</a></li>
-                    <li><a  href="xchart.html">xChart</a></li>
+                    <li><a  href="{{route('xchart')}}">xChart</a></li>
                 </ul>
             </li>
             <li class="sub-menu">
@@ -315,7 +315,7 @@
                 </ul>
             </li>
             <li>
-                <a  href="login.html">
+                <a  href="{{route('login')}}">
                 <i class="icon-user"></i>
                 <span>Login Page</span>
                 </a>
