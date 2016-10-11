@@ -6,6 +6,7 @@ namespace App\Repositories\Eloquents;
 use App\Repositories\Contracts\PostRepositoryInterface;
 use App\Post;
 use App\User;
+use App\Comment;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Validator;
@@ -79,7 +80,12 @@ class PostRepository implements PostRepositoryInterface
 
     public function filterByCategory($id){
       return Post::where('type_id', '=', $id)->paginate(5);
-     }
+    }
+
+    public function getArrCommentID($id)  {
+      $arr_cmt_id = Comment::where('post_id','=',$id)->pluck('id')->toArray();
+      return $arr_cmt_id;
+    }
 
 
 }

@@ -27,7 +27,8 @@ class PostController extends Controller
 
     public function show($id) {
       $post = $this->postRepository->find($id);
-      return view('frontend.pages.post_detail',['post'=>$post]);
+      $arr_cmt_id = $this->postRepository->getArrCommentID($id);
+      return view('frontend.pages.post_detail',['post'=>$post, 'arr_cmt_id' =>$arr_cmt_id]);
     }
     //Add
     public function showAddForm() {

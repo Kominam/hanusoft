@@ -108,6 +108,8 @@
 	Route::get('post/by-category/{id}', ['as' => 'browse-post-by-cate','uses' => 'PostController@filterByCategory']);
 	
 	Route::post('post-comment', ['as' => 'post-comment', 'uses' => 'CommentController@create']);
+
+	Route::post('post-reply-comment', ['as' => 'post-reply-comment', 'uses' => 'ReplyCommentController@create']);
 	
 	
 	/*Route::get('/admin', 'AdminController@index');
@@ -116,5 +118,5 @@
 	Route::get('admin/logout', 'AdminAuth\Controller@logout');
 	Route::get('/admin/register', 'AdminAuth\RegisterController@showRegistrationForm');
 	Route::post('/admin/register', ['as' => 'admin.register.post', 'uses' => 'AdminAuth\RegisterController@register']);*/
-	// Route::get('test/{id}', 'PostController@filterByCategory');
+	 Route::get('test/{id}', 'PostController@getArrCommentID');
 	

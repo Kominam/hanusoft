@@ -76,26 +76,30 @@
             @if ($post->comments->count()===0)
                 <div id="if_no_cmt"><h5>Be the first person comment on this post</h5></div>
             @endif
-            <ul class="comments">
+            <ul class="comments" id="cmt_area">
+              @foreach ($arr_cmt_id as $id)
+               {{$id}}
+                @endforeach
                 @foreach($post->comments as $comment)
-                {{-- <li>
-                    <div class="comment">
+                 <li>
+                    <div class="comment" id="comment{{$comment->id}}">
                         <div class="img-thumbnail">
                             <img class="avatar" alt="" src="{{url('frontend/img/avatar-2.jpg')}}">
                         </div>
                         <div class="comment-block">
                             <div class="comment-arrow"></div>
                             <span class="comment-by">
-                            <strong>John Doe</strong>
+                            <strong>{{$comment->name}}</strong>
                             <span class="pull-right">
-                            <span> <a href="#"><i class="fa fa-reply"></i> Reply</a></span>
+                            <span> <a href="#replycomment{{$comment->id}}"><i class="fa fa-reply"></i> Reply</a></span>
                             </span>
                             </span>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae, gravida pellentesque urna varius vitae. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim ornare nisi, vitae mattis nulla ante id dui.</p>
-                            <span class="date pull-right">January 12, 2013 at 1:38 pm</span>
+                            <p>{{$comment->content}}</p>
+                            <span class="date pull-right">{{$comment->created_at->diffForHumans()}}</span>
                         </div>
                     </div>
-                    <ul class="comments reply">
+                    <ul class="comments reply {{$comment->id}}" id="reply_comment{{$comment->id}}">
+                        @foreach($comment->reply_comments as $r_comment )
                         <li>
                             <div class="comment">
                                 <div class="img-thumbnail">
@@ -104,53 +108,17 @@
                                 <div class="comment-block">
                                     <div class="comment-arrow"></div>
                                     <span class="comment-by">
-                                    <strong>John Doe</strong>
+                                    <strong>{{$r_comment->name}}</strong>
                                     <span class="pull-right">
-                                    <span> <a href="#"><i class="fa fa-reply"></i> Reply</a></span>
                                     </span>
                                     </span>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae, gravida pellentesque urna varius vitae.</p>
-                                    <span class="date pull-right">January 12, 2013 at 1:38 pm</span>
+                                    <p>{{$r_comment->content}}</p>
+                                    <span class="date pull-right">{{$r_comment->created_at->diffForHumans()}}</span>
                                 </div>
                             </div>
                         </li>
-                        <li>
-                            <div class="comment">
-                                <div class="img-thumbnail">
-                                    <img class="avatar" alt="" src="img/avatar-4.jpg">
-                                </div>
-                                <div class="comment-block">
-                                    <div class="comment-arrow"></div>
-                                    <span class="comment-by">
-                                    <strong>John Doe</strong>
-                                    <span class="pull-right">
-                                    <span> <a href="#"><i class="fa fa-reply"></i> Reply</a></span>
-                                    </span>
-                                    </span>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae, gravida pellentesque urna varius vitae.</p>
-                                    <span class="date pull-right">January 12, 2013 at 1:38 pm</span>
-                                </div>
-                            </div>
-                        </li>
+                        @endforeach
                     </ul>
-                </li> --}}
-                <li>
-                    <div class="comment">
-                        <div class="img-thumbnail">
-                            <img class="avatar" alt="" src="{{url('frontend/img/avatar.jpg')}}">
-                        </div>
-                        <div class="comment-block">
-                            <div class="comment-arrow"></div>
-                            <span class="comment-by">
-                            <strong>{{$comment->name}}</strong>
-                            <span class="pull-right">
-                            <span id=""> <a href="#replycomment{{$comment->id}}"><i class="fa fa-reply"></i> Reply</a></span>
-                            </span>
-                            </span>
-                            <p>{{$comment->content}}</p>
-                            <span class="date pull-right">{{$comment->created_at->diffForHumans()}}</span>
-                        </div>
-                    </div>
                 </li>
                 @endforeach
             </ul>
@@ -201,8 +169,8 @@
   //Bind a function to a Event (the full Laravel class)
   channel.bind('App\\Events\\CommentWasSent', function(comments){
    for (var property in comments) {
-        var new_cmt='<li><div class="comment"><div class="img-thumbnail"><img class="avatar" alt="" src="{{url('frontend/img/avatar.jpg')}}"></div><div class="comment-block"><div class="comment-arrow"></div><span class="comment-by"><strong>' + comments[property].name +'</strong><span class="pull-right"><span> <a href="#"><i class="fa fa-reply"></i> Reply</a></span></span></span><p>' + comments[property].content + '</p><span class="date pull-right">a moment ago</span></div></div></li>';
-        $('#post_comment ul').append(new_cmt);
+        var new_cmt='<li><div class="comment"><div class="img-thumbnail"><img class="avatar" alt="" src="{{url('frontend/img/avatar.jpg')}}"></div><div class="comment-block"><div class="comment-arrow"></div><span class="comment-by"><strong>' + comments[property].name +'</strong><span class="pull-right"><span> <a href="#replycomment'+comments[property].id+'"><i class="fa fa-reply"></i> Reply</a></span></span></span><p>' + comments[property].content + '</p><span class="date pull-right">a moment ago</span></div></div></li>';
+        $('#cmt_area').append(new_cmt);
     }  
   });
 </script> 
@@ -213,7 +181,7 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           }
         });
-        
+            
         
          $("#submit-btn").click(function() {
                 $("#submit-btn").text('Loading...').button("refresh");
@@ -237,14 +205,60 @@
                               $("#cmt_count ").text('('+new_count+')');
                             if ($("#if_no_cmt").length > 0){
                                 $("#if_no_cmt").remove();
-                            }
-
-
-
-                          
+                            }          
                     }
                });
-            });                          
+            });
+        
+
+        var arrayCommentID = <?php echo json_encode($arr_cmt_id); ?>;
+        $.each(arrayCommentID, function (key, value) {
+            // do your stuff
+            $('a[href="#replycomment'+value+'"]').click(function(){
+              alert('Sign new href executed.' + value);
+              //Append form for reply comment
+              var token ="{{csrf_token()}}";
+              var replyCmtForm ='<div class="post-block post-leave-comment" id="form_reply_comment'+value+'"><h4>Reply this comment</h4><form action="#" method="post" id="formreplycmt'+ value+'"><div class="row"><div class="form-group"><div class="col-md-6"><label>Your name *</label><input type="text" value="" maxlength="100" class="form-control" name="r_name'+value+'" id="rname'+value+'"><input type="hidden" name="_token" value="'+ token+'"></div><div class="col-md-6"><label>Your email address *</label><input type="email" value="" maxlength="100" class="form-control" name="r_email'+value+'" id="remail'+value+'"></div></div></div><div class="row"><div class="form-group"><div class="col-md-12"><label>Comment *</label><textarea maxlength="3000" rows="5" class="form-control" name="r_comment'+value+'" id="rcomment'+value+'"></textarea></div></div></div><div class="row"><div class="col-md-12"><button type="button" class="btn btn-primary btn-lg" id="submit-reply_cmt'+ value+'">Post Comment</button></div></div></form></div>';
+              $('#reply_comment' + value).append(replyCmtForm);
+              $('#submit-reply_cmt'+ value).click(function() {
+                 var r_name = $('#rname' +value).val();
+                 var r_email = $('#remail' +value).val();
+                 var r_comment = $('#rcomment' +value).val();
+                  $.ajax({
+                    url:'/post-reply-comment',
+                    type: "post",
+                    data: { '_token': token, 'comment_id': value, 'name': r_name, 'email': r_email, 'content': r_comment},
+                    success: function(data) {
+                             $('#submit-reply_cmt'+ value).text('Post Comment').button("refresh");
+                            $('#rname' +value).val("");
+                            $('#remail' +value).val("");
+                            $('#rcomment' +value).val("");       
+                    }
+               });
+              });
+              //Submit reply comment by ajax
+              //Listen on channel reply-on-comment 
+            }); 
+          //instantiate a Pusher object with our Credential's key
+            var pusher = new Pusher('29cd347d237de727387a', {
+            encrypted: true
+          });
+
+          //Subscribe to the channel we specified in our Laravel Event
+          var channel = pusher.subscribe('reply-on-comment' +value);
+
+          //Bind a function to a Event (the full Laravel class)
+          channel.bind('App\\Events\\SomeOneReplyComment', function(reply_cmt){
+           for (var property in reply_cmt) {
+                var new_reply_cmt='<li><div class="comment"><div class="img-thumbnail"><img class="avatar" alt="" src="{{url('frontend/img/avatar.jpg')}}"></div><div class="comment-block"><div class="comment-arrow"></div><span class="comment-by"><strong>' + reply_cmt[property].name +'</strong><span class="pull-right"><span></span></span></span><p>' + reply_cmt[property].content + '</p><span class="date pull-right">a moment ago</span></div></div></li>';
+                $('#form_reply_comment'+ value).before(new_reply_cmt);
+            }  
+          });
+
+        }); 
+
+
+                               
       });
 
     </script>

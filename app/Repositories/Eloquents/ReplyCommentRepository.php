@@ -29,6 +29,7 @@ class ReplyCommentRepository implements ReplyCommentRepositoryInterface
         }
         $reply_comment = new ReplyComment;
         $reply_comment->name = $request->name;
+        $reply_comment->email = $request->email;
         $reply_comment->content = $request->content;
 
     	//Define author for this project
