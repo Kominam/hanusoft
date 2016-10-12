@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Auth;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -43,6 +44,20 @@ class LoginController extends Controller
     protected function logout() {
         Auth::logout();
         return redirect()->route('login');
+    }
+    protected function login(Request $request) {
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+        $remember = ($request->has('remember')) ? true : false;
+        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')], $remember))
+        {
+            $user = auth()->user();
+            return redirect()->route('dashboard');
+        }else{
+            return back()->with('error','your username and password are wrong.');
+        }
     }
 
 }

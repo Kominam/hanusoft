@@ -47,7 +47,7 @@
     <script src="{{url('backend/js/jquery.js')}}"></script>
     <script class="include" type="text/javascript" src="{{url('backend/js/jquery.dcjqaccordion.2.7.js')}}"></script>
     <script src="{{url('backend/js/jquery.scrollTo.min.js')}}"></script>
-    <script src="{{url('backend/js/jquery.nicescroll.js')}}" type="text/javascript"></script>
+   
      <script src="{{url('backend/js/jquery-1.8.3.min.js')}}"></script>
     <script src="{{url('backend/js/bootstrap.min.js')}}"></script>
     <script class="include" type="text/javascript" src="{{url('backend/js/jquery.dcjqaccordion.2.7.js')}}"></script>
@@ -57,9 +57,10 @@
     <script src="{{url('backend/js/jquery.customSelect.min.js')}}" ></script>
     <script class="include" type="text/javascript" src="{{url('backend/js/jquery.dcjqaccordion.2.7.js')}}"></script>
     <script src="{{url('backend/js/respond.min.js')}}" ></script>
-
+    <script src="{{url('backend/js/jquery.nicescroll.js')}}" type="text/javascript"></script>
     <!--common script for all pages-->
     <script src="{{url('backend/js/common-scripts.js')}}"></script>
+
 
     <!--script for this page-->
     <script src="{{url('backend/js/sparkline-chart.js')}}"></script>

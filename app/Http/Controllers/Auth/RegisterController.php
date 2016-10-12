@@ -75,13 +75,32 @@ class RegisterController extends Controller
         return view('backend.pages.register');
     }
     protected function register(Request $request) {
-        $user = new User();
-        $user->name = $request->name;
-        $user->email= $request->email;
-        $user->password = bcrypt($request->password);
-        $user->position_id=1;
-        $user->bio='empty';
-        $user->save();
-        return redirect()->route('dashboard');
+        //Validator
+               $messages = [
+               'name.required'=>'Enter the name ',
+               'email.unique'=>'This email is already existing',
+               'email.email'=>'This email is invalid',
+               'email.required'=>'Please enter the email',
+               'password.required'=>'Please enter the password',
+               'password.min'=>'The length of password must greater than 6',
+               'password.confirmed'=>'Please re-type password',
+               ];
+               $validator = Validator:: make($request->all(),[
+               'name' => 'required|max:255',
+               'email' => 'required|email|max:255|unique:users',
+               'password' => 'required|min:6|confirmed',
+               ], $messages);
+               if ($validator->fails()) {
+               return redirect()->route('register')->withErrors($validator)->withInput();
+               } else {
+                   $user = new User();
+                   $user->name = $request->name;
+                   $user->email= $request->email;
+                   $user->password = bcrypt($request->password);
+                   $user->position_id=$request->position_id;
+                   $user->bio='empty';
+                   $user->save();
+                   return redirect()->route('dashboard');
+               }        
     }
 }

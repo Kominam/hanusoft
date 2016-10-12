@@ -7,7 +7,7 @@
         <meta name="author" content="Mosaddek">
         <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
         <link rel="shortcut icon" href="{{url('backend/img/favicon.png')}}">
-        <title>Administrator</title>
+        <title>Login</title>
         <!-- Bootstrap core CSS -->
         <link href="{{url('backend/css/bootstrap.min.css')}}" rel="stylesheet">
         <link href="{{url('backend/css/bootstrap-reset.css')}}" rel="stylesheet">
@@ -28,7 +28,7 @@
                     <input type="text" class="form-control" placeholder="User ID" autofocus name="email">
                     <input type="password" class="form-control" placeholder="Password" name="password">
                     <label class="checkbox">
-                    <input type="checkbox" value="remember-me"> Remember me
+                    <input type="checkbox" value="remember-me" name="remember"> Remember me
                     <span class="pull-right">
                     <a data-toggle="modal" href="#myModal"> Forgot Password?</a>
                     </span>

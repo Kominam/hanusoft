@@ -7,6 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use App\PostType;
 use App\Post;
 use App\Project;
+use App\Position;
 
 class ViewComposerServiceProvider extends ServiceProvider
 {
@@ -47,6 +48,11 @@ class ViewComposerServiceProvider extends ServiceProvider
          View::composer('frontend.pages.index', function ($view) {
             $all_project= Project::all();
             $view->with('all_project', $all_project);
+        });
+         // Position For Registation
+         View::composer('backend.pages.register', function ($view) {
+            $all_position= Position::where('name', '<>', 'Leadership')->get();
+            $view->with('all_position', $all_position);
         });
 
     }
