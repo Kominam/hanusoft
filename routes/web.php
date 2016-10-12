@@ -78,7 +78,7 @@
     	Route::get('password/reset/{token}', ['as' => 'password.reset.token', 'uses' => 'Auth\ResetPasswordController@showResetForm']);
     	Route::post('password/reset', ['as' => 'password.reset.post', 'uses' => 'Auth\ResetPasswordController@reset']);
 		Route::group(['middleware' => ['auth']], function () {
-			Route::get('/dashboard', 'HomeController@index')->name('dashboard');;
+			Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 			Route::get('/logout', 'Auth\LoginController@logout');
 			});
 		});
