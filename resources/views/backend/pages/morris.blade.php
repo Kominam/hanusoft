@@ -1,9 +1,6 @@
 @extends('backend.pages.master')
 @section('content')
-
-<!--main content start-->
-<section id="main-content">
-    <section class="wrapper site-min-height">
+<section class="wrapper site-min-height">
         <!-- page start-->
         <div id="morris">
             <div class="row">
@@ -53,8 +50,6 @@
         </div>
         <!-- page end-->
     </section>
-</section>
-<!--main content end-->
 <!-- script for this page only-->
 <script src="{{url('backend/js/morris-script.js')}}"></script>
 @endsection()

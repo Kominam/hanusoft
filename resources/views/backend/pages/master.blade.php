@@ -9,7 +9,7 @@
     <link rel="shortcut icon" href="img/favicon.png">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Blank</title>
+    <title>Administrator</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{url('backend/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -21,25 +21,21 @@
     <link href="{{url('backend/css/style-responsive.css')}}" rel="stylesheet" />
      <link href="{{url('backend/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css')}}" rel="stylesheet" type="text/css" media="screen"/>
     <link rel="stylesheet" href="{{url('backend/css/owl.carousel.css')}}" type="text/css">
-    <!-- Custom styles for this template -->
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
-    <!--[if lt IE 9]>
-      <script src="js/html5shiv.js"></script>
-      <script src="js/respond.min.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="{{url('backend/assets/bootstrap-datepicker/css/datepicker.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{url('backend/assets/bootstrap-colorpicker/css/colorpicker.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{url('backend/assets/bootstrap-daterangepicker/daterangepicker.css')}}" />
+    <link href="{{url('backend/assets/advanced-datatable/media/css/demo_page.css')}}" rel="stylesheet" />
+    <link href="{{url('backend/assets/advanced-datatable/media/css/demo_table.css')}}" rel="stylesheet" />
   </head>
 
   <body>
   @include('backend.blocks.header')
   <section id="container" class="">
       <!--main content start-->
-      <section id="main-content">
-         
+      <section id="main-content">         
               <!-- page start-->
               @yield('content')
-              <!-- page end-->
-          
+              <!-- page end-->          
       </section>
       <!--main content end-->
       <!--footer start-->
@@ -49,17 +45,17 @@
 
     <!-- js placed at the end of the document so the pages load faster -->
     <script src="{{url('backend/js/jquery.js')}}"></script>
+    <script class="include" type="text/javascript" src="{{url('backend/js/jquery.dcjqaccordion.2.7.js')}}"></script>
+    <script src="{{url('backend/js/jquery.scrollTo.min.js')}}"></script>
+    <script src="{{url('backend/js/jquery.nicescroll.js')}}" type="text/javascript"></script>
      <script src="{{url('backend/js/jquery-1.8.3.min.js')}}"></script>
     <script src="{{url('backend/js/bootstrap.min.js')}}"></script>
     <script class="include" type="text/javascript" src="{{url('backend/js/jquery.dcjqaccordion.2.7.js')}}"></script>
-     <script src="{{url('backend/js/jquery.nicescroll.js')}}" type="text/javascript"></script>
-     <script src="{{url('backend/js/jquery.scrollTo.min.js')}}"></script>
     <script src="{{url('backend/js/jquery.sparkline.js')}}" type="text/javascript"></script>
     <script src="{{url('backend/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js')}}"></script>
     <script src="{{url('backend/js/owl.carousel.js')}}" ></script>
     <script src="{{url('backend/js/jquery.customSelect.min.js')}}" ></script>
     <script class="include" type="text/javascript" src="{{url('backend/js/jquery.dcjqaccordion.2.7.js')}}"></script>
-    
     <script src="{{url('backend/js/respond.min.js')}}" ></script>
 
     <!--common script for all pages-->

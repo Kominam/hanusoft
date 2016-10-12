@@ -1,9 +1,7 @@
 @extends('backend.pages.master')
 @section('content')
 
-<!--main content start-->
-<section id="main-content">
-    <section class="wrapper">
+<section class="wrapper">
         <!-- page start-->
         <div class="row">
             <aside class="profile-nav col-lg-3">
@@ -136,6 +134,4 @@
         </div>
         <!-- page end-->
     </section>
-</section>
-<!--main content end-->
 @endsection()

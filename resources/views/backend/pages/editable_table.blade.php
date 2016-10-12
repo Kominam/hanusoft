@@ -1,8 +1,6 @@
 @extends('backend.pages.master')
 @section('content')
-<!--main content start-->
-      <section id="main-content">
-          <section class="wrapper">
+<section class="wrapper">
               <!-- page start-->
               <section class="panel">
                   <header class="panel-heading">
@@ -142,8 +140,6 @@
               </section>
               <!-- page end-->
           </section>
-      </section>
-      <!--main content end-->
       <!--script for this page only-->
       <script src="{{url('backend/js/editable-table.js')}}"></script>
 

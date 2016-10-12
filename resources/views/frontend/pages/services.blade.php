@@ -196,7 +196,7 @@
                 </p>
             </div>
             <div class="col-sm-4 col-sm-offset-1 push-top">
-                <img class="img-responsive" src="img/device.png">
+                <img class="img-responsive" src="{{url('frontend/img/device.png')}}">
             </div>
         </div>
     </div>
