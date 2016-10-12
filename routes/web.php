@@ -12,54 +12,49 @@
 	*/
 	
 	Route::get('/', function () {
-	return view('frontend.pages.index');
+		return view('frontend.pages.index');
 	});
 
 	
-	Route::get('/home', 'HomeController@index');
 	Route::group(['prefix' => 'member'], function () {
-		Route::get('/index', ['as' => 'member.index', function () {
-		return view('backend.pages.index');
-		}]);
-		
 		Route::get('/mail', ['as' => 'mail', function() {
-		return view('backend.pages.mail');
+			return view('backend.pages.mail');
 		}]);
 		
 		Route::get('/form_component', ['as' => 'form_component', function() {
-		return view('backend.pages.form_component');
+			return view('backend.pages.form_component');
 		}]);
 		
 		Route::get('/form_wizard', ['as' => 'form_wizard', function() {
-		return view('backend.pages.form_wizard');
+			return view('backend.pages.form_wizard');
 		}]);
 		
 		Route::get('/form_validation', ['as' => 'form_validation', function() {
-		return view('backend.pages.form_validation');
+			return view('backend.pages.form_validation');
 		}]);
 		
 		Route::get('/basic_table', ['as' => 'basic_table', function() {
-		return view('backend.pages.basic_table');
+			return view('backend.pages.basic_table');
 		}]);
 
 		Route::get('/dynamic_table', ['as' => 'dynamic_table', function() {
-		return view('backend.pages.dynamic_table');
+			return view('backend.pages.dynamic_table');
 		}]);
 
 		Route::get('/advanced_table', ['as' => 'advanced_table', function() {
-		return view('backend.pages.advanced_table');
+			return view('backend.pages.advanced_table');
 		}]);
 
 		Route::get('/editable_table', ['as' => 'editable_table', function() {
-		return view('backend.pages.editable_table');
+			return view('backend.pages.editable_table');
 		}]);
 		
 		Route::get('/morris', ['as' => 'morris', function() {
-		return view('backend.pages.morris');
+			return view('backend.pages.morris');
 		}]);
 		
 		Route::get('/xchart', ['as' => 'xchart', function() {
-		return view('backend.pages.xchart');
+			return view('backend.pages.xchart');
 		}]);
 
 		Route::get('/profile', ['as' => 'profile', function(){
@@ -73,7 +68,6 @@
 		// Login Routes...
 		Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
 		Route::post('/login', 'Auth\LoginController@login');
-		Route::get('/logout', 'Auth\LoginController@logout');
 		// Registration Routes...
 		Route::get('register', ['as' => 'register', 'uses' => 'Auth\RegisterController@showRegistrationForm']);
 		Route::post('register', ['as' => 'register.post', 'uses' => 'Auth\RegisterController@register']);
@@ -83,26 +77,30 @@
     	Route::post('password/email', ['as' => 'password.email', 'uses' => 'Auth\ForgotPasswordController@sendResetLinkEmail']);
     	Route::get('password/reset/{token}', ['as' => 'password.reset.token', 'uses' => 'Auth\ResetPasswordController@showResetForm']);
     	Route::post('password/reset', ['as' => 'password.reset.post', 'uses' => 'Auth\ResetPasswordController@reset']);
+		Route::group(['middleware' => ['auth']], function () {
+			Route::get('/dashboard', 'HomeController@index');
+			Route::get('/logout', 'Auth\LoginController@logout');
+			});
 		});
 	
 	
 	//For guest
 	Route::get('/index', ['as' => 'index', function () {
-	return view ('frontend.pages.index');
+		return view ('frontend.pages.index');
 	}]);
 	
 	Route::get('/contact', ['as' => 'contact', function() {
-	return view('frontend.pages.contact');
+		return view('frontend.pages.contact');
 	}]);
 	
 	Route::post('send-contact','ContactController@contact');
 	
 	Route::get('/about', ['as' => 'about', function () {
-	return view('frontend.pages.about');
+		return view('frontend.pages.about');
 	}]);
 	
 	Route::get('/services', ['as' => 'services', function () {
-	return view('frontend.pages.services');
+		return view('frontend.pages.services');
 	}]);
 	
 	Route::get('/members', ['as' => 'members', 'uses' => 'MemberController@index']);
