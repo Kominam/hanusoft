@@ -1,10 +1,6 @@
 @extends('backend.pages.master')
 @section('content')
-
-
-<!--main content start-->
-<section id="main-content">
-    <section class="wrapper site-min-height">
+<section class="wrapper site-min-height">
         <!-- page start-->
         <div class="row">
             <div class="col-lg-12">
@@ -120,6 +116,4 @@
         </div>
         <!-- page end-->
     </section>
-</section>
-<!--main content end-->
 @endsection()

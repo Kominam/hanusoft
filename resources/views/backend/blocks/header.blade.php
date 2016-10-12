@@ -105,7 +105,7 @@
                         </li>
                         <li>
                             <a href="#">
-                            <span class="photo"><img alt="avatar" src="./img/avatar-mini.jpg"></span>
+                            <span class="photo"><img alt="avatar" src="{{url('backend/img/avatar-mini.jpg')}}"></span>
                             <span class="subject">
                             <span class="from">Jonathan Smith</span>
                             <span class="time">Just now</span>
@@ -117,7 +117,7 @@
                         </li>
                         <li>
                             <a href="#">
-                            <span class="photo"><img alt="avatar" src="./img/avatar-mini2.jpg"></span>
+                            <span class="photo"><img alt="avatar" src="{{url('backend/img/avatar-mini2.jpg')}}"></span>
                             <span class="subject">
                             <span class="from">Jhon Doe</span>
                             <span class="time">10 mins</span>
@@ -129,7 +129,7 @@
                         </li>
                         <li>
                             <a href="#">
-                            <span class="photo"><img alt="avatar" src="./img/avatar-mini3.jpg"></span>
+                            <span class="photo"><img alt="avatar" src="{{url('backend/img/avatar-mini3.jpg')}}"></span>
                             <span class="subject">
                             <span class="from">Jason Stathum</span>
                             <span class="time">3 hrs</span>
@@ -141,7 +141,7 @@
                         </li>
                         <li>
                             <a href="#">
-                            <span class="photo"><img alt="avatar" src="./img/avatar-mini4.jpg"></span>
+                            <span class="photo"><img alt="avatar" src="{{url('backend/img/avatar-mini4.jpg')}}"></span>
                             <span class="subject">
                             <span class="from">Jondi Rose</span>
                             <span class="time">Just now</span>
@@ -219,7 +219,7 @@
                 <!-- user login dropdown start-->
                 <li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                    <img alt="" src="img/avatar1_small.jpg">
+                    <img alt="" src="{{url('backend/img/avatar1_small.jpg')}}">
                     <span class="username">Jhon Doue</span>
                     <b class="caret"></b>
                     </a>
@@ -265,10 +265,9 @@
                     <span>Form Stuff</span>
                     </a>
                     <ul class="sub">
-                        <li><a  href="form_component.html">Form Components</a></li>
-                        <li><a  href="advanced_form_components.html">Advanced Components</a></li>
-                        <li><a  href="form_wizard.html">Form Wizard</a></li>
-                        <li><a  href="form_validation.html">Form Validation</a></li>
+                        <li><a  href="{{route('form_component')}}">Form Components</a></li>
+                        <li><a  href="{{route('form_wizard')}}">Form Wizard</a></li>
+                        <li><a  href="{{route('form_validation')}}">Form Validation</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -277,15 +276,14 @@
                     <span>Data Tables</span>
                     </a>
                     <ul class="sub">
-                        <li><a  href="basic_table.html">Basic Table</a></li>
-                        <li><a  href="responsive_table.html">Responsive Table</a></li>
-                        <li><a  href="dynamic_table.html">Dynamic Table</a></li>
-                        <li><a  href="advanced_table.html">Advanced Table</a></li>
-                        <li><a  href="editable_table.html">Editable Table</a></li>
+                        <li><a  href="{{route('basic_table')}}">Basic Table</a></li>
+                        <li><a  href="{{route('dynamic_table')}}">Dynamic Table</a></li>
+                        <li><a  href="{{route('advanced_table')}}">Advanced Table</a></li>
+                        <li><a  href="{{route('editable_table')}}">Editable Table</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a  href="inbox.html">
+                    <a  href="{{route('mail')}}">
                     <i class="icon-envelope"></i>
                     <span>Mail </span>
                     <span class="label label-danger pull-right mail-info">2</span>
@@ -297,10 +295,10 @@
                     <span>Charts</span>
                     </a>
                     <ul class="sub">
-                        <li><a  href="morris.html">Morris</a></li>
+                        <li><a  href="{{route('morris')}}">Morris</a></li>
                         <li><a  href="chartjs.html">Chartjs</a></li>
                         <li><a  href="flot_chart.html">Flot Charts</a></li>
-                        <li><a  href="xchart.html">xChart</a></li>
+                        <li><a  href="{{route('xchart')}}">xChart</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -310,13 +308,13 @@
                     </a>
                     <ul class="sub">
                         <li><a  href="lock_screen.html">Lock Screen</a></li>
-                        <li><a  href="profile.html">Profile</a></li>
+                        <li><a  href="{{route('profile')}}">Profile</a></li>
                         <li><a  href="invoice.html">Invoice</a></li>
                         <li><a  href="search_result.html">Search Result</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a  href="login.html">
+                    <a  href="{{route('login')}}">
                     <i class="icon-user"></i>
                     <span>Login Page</span>
                     </a>

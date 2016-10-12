@@ -1,9 +1,6 @@
 @extends('backend.pages.master')
 @section('content')
-
-<!--main content start-->
-<section id="main-content">
-    <section class="wrapper">
+<section class="wrapper">
         <!--mail inbox start-->
         <div class="mail-box">
             <aside class="sm-side">
@@ -439,6 +436,4 @@
         </div>
         <!--mail inbox end-->
     </section>
-</section>
-<!--main content end-->
 @endsection()
