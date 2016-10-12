@@ -12,49 +12,49 @@
 	*/
 	
 	Route::get('/', function () {
-	return view('frontend.pages.index');
+		return view('frontend.pages.index');
 	});
 
 	
 	Route::group(['prefix' => 'member'], function () {
 		Route::get('/mail', ['as' => 'mail', function() {
-		return view('backend.pages.mail');
+			return view('backend.pages.mail');
 		}]);
 		
 		Route::get('/form_component', ['as' => 'form_component', function() {
-		return view('backend.pages.form_component');
+			return view('backend.pages.form_component');
 		}]);
 		
 		Route::get('/form_wizard', ['as' => 'form_wizard', function() {
-		return view('backend.pages.form_wizard');
+			return view('backend.pages.form_wizard');
 		}]);
 		
 		Route::get('/form_validation', ['as' => 'form_validation', function() {
-		return view('backend.pages.form_validation');
+			return view('backend.pages.form_validation');
 		}]);
 		
 		Route::get('/basic_table', ['as' => 'basic_table', function() {
-		return view('backend.pages.basic_table');
+			return view('backend.pages.basic_table');
 		}]);
 
 		Route::get('/dynamic_table', ['as' => 'dynamic_table', function() {
-		return view('backend.pages.dynamic_table');
+			return view('backend.pages.dynamic_table');
 		}]);
 
 		Route::get('/advanced_table', ['as' => 'advanced_table', function() {
-		return view('backend.pages.advanced_table');
+			return view('backend.pages.advanced_table');
 		}]);
 
 		Route::get('/editable_table', ['as' => 'editable_table', function() {
-		return view('backend.pages.editable_table');
+			return view('backend.pages.editable_table');
 		}]);
 		
 		Route::get('/morris', ['as' => 'morris', function() {
-		return view('backend.pages.morris');
+			return view('backend.pages.morris');
 		}]);
 		
 		Route::get('/xchart', ['as' => 'xchart', function() {
-		return view('backend.pages.xchart');
+			return view('backend.pages.xchart');
 		}]);
 
 		Route::get('/profile', ['as' => 'profile', function(){
@@ -86,21 +86,21 @@
 	
 	//For guest
 	Route::get('/index', ['as' => 'index', function () {
-	return view ('frontend.pages.index');
+		return view ('frontend.pages.index');
 	}]);
 	
 	Route::get('/contact', ['as' => 'contact', function() {
-	return view('frontend.pages.contact');
+		return view('frontend.pages.contact');
 	}]);
 	
 	Route::post('send-contact','ContactController@contact');
 	
 	Route::get('/about', ['as' => 'about', function () {
-	return view('frontend.pages.about');
+		return view('frontend.pages.about');
 	}]);
 	
 	Route::get('/services', ['as' => 'services', function () {
-	return view('frontend.pages.services');
+		return view('frontend.pages.services');
 	}]);
 	
 	Route::get('/members', ['as' => 'members', 'uses' => 'MemberController@index']);
