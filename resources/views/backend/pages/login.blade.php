@@ -41,14 +41,14 @@
                         <i class="icon-facebook"></i>
                         Facebook
                         </a>
-                        <a href="index.html" class="twitter">
+                        <a href="{{ url('/redirect/github') }}" class="twitter">
                         <i class="icon-twitter"></i>
                         Twitter
                         </a>
                     </div>
                     <div class="registration">
                         Don't have an account yet?
-                        <a class="" href="registration.html">
+                        <a class="" href="{{ route('register') }}">
                         Create an account
                         </a>
                     </div>

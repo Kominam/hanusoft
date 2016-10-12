@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use Validator;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -66,10 +67,21 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'position_id' =>1
+            'position_id' =>1,
+            'bio'=>'empty',
         ]);
     }
     protected function showRegistrationForm() {
         return view('backend.pages.register');
+    }
+    protected function register(Request $request) {
+        $user = new User();
+        $user->name = $request->name;
+        $user->email= $request->email;
+        $user->password = bcrypt($request->password);
+        $user->position_id=1;
+        $user->bio='empty';
+        $user->save();
+        return redirect()->route('dashboard');
     }
 }
