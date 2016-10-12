@@ -16,12 +16,7 @@
 	});
 
 	
-	Route::get('/home', 'HomeController@index');
 	Route::group(['prefix' => 'member'], function () {
-		Route::get('/index', ['as' => 'member.index', function () {
-		return view('backend.pages.index');
-		}]);
-		
 		Route::get('/mail', ['as' => 'mail', function() {
 		return view('backend.pages.mail');
 		}]);
@@ -73,7 +68,6 @@
 		// Login Routes...
 		Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
 		Route::post('/login', 'Auth\LoginController@login');
-		Route::get('/logout', 'Auth\LoginController@logout');
 		// Registration Routes...
 		Route::get('register', ['as' => 'register', 'uses' => 'Auth\RegisterController@showRegistrationForm']);
 		Route::post('register', ['as' => 'register.post', 'uses' => 'Auth\RegisterController@register']);
@@ -83,6 +77,10 @@
     	Route::post('password/email', ['as' => 'password.email', 'uses' => 'Auth\ForgotPasswordController@sendResetLinkEmail']);
     	Route::get('password/reset/{token}', ['as' => 'password.reset.token', 'uses' => 'Auth\ResetPasswordController@showResetForm']);
     	Route::post('password/reset', ['as' => 'password.reset.post', 'uses' => 'Auth\ResetPasswordController@reset']);
+		Route::group(['middleware' => ['auth']], function () {
+			Route::get('/dashboard', 'HomeController@index');
+			Route::get('/logout', 'Auth\LoginController@logout');
+			});
 		});
 	
 	
