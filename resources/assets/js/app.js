@@ -13,8 +13,19 @@ require('./bootstrap');
  * the application, or feel free to tweak this setup for your needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
+/*Vue.component('example', require('./components/Example.vue'));
 
 const app = new Vue({
     el: 'body'
-});
+});*/
+
+import Echo from "laravel-echo"
+
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: '29cd347d237de727387a'
+})
+Echo.private('App.User.' + userId)
+    .notification((notification) => {
+        console.log(notification.type);
+    });

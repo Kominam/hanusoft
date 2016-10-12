@@ -9,6 +9,7 @@ return array(
     'CommentTableSeeder' => $baseDir . '/database/seeds/CommentTableSeeder.php',
     'CreateAdminsTable' => $baseDir . '/database/migrations/2016_09_10_140402_create_admins_table.php',
     'CreateCommentsTable' => $baseDir . '/database/migrations/2016_10_06_233247_create_comments_table.php',
+    'CreateNotificationsTable' => $baseDir . '/database/migrations/2016_10_12_011210_create_notifications_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreatePositionsTable' => $baseDir . '/database/migrations/2016_10_05_083518_create_positions_table.php',
     'CreatePostTypesTable' => $baseDir . '/database/migrations/2016_10_06_085514_create_post_types_table.php',
