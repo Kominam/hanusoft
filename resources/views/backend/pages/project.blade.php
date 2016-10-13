@@ -325,5 +325,6 @@
       }());
 
   </script>
-   <script src="{{url('backend/js/jquery-1.8.3.min.js')}}"></script>
+    <script src="{{url('backend/js/jquery-1.8.3.min.js')}}"></script>
+   <script class="include" type="text/javascript" src="{{url('backend/js/jquery.dcjqaccordion.2.7.js')}}"></script>
 @endsection

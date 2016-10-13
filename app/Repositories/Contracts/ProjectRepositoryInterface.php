@@ -14,4 +14,6 @@ interface ProjectRepositoryInterface
     public function find($id);
     public function delete($id);
     public function countAll();
+    public function invite(Request $request);
+    public function acceptInvite(Request $request);
 }

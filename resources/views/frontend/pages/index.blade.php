@@ -6,7 +6,7 @@
           <div class="slider" id="revolutionSlider" data-plugin-revolution-slider data-plugin-options='{"startheight": 677}'>
             <ul>
               <li data-transition="fade" data-slotamount="10" data-masterspeed="300">
-                <img src="{{url('frontend/img/slides/slide-bg-4.jpg')}}" data-bgfit="cover" data-bgposition="right center" data-bgrepeat="no-repeat">
+                <img src="{{url('frontend/img/slides/hs-silder1.jpg')}}" data-bgfit="cover" data-bgposition="center" data-bgrepeat="no-repeat">
 
                   <div class="tp-caption sft stb visible-lg"
                      data-x="417"
@@ -71,8 +71,6 @@
                    data-speed="500"
                    data-start="2000"
                    data-easing="easeOutExpo">The <strong>#1 Selling</strong> HTML Site Template on ThemeForest</div>
-                
-
               </li>
             </ul>
           </div>
@@ -102,7 +100,7 @@
         <div class="container">
 
           <div class="container">
-        
+
           <div class="row center">
             <div class="col-md-12">
               <h1 class="short word-rotator-title">
@@ -123,7 +121,7 @@
               </p>
             </div>
           </div>
-        
+
         </div>
 
         </div>
@@ -142,8 +140,8 @@
             <div class="col-md-3 col-sm-6">
               <div class="featured-box featured-box-primary">
                 <div class="box-content">
-                  <i class="icon-featured fa fa-user"></i>
-                  <h4>Loved by Customers</h4>
+                 <i class="icon-featured fa fa-html5"></i>
+                  <h4>Web Development</h4>
                   <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus.</p>
                 </div>
               </div>
@@ -151,8 +149,8 @@
             <div class="col-md-3 col-sm-6">
               <div class="featured-box featured-box-secundary">
                 <div class="box-content">
-                  <i class="icon-featured fa fa-book"></i>
-                  <h4>Well Documented</h4>
+                <i class="icon-featured fa fa-magic"></i>
+                  <h4>UI\UX Design</h4>
                   <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus.</p>
                 </div>
               </div>
@@ -160,8 +158,8 @@
             <div class="col-md-3 col-sm-6">
               <div class="featured-box featured-box-tertiary">
                 <div class="box-content">
-                  <i class="icon-featured fa fa-trophy"></i>
-                  <h4>Winner</h4>
+                  <i class="icon-featured fa fa-android"></i>
+                  <h4>Software Engineering</h4>
                   <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus.</p>
                 </div>
               </div>
@@ -169,8 +167,8 @@
             <div class="col-md-3 col-sm-6">
               <div class="featured-box featured-box-quartenary">
                 <div class="box-content">
-                  <i class="icon-featured fa fa-cogs"></i>
-                  <h4>Customizable</h4>
+                 <i class="icon-featured fa fa-check-square-o"></i>
+                  <h4>Testing</h4>
                   <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus. </p>
                 </div>
               </div>
@@ -246,9 +244,6 @@
         </div>
 
           <hr class="tall" />
-
-          <div class="map-section">
-          <section class="featured footer map">
             <div class="container">
               <div class="row">
                 <div class="col-md-6">
@@ -265,12 +260,12 @@
                                 <span class="day">{{$l_post->created_at->format('d')}}</span>
                                 <span class="month">{{substr($l_post->created_at->format('F'),0,3)}}</span>
                               </div>
-                              <h4><a href="{{ route('post_detail', $l_post->id) }}">{{substr($l_post->tittle,0,50)}} [...]<a href="{{ route('post_detail', $l_post->id) }}" class="read-more">read more <i class="fa fa-angle-right"></i></a></p>
+                              <h4><a href="{{ route('post_detail', $l_post->id) }}">{{substr($l_post->tittle,0,70)}}[...] <a href="{{ route('post_detail', $l_post->id) }}" class="read-more">read more <i class="fa fa-angle-right"></i></a></p>
                             </article>
                           </div>
                          @endforeach
-                        </div> 
-                      @endforeach 
+                        </div>
+                      @endforeach
                       </div>
                     </div>
                   </div>
@@ -312,10 +307,8 @@
                 </div>
               </div>
             </div>
-          </section>
-        </div>
 
-          
+
         </div>
         <hr class="tall">
         <div class="container">
@@ -342,7 +335,7 @@
                     @if($key == 0)
                          <img alt="" class="img-responsive" src="{{url('frontend/img/projects/'.$image->img_name)}}">
                     @endif
-                @endforeach 
+                @endforeach
                 <span class="thumb-info-title">
                   <span class="thumb-info-inner">{{$project->name}}</span>
                   <span class="thumb-info-type">{{$project->type->name}}</span>

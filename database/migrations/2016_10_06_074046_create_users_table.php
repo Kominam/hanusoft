@@ -18,14 +18,17 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('password');
             $table->string('email')->unique();
+            $table->tinyInteger('gender')->default(0);
             $table->string('address')->default('empty');
             $table->text('bio');
             $table->string('url_fb')->default('empty');
             $table->string('url_gmail')->default('empty');
             $table->string('url_github')->default('empty');
             $table->string('url_avt')->default('empty');
-            $table->integer('position_id')->unsigned();
+            $table->integer('position_id')->unsigned()->nullable();
             $table->foreign('position_id')->references('id')->on('positions')->onDelete('cascade');
+            $table->integer('grade_id')->unsigned()->nullable();
+            $table->foreign('grade_id')->references('id')->on('grades')->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
         });

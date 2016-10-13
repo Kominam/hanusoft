@@ -48,7 +48,7 @@
             <span><i class="fa fa-tag"></i> <a href="{{ route('browse-post-by-cate', $post->type->id)}}">{{$post->type->name}}</a></span>
             <span><i class="fa fa-comments"></i> <a href="#">{{$post->comments->count()}} Comments</a></span>
         </div>
-        <p>{{$post->content}}</p>
+        <p>{!!$post->content!!}</p>
         <div class="post-block post-share">
             <h3><i class="fa fa-share"></i>Share this post</h3>
             <!-- AddThis Button BEGIN -->
@@ -77,9 +77,6 @@
                 <div id="if_no_cmt"><h5>Be the first person comment on this post</h5></div>
             @endif
             <ul class="comments" id="cmt_area">
-              @foreach ($arr_cmt_id as $id)
-               {{$id}}
-                @endforeach
                 @foreach($post->comments as $comment)
                  <li>
                     <div class="comment" id="comment{{$comment->id}}">
@@ -131,12 +128,12 @@
                     <div class="form-group">
                         <div class="col-md-6">
                             <label>Your name *</label>
-                            <input type="text" value="" maxlength="100" class="form-control" name="name" id="name">
+                            <input type="text" value="" maxlength="100" class="form-control" name="name" id="name" required>
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                         </div>
                         <div class="col-md-6">
                             <label>Your email address *</label>
-                            <input type="email" value="" maxlength="100" class="form-control" name="email" id="email">
+                            <input type="email" value="" maxlength="100" class="form-control" name="email" id="email" required>
                         </div>
                     </div>
                 </div>
@@ -218,7 +215,7 @@
               alert('Sign new href executed.' + value);
               //Append form for reply comment
               var token ="{{csrf_token()}}";
-              var replyCmtForm ='<div class="post-block post-leave-comment" id="form_reply_comment'+value+'"><h4>Reply this comment</h4><form action="#" method="post" id="formreplycmt'+ value+'"><div class="row"><div class="form-group"><div class="col-md-6"><label>Your name *</label><input type="text" value="" maxlength="100" class="form-control" name="r_name'+value+'" id="rname'+value+'"><input type="hidden" name="_token" value="'+ token+'"></div><div class="col-md-6"><label>Your email address *</label><input type="email" value="" maxlength="100" class="form-control" name="r_email'+value+'" id="remail'+value+'"></div></div></div><div class="row"><div class="form-group"><div class="col-md-12"><label>Comment *</label><textarea maxlength="3000" rows="5" class="form-control" name="r_comment'+value+'" id="rcomment'+value+'"></textarea></div></div></div><div class="row"><div class="col-md-12"><button type="button" class="btn btn-primary btn-lg" id="submit-reply_cmt'+ value+'">Post Comment</button></div></div></form></div>';
+              var replyCmtForm ='<div class="post-block post-leave-comment" id="form_reply_comment'+value+'"><h4>Reply this comment</h4><form action="#" method="post" id="formreplycmt'+ value+'"><div class="row"><div class="form-group"><div class="col-md-6"><label>Your name *</label><input type="text" required value="" maxlength="100" class="form-control" name="r_name'+value+'" id="rname'+value+'"><input type="hidden" name="_token" value="'+ token+'"></div><div class="col-md-6"><label>Your email address *</label><input type="email" value=""  required maxlength="100" class="form-control" name="r_email'+value+'" id="remail'+value+'"></div></div></div><div class="row"><div class="form-group"><div class="col-md-12"><label>Comment *</label><textarea maxlength="3000" rows="5" class="form-control" name="r_comment'+value+'" id="rcomment'+value+'"></textarea></div></div></div><div class="row"><div class="col-md-12"><button type="button" class="btn btn-primary btn-lg" id="submit-reply_cmt'+ value+'">Post Comment</button></div></div></form></div>';
               $('#reply_comment' + value).append(replyCmtForm);
               $('#submit-reply_cmt'+ value).click(function() {
                  var r_name = $('#rname' +value).val();

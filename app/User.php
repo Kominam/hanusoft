@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','position_id','bio'
+        'name', 'email', 'password','bio'
     ];
 
     /**
@@ -30,7 +30,7 @@ class User extends Authenticatable
     public function position() {
         return $this->belongsTo('App\Position');
     }
-    
+
     public function projects() {
         return $this->belongsToMany('App\Project',  'project_user', 'user_id', 'project_id');
     }
@@ -41,6 +41,16 @@ class User extends Authenticatable
     public function posts() {
         return $this->hasMany('App\Post');
     }
-    
 
+    public function grade() {
+        return $this->belongsTo('App\Grade');
+    }
+
+    public function invitations() {
+        return $this->belongsToMany('App\Invitation', 'invitation_user');
+    }
+
+    public function project_chats() {
+        return $this->belongsToMany('App\ProjectChat','project_chat_user', 'user_id', 'project_chat_id')->withPivot('message')->withTimestamps();
+    }
 }

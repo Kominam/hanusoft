@@ -23,7 +23,11 @@
         <div class="row">
             <div class="col-md-10">
                 <p class="lead">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rutrum pellentesque imperdiet. Nulla lacinia iaculis nulla non pulvinar. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut eu risus enim, ut pulvinar lectus. Sed hendrerit nibh metus.
+                    At Hanusoft, we are committed to providing customers with the best possible IT and systems support services that we can offer.
+                    We also believe in giving clear information about each of the services we provide, as well as the standards that we aim to achieve.
+                    Your goal - and ours - is to keep your plant running smoothly at all times. Our efforts are firmly focused on delivering what your plant needs, 
+                    and we cooperate closely with our customers to work out a package of services that fits perfectly. 
+                    Wherever you are in the world, our experienced team of process engineers located close to you is ready to provide you the needed support and troubleshooting.
                 </p>
             </div>
             <div class="col-md-2">
@@ -35,36 +39,36 @@
             <div class="col-md-3 col-sm-6">
                 <div class="featured-box featured-box-primary">
                     <div class="box-content">
-                        <i class="icon-featured fa fa-user"></i>
-                        <h4>Loved by Customers</h4>
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus.<a href="http://preview.oklerthemes.com/" class="learn-more">learn more <i class="fa fa-angle-right"></i></a></p>
+                        <i class="icon-featured fa fa-html5"></i>
+                        <h4>Web Development</h4>
+                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus.</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6">
                 <div class="featured-box featured-box-secundary">
                     <div class="box-content">
-                        <i class="icon-featured fa fa-book"></i>
-                        <h4>Well Documented</h4>
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus.<a href="http://preview.oklerthemes.com/" class="learn-more">learn more <i class="fa fa-angle-right"></i></a></p>
+                        <i class="icon-featured fa fa-magic"></i>
+                        <h4>UI\UX Design</h4>
+                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus.</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6">
                 <div class="featured-box featured-box-tertiary">
                     <div class="box-content">
-                        <i class="icon-featured fa fa-trophy"></i>
-                        <h4>Winner</h4>
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus.<a href="http://preview.oklerthemes.com/" class="learn-more">learn more <i class="fa fa-angle-right"></i></a></p>
+                        <i class="icon-featured fa fa-android"></i>
+                        <h4>Software Engineering</h4>
+                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus.</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6">
                 <div class="featured-box featured-box-quartenary">
                     <div class="box-content">
-                        <i class="icon-featured fa fa-cogs"></i>
-                        <h4>Customizable</h4>
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus. <a href="http://preview.oklerthemes.com/" class="learn-more">learn more <i class="fa fa-angle-right"></i></a></p>
+                        <i class="icon-featured fa fa-check-square-o"></i>
+                        <h4>Testing</h4>
+                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus.</p>
                     </div>
                 </div>
             </div>
@@ -97,7 +101,7 @@
                                 <i class="fa fa-google-plus"></i>
                             </div>
                             <div class="feature-box-info">
-                                <h4 class="shorter">500+ Google Fonts</h4>
+                                <h4 class="shorter">PHP</h4>
                                 <p class="tall">Lorem ipsum dolor sit amet, consectetur adip.</p>
                             </div>
                         </div>
@@ -105,10 +109,10 @@
                     <div class="col-sm-6">
                         <div class="feature-box">
                             <div class="feature-box-icon">
-                                <i class="fa fa-film"></i>
+                                <i class="fa fa-facebook"></i>
                             </div>
                             <div class="feature-box-info">
-                                <h4 class="shorter">Sliders</h4>
+                                <h4 class="shorter">Social media integration</h4>
                                 <p class="tall">Lorem ipsum dolor sit amet, consectetur.</p>
                             </div>
                         </div>
@@ -117,7 +121,7 @@
                                 <i class="fa fa-check"></i>
                             </div>
                             <div class="feature-box-info">
-                                <h4 class="shorter">Icons</h4>
+                                <h4 class="shorter">Hosting</h4>
                                 <p class="tall">Lorem ipsum dolor sit amet, consectetur adip.</p>
                             </div>
                         </div>
@@ -126,7 +130,7 @@
                                 <i class="fa fa-bars"></i>
                             </div>
                             <div class="feature-box-info">
-                                <h4 class="shorter">Buttons</h4>
+                                <h4 class="shorter">FAQ</h4>
                                 <p class="tall">Lorem ipsum dolor sit, consectetur adip.</p>
                             </div>
                         </div>
@@ -185,20 +189,6 @@
             </div>
         </div>
         <hr class="tall" />
-        <div class="row">
-            <div class="col-sm-7">
-                <h2>Premium <strong>Features</strong></h2>
-                <p class="lead">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur imperdiet hendrerit volutpat. Sed in nunc nec ligula consectetur mollis in vel justo. Vestibulum ante ipsum primis in faucibus orci.
-                </p>
-                <p class="tall">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur imperdiet hendrerit volutpat. Sed in nunc nec ligula consectetur mollis in vel justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent scelerisque volutpat turpis, eu hendrerit enim scel.
-                </p>
-            </div>
-            <div class="col-sm-4 col-sm-offset-1 push-top">
-                <img class="img-responsive" src="{{url('frontend/img/device.png')}}">
-            </div>
-        </div>
     </div>
 </div>
 @endsection()

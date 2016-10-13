@@ -439,6 +439,8 @@
 @section('external_script')
     <script type="text/javascript" language="javascript" src="{{url('backend/assets/advanced-datatable/media/js/jquery.js')}}"></script>
      <script type="text/javascript" language="javascript" src="{{url('backend/assets/advanced-datatable/media/js/jquery.dataTables.js')}}"></script>
+      <script src="{{url('backend/js/jquery-1.8.3.min.js')}}"></script>
+   <script class="include" type="text/javascript" src="{{url('backend/js/jquery.dcjqaccordion.2.7.js')}}"></script>
 
     <script type="text/javascript">
       /* Formating function for row details */

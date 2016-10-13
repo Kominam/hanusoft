@@ -10,16 +10,16 @@
                       <section class="panel">
                           <div class="user-heading round">
                               <a href="#">
-                                  <img src="img/profile-avatar.jpg" alt="">
+                              <img src="{{url('frontend/img/team/'.$member->url_avt)}}" alt="">
                               </a>
-                              <h1>Jonathan Smith</h1>
-                              <p>jsmith@flatlab.com</p>
+                              <h1>{{$member->name}}</h1>
+                              <p>{{$member->email}}</p>
                           </div>
 
                           <ul class="nav nav-pills nav-stacked">
-                              <li><a href="profile.html"> <i class="icon-user"></i> Profile</a></li>
-                              <li class="active"><a href="#"> <i class="icon-calendar"></i> Recent Activity <span class="label label-danger pull-right r-activity">9</span></a></li>
-                              <li><a href="profile-edit.html"> <i class="icon-edit"></i> Edit profile</a></li>
+                              <li ><a href="{{ route('profile') }}"> <i class="icon-user"></i> Profile</a></li>
+                              <li class="active"><a href="{{ route('profile-activity') }}"> <i class="icon-calendar"></i> Recent Activity <span class="label label-danger pull-right r-activity">9</span></a></li>
+                              <li><a href="{{route('profile-edit')}}"> <i class="icon-edit"></i> Edit profile</a></li>
                           </ul>
 
                       </section>
@@ -208,4 +208,6 @@
 @endsection
 @section('external_script')
    <script src="{{url('backend/assets/jquery-knob/js/jquery.knob.js')}}"></script>
+    <script src="{{url('backend/js/jquery-1.8.3.min.js')}}"></script>
+   <script class="include" type="text/javascript" src="{{url('backend/js/jquery.dcjqaccordion.2.7.js')}}"></script>
 @endsection

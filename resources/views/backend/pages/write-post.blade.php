@@ -10,25 +10,33 @@
               <!-- page start-->
               <div class="row">
                   <div class="col-lg-12">
-                  <form class="form-horizontal tasi-form" method="get"> 
-                      <section class="panel">
+                  <form class="form-horizontal tasi-form" method="post" action="{{ route('writePost') }}">
+                  <input type="hidden" name="_token" value="{{csrf_token()}}">
+                    @if (count($errors) >0)
+                        <section class="panel">
+                          <div class="panel-heading">
+                            Errors
+                          </div>
                           <div class="panel-body">
-                              
+                              @foreach($errors->all() as $error)
+                                        {!! $error !!}    
+                              @endforeach 
+                          </div>
+                        </section>
+                    @endif
+                      <section class="panel">
+                          <div class="panel-body">  
                                   <div class="form-group">
                                       <label class="col-sm-2 control-label col-lg-2" for="inputSuccess">Category</label>
                                       <div class="col-lg-10">
-                                           <div class="radio">
-                                              <label>
-                                                  <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-                                                  Technology
+                                            @foreach ($all_post_cate as $post_cate)
+                                              <div class="radio">
+                                               <label>
+                                                  <input type="radio" name="post_type_id" id="optionsRadios1" value="{{$post_cate->id}}">
+                                                  {{$post_cate->name}}
                                               </label>
-                                          </div>
-                                          <div class="radio">
-                                              <label>
-                                                  <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                                                 Design
-                                              </label>
-                                          </div>
+                                              </div>
+                                            @endforeach
                                       </div>
                                   </div>
                           </div>
@@ -38,24 +46,24 @@
                               Content
                           </header>
                           <div class="panel-body">
-                              <div class="form">
-                                
+                              <div class="form">            
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label col-sm-2">Tittle</label>
                                         <div class="col-sm-10">
-                                          <input type="text" class="form-control" id="" placeholder="Enter title">
+                                          <input type="text" class="form-control" id="" placeholder="Enter title" name="tittle" required>
                                         </div>
                                       
                                          </div>
                                       <div class="form-group">
                                           <label class="col-sm-2 control-label col-sm-2">Content</label>
                                           <div class="col-sm-10">
-                                              <textarea class="form-control ckeditor" name="editor1" rows="6"></textarea>
+                                              <textarea class="form-control ckeditor" name="content" rows="25"></textarea>
                                           </div>
                                       </div>
                               </div>
                           </div>
-                          </section>
+                      </section>
+                     <input type="submit" name="submit" value="submit">
                   </form>
                   </div>
               </div>
@@ -78,4 +86,6 @@
 
   <script type="text/javascript" src="{{url('backend/assets/bootstrap-inputmask/bootstrap-inputmask.min.js')}}"></script>
    <script src="{{url('backend/js/form-component.js')}}"></script>
+    <script src="{{url('backend/js/jquery-1.8.3.min.js')}}"></script>
+   <script class="include" type="text/javascript" src="{{url('backend/js/jquery.dcjqaccordion.2.7.js')}}"></script>
 @endsection
