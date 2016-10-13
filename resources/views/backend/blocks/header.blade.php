@@ -5,7 +5,7 @@
             <div data-original-title="Toggle Navigation" data-placement="right" class="icon-reorder tooltips"></div>
         </div>
         <!--logo start-->
-        <a href="{{route('index')}}" class="logo" >Flat<span>lab</span></a>
+        <a href="{{route('index')}}" class="logo" >HANU<span>soft</span></a>
         <!--logo end-->
         <div class="nav notify-row" id="top_menu">
             <!--  notification start -->
@@ -96,61 +96,34 @@
                 <li id="header_inbox_bar" class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                     <i class="icon-envelope-alt"></i>
-                    <span class="badge bg-important">5</span>
+                    <span class="badge bg-important" id="badge_num_unread_mess">{{$num_unread_mess}}</span>
                     </a>
                     <ul class="dropdown-menu extended inbox">
                         <div class="notify-arrow notify-arrow-red"></div>
                         <li>
-                            <p class="red">You have 5 new messages</p>
+                            <p class="red">You have <span id="num_unread_mess">{{$num_unread_mess}}</span>new messages</p>
                         </li>
-                        <li>
-                            <a href="#">
-                            <span class="photo"><img alt="avatar" src="{{url('backend/img/avatar-mini.jpg')}}"></span>
-                            <span class="subject">
-                            <span class="from">Jonathan Smith</span>
-                            <span class="time">Just now</span>
-                            </span>
-                            <span class="message">
-                            Hello, this is an example msg.
-                            </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                            <span class="photo"><img alt="avatar" src="{{url('backend/img/avatar-mini2.jpg')}}"></span>
-                            <span class="subject">
-                            <span class="from">Jhon Doe</span>
-                            <span class="time">10 mins</span>
-                            </span>
-                            <span class="message">
-                            Hi, Jhon Doe Bhai how are you ?
-                            </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                            <span class="photo"><img alt="avatar" src="{{url('backend/img/avatar-mini3.jpg')}}"></span>
-                            <span class="subject">
-                            <span class="from">Jason Stathum</span>
-                            <span class="time">3 hrs</span>
-                            </span>
-                            <span class="message">
-                            This is awesome dashboard.
-                            </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                            <span class="photo"><img alt="avatar" src="{{url('backend/img/avatar-mini4.jpg')}}"></span>
-                            <span class="subject">
-                            <span class="from">Jondi Rose</span>
-                            <span class="time">Just now</span>
-                            </span>
-                            <span class="message">
-                            Hello, this is metrolab
-                            </span>
-                            </a>
-                        </li>
+                          @foreach (Auth::user()->unreadNotifications->take(5) as $notification)
+                             @if($notification->type=='App\Notifications\ChatProject')
+                                     <li>
+                                        <a href="{{ url('member/mail') }}">
+                                        <span class="photo"><img alt="avatar" src="{{url('frontend/img/team/'.$notification->data['member_avt'])}}"></span>
+                                        <span class="subject">
+                                        <span class="from" style="color:red">{{$notification->data['member_name']}}</span>
+                                        <span class="time">{{$notification->created_at}}</span>
+                                        </span>
+                                        <span class="message">
+                                        <strong>{{$notification->data['project_chat_name']}}</strong>
+                                        </span>
+                                         <span class="message">
+                                        {{substr($notification->data['message'], 0,50)}}...
+                                        </span>
+                                        </a>
+                                    </li>
+                             @endif
+                          @endforeach
+                       
+                        
                         <li>
                             <a href="#">See all messages</a>
                         </li>
@@ -158,51 +131,72 @@
                 </li>
                 <!-- inbox dropdown end -->
                 <!-- notification dropdown start-->
+                  <script src="{{url('backend/js/jquery-1.8.3.min.js')}}"></script>
                 <li id="header_notification_bar" class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                     <i class="icon-bell-alt"></i>
-                    <span class="badge bg-warning">7</span>
+                    <span class="badge bg-warning" id="badge_num_unread_noti">{{$num_unread_noti}}</span>
                     </a>
                     <ul class="dropdown-menu extended notification">
                         <div class="notify-arrow notify-arrow-yellow"></div>
                         <li>
-                            <p class="yellow">You have 7 new notifications</p>
+                            <p class="yellow">You have <span id="num_unread_noti">{{$num_unread_noti}}</span> new notifications</p>
                         </li>
-                        <li>
-                            <a href="#">
-                            <span class="label label-danger"><i class="icon-bolt"></i></span>
-                            Server #3 overloaded.
-                            <span class="small italic">34 mins</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                            <span class="label label-warning"><i class="icon-bell"></i></span>
-                            Server #10 not respoding.
-                            <span class="small italic">1 Hours</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                            <span class="label label-danger"><i class="icon-bolt"></i></span>
-                            Database overloaded 24%.
-                            <span class="small italic">4 hrs</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                            <span class="label label-success"><i class="icon-plus"></i></span>
-                            New user registered.
-                            <span class="small italic">Just now</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                            <span class="label label-info"><i class="icon-bullhorn"></i></span>
-                            Application error.
-                            <span class="small italic">10 mins</span>
-                            </a>
-                        </li>
+                        <input type="hidden" name="_token" value="{{csrf_token()}}" >
+                        @foreach (Auth::user()->unreadNotifications->take(5) as $notification)
+                         @if($notification->type=='App\Notifications\InvitetoProject')
+                              <li id="invite{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}">
+                                <a href="#">
+                                <span class="label label-danger"><i class="icon-bolt"></i></span>
+                                 <span style="color:red;font-size:15px">Invite project</span><br>{{$notification->data['project_name']}} from {{$notification->data['leadership_name']}}
+                                 <br>
+                                <span class="small italic">{{$notification->created_at->diffForHumans()}}</span>
+                                <br>
+                                <table>
+                                    <tr>
+                                        <td><a id="accept{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}"><i class=" icon-ok" style="color:green">Accept</i></a></td>
+                                        <td><a id="decline{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}"><i class="icon-minus" style="color:red">Decline</i></a></td>
+                                        <td><a href="#hide"><i class="icon-off">Hide</i></td>
+                                    </tr>
+                                </table>
+                                </a>
+                            </li>
+                              <script type="text/javascript">
+                                    $(document).ready(function(){
+                                          $.ajaxSetup({
+                                              headers: {
+                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                              }
+                                            });
+
+                                          /*$('#header_notification_bar ul').prepend('Some text');*/
+                                        $('#accept{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}').click(function(){
+                                                var project_id="{{$notification->data['project_id']}}";
+                                                $.ajax({
+                                                url:'/member/accept-invite',
+                                                type: "post",
+                                                data: { '_token': $('input[name=_token]').val(), 'project_id': project_id, 'response': 'accept'},
+                                                success: function(data) {   
+                                                    $('#invite{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}').remove();
+                                                    }          
+                                                }); 
+                                            });
+                                        $('#decline{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}').click(function(){
+                                              var project_id="{{$notification->data['project_id']}}";
+                                                $.ajax({
+                                                url:'/member/accept-invite',
+                                                type: "post",
+                                                data: { '_token': $('input[name=_token]').val(), 'project_id': project_id, 'response': 'decline'},
+                                                success: function(data) { 
+                                                    console.log(data);  
+                                                    $('#invite{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}').remove();
+                                                    }          
+                                                });  
+                                            }); 
+                                    });
+                             </script>
+                        @endif
+                        @endforeach
                         <li>
                             <a href="#">See all notifications</a>
                         </li>
@@ -219,16 +213,16 @@
                 <!-- user login dropdown start-->
                 <li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                    <img alt="" src="{{url('backend/img/avatar1_small.jpg')}}">
-                    <span class="username">Jhon Doue</span>
+                    <img alt="" src="{{url('frontend/img/team/'.Auth::user()->url_avt)}}" style="width: 28px; height: 28px">
+                    <span class="username">{{Auth::user()->name}}</span>
                     <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu extended logout">
                         <div class="log-arrow-up"></div>
-                        <li><a href="#"><i class=" icon-suitcase"></i>Profile</a></li>
+                        <li><a href="{{route('profile')}}"><i class=" icon-suitcase"></i>Profile</a></li>
                         <li><a href="#"><i class="icon-cog"></i> Settings</a></li>
                         <li><a href="#"><i class="icon-bell-alt"></i> Notification</a></li>
-                        <li><a href="login.html"><i class="icon-key"></i> Log Out</a></li>
+                        <li><a href="{{ url('member/logout') }}"><i class="icon-key"></i> Log Out</a></li>
                     </ul>
                 </li>
                 <!-- user login dropdown end -->
@@ -242,82 +236,56 @@
             <!-- sidebar menu start-->
             <ul class="sidebar-menu" id="nav-accordion">
                 <li>
-                    <a href="index.html">
+                    <a href="{{ route('dashboard') }}">
                     <i class="icon-dashboard"></i>
                     <span>Dashboard</span>
                     </a>
                 </li>
                 <li class="sub-menu">
                     <a href="javascript:;">
-                    <i class="icon-cogs"></i>
-                    <span>Components</span>
+                    <i class=" icon-folder-open"></i>
+                    <span>Projects</span>
                     </a>
                     <ul class="sub">
-                        <li><a  href="grids.html">Grids</a></li>
-                        <li><a  href="calendar.html">Calendar</a></li>
-                        <li><a  href="gallery.html">Gallery</a></li>
-                        <li><a  href="todo_list.html">Todo List</a></li>
+                        @foreach (Auth::user()->projects as $project)
+                          <li><a  href="{{ route('backend.project', $project->id) }}"> <i class=" icon-folder-close"></i>{{$project->name}}</a></li>
+                        @endforeach
+                         <li><a  href="{{ route('create-project') }}"> <i class="icon-plus-sign-alt"></i>Create a new project</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
                     <a href="javascript:;" >
-                    <i class="icon-tasks"></i>
-                    <span>Form Stuff</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a  href="{{route('form_component')}}">Form Components</a></li>
-                        <li><a  href="{{route('form_wizard')}}">Form Wizard</a></li>
-                        <li><a  href="{{route('form_validation')}}">Form Validation</a></li>
-                    </ul>
-                </li>
-                <li class="sub-menu">
-                    <a href="javascript:;">
-                    <i class="icon-th"></i>
-                    <span>Data Tables</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a  href="{{route('basic_table')}}">Basic Table</a></li>
-                        <li><a  href="{{route('dynamic_table')}}">Dynamic Table</a></li>
-                        <li><a  href="{{route('advanced_table')}}">Advanced Table</a></li>
-                        <li><a  href="{{route('editable_table')}}">Editable Table</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a  href="{{route('mail')}}">
-                    <i class="icon-envelope"></i>
-                    <span>Mail </span>
-                    <span class="label label-danger pull-right mail-info">2</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
-                    <a href="javascript:;">
-                    <i class=" icon-bar-chart"></i>
-                    <span>Charts</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a  href="{{route('morris')}}">Morris</a></li>
-                        <li><a  href="chartjs.html">Chartjs</a></li>
-                        <li><a  href="flot_chart.html">Flot Charts</a></li>
-                        <li><a  href="{{route('xchart')}}">xChart</a></li>
-                    </ul>
-                </li>
-                <li class="sub-menu">
-                    <a href="javascript:;" class="active" >
-                    <i class="icon-glass"></i>
-                    <span>Extra</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a  href="lock_screen.html">Lock Screen</a></li>
-                        <li><a  href="{{route('profile')}}">Profile</a></li>
-                        <li><a  href="invoice.html">Invoice</a></li>
-                        <li><a  href="search_result.html">Search Result</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a  href="{{route('login')}}">
                     <i class="icon-user"></i>
-                    <span>Login Page</span>
+                    <span>Profile</span>
                     </a>
+                    <ul class="sub">
+                        <li><a  href="{{route('profile')}}"> <i class=" icon-info"></i>Your profile</a></li>
+                         <li><a  href="{{route('profile-edit')}}"><i class="icon-edit"></i>Edit profile</a></li>
+                        <li><a  href="{{route('profile-activity')}}"><i class="icon-calendar"></i>Activity</a></li>
+                        <li><a href="{{route('mail')}}"><i class="icon-envelope"></i>Inbox</a></li>
+                    </ul>
+                </li>
+                  <li class="sub-menu">
+                    <a href="javascript:;" >
+                    <i class="icon-tasks"></i>
+                    <span>Post</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="{{ route('showPostForm') }}"><i class="icon-edit"></i>Write post</a></li>
+                        <li><a  href="{{ route('your-post') }}"><i class="icon-book"></i>Your post</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                    <i class="icon-gear (alias)"></i>
+                    <span>Setting</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="#">Basic Table</a></li>
+                        <li><a  href="#">Dynamic Table</a></li>
+                        <li><a  href="#">Advanced Table</a></li>
+                        <li><a  href="#">Editable Table</a></li>
+                    </ul>
                 </li>
             </ul>
             <!-- sidebar menu end-->

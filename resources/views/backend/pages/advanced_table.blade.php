@@ -439,6 +439,8 @@
 @section('external_script')
     <script type="text/javascript" language="javascript" src="{{url('backend/assets/advanced-datatable/media/js/jquery.js')}}"></script>
      <script type="text/javascript" language="javascript" src="{{url('backend/assets/advanced-datatable/media/js/jquery.dataTables.js')}}"></script>
+      <script src="{{url('backend/js/jquery-1.8.3.min.js')}}"></script>
+   <script class="include" type="text/javascript" src="{{url('backend/js/jquery.dcjqaccordion.2.7.js')}}"></script>
 
     <script type="text/javascript">
       /* Formating function for row details */
@@ -460,7 +462,7 @@
            */
           var nCloneTh = document.createElement( 'th' );
           var nCloneTd = document.createElement( 'td' );
-          nCloneTd.innerHTML = '<img src="assets/advanced-datatable/examples/examples_support/details_open.png">';
+          nCloneTd.innerHTML = '<img src="{{url('backend/assets/advanced-datatable/examples/examples_support/details_open.png')}}">';
           nCloneTd.className = "center";
 
           $('#hidden-table-info thead tr').each( function () {
@@ -490,13 +492,13 @@
               if ( oTable.fnIsOpen(nTr) )
               {
                   /* This row is already open - close it */
-                  this.src = "assets/advanced-datatable/examples/examples_support/details_open.png";
+                  this.src = "{{url('backend/assets/advanced-datatable/examples/examples_support/details_open.png')}}";
                   oTable.fnClose( nTr );
               }
               else
               {
                   /* Open this row */
-                  this.src = "assets/advanced-datatable/examples/examples_support/details_close.png";
+                  this.src = "{{url('backend/assets/advanced-datatable/examples/examples_support/details_close.png')}}";
                   oTable.fnOpen( nTr, fnFormatDetails(oTable, nTr), 'details' );
               }
           } );

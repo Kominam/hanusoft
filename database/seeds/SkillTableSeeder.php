@@ -21,6 +21,9 @@ class SkillTableSeeder extends Seeder
              array('name'=>'Yii','created_at' => Carbon::now(),'updated_at' => Carbon::now()),
              array('name'=>'Laravel','created_at' => Carbon::now(),'updated_at' => Carbon::now()),
              array('name'=>'.NET','created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+             array('name'=>'Android','created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+             array('name'=>'C','created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+             array('name'=>'C#','created_at' => Carbon::now(),'updated_at' => Carbon::now()),
         ]);
     }
 }

@@ -1697,54 +1697,54 @@ html.boxed .pricing-table .plan, html.boxed .pricing-table h3 {
 
 /* Primary */
 .featured-box-primary i.icon-featured {
-	background-color: #E36159;
+	background-color: #FA3F10;
 }
 
 .featured-box-primary h4 {
-	color: #E36159;
+	color: #FA3F10;
 }
 
 .featured-box-primary .box-content {
-	border-top-color: #E36159;
+	border-top-color: #FA3F10;
 }
 
 /* Secundary */
 .featured-box-secundary i.icon-featured {
-	background-color: #CCC;
+	background-color: #231F78;
 }
 
 .featured-box-secundary h4 {
-	color: #CCC;
+	color: #231F78;
 }
 
 .featured-box-secundary .box-content {
-	border-top-color:  #057612;
+	border-top-color:  #231F78;
 }
 
 /* Tertiary */
 .featured-box-tertiary i.icon-featured {
-	background-color: #2BAAB1;
+	background-color: #1C8E16;
 }
 
 .featured-box-tertiary h4 {
-	color: #2BAAB1;
+	color:  #1C8E16;
 }
 
 .featured-box-tertiary .box-content {
-	border-top-color: #2BAAB1;
+	border-top-color: #1C8E16;
 }
 
 /* Quartenary */
 .featured-box-quartenary i.icon-featured {
-	background-color: #734BA9;
+	background-color: #F70F0F;
 }
 
 .featured-box-quartenary h4 {
-	color: #734BA9;
+	color: #F70F0F;
 }
 
 .featured-box-quartenary .box-content {
-	border-top-color: #734BA9;
+	border-top-color: #F70F0F;
 }
 
 /* Featured Boxes - Login */

@@ -14,7 +14,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h1>Contact Us Advanced</h1>
+                    <h1>Contact Us</h1>
                 </div>
             </div>
         </div>
@@ -65,7 +65,7 @@
                         <div class="form-group">
                             <div class="col-md-4">
                                 <div class="captcha form-control">
-                                  {!! captcha_img() !!} 
+                                  {!! captcha_img() !!}
                                 </div>
                             </div>
                             <div class="col-md-8">
@@ -87,13 +87,13 @@
             </div>
             <div class="col-md-6">
                 <h4 class="push-top">Get in <strong>touch</strong></h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget leo at velit imperdiet varius. In eu ipsum vitae velit congue iaculis vitae at risus.</p>
+                <p>Hanusoft is an IT club, working in Faculty of Information Technology. Taking part in Hanusoft means that you have passion with programming. </p>
                 <hr />
                 <h4>The <strong>Office</strong></h4>
                 <ul class="list-unstyled">
-                    <li><i class="fa fa-map-marker"></i> <strong>Address:</strong> 1234 Street Name, City Name, United States</li>
+                    <li><i class="fa fa-map-marker"></i> <strong>Address:</strong> Hanoi University Km9 Nguyen Trai, Thanh Xuan, Ha Noi</li>
                     <li><i class="fa fa-phone"></i> <strong>Phone:</strong> (123) 456-7890</li>
-                    <li><i class="fa fa-envelope"></i> <strong>Email:</strong> <a href="mailto:mail@example.com">mail@example.com</a></li>
+                    <li><i class="fa fa-envelope"></i> <strong>Email:</strong> <a href="mailto:hanusoft.dev@gmail.com">hanusoft.dev@gmail.com</a></li>
                 </ul>
                 <hr />
                 <h4>Business <strong>Hours</strong></h4>

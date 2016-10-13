@@ -32,13 +32,13 @@
       <!--main content end-->
       <!--footer start-->
       @include('backend.blocks.footer')
+      <span style="display: none" id="userId">{{Auth::user()->id}}</span>
       <!--footer end-->
   </section>
-
     <!-- js placed at the end of the document so the pages load faster -->
     <script src="{{url('backend/js/jquery.js')}}"></script>
-   <script src="{{url('backend/js/bootstrap.min.js')}}"></script>
-   <script class="include" type="text/javascript" src="{{url('backend/js/jquery.dcjqaccordion.2.7.js')}}"></script>
+    <script src="{{url('backend/js/bootstrap.min.js')}}"></script>
+    <script class="include" type="text/javascript" src="{{url('backend/js/jquery.dcjqaccordion.2.7.js')}}"></script>
     <script src="{{url('backend/js/jquery.scrollTo.min.js')}}"></script>
     <script src="{{url('backend/js/jquery.nicescroll.js')}}" type="text/javascript"></script>
     <script src="{{url('backend/js/respond.min.js')}}" ></script>
@@ -47,6 +47,9 @@
 
      <!--common script for all pages-->
     <script src="{{url('backend/js/common-scripts.js')}}"></script>
+    <script type="text/javascript">
+    </script>
+    <script src="{{ elixir('js/app.js') }}"></script>
 
     @yield('external_script')
   </body>

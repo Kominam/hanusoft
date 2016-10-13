@@ -1,16 +1,21 @@
 @extends('backend.pages.master')
+@section('external_css')
+    <link href="{{url('backend/assets/font-awesome/css/font-awesome.css')}}" rel="stylesheet" />
+    <link href="{{url('backend/assets/jquery-file-upload/css/jquery.fileupload-ui.css')}}" rel="stylesheet" type="text/css" >
+@endsection
 @section('content')
 <section class="wrapper">
+ <input type="hidden" name="_token" value="{{csrf_token()}}">
         <!--mail inbox start-->
         <div class="mail-box">
             <aside class="sm-side">
                 <div class="user-head">
                     <a href="javascript:;" class="inbox-avatar">
-                    <img src="{{url('backend/img/mail-avatar.jpg')}}" alt="">
+                    <img src="{{url('frontend/img/team/'.Auth::user()->url_avt)}}" alt="" style="width: 60px;height: 64px">
                     </a>
                     <div class="user-name">
-                        <h5><a href="#">Jonathan Smith</a></h5>
-                        <span><a href="#">jsmith@gmail.com</a></span>
+                        <h5><a href="#">{{Auth::user()->name}}</a></h5>
+                        <span><a href="#">{{Auth::user()->email}}</a></span>
                     </div>
                     <a href="javascript:;" class="mail-dropdown pull-right">
                     <i class="icon-chevron-down"></i>
@@ -74,87 +79,42 @@
                     <!-- /.modal -->
                 </div>
                 <ul class="inbox-nav inbox-divider">
-                    <li class="active">
-                        <a href="#"><i class="icon-inbox"></i> Inbox <span class="label label-danger pull-right">2</span></a>
-                    </li>
+                    @foreach ($belonged_projects as $project_chat)
                     <li>
-                        <a href="#"><i class="icon-envelope-alt"></i> Sent Mail</a>
+                        <a href="#{{$project_chat->name}}"><i class="icon-envelope-alt"></i>{{$project_chat->name}}</a>
                     </li>
-                    <li>
-                        <a href="#"><i class="icon-bookmark-empty"></i> Important</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class=" icon-external-link"></i> Drafts <span class="label label-info pull-right">30</span></a>
-                    </li>
-                    <li>
-                        <a href="#"><i class=" icon-trash"></i> Trash</a>
-                    </li>
+                    <script type="text/javascript">
+                        $(document).ready(function() {
+                              $.ajaxSetup({
+                              headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                              }
+                            });
+                            $('a[href="#{{$project_chat->name}}"]').click(function(){
+                                $('#project_chat_name').find('p').text($(this).text());
+                                  $.ajax({
+                                    url:'/member/get-chat-project-cont',
+                                    type: "post",
+                                    data: { '_token': $('input[name=_token]').val(), 'project_chat_name': "{{$project_chat->name}}"},
+                                    success: function(data) {   
+                                            $('#msg-cont').empty();
+                                           $('#msg-cont').prepend(data);
+
+                                }          
+                            });
+                                
+                            }); 
+                        });
+                    </script>
+                    @endforeach
+                    <!-- <li class="active">
+                        <a href="#"><i class="icon-inbox"></i> Bussiness CMS <span class="label label-danger pull-right">2</span></a>
+                    </li> -->
                 </ul>
-                <ul class="nav nav-pills nav-stacked labels-info inbox-divider">
-                    <li>
-                        <h4>Labels</h4>
-                    </li>
-                    <li> <a href="#"> <i class=" icon-sign-blank text-danger"></i> Work </a> </li>
-                    <li> <a href="#"> <i class=" icon-sign-blank text-success"></i> Design </a> </li>
-                    <li> <a href="#"> <i class=" icon-sign-blank text-info "></i> Family </a>
-                    <li> <a href="#"> <i class=" icon-sign-blank text-warning "></i> Friends </a>
-                    <li> <a href="#"> <i class=" icon-sign-blank text-primary "></i> Office </a>
-                    </li>
-                </ul>
-                <ul class="nav nav-pills nav-stacked labels-info ">
-                    <li>
-                        <h4>Buddy online</h4>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class=" icon-circle text-success"></i> Jhone Doe 
-                            <p>I do not think</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class=" icon-circle text-danger"></i> Sumon 
-                            <p>Busy with coding</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class=" icon-circle text-muted "></i> Anjelina Joli 
-                            <p>I out of control</p>
-                        </a>
-                    <li>
-                        <a href="#">
-                            <i class=" icon-circle text-muted "></i> Jonathan Smith 
-                            <p>I am not here</p>
-                        </a>
-                    <li>
-                        <a href="#">
-                            <i class=" icon-circle text-muted "></i> Tawseef 
-                            <p>I do not think</p>
-                        </a>
-                    </li>
-                </ul>
-                <div class="inbox-body text-center">
-                    <div class="btn-group">
-                        <a href="javascript:;" class="btn mini btn-primary">
-                        <i class="icon-plus"></i>
-                        </a>
-                    </div>
-                    <div class="btn-group">
-                        <a href="javascript:;" class="btn mini btn-success">
-                        <i class="icon-phone"></i>
-                        </a>
-                    </div>
-                    <div class="btn-group">
-                        <a href="javascript:;" class="btn mini btn-info">
-                        <i class="icon-cog"></i>
-                        </a>
-                    </div>
-                </div>
             </aside>
             <aside class="lg-side">
                 <div class="inbox-head">
-                    <h3>Inbox</h3>
+                    <h3>Chat</h3>
                     <form class="pull-right position" action="#">
                         <div class="input-append">
                             <input type="text"  placeholder="Search Mail" class="sr-input">
@@ -163,277 +123,79 @@
                     </form>
                 </div>
                 <div class="inbox-body">
-                    <div class="mail-option">
-                        <div class="chk-all">
-                            <input type="checkbox" class="mail-checkbox mail-group-checkbox">
-                            <div class="btn-group" >
-                                <a class="btn mini all" href="#" data-toggle="dropdown">
-                                All
-                                <i class="icon-angle-down "></i>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#"> None</a></li>
-                                    <li><a href="#"> Read</a></li>
-                                    <li><a href="#"> Unread</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="btn-group">
-                            <a class="btn mini tooltips" href="#" data-toggle="dropdown" data-placement="top" data-original-title="Refresh">
-                            <i class=" icon-refresh"></i>
-                            </a>
-                        </div>
-                        <div class="btn-group hidden-phone">
-                            <a class="btn mini blue" href="#" data-toggle="dropdown">
-                            More
-                            <i class="icon-angle-down "></i>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#"><i class="icon-pencil"></i> Mark as Read</a></li>
-                                <li><a href="#"><i class="icon-ban-circle"></i> Spam</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#"><i class="icon-trash"></i> Delete</a></li>
-                            </ul>
-                        </div>
-                        <div class="btn-group">
-                            <a class="btn mini blue" href="#" data-toggle="dropdown">
-                            Move to
-                            <i class="icon-angle-down "></i>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#"><i class="icon-pencil"></i> Mark as Read</a></li>
-                                <li><a href="#"><i class="icon-ban-circle"></i> Spam</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#"><i class="icon-trash"></i> Delete</a></li>
-                            </ul>
-                        </div>
-                        <ul class="unstyled inbox-pagination">
-                            <li><span>1-50 of 234</span></li>
-                            <li>
-                                <a href="#" class="np-btn"><i class="icon-angle-left  pagination-left"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" class="np-btn"><i class="icon-angle-right pagination-right"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <table class="table table-inbox table-hover">
-                        <tbody>
-                            <tr class="unread">
-                                <td class="inbox-small-cells">
-                                    <input type="checkbox" class="mail-checkbox">
-                                </td>
-                                <td class="inbox-small-cells"><i class="icon-star"></i></td>
-                                <td class="view-message  dont-show">Vector Lab</td>
-                                <td class="view-message ">Lorem ipsum dolor imit set.</td>
-                                <td class="view-message  inbox-small-cells"><i class="icon-paper-clip"></i></td>
-                                <td class="view-message  text-right">9:27 AM</td>
-                            </tr>
-                            <tr class="unread">
-                                <td class="inbox-small-cells">
-                                    <input type="checkbox" class="mail-checkbox">
-                                </td>
-                                <td class="inbox-small-cells"><i class="icon-star"></i></td>
-                                <td class="view-message dont-show">Mosaddek Hossain</td>
-                                <td class="view-message">Hi Bro, How are you?</td>
-                                <td class="view-message inbox-small-cells"></td>
-                                <td class="view-message text-right">March 15</td>
-                            </tr>
-                            <tr class="">
-                                <td class="inbox-small-cells">
-                                    <input type="checkbox" class="mail-checkbox">
-                                </td>
-                                <td class="inbox-small-cells"><i class="icon-star"></i></td>
-                                <td class="view-message dont-show">Dulal khan</td>
-                                <td class="view-message">Lorem ipsum dolor sit amet</td>
-                                <td class="view-message inbox-small-cells"></td>
-                                <td class="view-message text-right">June 15</td>
-                            </tr>
-                            <tr class="">
-                                <td class="inbox-small-cells">
-                                    <input type="checkbox" class="mail-checkbox">
-                                </td>
-                                <td class="inbox-small-cells"><i class="icon-star"></i></td>
-                                <td class="view-message dont-show">Facebook</td>
-                                <td class="view-message">Dolor sit amet, consectetuer adipiscing</td>
-                                <td class="view-message inbox-small-cells"></td>
-                                <td class="view-message text-right">April 01</td>
-                            </tr>
-                            <tr class="">
-                                <td class="inbox-small-cells">
-                                    <input type="checkbox" class="mail-checkbox">
-                                </td>
-                                <td class="inbox-small-cells"><i class="icon-star inbox-started"></i></td>
-                                <td class="view-message dont-show">Mosaddek <span class="label label-danger pull-right">urgent</span></td>
-                                <td class="view-message">Lorem ipsum dolor sit amet</td>
-                                <td class="view-message inbox-small-cells"></td>
-                                <td class="view-message text-right">May 23</td>
-                            </tr>
-                            <tr class="">
-                                <td class="inbox-small-cells">
-                                    <input type="checkbox" class="mail-checkbox">
-                                </td>
-                                <td class="inbox-small-cells"><i class="icon-star inbox-started"></i></td>
-                                <td class="view-message dont-show">Facebook</td>
-                                <td class="view-message">Dolor sit amet, consectetuer adipiscing</td>
-                                <td class="view-message inbox-small-cells"><i class="icon-paper-clip"></i></td>
-                                <td class="view-message text-right">March 14</td>
-                            </tr>
-                            <tr class="">
-                                <td class="inbox-small-cells">
-                                    <input type="checkbox" class="mail-checkbox">
-                                </td>
-                                <td class="inbox-small-cells"><i class="icon-star inbox-started"></i></td>
-                                <td class="view-message dont-show">Rafiq</td>
-                                <td class="view-message">Lorem ipsum dolor sit amet</td>
-                                <td class="view-message inbox-small-cells"><i class="icon-paper-clip"></i></td>
-                                <td class="view-message text-right">January 19</td>
-                            </tr>
-                            <tr class="">
-                                <td class="inbox-small-cells">
-                                    <input type="checkbox" class="mail-checkbox">
-                                </td>
-                                <td class="inbox-small-cells"><i class="icon-star"></i></td>
-                                <td class="view-message dont-show">Facebook <span class="label label-success pull-right">megazine</span></td>
-                                <td class="view-message view-message">Dolor sit amet, consectetuer adipiscing</td>
-                                <td class="view-message inbox-small-cells"></td>
-                                <td class="view-message text-right">March 04</td>
-                            </tr>
-                            <tr class="">
-                                <td class="inbox-small-cells">
-                                    <input type="checkbox" class="mail-checkbox">
-                                </td>
-                                <td class="inbox-small-cells"><i class="icon-star"></i></td>
-                                <td class="view-message dont-show">Mosaddek</td>
-                                <td class="view-message view-message">Lorem ipsum dolor sit amet</td>
-                                <td class="view-message inbox-small-cells"></td>
-                                <td class="view-message text-right">June 13</td>
-                            </tr>
-                            <tr class="">
-                                <td class="inbox-small-cells">
-                                    <input type="checkbox" class="mail-checkbox">
-                                </td>
-                                <td class="inbox-small-cells"><i class="icon-star"></i></td>
-                                <td class="view-message dont-show">Facebook <span class="label label-info pull-right">family</span></td>
-                                <td class="view-message view-message">Dolor sit amet, consectetuer adipiscing</td>
-                                <td class="view-message inbox-small-cells"></td>
-                                <td class="view-message text-right">March 24</td>
-                            </tr>
-                            <tr class="">
-                                <td class="inbox-small-cells">
-                                    <input type="checkbox" class="mail-checkbox">
-                                </td>
-                                <td class="inbox-small-cells"><i class="icon-star inbox-started"></i></td>
-                                <td class="view-message dont-show">Mosaddek</td>
-                                <td class="view-message">Lorem ipsum dolor sit amet</td>
-                                <td class="view-message inbox-small-cells"></td>
-                                <td class="view-message text-right">March 09</td>
-                            </tr>
-                            <tr class="">
-                                <td class="inbox-small-cells">
-                                    <input type="checkbox" class="mail-checkbox">
-                                </td>
-                                <td class="inbox-small-cells"><i class="icon-star inbox-started"></i></td>
-                                <td class="dont-show">Facebook</td>
-                                <td class="view-message">Dolor sit amet, consectetuer adipiscing</td>
-                                <td class="view-message inbox-small-cells"><i class="icon-paper-clip"></i></td>
-                                <td class="view-message text-right">May 14</td>
-                            </tr>
-                            <tr class="">
-                                <td class="inbox-small-cells">
-                                    <input type="checkbox" class="mail-checkbox">
-                                </td>
-                                <td class="inbox-small-cells"><i class="icon-star"></i></td>
-                                <td class="view-message dont-show">Sumon</td>
-                                <td class="view-message">Lorem ipsum dolor sit amet</td>
-                                <td class="view-message inbox-small-cells"><i class="icon-paper-clip"></i></td>
-                                <td class="view-message text-right">February 25</td>
-                            </tr>
-                            <tr class="">
-                                <td class="inbox-small-cells">
-                                    <input type="checkbox" class="mail-checkbox">
-                                </td>
-                                <td class="inbox-small-cells"><i class="icon-star"></i></td>
-                                <td class="dont-show">Facebook</td>
-                                <td class="view-message view-message">Dolor sit amet, consectetuer adipiscing</td>
-                                <td class="view-message inbox-small-cells"></td>
-                                <td class="view-message text-right">March 14</td>
-                            </tr>
-                            <tr class="">
-                                <td class="inbox-small-cells">
-                                    <input type="checkbox" class="mail-checkbox">
-                                </td>
-                                <td class="inbox-small-cells"><i class="icon-star"></i></td>
-                                <td class="view-message dont-show">Dulal</td>
-                                <td class="view-message">Lorem ipsum dolor sit amet</td>
-                                <td class="view-message inbox-small-cells"></td>
-                                <td class="view-message text-right">April 07</td>
-                            </tr>
-                            <tr class="">
-                                <td class="inbox-small-cells">
-                                    <input type="checkbox" class="mail-checkbox">
-                                </td>
-                                <td class="inbox-small-cells"><i class="icon-star"></i></td>
-                                <td class="view-message dont-show">Twitter</td>
-                                <td class="view-message">Dolor sit amet, consectetuer adipiscing</td>
-                                <td class="view-message inbox-small-cells"></td>
-                                <td class="view-message text-right">July 14</td>
-                            </tr>
-                            <tr class="">
-                                <td class="inbox-small-cells">
-                                    <input type="checkbox" class="mail-checkbox">
-                                </td>
-                                <td class="inbox-small-cells"><i class="icon-star inbox-started"></i></td>
-                                <td class="view-message dont-show">Sumon</td>
-                                <td class="view-message">Lorem ipsum dolor sit amet</td>
-                                <td class="view-message inbox-small-cells"></td>
-                                <td class="view-message text-right">August 10</td>
-                            </tr>
-                            <tr class="">
-                                <td class="inbox-small-cells">
-                                    <input type="checkbox" class="mail-checkbox">
-                                </td>
-                                <td class="inbox-small-cells"><i class="icon-star"></i></td>
-                                <td class="view-message dont-show">Facebook</td>
-                                <td class="view-message view-message">Dolor sit amet, consectetuer adipiscing</td>
-                                <td class="view-message inbox-small-cells"><i class="icon-paper-clip"></i></td>
-                                <td class="view-message text-right">April 14</td>
-                            </tr>
-                            <tr class="">
-                                <td class="inbox-small-cells">
-                                    <input type="checkbox" class="mail-checkbox">
-                                </td>
-                                <td class="inbox-small-cells"><i class="icon-star"></i></td>
-                                <td class="view-message dont-show">Mosaddek</td>
-                                <td class="view-message">Lorem ipsum dolor sit amet</td>
-                                <td class="view-message inbox-small-cells"><i class="icon-paper-clip"></i></td>
-                                <td class="view-message text-right">June 16</td>
-                            </tr>
-                            <tr class="">
-                                <td class="inbox-small-cells">
-                                    <input type="checkbox" class="mail-checkbox">
-                                </td>
-                                <td class="inbox-small-cells"><i class="icon-star inbox-started"></i></td>
-                                <td class="view-message dont-show">Sumon</td>
-                                <td class="view-message">Lorem ipsum dolor sit amet</td>
-                                <td class="view-message inbox-small-cells"></td>
-                                <td class="view-message text-right">August 10</td>
-                            </tr>
-                            <tr class="">
-                                <td class="inbox-small-cells">
-                                    <input type="checkbox" class="mail-checkbox">
-                                </td>
-                                <td class="inbox-small-cells"><i class="icon-star"></i></td>
-                                <td class="view-message dont-show">Facebook</td>
-                                <td class="view-message view-message">Dolor sit amet, consectetuer adipiscing</td>
-                                <td class="view-message inbox-small-cells"><i class="icon-paper-clip"></i></td>
-                                <td class="view-message text-right">April 14</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                   
+                    <section class="panel" >
+                          <header class="panel-heading" id="project_chat_name">
+                              <p>Bussiness CMS</p>
+                        
+                          </header>
+                          <div class="panel-body">
+                              <div class="timeline-messages" id="msg-cont">
+                                <p>Please choose a topic from left-sidebar and message will appear in here</p>
+
+                              </div>
+                              <div class="chat-form">
+                                    <div class="input-cont ">
+                                      <input type="text" class="form-control col-lg-12" placeholder="Type a message here..." id="message">
+                                  </div>
+                                  <div class="form-group">
+                                      <div class="pull-right chat-features">
+                                          <a href="javascript:;">
+                                              <i class="icon-camera"></i>
+                                          </a>
+                                          <a href="javascript:;">
+                                              <i class="icon-link"></i>
+                                          </a>
+                                          <a class="btn btn-danger" href="javascript:;" id="sendMsg">Send</a>
+                                      </div>
+                                  </div>
+                                  <script type="text/javascript">
+                                      $(document).ready(function() {
+                                         $.ajaxSetup({
+                                          headers: {
+                                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                          }
+                                        });
+                                        $('#sendMsg').click(function() {
+                                              var project_chat_name = $('#project_chat_name').find('p').text();
+                                              var message= $('#message').val();
+                                               $.ajax({
+                                                    url:'/member/chat-project',
+                                                    type: "post",
+                                                    data: { '_token': $('input[name=_token]').val(), 'project_chat_name': project_chat_name, 'message': message},
+                                                    success: function(data) {   
+                                                }          
+                                            });
+                                        })
+                                      });
+                                  </script>
+
+                              </div>
+                          </div>
+                      </section>
                 </div>
             </aside>
         </div>
         <!--mail inbox end-->
     </section>
-@endsection()
+@endsection
+@section('external_script')
+     <!-- BEGIN:File Upload Plugin JS files-->
+  <script src="{{url('backend/assets/jquery-file-upload/js/vendor/jquery.ui.widget.js')}}"></script>
+  <!-- The Templates plugin is included to render the upload/download listings -->
+  <script src="{{url('backend/assets/jquery-file-upload/js/vendor/tmpl.min.js')}}"></script>
+  <!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+  <script src="{{url('backend/assets/jquery-file-upload/js/vendor/load-image.min.js')}}"></script>
+  <!-- The Canvas to Blob plugin is included for image resizing functionality -->
+  <script src="{{url('backend/assets/jquery-file-upload/js/vendor/canvas-to-blob.min.js')}}"></script>
+  <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+  <script src="{{url('backend/assets/jquery-file-upload/js/jquery.iframe-transport.js')}}"></script>
+  <!-- The basic File Upload plugin -->
+  <script src="{{url('backend/assets/jquery-file-upload/js/jquery.fileupload.js')}}"></script>
+  <!-- The File Upload file processing plugin -->
+  <script src="{{url('backend/assets/jquery-file-upload/js/jquery.fileupload-fp.js')}}"></script>
+  <!-- The File Upload user interface plugin -->
+  <script src="{{url('backend/assets/jquery-file-upload/js/jquery.fileupload-ui.js')}}"></script>
+   <script src="{{url('backend/js/jquery-1.8.3.min.js')}}"></script>
+   <script class="include" type="text/javascript" src="{{url('backend/js/jquery.dcjqaccordion.2.7.js')}}"></script>
+@stop

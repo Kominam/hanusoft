@@ -53,6 +53,31 @@ class MemberSkillTableSeeder extends Seeder
              array('user_id'=>8, 'skill_id' =>2, 'level' => 85,'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
              array('user_id'=>8, 'skill_id' =>3, 'level' => 65,'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
              array('user_id'=>8, 'skill_id' =>4, 'level' => 90,'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+
+             array('user_id'=>9, 'skill_id' =>1, 'level' => 75,'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+             array('user_id'=>9, 'skill_id' =>2, 'level' => 85,'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+             array('user_id'=>9, 'skill_id' =>3, 'level' => 65,'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+             array('user_id'=>9, 'skill_id' =>4, 'level' => 90,'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+
+             array('user_id'=>10, 'skill_id' =>1, 'level' => 75,'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+             array('user_id'=>10, 'skill_id' =>2, 'level' => 85,'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+             array('user_id'=>10, 'skill_id' =>3, 'level' => 65,'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+             array('user_id'=>10, 'skill_id' =>4, 'level' => 90,'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+
+             array('user_id'=>11, 'skill_id' =>1, 'level' => 75,'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+             array('user_id'=>11, 'skill_id' =>2, 'level' => 85,'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+             array('user_id'=>11, 'skill_id' =>3, 'level' => 65,'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+             array('user_id'=>11, 'skill_id' =>4, 'level' => 90,'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+
+             array('user_id'=>12, 'skill_id' =>1, 'level' => 75,'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+             array('user_id'=>12, 'skill_id' =>2, 'level' => 85,'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+             array('user_id'=>12, 'skill_id' =>3, 'level' => 65,'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+             array('user_id'=>12, 'skill_id' =>4, 'level' => 90,'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+
+             array('user_id'=>13, 'skill_id' =>1, 'level' => 75,'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+             array('user_id'=>13, 'skill_id' =>2, 'level' => 85,'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+             array('user_id'=>13, 'skill_id' =>3, 'level' => 65,'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+             array('user_id'=>13, 'skill_id' =>4, 'level' => 90,'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
         ]);
     }
 }

@@ -25,10 +25,20 @@
                 <h2 class="form-signin-heading">sign in now</h2>
                 <div class="login-wrap">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
-                    <input type="text" class="form-control" placeholder="User ID" autofocus name="email">
+                    <input type="text" class="form-control" placeholder="Email" autofocus name="email" value="{{ old('email') }}">
+                       @if ($errors->has('email'))
+                                 <div class="alert alert-danger">
+                                   {{ $errors->first('email') }}
+                                 </div>         
+                        @endif
                     <input type="password" class="form-control" placeholder="Password" name="password">
+                         @if ($errors->has('password'))
+                                 <div class="alert alert-danger">
+                                    {{ $errors->first('password') }}
+                                 </div>         
+                        @endif
                     <label class="checkbox">
-                    <input type="checkbox" value="remember-me" name="remember"> Remember me
+                    <input type="checkbox" name="remember"> Remember me
                     <span class="pull-right">
                     <a data-toggle="modal" href="#myModal"> Forgot Password?</a>
                     </span>
@@ -62,13 +72,24 @@
                                 <h4 class="modal-title">Forgot Password ?</h4>
                             </div>
                             <div class="modal-body">
-                                <p>Enter your e-mail address below to reset your password.</p>
+                                @if (session('status'))
+                                    <div class="alert alert-success">
+                                        {{ session('status') }}
+                                    </div>
+                                @endif
                                 <form method="POST" action="{{ url('/password/email') }}">
-                                <input type="text"  placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
+                                  {{ csrf_field() }}
+                                 <p>Enter your e-mail address below to reset your password.</p>
+                                <input type="text"  placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix" name="email">
+                                @if ($errors->has('email'))
+                                    <div class="alert-danger">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                             <div class="modal-footer">
                                 <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
-                                <button class="btn btn-success" type="button">Submit</button>
+                                <button class="btn btn-success" type="submit">Submit</button>
                                 </form>
                             </div>
                         </div>

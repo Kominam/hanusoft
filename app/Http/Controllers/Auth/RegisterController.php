@@ -67,7 +67,6 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'position_id' =>1,
             'bio'=>'empty',
         ]);
     }
@@ -97,7 +96,12 @@ class RegisterController extends Controller
                    $user->name = $request->name;
                    $user->email= $request->email;
                    $user->password = bcrypt($request->password);
-                   $user->position_id=$request->position_id;
+                   if ($request->has('position_id')) {
+                      $user->position_id=$request->position_id;
+                   }
+                   if ($request->has('grade_id')) {
+                      $user->grade_id=$request->grade_id;
+                   }
                    $user->bio='empty';
                    $user->save();
                    return redirect()->route('dashboard');

@@ -10,6 +10,11 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Validator;
+use App\Invitation;
+use Auth;
+use App\Notifications\InvitetoProject;
+use Notifications;
+use DB;
 
 class ProjectRepository implements ProjectRepositoryInterface
 {
@@ -57,34 +62,47 @@ class ProjectRepository implements ProjectRepositoryInterface
     }
 
     public function create(Request $request){
-    	 $messages = [
+    	/* $messages = [
                'name.required'=>'Enter the name for this project',
                'name.unique'=>'This name is already existing',
                'description.required'=>'Enter the description for this project',
-               'link_preview.required'=>'Enter the URL demo for this project',
                'link_preview.url'=>'This link is not correct',
                'link_preview.unique'=>'This link is used for another project',
         ];
         $validator = Validator:: make($request->all(),[
               'name'=>'required|unique:projects,name',
               'description'=>'required',
-              'link_preview'=>'required|url|unique:projects,link_preview',
+              'link_preview'=>'url|unique:projects,link_preview',
         ], $messages);
         if ($validator->fails()) {
-            return redirect('/')->withErrors($validator)->withInput();
-        }
-    	$project= Project::create(['name' => $request->name, 
-    								'description' => $request->description, 
-    								'link_preview' => $request->link_preview]);
-    	//Define type for this project
-    	$project->type_id= $request->type_id;
+            return back()->withErrors($validator)->withInput();
+        }*/
+    	 $project= new Project;
+       $project->name = $request->name;
+       $project->description = $request->description;
+       if ($request->has('link_preview')) {
+        $project->link_preview = $request->link_preview;
+       }
+      
+    	$project->type_id= $request->project_cate_id;
+      $project->save();
     	//Define skill
-    	defineRequiredSkill($request->skills, $project);
-    	//Assign for member (if avaialble)
-    	if ($request->has('member')) {
-           assignMember($request->members, $project);
+    	if ($request->has('skills')) {
+        $this->defineRequiredSkill($request->skills, $project);
+      }
+      
+    	//Invite for member (if avaialble)
+    	if ($request->has('inviters')) {
+              $new_invitation = Invitation::create(['leadership_id' => Auth::user()->id, 'project_id' => $project->id]);
+              $new_invitation->save();
+              foreach ($request->inviters as $inviter_id) {
+                $inviter = User::find($inviter_id);
+                $inviter->invitations()->attach($new_invitation->id);
+                $inviter->save();
+                $inviter->notify(new InvitetoProject(Auth::user()->name,$project->name, Auth::user()->id, $project->id));
+              }
         }
-    	$project->save();
+      return redirect()->route('dashboard');
     }
 
     public function update(Request $request, $id){
@@ -118,6 +136,50 @@ class ProjectRepository implements ProjectRepositoryInterface
     }
     public function countAll(){
       return Project::count();
+    }
+
+    public function invite(Request $request) {
+      $new_invitation = Invitation::firstOrCreate(['leadership_id' => Auth::user()->id, 'project_id' => $request->project_id]);
+      $new_invitation->save();
+      foreach ($request->inviters as $inviter_id) {
+        $inviter = User::find($inviter_id);
+        $inviter->invitations()->attach($new_invitation->id);
+        $inviter->save();
+        $inviter->notify(new InvitetoProject(Auth::user()->name,$request->project_name, Auth::user()->id, $request->project_id));
+      }
+    }
+
+    public function acceptInvite(Request $request) {
+      $response = $request->response;
+      //change the respon of invitation_user
+      if ($response=='accept') {
+        //assgin member to project
+        $project = Project::find($request->project_id);
+        $this->assignMember(Auth::user()->id,$project );
+        /*$notification = Notifications::where('type','=','App\Notifications\InvitetoProject')->where('data["project_id"]', '=',$request->project_id)->first();
+        $notification->markAsRead();*/
+        /*$spec_noti = DB::table('notifications')->where('type','=','App\Notifications\InvitetoProject')->where('notifiable_id', Auth::user()->id)->where('data["project_id"]', '=',$request->project_id)->first();
+        $spec_noti->markAsRead();*/
+        return 'Assign Ok';
+      }
+      else if ($response=='decline') {
+        //delte invitation
+        $member= User::find(Auth::user()->id);
+        $invitation = Invitation::where('project_id','=', $request->project_id)->first();
+        $member->invitations()->detach($invitation->id);
+        return 'decline ok';
+      }
+    }
+
+    public function canInvinteMember($id) {
+      $project = Project:: find($id);
+      $mem_in_project = $project->users()->get()->pluck('id')->all();
+      $invitation = DB::table('invitations')->where('project_id','=', $id)->pluck('project_id')->all();
+      $total1 = array_merge($mem_in_project,$invitation);
+      $on_handle_mem_for_this_project = DB::table('invitation_user')->whereIn('invitation_id', $invitation)->pluck('user_id')->all();
+      $total= array_merge( $total1, $on_handle_mem_for_this_project);
+      $can_invite_mem = User::whereNotIn('id', $total)->get();
+      return $can_invite_mem;
     }
 
 

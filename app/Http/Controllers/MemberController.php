@@ -8,6 +8,12 @@ use App\Http\Requests;
 
 use App\User;
 
+use Auth;
+
+use Notification;
+
+use App\Notifications\TestNoti;
+
 use App\Repositories\Contracts\MemberRepositoryInterface;
 
 class MemberController extends Controller
@@ -27,5 +33,23 @@ class MemberController extends Controller
     public function show($id) {
         $member = $this->memberRepository->find($id);
         return view('frontend.pages.member_detail',['member' =>$member]);
+    }
+    public function profile() {
+        $member = $this->memberRepository->find(Auth::user()->id);
+        return view('backend.pages.profile',['member' =>$member]);
+    }
+    public function recent_activity() {
+        $member = $this->memberRepository->find(Auth::user()->id);
+        return view('backend.pages.profile-activity',['member' =>$member]);
+    }
+    public function showEditProfile() {
+       $member = $this->memberRepository->find(Auth::user()->id);
+       return view('backend.pages.profile-edit',['member' =>$member]);
+    }
+    public function editProfile(Request $request, $id) {
+        $this->memberRepository->update($request, $id);
+    }
+    public function changePwd(Request $request) {
+         $this->memberRepository->changePwd($request);
     }
 }
