@@ -38,13 +38,13 @@ return [
     'facebook' => [
         'client_id' => '222547138163949',
         'client_secret' => '9c11deb0a3b99d1b1d96caf199cdb687',
-        'redirect' => 'http://hanusoft.dev:8000/callback/facebook',
+        'redirect' => 'http://hanusoft.dev/callback/facebook',
     ],
 
     'github' => [
         'client_id' => '6ca98b6350d26a469862',
         'client_secret' => 'd1b886974594eaded13898eaeac9dfef5cd2b446',
-        'redirect' => 'http://hanusoft.dev:8000/callback/github',
+        'redirect' => 'http://hanusoft.dev/callback/github',
     ],
 
 ];
