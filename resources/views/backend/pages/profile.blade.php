@@ -1,4 +1,7 @@
 @extends('backend.pages.master')
+@section('external_css')
+     <link href="{{url('backend/assets/font-awesome/css/font-awesome.css')}}" rel="stylesheet" />
+@endsection
 @section('content')
 <section class="wrapper">
         <!-- page start-->
@@ -140,8 +143,13 @@
         </div>
         <!-- page end-->
     </section>
-<script>
-    //knob
-    $(".knob").knob();
-</script>
-@endsection()
+@endsection
+@section('external_script')
+     <script src="{{url('backend/assets/jquery-knob/js/jquery.knob.js')}}"></script>
+     <script>
+
+      //knob
+      $(".knob").knob();
+
+  </script>
+@endsection

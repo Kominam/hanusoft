@@ -27,10 +27,8 @@ var Script = function () {
       Morris.Donut({
         element: 'hero-donut',
         data: [
-          {label: 'Jam', value: 25 },
-          {label: 'Frosted', value: 40 },
-          {label: 'Custard', value: 25 },
-          {label: 'Sugar', value: 10 }
+          {label: 'Complete', value: 25 },
+          {label: 'Nor complete', value: 75},
         ],
           colors: ['#41cac0', '#49e2d7', '#34a39b'],
         formatter: function (y) { return y + "%" }

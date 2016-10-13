@@ -1,4 +1,8 @@
 @extends('backend.pages.master')
+@section('external_css')
+    <link href="{{url('backend/assets/font-awesome/css/font-awesome.css')}}" rel="stylesheet" />
+    <link href="{{url('backend/assets/jquery-file-upload/css/jquery.fileupload-ui.css')}}" rel="stylesheet" type="text/css" >
+@endsection
 @section('content')
 <section class="wrapper">
         <!--mail inbox start-->
@@ -436,4 +440,22 @@
         </div>
         <!--mail inbox end-->
     </section>
-@endsection()
+@endsection
+@section('external_script')
+     <!-- BEGIN:File Upload Plugin JS files-->
+  <script src="{{url('backend/assets/jquery-file-upload/js/vendor/jquery.ui.widget.js')}}"></script>
+  <!-- The Templates plugin is included to render the upload/download listings -->
+  <script src="{{url('backend/assets/jquery-file-upload/js/vendor/tmpl.min.js')}}"></script>
+  <!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+  <script src="{{url('backend/assets/jquery-file-upload/js/vendor/load-image.min.js')}}"></script>
+  <!-- The Canvas to Blob plugin is included for image resizing functionality -->
+  <script src="{{url('backend/assets/jquery-file-upload/js/vendor/canvas-to-blob.min.js')}}"></script>
+  <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+  <script src="{{url('backend/assets/jquery-file-upload/js/jquery.iframe-transport.js')}}"></script>
+  <!-- The basic File Upload plugin -->
+  <script src="{{url('backend/assets/jquery-file-upload/js/jquery.fileupload.js')}}"></script>
+  <!-- The File Upload file processing plugin -->
+  <script src="{{url('backend/assets/jquery-file-upload/js/jquery.fileupload-fp.js')}}"></script>
+  <!-- The File Upload user interface plugin -->
+  <script src="{{url('backend/assets/jquery-file-upload/js/jquery.fileupload-ui.js')}}"></script>
+@stop

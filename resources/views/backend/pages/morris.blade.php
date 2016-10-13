@@ -1,4 +1,9 @@
 @extends('backend.pages.master')
+@section('external_css')
+     <!--external css-->
+    <link href="{{url('backend/assets/font-awesome/css/font-awesome.css')}}" rel="stylesheet" />
+    <link href="{{url('backend/assets/morris.js-0.4.3/morris.css')}}" rel="stylesheet" />
+@endsection
 @section('content')
 <section class="wrapper site-min-height">
         <!-- page start-->
@@ -49,7 +54,11 @@
             </div>
         </div>
         <!-- page end-->
-    </section>
-<!-- script for this page only-->
-<script src="{{url('backend/js/morris-script.js')}}"></script>
-@endsection()
+</section>
+@endsection
+@section('external_script')
+        <script src="{{url('backend/js/jquery-1.8.3.min.js')}}"></script>
+     <script src="{{url('backend/assets/morris.js-0.4.3/morris.min.js')}}" type="text/javascript"></script>
+    <script src="{{url('backend/assets/morris.js-0.4.3/raphael-min.js')}}" type="text/javascript"></script>
+    <script src="{{url('backend/js/morris-script.js')}}"></script>
+@endsection

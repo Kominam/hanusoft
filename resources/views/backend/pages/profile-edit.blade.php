@@ -1,6 +1,8 @@
 @extends('backend.pages.master')
+@section('external_css')
+    <link href="{{url('backend/assets/font-awesome/css/font-awesome.css')}}" rel="stylesheet" />
+@endsection
 @section('content')
-
 <section class="wrapper">
         <!-- page start-->
         <div class="row">
@@ -133,5 +135,8 @@
             </aside>
         </div>
         <!-- page end-->
-    </section>
-@endsection()
+</section>
+@endsection
+@section('external_script')
+   <script src="{{url('backend/assets/jquery-knob/js/jquery.knob.js')}}"></script>
+@endsection

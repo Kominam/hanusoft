@@ -64,6 +64,15 @@
 		Route::get('/profile-edit', ['as' => 'profile-edit', function(){
 			return view('backend.pages.profile-edit');
 		}]);
+		Route::get('/profile-activity', ['as' => 'profile-activity', function(){
+			return view('backend.pages.profile-activity');
+		}]);
+		Route::get('/todo_list', ['as' => 'todo_list', function(){
+			return view('backend.pages.todo_list');
+		}]);
+		Route::get('/project', ['as' => 'sdv', function(){
+			return view('backend.pages.project');
+		}]);
 
 		// Login Routes...
 		Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);

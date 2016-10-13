@@ -242,7 +242,7 @@
             <!-- sidebar menu start-->
             <ul class="sidebar-menu" id="nav-accordion">
                 <li>
-                    <a href="index.html">
+                    <a href="{{ route('dashboard') }}">
                     <i class="icon-dashboard"></i>
                     <span>Dashboard</span>
                     </a>
@@ -250,30 +250,29 @@
                 <li class="sub-menu">
                     <a href="javascript:;">
                     <i class="icon-cogs"></i>
-                    <span>Components</span>
+                    <span>Projects</span>
                     </a>
                     <ul class="sub">
-                        <li><a  href="grids.html">Grids</a></li>
-                        <li><a  href="calendar.html">Calendar</a></li>
-                        <li><a  href="gallery.html">Gallery</a></li>
-                        <li><a  href="todo_list.html">Todo List</a></li>
+                        @foreach (Auth::user()->projects as $project)
+                          <li><a  href="grids.html">{{$project->name}}</a></li>
+                        @endforeach
                     </ul>
                 </li>
                 <li class="sub-menu">
                     <a href="javascript:;" >
                     <i class="icon-tasks"></i>
-                    <span>Form Stuff</span>
+                    <span>Profile</span>
                     </a>
                     <ul class="sub">
-                        <li><a  href="{{route('form_component')}}">Form Components</a></li>
-                        <li><a  href="{{route('form_wizard')}}">Form Wizard</a></li>
-                        <li><a  href="{{route('form_validation')}}">Form Validation</a></li>
+                        <li><a  href="{{route('form_component')}}">Activity</a></li>
+                        <li><a  href="{{route('form_wizard')}}">Edit profile</a></li>
+                        <li><a  href="{{route('form_wizard')}}">Inbox</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
                     <a href="javascript:;">
                     <i class="icon-th"></i>
-                    <span>Data Tables</span>
+                    <span>Setting</span>
                     </a>
                     <ul class="sub">
                         <li><a  href="{{route('basic_table')}}">Basic Table</a></li>
@@ -281,43 +280,6 @@
                         <li><a  href="{{route('advanced_table')}}">Advanced Table</a></li>
                         <li><a  href="{{route('editable_table')}}">Editable Table</a></li>
                     </ul>
-                </li>
-                <li>
-                    <a  href="{{route('mail')}}">
-                    <i class="icon-envelope"></i>
-                    <span>Mail </span>
-                    <span class="label label-danger pull-right mail-info">2</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
-                    <a href="javascript:;">
-                    <i class=" icon-bar-chart"></i>
-                    <span>Charts</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a  href="{{route('morris')}}">Morris</a></li>
-                        <li><a  href="chartjs.html">Chartjs</a></li>
-                        <li><a  href="flot_chart.html">Flot Charts</a></li>
-                        <li><a  href="{{route('xchart')}}">xChart</a></li>
-                    </ul>
-                </li>
-                <li class="sub-menu">
-                    <a href="javascript:;" class="active" >
-                    <i class="icon-glass"></i>
-                    <span>Extra</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a  href="lock_screen.html">Lock Screen</a></li>
-                        <li><a  href="{{route('profile')}}">Profile</a></li>
-                        <li><a  href="invoice.html">Invoice</a></li>
-                        <li><a  href="search_result.html">Search Result</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a  href="{{route('login')}}">
-                    <i class="icon-user"></i>
-                    <span>Login Page</span>
-                    </a>
                 </li>
             </ul>
             <!-- sidebar menu end-->
