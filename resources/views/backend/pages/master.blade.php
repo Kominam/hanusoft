@@ -34,7 +34,6 @@
       @include('backend.blocks.footer')
       <!--footer end-->
   </section>
-
     <!-- js placed at the end of the document so the pages load faster -->
     <script src="{{url('backend/js/jquery.js')}}"></script>
     <script src="{{url('backend/js/bootstrap.min.js')}}"></script>

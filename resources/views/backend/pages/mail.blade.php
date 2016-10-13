@@ -458,4 +458,6 @@
   <script src="{{url('backend/assets/jquery-file-upload/js/jquery.fileupload-fp.js')}}"></script>
   <!-- The File Upload user interface plugin -->
   <script src="{{url('backend/assets/jquery-file-upload/js/jquery.fileupload-ui.js')}}"></script>
+   <script src="{{url('backend/js/jquery-1.8.3.min.js')}}"></script>
+   <script class="include" type="text/javascript" src="{{url('backend/js/jquery.dcjqaccordion.2.7.js')}}"></script>
 @stop
