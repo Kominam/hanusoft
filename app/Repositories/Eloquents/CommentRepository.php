@@ -11,6 +11,8 @@ use App\Http\Requests;
 use Validator;
 use Event;
 use App\Events\CommentWasSent;
+use Auth;
+use App\Notifications\SomeOneCommentYourPost;
 
 class CommentRepository implements CommentRepositoryInterface
 {
@@ -34,8 +36,12 @@ class CommentRepository implements CommentRepositoryInterface
       $comment->content = $request->content;
     	//Define author for this project
       $comment->post_id = $request->post_id;
+    /*  $post= Post::find($request->post_id);*/
     	
     	$comment->save();
+
+     /* $user = Auth::user();
+      $user->notify(new SomeOneCommentYourPost($comment->name, $comment->content, $comment->email, $comment->post_id, $post->tittle));*/
 
       Event::fire(new CommentWasSent($comment));
 

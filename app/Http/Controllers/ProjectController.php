@@ -23,10 +23,9 @@ class ProjectController extends Controller
 
         return view('frontend.pages.projects' ,['projects' => $projects]);
     }
-
+    //For front-end
     public function show($id) {
        $project = $this->projectRepository->find($id);
-
        $related_projects = $this->projectRepository->findRelated($id,$project->type_id);
        $num_project = $this->projectRepository->countAll();
        if ($project->id===1) {
@@ -39,16 +38,27 @@ class ProjectController extends Controller
           $next_project_id = $project->id +1;
            $previous_project_id =$project->id -1;
        }
-       
-
       return view('frontend.pages.single_project' ,['project' => $project, 'related_projects'=>$related_projects, 'next_project' =>$next_project_id, 'prev_project'=> $previous_project_id]);
+    }
+    //For back-end
+    public function showForBackEnd($id) {
+      $project = $this->projectRepository->find($id);
+      $can_invite_mem= $this->projectRepository->canInvinteMember($id);
+      return view('backend.pages.project', ['project' => $project, 'can_invite_mem'=> $can_invite_mem]);
     }
     //Add
     public function showAddForm() {
-    	//return form to add new group
+    	return view('backend.pages.create-project');
     }
     public function add(Request $request) {
-    	 $this->projectRepository->create($request);
+        $validator = $this->projectRepository->validatorNew($request);
+         if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+         } else {
+             $new_project = $this->projectRepository->create($request);
+             return redirect()->route('backend.project', $new_project->id);
+         }
+
     }
 
    	//EDIT
@@ -67,5 +77,13 @@ class ProjectController extends Controller
    	public function delete($id) {
    		$this->projectRepository->delete($id);
    	}
+
+    public function invite(Request $request) {
+      $this->projectRepository->invite($request);
+    }
+
+    public function acceptInvite(Request $request) {
+      $this->projectRepository->handleInvitation($request);
+    }
 
 }

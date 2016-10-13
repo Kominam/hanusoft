@@ -14,4 +14,6 @@ interface PostRepositoryInterface
     public function find($id);
     public function delete($id);
     public function filterByCategory($id);
+    public function validatorNew(Request $request);
+    public function validatorUpdate(Request $request);
 }

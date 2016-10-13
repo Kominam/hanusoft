@@ -23,7 +23,7 @@
 <div class="col-md-9">
 <div class="blog-posts single-post">
 <article class="post post-large blog-single-post">
-    <div class="post-image">
+    <!-- <div class="post-image">
         <div class="owl-carousel" data-plugin-options='{"items":1}'>
             <div>
                 <div class="img-thumbnail">
@@ -36,7 +36,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="post-date">
         <span class="day">{{$post->created_at->format('d')}}</span>
         <span class="month"> {{substr($post->created_at->format('F'),0,3)}}</span>
@@ -48,7 +48,7 @@
             <span><i class="fa fa-tag"></i> <a href="{{ route('browse-post-by-cate', $post->type->id)}}">{{$post->type->name}}</a></span>
             <span><i class="fa fa-comments"></i> <a href="#">{{$post->comments->count()}} Comments</a></span>
         </div>
-        <p>{{$post->content}}</p>
+        <p>{!!$post->content!!}</p>
         <div class="post-block post-share">
             <h3><i class="fa fa-share"></i>Share this post</h3>
             <!-- AddThis Button BEGIN -->
@@ -65,11 +65,11 @@
             <h3><i class="fa fa-user"></i>Author</h3>
             <div class="img-thumbnail">
                 <a href="blog-post.html">
-                <img src="{{url('frontend/img/avatar.jpg')}}" alt="">
+                <img src="{{url('frontend/img/team/'.$post->user->url_avt)}}" alt="">
                 </a>
             </div>
             <p><strong class="name"><a href={{route('member_detail',$post->user->id)}}>{{$post->user->name}}</a></strong></p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim ornare nisi, vitae mattis nulla ante id dui. </p>
+            <p>{{$post->user->bio}}</p>
         </div>
         <div class="post-block post-comments clearfix" id="post_comment">
             <h3><i class="fa fa-comments"></i>Comments <span id="cmt_count">({{$post->comments->count()}})</span></h3>
@@ -77,14 +77,11 @@
                 <div id="if_no_cmt"><h5>Be the first person comment on this post</h5></div>
             @endif
             <ul class="comments" id="cmt_area">
-              @foreach ($arr_cmt_id as $id)
-               {{$id}}
-                @endforeach
                 @foreach($post->comments as $comment)
                  <li>
                     <div class="comment" id="comment{{$comment->id}}">
                         <div class="img-thumbnail">
-                            <img class="avatar" alt="" src="{{url('frontend/img/avatar-2.jpg')}}">
+                            <img class="avatar" alt="" src="{{url('frontend/img/User-Default.jpg')}}">
                         </div>
                         <div class="comment-block">
                             <div class="comment-arrow"></div>
@@ -103,7 +100,7 @@
                         <li>
                             <div class="comment">
                                 <div class="img-thumbnail">
-                                    <img class="avatar" alt="" src="{{url('frontend/img/avatar-3.jpg')}}">
+                                    <img class="avatar" alt="" src="{{url('frontend/img/User-Default.jpg')}}">
                                 </div>
                                 <div class="comment-block">
                                     <div class="comment-arrow"></div>
@@ -131,12 +128,12 @@
                     <div class="form-group">
                         <div class="col-md-6">
                             <label>Your name *</label>
-                            <input type="text" value="" maxlength="100" class="form-control" name="name" id="name">
+                            <input type="text" value="" maxlength="100" class="form-control" name="name" id="name" required>
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                         </div>
                         <div class="col-md-6">
                             <label>Your email address *</label>
-                            <input type="email" value="" maxlength="100" class="form-control" name="email" id="email">
+                            <input type="email" value="" maxlength="100" class="form-control" name="email" id="email" required>
                         </div>
                     </div>
                 </div>
@@ -169,7 +166,7 @@
   //Bind a function to a Event (the full Laravel class)
   channel.bind('App\\Events\\CommentWasSent', function(comments){
    for (var property in comments) {
-        var new_cmt='<li><div class="comment"><div class="img-thumbnail"><img class="avatar" alt="" src="{{url('frontend/img/avatar.jpg')}}"></div><div class="comment-block"><div class="comment-arrow"></div><span class="comment-by"><strong>' + comments[property].name +'</strong><span class="pull-right"><span> <a href="#replycomment'+comments[property].id+'"><i class="fa fa-reply"></i> Reply</a></span></span></span><p>' + comments[property].content + '</p><span class="date pull-right">a moment ago</span></div></div></li>';
+        var new_cmt='<li><div class="comment"><div class="img-thumbnail"><img class="avatar" alt="" src="{{url('frontend/img/User-Default.jpg')}}"></div><div class="comment-block"><div class="comment-arrow"></div><span class="comment-by"><strong>' + comments[property].name +'</strong><span class="pull-right"><span> <a href="#replycomment'+comments[property].id+'"><i class="fa fa-reply"></i> Reply</a></span></span></span><p>' + comments[property].content + '</p><span class="date pull-right">a moment ago</span></div></div></li>';
         $('#cmt_area').append(new_cmt);
     }  
   });
@@ -218,7 +215,7 @@
               alert('Sign new href executed.' + value);
               //Append form for reply comment
               var token ="{{csrf_token()}}";
-              var replyCmtForm ='<div class="post-block post-leave-comment" id="form_reply_comment'+value+'"><h4>Reply this comment</h4><form action="#" method="post" id="formreplycmt'+ value+'"><div class="row"><div class="form-group"><div class="col-md-6"><label>Your name *</label><input type="text" value="" maxlength="100" class="form-control" name="r_name'+value+'" id="rname'+value+'"><input type="hidden" name="_token" value="'+ token+'"></div><div class="col-md-6"><label>Your email address *</label><input type="email" value="" maxlength="100" class="form-control" name="r_email'+value+'" id="remail'+value+'"></div></div></div><div class="row"><div class="form-group"><div class="col-md-12"><label>Comment *</label><textarea maxlength="3000" rows="5" class="form-control" name="r_comment'+value+'" id="rcomment'+value+'"></textarea></div></div></div><div class="row"><div class="col-md-12"><button type="button" class="btn btn-primary btn-lg" id="submit-reply_cmt'+ value+'">Post Comment</button></div></div></form></div>';
+              var replyCmtForm ='<div class="post-block post-leave-comment" id="form_reply_comment'+value+'"><h4>Reply this comment</h4><form action="#" method="post" id="formreplycmt'+ value+'"><div class="row"><div class="form-group"><div class="col-md-6"><label>Your name *</label><input type="text" required value="" maxlength="100" class="form-control" name="r_name'+value+'" id="rname'+value+'"><input type="hidden" name="_token" value="'+ token+'"></div><div class="col-md-6"><label>Your email address *</label><input type="email" value=""  required maxlength="100" class="form-control" name="r_email'+value+'" id="remail'+value+'"></div></div></div><div class="row"><div class="form-group"><div class="col-md-12"><label>Comment *</label><textarea maxlength="3000" rows="5" class="form-control" name="r_comment'+value+'" id="rcomment'+value+'"></textarea></div></div></div><div class="row"><div class="col-md-12"><button type="button" class="btn btn-primary btn-lg" id="submit-reply_cmt'+ value+'">Post Comment</button></div></div></form></div>';
               $('#reply_comment' + value).append(replyCmtForm);
               $('#submit-reply_cmt'+ value).click(function() {
                  var r_name = $('#rname' +value).val();
@@ -250,7 +247,7 @@
           //Bind a function to a Event (the full Laravel class)
           channel.bind('App\\Events\\SomeOneReplyComment', function(reply_cmt){
            for (var property in reply_cmt) {
-                var new_reply_cmt='<li><div class="comment"><div class="img-thumbnail"><img class="avatar" alt="" src="{{url('frontend/img/avatar.jpg')}}"></div><div class="comment-block"><div class="comment-arrow"></div><span class="comment-by"><strong>' + reply_cmt[property].name +'</strong><span class="pull-right"><span></span></span></span><p>' + reply_cmt[property].content + '</p><span class="date pull-right">a moment ago</span></div></div></li>';
+                var new_reply_cmt='<li><div class="comment"><div class="img-thumbnail"><img class="avatar" alt="" src="{{url('frontend/img/User-Default.jpg')}}"></div><div class="comment-block"><div class="comment-arrow"></div><span class="comment-by"><strong>' + reply_cmt[property].name +'</strong><span class="pull-right"><span></span></span></span><p>' + reply_cmt[property].content + '</p><span class="date pull-right">a moment ago</span></div></div></li>';
                 $('#form_reply_comment'+ value).before(new_reply_cmt);
             }  
           });

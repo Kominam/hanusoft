@@ -36,7 +36,7 @@
                 <a href="{{route('single_project', ['id'=> $project->id])}}" class="thumb-info secundary">
                 @foreach ($project->images as $key=>$image)
                     @if($key == 0)
-                         <img alt="" class="img-responsive" src="{{url('frontend/img/projects/'.$image->img_name)}}">
+                         <img alt="" class="img-responsive" src="{{url('frontend/img/projects/'.$image->img_name)}}" style="width: 447px; height: 247px">
                     @endif
                 @endforeach   
                 <span class="thumb-info-title">

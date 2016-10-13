@@ -8,7 +8,15 @@ use App\Http\Requests;
 
 use App\User;
 
+use Auth;
+
+use Notification;
+
+use App\Notifications\TestNoti;
+
 use App\Repositories\Contracts\MemberRepositoryInterface;
+
+use Redirect;
 
 class MemberController extends Controller
 {
@@ -27,5 +35,35 @@ class MemberController extends Controller
     public function show($id) {
         $member = $this->memberRepository->find($id);
         return view('frontend.pages.member_detail',['member' =>$member]);
+    }
+    public function profile() {
+        $member = $this->memberRepository->find(Auth::user()->id);
+        return view('backend.pages.profile',['member' =>$member]);
+    }
+    public function recent_activity() {
+        $member = $this->memberRepository->find(Auth::user()->id);
+        return view('backend.pages.profile-activity',['member' =>$member]);
+    }
+    public function showEditProfile() {
+       $member = $this->memberRepository->find(Auth::user()->id);
+       return view('backend.pages.profile-edit',['member' =>$member]);
+    }
+    public function editProfile(Request $request) {
+         $validator = $this->memberRepository->validatorUpdate($request);
+         if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+         } else {
+             $this->memberRepository->update($request);
+             return redirect()->route("profile");
+         }
+    }
+    public function changePwd(Request $request) {
+         $validator = $this->memberRepository->validatorChangePwd($request);
+         if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+         } else {
+             $this->memberRepository->changePwd($request);
+             return redirect()->route('profile');
+         }
     }
 }

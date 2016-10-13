@@ -9,6 +9,7 @@ use App\Http\Requests;
 interface MemberRepositoryInterface
 {
     public function all();
-    public function update(Request $request, $id);
+    public function update(Request $request);
     public function find($id);
+    public function changePwd(Request $request);
 }

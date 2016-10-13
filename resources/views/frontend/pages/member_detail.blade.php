@@ -55,10 +55,11 @@
         </div>
         <hr class="tall" />
         <div class="row center">
+       
             @foreach ($member->skills as $skill)
                  <div class="col-md-3">
                 <div class="circular-bar">
-                    <div class="circular-bar-chart" data-percent="{{$skill->pivot->level}}" data-plugin-options='{"barColor": "#E36159"}'>
+                    <div class="circular-bar-chart" data-percent="{{$skill->pivot->level}}" data-plugin-options='{"barColor": "#E36159", "delay":300}'>
                         <strong>{{$skill->name}}</strong>
                         <label><span class="percent">{{$skill->pivot->level}}</span>%</label>
                     </div>
@@ -94,26 +95,26 @@
     </div>
     <section class="parallax" data-stellar-background-ratio="0.5" style="background-image: url(img/parallax-transparent.jpg);">
         <div class="container">
-            <div class="row center">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="owl-carousel" data-plugin-options='{"items": 1}'>
-                            <div>
-                                <blockquote>
-                                    <p><i class="fa fa-quote-left"></i> Joe Doe is the smartest guy I ever met, he provides great tech service for each template and allows me to become more knowledgeable as a designer.</p>
-                                    <span>- Mark Doe</span>
-                                </blockquote>
-                            </div>
-                            <div>
-                                <blockquote>
-                                    <p><i class="fa fa-quote-left"></i> He provides great tech service for each template and allows me to become more knowledgeable as a designer.</p>
-                                    <span>- Joseph Doe</span>
-                                </blockquote>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           <!--  <div class="row center">
+               <div class="col-md-12">
+                   <div class="row">
+                       <div class="owl-carousel" data-plugin-options='{"items": 1}'>
+                           <div>
+                               <blockquote>
+                                   <p><i class="fa fa-quote-left"></i> Joe Doe is the smartest guy I ever met, he provides great tech service for each template and allows me to become more knowledgeable as a designer.</p>
+                                   <span>- Mark Doe</span>
+                               </blockquote>
+                           </div>
+                           <div>
+                               <blockquote>
+                                   <p><i class="fa fa-quote-left"></i> He provides great tech service for each template and allows me to become more knowledgeable as a designer.</p>
+                                   <span>- Joseph Doe</span>
+                               </blockquote>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div> -->
         </div>
     </section>
     <div class="container">
@@ -143,48 +144,6 @@
                     </div>
                 </li>
                 @endforeach
-              {{--   <li class="col-md-3">
-                    <div class="portfolio-item thumbnail">
-                        <a href="portfolio-single-project.html" class="thumb-info">
-                        <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project-1.jpg')}}">
-                        <span class="thumb-info-title">
-                        <span class="thumb-info-inner">Okler</span>
-                        <span class="thumb-info-type">Brand</span>
-                        </span>
-                        <span class="thumb-info-action">
-                        <span title="Universal" class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
-                        </span>
-                        </a>
-                    </div>
-                </li>
-                <li class="col-md-3">
-                    <div class="portfolio-item thumbnail">
-                        <a href="portfolio-single-project.html" class="thumb-info">
-                        <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project-2.jpg')}}">
-                        <span class="thumb-info-title">
-                        <span class="thumb-info-inner">The Fly</span>
-                        <span class="thumb-info-type">Logo</span>
-                        </span>
-                        <span class="thumb-info-action">
-                        <span title="Universal" class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
-                        </span>
-                        </a>
-                    </div>
-                </li>
-                <li class="col-md-3">
-                    <div class="portfolio-item thumbnail">
-                        <a href="portfolio-single-project.html" class="thumb-info">
-                        <img alt="" class="img-responsive" src="{{url('frontend/img/projects/project-3.jpg')}}">
-                        <span class="thumb-info-title">
-                        <span class="thumb-info-inner">The Fly</span>
-                        <span class="thumb-info-type">Website</span>
-                        </span>
-                        <span class="thumb-info-action">
-                        <span title="Universal" class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
-                        </span>
-                        </a>
-                    </div>
-                </li> --}}
             </ul>
         </div>
     </div>

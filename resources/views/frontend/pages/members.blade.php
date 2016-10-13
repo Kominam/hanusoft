@@ -22,27 +22,29 @@
         <h2>Meet the <strong>Team</strong></h2>
         <ul class="nav nav-pills sort-source" data-sort-id="team" data-option-key="filter">
             <li data-option-value="*" class="active"><a href="#">Show All</a></li>
-            <li data-option-value=".Leadership"><a href="#">Leadership</a></li>
-            <li data-option-value=".Tester"><a href="#">Tester</a></li>
-            <li data-option-value=".Development"><a href="#">Development</a></li>
-            <li data-option-value=".Design"><a href="#">Design</a></li>
+            @foreach ($all_position as $position)
+                <li data-option-value=".{{$position->name}}"><a href="#">{{$position->name}}</a></li>
+            @endforeach
+           @foreach ($all_grade as $grade)
+                <li data-option-value=".{{$grade->name}}"><a href="#">{{$grade->name}}</a></li>
+            @endforeach
         </ul>
         <hr />
         <div class="row">
             <ul class="team-list sort-destination" data-sort-id="team">
                 @foreach($members as $member)
-                <li class="col-md-3 col-sm-6 col-xs-12 isotope-item {{$member->position->name}}">
+                <li class="col-md-3 col-sm-6 col-xs-12 isotope-item {{$member->position->name}} {{$member->grade->name}} ">
                     <div class="team-item thumbnail">
                         <a href="{{route('member_detail', ['id'=>$member->id])}}" class="thumb-info team">
                        
-                        <img class="img-responsive" alt="" src="{{url('frontend/img/team/'.$member->url_avt)}}">
+                        <img class="img-responsive" alt="" src="{{url('frontend/img/team/'.$member->url_avt)}}" style="width: 585px; height: 295px">
                         <span class="thumb-info-title">
                         <span class="thumb-info-inner">{{$member->name}}</span>
                         <span class="thumb-info-type">{{$member->position->name}}</span>
                         </span>
                         </a>
                         <span class="thumb-info-caption">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ac ligula mi, non suscipitaccumsan.</p>
+                            <p>{{substr($member->bio, 0, 200)}} ...</p>
                             <span class="thumb-info-social-icons">
                             <a data-tooltip data-placement="bottom" target="_blank" href="{{$member->url_fb}}"><i class="fa fa-facebook"></i><span>Facebook</span></a>
                             <a data-tooltip data-placement="bottom" href="../../../www.twitter.com/index.html" data-original-title="Twitter"><i class="fa fa-twitter"></i><span>Twitter</span></a>

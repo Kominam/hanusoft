@@ -1,11 +1,13 @@
 <section id="container" class="">
+ <script src="{{url('backend/js/jquery-1.8.3.min.js')}}"></script>
+  <input type="hidden" name="_token" value="{{csrf_token()}}" >
     <!--header start-->
     <header class="header white-bg">
         <div class="sidebar-toggle-box">
             <div data-original-title="Toggle Navigation" data-placement="right" class="icon-reorder tooltips"></div>
         </div>
         <!--logo start-->
-        <a href="{{route('index')}}" class="logo" >Flat<span>lab</span></a>
+        <a href="{{route('index')}}" class="logo" >HANU<span>soft</span></a>
         <!--logo end-->
         <div class="nav notify-row" id="top_menu">
             <!--  notification start -->
@@ -96,61 +98,56 @@
                 <li id="header_inbox_bar" class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                     <i class="icon-envelope-alt"></i>
-                    <span class="badge bg-important">5</span>
+                    <span class="badge bg-important" id="badge_num_unread_mess">{{$num_unread_mess}}</span>
                     </a>
-                    <ul class="dropdown-menu extended inbox">
+                    <ul class="dropdown-menu extended inbox" id="inbox">
                         <div class="notify-arrow notify-arrow-red"></div>
                         <li>
-                            <p class="red">You have 5 new messages</p>
+                            <p class="red">You have <span id="num_unread_mess">{{$num_unread_mess}}</span>new messages</p>
                         </li>
-                        <li>
-                            <a href="#">
-                            <span class="photo"><img alt="avatar" src="{{url('backend/img/avatar-mini.jpg')}}"></span>
-                            <span class="subject">
-                            <span class="from">Jonathan Smith</span>
-                            <span class="time">Just now</span>
-                            </span>
-                            <span class="message">
-                            Hello, this is an example msg.
-                            </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                            <span class="photo"><img alt="avatar" src="{{url('backend/img/avatar-mini2.jpg')}}"></span>
-                            <span class="subject">
-                            <span class="from">Jhon Doe</span>
-                            <span class="time">10 mins</span>
-                            </span>
-                            <span class="message">
-                            Hi, Jhon Doe Bhai how are you ?
-                            </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                            <span class="photo"><img alt="avatar" src="{{url('backend/img/avatar-mini3.jpg')}}"></span>
-                            <span class="subject">
-                            <span class="from">Jason Stathum</span>
-                            <span class="time">3 hrs</span>
-                            </span>
-                            <span class="message">
-                            This is awesome dashboard.
-                            </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                            <span class="photo"><img alt="avatar" src="{{url('backend/img/avatar-mini4.jpg')}}"></span>
-                            <span class="subject">
-                            <span class="from">Jondi Rose</span>
-                            <span class="time">Just now</span>
-                            </span>
-                            <span class="message">
-                            Hello, this is metrolab
-                            </span>
-                            </a>
-                        </li>
+                          @foreach (Auth::user()->unreadNotifications->take(5) as $notification)
+                             @if($notification->type=='App\Notifications\ChatProject')
+                                     <li id="{{$notification->id}}">
+                                        <a href="{{ url('member/mail') }}">
+                                        <span class="photo"><img alt="avatar" src="{{url('frontend/img/team/'.$notification->data['member_avt'])}}"></span>
+                                        <span class="subject">
+                                        <span class="from" style="color:red">{{$notification->data['member_name']}}</span>
+                                        <span class="time">{{$notification->created_at}}</span>
+                                        </span>
+                                        <span class="message">
+                                        <strong>{{$notification->data['project_chat_name']}}</strong>
+                                        </span>
+                                         <span class="message">
+                                        {{substr($notification->data['message'], 0,50)}}...
+                                        </span>
+                                        </a>
+                                    </li>
+                             @endif
+                             <script type="text/javascript">
+                              $(document).ready(function() {
+                                 var num_unread_mess= parseInt($('#num_unread_mess').text());
+                                 var temp= parseInt(" 1 ");
+                                    $("#inbox").on("click", "#{{$notification->id}}", function(event){
+                                        var noti_id = "{{$notification->id}}";
+                                         $.ajaxSetup({
+                                              headers: {
+                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                              }
+                                            });
+                                          $.ajax({
+                                                url:'/member/notifications',
+                                                type: "post",
+                                                data: { '_token': $('input[name=_token]').val(), 'noti_id': noti_id},
+                                                success: function(data) {
+                                                    var new_num_unread_mess = num_unread_mess - temp;
+                                                    $('#num_unread_mess').text(new_num_unread_mess);
+                                                    $('#badge_num_unread_mess').text(new_num_unread_mess);
+                                                    }
+                                                });
+                                    });
+                                 });
+                             </script>
+                          @endforeach
                         <li>
                             <a href="#">See all messages</a>
                         </li>
@@ -161,48 +158,119 @@
                 <li id="header_notification_bar" class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                     <i class="icon-bell-alt"></i>
-                    <span class="badge bg-warning">7</span>
+                    <span class="badge bg-warning" id="badge_num_unread_noti">{{$num_unread_noti}}</span>
                     </a>
-                    <ul class="dropdown-menu extended notification">
+                    <ul class="dropdown-menu extended notification" id="noti">
                         <div class="notify-arrow notify-arrow-yellow"></div>
                         <li>
-                            <p class="yellow">You have 7 new notifications</p>
+                            <p class="yellow">You have <span id="num_unread_noti">{{$num_unread_noti}}</span> new notifications</p>
                         </li>
-                        <li>
-                            <a href="#">
-                            <span class="label label-danger"><i class="icon-bolt"></i></span>
-                            Server #3 overloaded.
-                            <span class="small italic">34 mins</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                            <span class="label label-warning"><i class="icon-bell"></i></span>
-                            Server #10 not respoding.
-                            <span class="small italic">1 Hours</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                            <span class="label label-danger"><i class="icon-bolt"></i></span>
-                            Database overloaded 24%.
-                            <span class="small italic">4 hrs</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                            <span class="label label-success"><i class="icon-plus"></i></span>
-                            New user registered.
-                            <span class="small italic">Just now</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                            <span class="label label-info"><i class="icon-bullhorn"></i></span>
-                            Application error.
-                            <span class="small italic">10 mins</span>
-                            </a>
-                        </li>
+                        @foreach (Auth::user()->unreadNotifications->take(5) as $notification)
+                         @if($notification->type=='App\Notifications\InvitetoProject')
+                              <li id="invite{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}">
+                                <a href="#">
+                                <span style="display: none" id="noti_id">{{$notification->id}}</span>
+                                <span class="label label-danger"><i class="icon-bolt"></i></span>
+                                 <span style="color:red;font-size:15px">Invite project</span><br>{{$notification->data['project_name']}} from {{$notification->data['leadership_name']}}
+                                 <br>
+                                <span class="small italic">{{$notification->created_at->diffForHumans()}}</span>
+                                <br>
+                                <table>
+                                    <tr>
+                                        <td><a id="accept{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}"><i class=" icon-ok" style="color:green">Accept</i></a></td>
+                                        <td><a id="decline{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}"><i class="icon-minus" style="color:red">Decline</i></a></td>
+                                        <td><a id="hide{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}"><i class="icon-off">Hide</i></td>
+                                    </tr>
+                                </table>
+                                </a>
+                            </li>
+                              <script type="text/javascript">
+                                    $(document).ready(function(){
+                                          $.ajaxSetup({
+                                              headers: {
+                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                              }
+                                            });
+
+                                          /*$('#header_notification_bar ul').prepend('Some text');*/
+                                        var notification_id = $('#noti_id').text();
+                                        var num_unread_noti= parseInt($('#num_unread_noti').text());
+                                        var temp= parseInt(" 1 ");
+                                        $('#accept{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}').click(function(){
+                                                var project_id="{{$notification->data['project_id']}}";
+                                                $.ajax({
+                                                url:'/member/accept-invite',
+                                                type: "post",
+                                                data: { '_token': $('input[name=_token]').val(), 'project_id': project_id, 'response': 'accept', 'noti_id': notification_id},
+                                                success: function(data) {
+                                                    alert("Accept success");
+                                                    $('#invite{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}').remove();
+                                                     var new_num_unread_noti = num_unread_noti - temp;
+                                                    $('#num_unread_noti').text(new_num_unread_noti);
+                                                    $('#badge_num_unread_noti').text(new_num_unread_noti);
+                                                    }
+                                                });
+                                            });
+                                        $('#decline{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}').click(function(){
+                                              var project_id="{{$notification->data['project_id']}}";
+                                                $.ajax({
+                                                url:'/member/accept-invite',
+                                                type: "post",
+                                                data: { '_token': $('input[name=_token]').val(), 'project_id': project_id, 'response': 'decline','noti_id': notification_id},
+                                                success: function(data) {
+                                                     alert("Decline success");
+                                                    $('#invite{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}').remove();
+                                                     var new_num_unread_noti = num_unread_noti - temp;
+                                                    $('#num_unread_noti').text(new_num_unread_noti);
+                                                    $('#badge_num_unread_noti').text(new_num_unread_noti);
+                                                    }
+                                                });
+                                            });
+                                        $('#hide{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}').click(function(){
+                                              var project_id="{{$notification->data['project_id']}}";
+                                                $.ajax({
+                                                url:'/member/accept-invite',
+                                                type: "post",
+                                                data: { '_token': $('input[name=_token]').val(), 'project_id': project_id, 'response': 'hide',  'noti_id': notification_id},
+                                                success: function(data) {
+                                                     alert("Hide success");
+                                                    $('#invite{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}').remove();
+                                                     var new_num_unread_noti = num_unread_noti - temp;
+                                                    $('#num_unread_noti').text(new_num_unread_noti);
+                                                    $('#badge_num_unread_noti').text(new_num_unread_noti);
+                                                    }
+                                                });
+                                            });
+                                    });
+                             </script>
+                        @elseif($notification->type=='App\Notifications\AddNewState')
+                            <li id="{{$notification->id}}"><a href="{{ route('backend.project', $notification->data['project_id']) }}"><span class="label label-danger"><i class="icon-bolt"></i></span>New State Added.<span class="small italic">{{$notification->data['project_name']}}</span></a></li>'
+                             <script type="text/javascript">
+                              $(document).ready(function() {
+                                 var num_unread_noti= parseInt($('#num_unread_noti').text());
+                                 var temp= parseInt(" 1 ");
+                                    $("#noti").on("click", "#{{$notification->id}}", function(event){
+                                        var noti_id = "{{$notification->id}}";
+                                         $.ajaxSetup({
+                                              headers: {
+                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                              }
+                                            });
+                                          $.ajax({
+                                                url:'/member/notifications',
+                                                type: "post",
+                                                data: { '_token': $('input[name=_token]').val(), 'noti_id': noti_id},
+                                                success: function(data) {
+                                                    var new_num_unread_noti = num_unread_noti - temp;
+                                                    $('#num_unread_noti').text(new_num_unread_noti);
+                                                    $('#badge_num_unread_noti').text(new_num_unread_noti);
+                                                    }
+                                                });
+                                    });
+                                 });
+                             </script>
+                        @endif
+                        @endforeach
                         <li>
                             <a href="#">See all notifications</a>
                         </li>
@@ -219,13 +287,13 @@
                 <!-- user login dropdown start-->
                 <li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                    <img alt="" src="{{url('backend/img/avatar1_small.jpg')}}">
+                    <img alt="" src="{{url('frontend/img/team/'.Auth::user()->url_avt)}}" style="width: 28px; height: 28px">
                     <span class="username">{{Auth::user()->name}}</span>
                     <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu extended logout">
                         <div class="log-arrow-up"></div>
-                        <li><a href="#"><i class=" icon-suitcase"></i>Profile</a></li>
+                        <li><a href="{{route('profile')}}"><i class=" icon-suitcase"></i>Profile</a></li>
                         <li><a href="#"><i class="icon-cog"></i> Settings</a></li>
                         <li><a href="#"><i class="icon-bell-alt"></i> Notification</a></li>
                         <li><a href="{{ url('member/logout') }}"><i class="icon-key"></i> Log Out</a></li>
@@ -254,8 +322,9 @@
                     </a>
                     <ul class="sub">
                         @foreach (Auth::user()->projects as $project)
-                          <li><a  href="{{ route('sdv') }}"> <i class=" icon-folder-close"></i>{{$project->name}}</a></li>
+                          <li><a  href="{{ route('backend.project', $project->id) }}"> <i class=" icon-folder-close"></i>{{$project->name}}</a></li>
                         @endforeach
+                         <li><a  href="{{ route('create-project') }}"> <i class="icon-plus-sign-alt"></i>Create a new project</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -276,8 +345,8 @@
                     <span>Post</span>
                     </a>
                     <ul class="sub">
-                        <li><a  href="{{ route('write-post') }}"><i class="icon-edit"></i>Write post</a></li>
-                        <li><a  href="#"><i class="icon-book"></i>Your post</a></li>
+                        <li><a  href="{{ route('showPostForm') }}"><i class="icon-edit"></i>Write post</a></li>
+                        <li><a  href="{{ route('your-post') }}"><i class="icon-book"></i>Your post</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
