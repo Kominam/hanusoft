@@ -89,8 +89,11 @@
 		Route::group(['middleware' => ['auth']], function () {
 			Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 			Route::get('/logout', 'Auth\LoginController@logout');
-			});
+			Route::get('/write-post', ['as' => 'write-post', function(){
+				return view('backend.pages.write-post');
+			}]);
 		});
+	});
 	
 	
 	//For guest

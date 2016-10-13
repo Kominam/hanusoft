@@ -276,7 +276,7 @@
                     <span>Post</span>
                     </a>
                     <ul class="sub">
-                        <li><a  href="#"><i class="icon-edit"></i>Write post</a></li>
+                        <li><a  href="{{ route('write-post') }}"><i class="icon-edit"></i>Write post</a></li>
                         <li><a  href="#"><i class="icon-book"></i>Your post</a></li>
                     </ul>
                 </li>
