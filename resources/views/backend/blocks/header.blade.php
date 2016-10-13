@@ -225,7 +225,7 @@
                     </a>
                     <ul class="dropdown-menu extended logout">
                         <div class="log-arrow-up"></div>
-                        <li><a href="#"><i class=" icon-suitcase"></i>Profile</a></li>
+                        <li><a href="{{route('profile')}}"><i class=" icon-suitcase"></i>Profile</a></li>
                         <li><a href="#"><i class="icon-cog"></i> Settings</a></li>
                         <li><a href="#"><i class="icon-bell-alt"></i> Notification</a></li>
                         <li><a href="{{ url('member/logout') }}"><i class="icon-key"></i> Log Out</a></li>
@@ -256,6 +256,7 @@
                         @foreach (Auth::user()->projects as $project)
                           <li><a  href="{{ route('sdv') }}"> <i class=" icon-folder-close"></i>{{$project->name}}</a></li>
                         @endforeach
+                         <li><a  href="{{ route('create-project') }}"> <i class="icon-plus-sign-alt"></i>Create a new project</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">

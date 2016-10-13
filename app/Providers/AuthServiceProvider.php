@@ -25,6 +25,12 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('create-project', function ($user) {
+            if ($user->position->name =='Leadership') {
+                return true;
+            } else {
+                return false;
+            }
+        });
     }
 }

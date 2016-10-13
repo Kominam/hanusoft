@@ -92,6 +92,9 @@
 			Route::get('/write-post', ['as' => 'write-post', function(){
 				return view('backend.pages.write-post');
 			}]);
+				Route::get('/create-project', ['as' => 'create-project', function(){
+				return view('backend.pages.create-project');
+			}]);
 		});
 	});
 	
