@@ -49,11 +49,20 @@ class ViewComposerServiceProvider extends ServiceProvider
             $all_project= Project::all();
             $view->with('all_project', $all_project);
         });
+           //Post For Index
+         View::composer('frontend.pages.index', function ($view) {
+            $lastest_posts = Post::get()->sortByDesc(function($post)
+                {
+                    return $post->created_at;
+                })->take(6);
+            $view->with('lastest_posts', $lastest_posts);
+        });
          // Position For Registation
          View::composer('backend.pages.register', function ($view) {
             $all_position= Position::where('name', '<>', 'Leadership')->get();
             $view->with('all_position', $all_position);
         });
+       
 
     }
 

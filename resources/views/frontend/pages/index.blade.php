@@ -256,72 +256,21 @@
                     <h2>Latest <strong>Posts</strong></h2>
                     <div class="row">
                       <div class="owl-carousel" data-plugin-options='{"items": 1}'>
-                        <div>
-                          <div class="col-md-6">
+                      @foreach ($lastest_posts->chunk(2) as $chunk)
+                         <div>
+                         @foreach ($chunk as $l_post)
+                            <div class="col-md-6">
                             <article>
                               <div class="date">
-                                <span class="day">15</span>
-                                <span class="month">Jan</span>
+                                <span class="day">{{$l_post->created_at->format('d')}}</span>
+                                <span class="month">{{substr($l_post->created_at->format('F'),0,3)}}</span>
                               </div>
-                              <h4><a href="blog-post.html">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></h4>
-                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit vehicula est, in consequat libero. <a href="{{url('http://preview.oklerthemes.com/')}}" class="read-more">read more <i class="fa fa-angle-right"></i></a></p>
+                              <h4><a href="{{ route('post_detail', $l_post->id) }}">{{substr($l_post->tittle,0,50)}} [...]<a href="{{ route('post_detail', $l_post->id) }}" class="read-more">read more <i class="fa fa-angle-right"></i></a></p>
                             </article>
                           </div>
-                          <div class="col-md-6">
-                            <article>
-                              <div class="date">
-                                <span class="day">15</span>
-                                <span class="month">Jan</span>
-                              </div>
-                              <h4><a href="blog-post.html">Lorem ipsum dolor</a></h4>
-                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit vehicula est, in consequat. <a href="{{url('http://preview.oklerthemes.com/')}}" class="read-more">read more <i class="fa fa-angle-right"></i></a></p>
-                            </article>
-                          </div>
-                        </div>
-                        <div>
-                          <div class="col-md-6">
-                            <article>
-                              <div class="date">
-                                <span class="day">12</span>
-                                <span class="month">Jan</span>
-                              </div>
-                              <h4><a href="blog-post.html">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></h4>
-                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit vehicula est, in consequat libero. <a href="http://preview.oklerthemes.com/" class="read-more">read more <i class="fa fa-angle-right"></i></a></p>
-                            </article>
-                          </div>
-                          <div class="col-md-6">
-                            <article>
-                              <div class="date">
-                                <span class="day">11</span>
-                                <span class="month">Jan</span>
-                              </div>
-                              <h4><a href="blog-post.html">Lorem ipsum dolor</a></h4>
-                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <a href="http://preview.oklerthemes.com/" class="read-more">read more <i class="fa fa-angle-right"></i></a></p>
-                            </article>
-                          </div>
-                        </div>
-                        <div>
-                          <div class="col-md-6">
-                            <article>
-                              <div class="date">
-                                <span class="day">15</span>
-                                <span class="month">Jan</span>
-                              </div>
-                              <h4><a href="blog-post.html">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></h4>
-                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit vehicula est, in consequat libero. <a href="http://preview.oklerthemes.com/" class="read-more">read more <i class="fa fa-angle-right"></i></a></p>
-                            </article>
-                          </div>
-                          <div class="col-md-6">
-                            <article>
-                              <div class="date">
-                                <span class="day">15</span>
-                                <span class="month">Jan</span>
-                              </div>
-                              <h4><a href="blog-post.html">Lorem ipsum dolor</a></h4>
-                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit vehicula est, in consequat. <a href="http://preview.oklerthemes.com/" class="read-more">read more <i class="fa fa-angle-right"></i></a></p>
-                            </article>
-                          </div>
-                        </div>
+                         @endforeach
+                        </div> 
+                      @endforeach 
                       </div>
                     </div>
                   </div>

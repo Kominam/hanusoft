@@ -110,7 +110,6 @@
 	Route::get('/posts', ['as' => 'posts','uses' => 'PostController@index']);
 	
 	Route::get('/post_detail/{id}', ['as' => 'post_detail','uses' => 'PostController@show' ]);
-	
 	Route::get('/projects', ['as' => 'projects', 'uses' => 'ProjectController@index']);
 	
 	Route::get('/single_project/{id}', ['as' => 'single_project','uses' => 'ProjectController@show']);

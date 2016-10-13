@@ -1,4 +1,43 @@
 @extends('backend.pages.master')
+@section('external_css')
+   <link href="{{url('backend/assets/font-awesome/css/font-awesome.css')}}" rel="stylesheet" />
+   <link href="{{url('backend/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css')}}" rel="stylesheet" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="{{url('backend/css/owl.carousel.css')}}" type="text/css">
+@endsection
+@section('external_script')
+    <script src="{{url('backend/js/jquery-1.8.3.min.js')}}"></script>
+    <script src="{{url('backend/js/jquery.sparkline.js')}}" type="text/javascript"></script>
+    <script src="{{url('backend/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js')}}"></script>
+    <script src="{{url('backend/js/owl.carousel.js')}}" ></script>
+    <script src="{{url('backend/js/jquery.customSelect.min.js')}}" ></script>
+     <script class="include" type="text/javascript" src="{{url('backend/js/jquery.dcjqaccordion.2.7.js')}}"></script>
+     <!--script for this page-->
+    <script src="{{url('backend/js/sparkline-chart.js')}}"></script>
+    <script src="{{url('backend/js/easy-pie-chart.js')}}"></script>
+    <script src="{{url('backend/js/count.js')}}"></script>
+
+  <script>
+
+      //owl carousel
+      $(document).ready(function() {
+          $("#owl-demo").owlCarousel({
+              navigation : true,
+              slideSpeed : 300,
+              paginationSpeed : 400,
+              singleItem : true,
+              autoPlay:true
+
+          });
+      });
+
+      //custom select box
+
+      $(function(){
+          $('select.styled').customSelect();
+      });
+
+  </script>
+@endsection
 @section('content')
 <section class="wrapper">
     <!--state overview start-->

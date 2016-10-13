@@ -1,4 +1,9 @@
 @extends('backend.pages.master')
+@section('external_css')
+   <link href="{{url('backend/assets/font-awesome/css/font-awesome.css')}}" rel="stylesheet" />
+    <link href="{{url('backend/assets/advanced-datatable/media/css/demo_page.css')}}" rel="stylesheet" />
+    <link href="{{url('backend/assets/advanced-datatable/media/css/demo_table.css')}}" rel="stylesheet" />
+@endsection
 @section('content')
 <section class="wrapper">
     <!-- page start-->
@@ -446,4 +451,17 @@
     </div>
     <!-- page end-->
   </section>
-@endsection()
+@endsection
+@section('external_script')
+  <script type="text/javascript" language="javascript" src="{{url('backend/assets/advanced-datatable/media/js/jquery.js')}}"></script>
+  <script type="text/javascript" language="javascript" src="{{url('backend/assets/advanced-datatable/media/js/jquery.dataTables.js')}}"></script>
+  <!--script for this page only-->
+
+      <script type="text/javascript" charset="utf-8">
+          $(document).ready(function() {
+              $('#example').dataTable( {
+                  "aaSorting": [[ 4, "desc" ]]
+              } );
+          } );
+      </script>
+@endsection
