@@ -220,7 +220,7 @@
                 <li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                     <img alt="" src="{{url('backend/img/avatar1_small.jpg')}}">
-                    <span class="username">Jhon Doue</span>
+                    <span class="username">{{Auth::user()->name}}</span>
                     <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu extended logout">
@@ -228,7 +228,7 @@
                         <li><a href="#"><i class=" icon-suitcase"></i>Profile</a></li>
                         <li><a href="#"><i class="icon-cog"></i> Settings</a></li>
                         <li><a href="#"><i class="icon-bell-alt"></i> Notification</a></li>
-                        <li><a href="login.html"><i class="icon-key"></i> Log Out</a></li>
+                        <li><a href="{{ url('member/logout') }}"><i class="icon-key"></i> Log Out</a></li>
                     </ul>
                 </li>
                 <!-- user login dropdown end -->
@@ -249,36 +249,47 @@
                 </li>
                 <li class="sub-menu">
                     <a href="javascript:;">
-                    <i class="icon-cogs"></i>
+                    <i class=" icon-folder-open"></i>
                     <span>Projects</span>
                     </a>
                     <ul class="sub">
                         @foreach (Auth::user()->projects as $project)
-                          <li><a  href="grids.html">{{$project->name}}</a></li>
+                          <li><a  href="{{ route('sdv') }}"> <i class=" icon-folder-close"></i>{{$project->name}}</a></li>
                         @endforeach
                     </ul>
                 </li>
                 <li class="sub-menu">
                     <a href="javascript:;" >
-                    <i class="icon-tasks"></i>
+                    <i class="icon-user"></i>
                     <span>Profile</span>
                     </a>
                     <ul class="sub">
-                        <li><a  href="{{route('form_component')}}">Activity</a></li>
-                        <li><a  href="{{route('form_wizard')}}">Edit profile</a></li>
-                        <li><a  href="{{route('form_wizard')}}">Inbox</a></li>
+                        <li><a  href="{{route('profile')}}"> <i class=" icon-info"></i>Your profile</a></li>
+                         <li><a  href="{{route('profile-edit')}}"><i class="icon-edit"></i>Edit profile</a></li>
+                        <li><a  href="{{route('profile-activity')}}"><i class="icon-calendar"></i>Activity</a></li>
+                        <li><a href="{{route('mail')}}"><i class="icon-envelope"></i>Inbox</a></li>
+                    </ul>
+                </li>
+                  <li class="sub-menu">
+                    <a href="javascript:;" >
+                    <i class="icon-tasks"></i>
+                    <span>Post</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="#"><i class="icon-edit"></i>Write post</a></li>
+                        <li><a  href="#"><i class="icon-book"></i>Your post</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
                     <a href="javascript:;">
-                    <i class="icon-th"></i>
+                    <i class="icon-gear (alias)"></i>
                     <span>Setting</span>
                     </a>
                     <ul class="sub">
-                        <li><a  href="{{route('basic_table')}}">Basic Table</a></li>
-                        <li><a  href="{{route('dynamic_table')}}">Dynamic Table</a></li>
-                        <li><a  href="{{route('advanced_table')}}">Advanced Table</a></li>
-                        <li><a  href="{{route('editable_table')}}">Editable Table</a></li>
+                        <li><a  href="#">Basic Table</a></li>
+                        <li><a  href="#">Dynamic Table</a></li>
+                        <li><a  href="#">Advanced Table</a></li>
+                        <li><a  href="#">Editable Table</a></li>
                     </ul>
                 </li>
             </ul>

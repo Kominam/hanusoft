@@ -140,6 +140,20 @@
                               </div>
                           </div>
                       </section>
+                      <section class="panel">
+                            <div class="panel-heading">
+                                Members
+                            </div>
+                          <div class="panel-body">
+                          <ul>
+                              <li>Hello</li>
+                               <li>Hello</li>
+                                <li>Hello</li>
+                                 <li>Hello</li>
+                                  <li>Hello</li>
+                          </ul>
+                          </div>
+                      </section>
         </div>
         <div class="col-md-6">
            <section class="panel">
@@ -248,7 +262,7 @@
                       <figure class="demo-xchart" id="chart"></figure>
                   </div>
               </section>
-               
+
 </section>
 @endsection
 @section('external_script')
