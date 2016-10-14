@@ -32,7 +32,7 @@ class PostController extends Controller
     }
     //Add
     public function showAddForm() {
-    	//return form to add new group
+    	return view('backend.pages.write-post');
     }
     public function add(Request $request) {
          $this->postRepository->create($request);

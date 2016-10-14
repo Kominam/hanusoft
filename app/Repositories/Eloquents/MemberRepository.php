@@ -41,10 +41,10 @@ class MemberRepository implements MemberRepositoryInterface
 
     public function assignToProjects($users, $project) {
         $user->projects()->attach($project);
-    		$user->save();
+    	$user->save();
     }
     public function unassignToProjects($users, $project) {
-    		$user->projects()->detach($project);
+    	$user->projects()->detach($project);
         $user->save();
     }
 

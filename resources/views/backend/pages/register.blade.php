@@ -49,7 +49,7 @@
           @endforeach
           </select>
           <p> Enter your account details below</p>
-          <input type="text" class="form-control" placeholder="User Name" autofocus name="email" value="{{ old('email')}}">
+          <input type="text" class="form-control" placeholder="Email" autofocus name="email" value="{{ old('email')}}">
           <input type="password" name="password" class="form-control" placeholder="Password">
           <input type="password" name="password_confirmation" class="form-control" placeholder="Re-type Password">
           <label class="checkbox">

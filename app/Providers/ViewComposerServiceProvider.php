@@ -24,7 +24,7 @@ class ViewComposerServiceProvider extends ServiceProvider
         );*/
 
         // Using Closure based composers...
-        View::composer(['frontend.pages.posts', 'frontend.pages.post_detail'], function ($view) {
+        View::composer(['frontend.pages.posts', 'frontend.pages.post_detail', 'backend.pages.write-post'], function ($view) {
             $all_post_cate = PostType::all();
             $view->with('all_post_cate', $all_post_cate);
         });

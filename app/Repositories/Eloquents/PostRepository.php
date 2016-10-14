@@ -10,6 +10,7 @@ use App\Comment;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Validator;
+use Auth;
 
 class PostRepository implements PostRepositoryInterface
 {
@@ -30,25 +31,24 @@ class PostRepository implements PostRepositoryInterface
     	 $messages = [
                'tittle.required'=>'Enter the tittle for this post',
                'tittle.unique'=>'This tittle is already existing',
-               'content.required'=>'Enter the content for this project',
-               'img_cover.required'=>'Enter the URL demo for this project'
+               'content.required'=>'Enter the content for this project'
         ];
         $validator = Validator:: make($request->all(),[
               'tittle'=>'required|unique:posts,tittle',
-              'content'=>'required',
-              'img_cover'=>'required|file|image|mimes:jpeg,jpg',
+              'content'=>'required'
         ], $messages);
         if ($validator->fails()) {
-            return redirect('/')->withErrors($validator)->withInput();
+            return back()->withErrors($validator)->withInput();
+        } else {
+            $post = new Post;
+            $post->tittle = $request->tittle;
+            $post->content = $request->content;
+            $post->type_id = $request->post_type_id;
+            $post->user_id= Auth::user()->id;
+            $post->save();
+            return redirect()->route('dashboard');
         }
-    	$post= Post::create(['tittle' => $request->tittle, 
-    								'content' => $request->content, 
-    								'img_cover' => $request->img_cover
-                    ]);
-    	//Define author for this project
-    	$post->user_id= $request->user_id;
-    	
-    	$post->save();
+       
     }
 
     public function update(Request $request, $id){

@@ -26,6 +26,13 @@
                 <div class="login-wrap">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                     <input type="text" class="form-control" placeholder="User ID" autofocus name="email">
+                    @if (count($errors) >0)
+                  @foreach($errors->all() as $error)
+                    <div class="alert alert-danger"> 
+                                {!! $error !!}    
+                    </div>
+                    @endforeach 
+                 @endif
                     <input type="password" class="form-control" placeholder="Password" name="password">
                     <label class="checkbox">
                     <input type="checkbox" value="remember-me" name="remember"> Remember me

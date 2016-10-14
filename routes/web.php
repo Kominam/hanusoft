@@ -89,10 +89,9 @@
 		Route::group(['middleware' => ['auth']], function () {
 			Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 			Route::get('/logout', 'Auth\LoginController@logout');
-			Route::get('/write-post', ['as' => 'write-post', function(){
-				return view('backend.pages.write-post');
-			}]);
-				Route::get('/create-project', ['as' => 'create-project', function(){
+			Route::get('/write-post', ['as' => 'showPostForm','uses'=>'PostController@showAddForm']);
+			Route::post('/write-post', ['as' => 'writePost', 'uses'=>'PostController@add']);
+			Route::get('/create-project', ['as' => 'create-project', function(){
 				return view('backend.pages.create-project');
 			}]);
 		});
