@@ -52,7 +52,7 @@ class PostRepository implements PostRepositoryInterface
     }
 
     public function update(Request $request, $id){
-     $messages = [
+    /* $messages = [
                'tittle.required'=>'Enter the tittle for this post',
                'tittle.unique'=>'This tittle is already existing',
                'content.required'=>'Enter the content for this project',
@@ -65,13 +65,14 @@ class PostRepository implements PostRepositoryInterface
         ], $messages);
         if ($validator->fails()) {
             return redirect('/')->withErrors($validator)->withInput();
-        }
+        }*/
         $post =Post::find($id);
         $post->tittle = $request->tittle;
         $post->content = $request->content;
-        $post->img_cover = $request->img_cover;
+        $post->type_id= $request->post_type_id;
         //Save
        $post->save();
+       return redirect()->route('dashboard');
     }
 
     public function delete($id) {

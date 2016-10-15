@@ -15,7 +15,7 @@
 		return view('frontend.pages.index');
 	});
 
-	
+	Auth::routes();
 	Route::group(['prefix' => 'member'], function () {
 		Route::get('/mail', ['as' => 'mail', function() {
 			return view('backend.pages.mail');
@@ -57,16 +57,6 @@
 			return view('backend.pages.xchart');
 		}]);
 
-		Route::get('/profile', ['as' => 'profile', function(){
-			return view('backend.pages.profile');
-		}]);
-
-		Route::get('/profile-edit', ['as' => 'profile-edit', function(){
-			return view('backend.pages.profile-edit');
-		}]);
-		Route::get('/profile-activity', ['as' => 'profile-activity', function(){
-			return view('backend.pages.profile-activity');
-		}]);
 		Route::get('/todo_list', ['as' => 'todo_list', function(){
 			return view('backend.pages.todo_list');
 		}]);
@@ -91,9 +81,20 @@
 			Route::get('/logout', 'Auth\LoginController@logout');
 			Route::get('/write-post', ['as' => 'showPostForm','uses'=>'PostController@showAddForm']);
 			Route::post('/write-post', ['as' => 'writePost', 'uses'=>'PostController@add']);
-			Route::get('/create-project', ['as' => 'create-project', function(){
-				return view('backend.pages.create-project');
-			}]);
+			Route::get('/edit-post/{id}', ['as' => 'get.edit.post', 'uses'=>'PostController@showEditForm']);
+			Route::post('/edit-post/{id}', ['as' => 'post.edit.post', 'uses'=>'PostController@edit']);
+			Route::get('/create-project', ['as' => 'create-project','uses'=>'ProjectController@showAddForm']);
+			Route::post('/create-project', ['as' => 'createProject','uses'=>'ProjectController@add']);
+			Route::get('/profile', ['as' => 'profile', function(){
+					return view('backend.pages.profile');
+				}]);
+
+			Route::get('/profile-edit', ['as' => 'profile-edit', function(){
+					return view('backend.pages.profile-edit');
+				}]);
+			Route::get('/profile-activity', ['as' => 'profile-activity', function(){
+					return view('backend.pages.profile-activity');
+				}]);
 		});
 	});
 	

@@ -5,9 +5,11 @@ namespace App\Providers;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use App\PostType;
+use App\ProjectType;
 use App\Post;
 use App\Project;
 use App\Position;
+use App\Skill;
 
 class ViewComposerServiceProvider extends ServiceProvider
 {
@@ -24,7 +26,7 @@ class ViewComposerServiceProvider extends ServiceProvider
         );*/
 
         // Using Closure based composers...
-        View::composer(['frontend.pages.posts', 'frontend.pages.post_detail', 'backend.pages.write-post'], function ($view) {
+        View::composer(['*'], function ($view) {
             $all_post_cate = PostType::all();
             $view->with('all_post_cate', $all_post_cate);
         });
@@ -61,6 +63,15 @@ class ViewComposerServiceProvider extends ServiceProvider
          View::composer('backend.pages.register', function ($view) {
             $all_position= Position::where('name', '<>', 'Leadership')->get();
             $view->with('all_position', $all_position);
+        });
+         //For create project
+         View::composer(['backend.pages.create-project'], function ($view) {
+            $all_project_cate = ProjectType::all();
+            $view->with('all_project_cate', $all_project_cate);
+        });
+          View::composer(['backend.pages.create-project'], function ($view) {
+            $all_skill = Skill::all();
+            $view->with('all_skill', $all_skill);
         });
        
 

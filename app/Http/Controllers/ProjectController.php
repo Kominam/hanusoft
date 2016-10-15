@@ -26,7 +26,6 @@ class ProjectController extends Controller
 
     public function show($id) {
        $project = $this->projectRepository->find($id);
-
        $related_projects = $this->projectRepository->findRelated($id,$project->type_id);
        $num_project = $this->projectRepository->countAll();
        if ($project->id===1) {
@@ -39,13 +38,11 @@ class ProjectController extends Controller
           $next_project_id = $project->id +1;
            $previous_project_id =$project->id -1;
        }
-       
-
       return view('frontend.pages.single_project' ,['project' => $project, 'related_projects'=>$related_projects, 'next_project' =>$next_project_id, 'prev_project'=> $previous_project_id]);
     }
     //Add
     public function showAddForm() {
-    	//return form to add new group
+    	return view('backend.pages.create-project');
     }
     public function add(Request $request) {
     	 $this->projectRepository->create($request);

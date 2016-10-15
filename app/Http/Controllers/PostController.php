@@ -43,7 +43,7 @@ class PostController extends Controller
 
    	public function showEditForm($id) {
    		$post = Post:: find($id);
-   		return view ('', compact('post','id'));
+   		return view ('backend.pages.edit-post', compact('post','id'));
    	}
 
    	public function edit(Request $request, $id) {

@@ -8,38 +8,39 @@
 @section('content')
      <section class="wrapper">
               <!-- page start-->
-              @cannot('create-project')
-                <h3>Sorry you have not permission to create project</h3>
+              @cannot('update-post', $post)
+               <h3>Sorry you do not have permission to edit this post.This post is not yours.</h3>
               @endcannot
-              @can('create-project')
-                 <div class="row">
+              @can('update-post', $post)
+                    <div class="row">
                   <div class="col-lg-12">
-                  <form class="form-horizontal tasi-form" method="POST" action="{{ route('createProject') }}"> 
-                      <section class="panel">
+                  <form class="form-horizontal tasi-form" method="post" action="{{ route('post.edit.post', $post->id) }}">
+                  <input type="hidden" name="_token" value="{{csrf_token()}}">
+                    @if (count($errors) >0)
+                        <section class="panel">
+                          <div class="panel-heading">
+                            Errors
+                          </div>
                           <div class="panel-body">
-                              <input type="hidden" name="_token" value="{{csrf_token()}}">
+                              @foreach($errors->all() as $error)
+                                        {!! $error !!}    
+                              @endforeach 
+                          </div>
+                        </section>
+                    @endif
+                      <section class="panel">
+                          <div class="panel-body">  
                                   <div class="form-group">
                                       <label class="col-sm-2 control-label col-lg-2" for="inputSuccess">Category</label>
-                                      <div class="col-lg-5">
-                                        @foreach ($all_project_cate as $project_cate)
-                                           <div class="radio">
-                                              <label>
-                                                  <input type="radio" name="project_cate_id" id="optionsRadios1" value="{{$project_cate->id}}">
-                                                  {{$project_cate->name}}
+                                      <div class="col-lg-10">
+                                            @foreach ($all_post_cate as $post_cate)
+                                              <div class="radio">
+                                               <label>
+                                                  <input type="radio" name="post_type_id" id="optionsRadios1" value="{{$post_cate->id}}" {{($post->type_id === $post_cate->id ? 'checked' : '') }}>
+                                                  {{$post_cate->name}}
                                               </label>
-                                          </div>
-                                        @endforeach
-                                      </div>
-                                       <label class="col-sm-2 control-label col-lg-2" for="inputSuccess">Required Skills</label>
-                                        <div class="col-lg-3">
-                                        @foreach ($all_skill as $skill)
-                                           <div class="checkbox">
-                                              <label>
-                                                  <input type="checkbox" name="skills[]" id="optionsRadios1" value="{{$skill->id}}">
-                                                  {{$skill->name}}
-                                              </label>
-                                          </div>
-                                        @endforeach
+                                              </div>
+                                            @endforeach
                                       </div>
                                   </div>
                           </div>
@@ -49,34 +50,30 @@
                               Content
                           </header>
                           <div class="panel-body">
-                              <div class="form">
+                              <div class="form">            
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label col-sm-2">Tittle</label>
                                         <div class="col-sm-10">
-                                          <input type="text" class="form-control" id="" name="name" placeholder="Enter project name">
+                                          <input type="text" class="form-control" id="" value="{{$post->tittle }}" name="tittle" required>
                                         </div>
-                                    </div>
-                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label col-sm-2">Link preview (optional)</label>
-                                        <div class="col-sm-10">
-                                          <input type="text" class="form-control" id="" name="link_preview" placeholder="Enter project name">
-                                        </div>
-                                    </div>
+                                      
+                                         </div>
                                       <div class="form-group">
-                                          <label class="col-sm-2 control-label col-sm-2">Description</label>
+                                          <label class="col-sm-2 control-label col-sm-2">Content</label>
                                           <div class="col-sm-10">
-                                              <textarea class="form-control ckeditor" name="description" rows="6"></textarea>
+                                              <textarea class="form-control ckeditor" name="content" rows="25">
+                                                {!!$post->content !!}
+                                              </textarea>
                                           </div>
                                       </div>
                               </div>
                           </div>
-                          </section>
-                    <input type="submit" value="Create">
+                      </section>
+                     <input type="submit" name="submit" value="submit">
                   </form>
                   </div>
               </div>
               @endcan
-             
               <!-- page end-->
           </section>
 @endsection

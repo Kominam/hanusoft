@@ -57,34 +57,37 @@ class ProjectRepository implements ProjectRepositoryInterface
     }
 
     public function create(Request $request){
-    	 $messages = [
+    	/* $messages = [
                'name.required'=>'Enter the name for this project',
                'name.unique'=>'This name is already existing',
                'description.required'=>'Enter the description for this project',
-               'link_preview.required'=>'Enter the URL demo for this project',
                'link_preview.url'=>'This link is not correct',
                'link_preview.unique'=>'This link is used for another project',
         ];
         $validator = Validator:: make($request->all(),[
               'name'=>'required|unique:projects,name',
               'description'=>'required',
-              'link_preview'=>'required|url|unique:projects,link_preview',
+              'link_preview'=>'url|unique:projects,link_preview',
         ], $messages);
         if ($validator->fails()) {
-            return redirect('/')->withErrors($validator)->withInput();
-        }
-    	$project= Project::create(['name' => $request->name, 
-    								'description' => $request->description, 
-    								'link_preview' => $request->link_preview]);
-    	//Define type for this project
-    	$project->type_id= $request->type_id;
+            return back()->withErrors($validator)->withInput();
+        }*/
+    	 $project= new Project;
+       $project->name = $request->name;
+       $project->description = $request->description;
+       if ($request->has('link_preview')) {
+        $project->link_preview = $request->link_preview;
+       }
+      
+    	$project->type_id= $request->project_cate_id;
+      $project->save();
     	//Define skill
-    	defineRequiredSkill($request->skills, $project);
+    	$this->defineRequiredSkill($request->skills, $project);
     	//Assign for member (if avaialble)
     	if ($request->has('member')) {
-           assignMember($request->members, $project);
+           $this->assignMember($request->members, $project);
         }
-    	$project->save();
+      return redirect()->route('dashboard');
     }
 
     public function update(Request $request, $id){
