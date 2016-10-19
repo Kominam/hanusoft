@@ -25,7 +25,7 @@
                     <a href="{{route('contact')}}"><i class="fa fa-angle-right"></i>Contact Us</a>
                 </li>
                 <li class="phone">
-                    <span><i class="fa fa-phone"></i>(123) 456-7890</span>
+                    <span><i class="fa fa-phone"></i>(84 4)35 43 0267</span>
                 </li>
             </ul>
         </nav>
