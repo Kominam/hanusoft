@@ -12,8 +12,8 @@
                         <a href="#">
                         <img src="{{url('backend/img/profile-avatar.jpg')}}" alt="">
                         </a>
-                        <h1>Jonathan Smith</h1>
-                        <p>jsmith@flatlab.com</p>
+                        <h1>{{$member->name}}</h1>
+                        <p>{{$member->email}}</p>
                     </div>
                     <ul class="nav nav-pills nav-stacked">
                         <li class="active"><a href="profile.html"> <i class="icon-user"></i> Profile</a></li>
@@ -65,10 +65,10 @@
                                 <p><span>Birthday</span>: 13 July 1983</p>
                             </div>
                             <div class="bio-row">
-                                <p><span>Occupation </span>: UI Designer</p>
+                                <p><span>Occupation </span>: {{$member->position->name}}</p>
                             </div>
                             <div class="bio-row">
-                                <p><span>Email </span>: jsmith@flatlab.com</p>
+                                <p><span>Email </span>: {{$member->email}}</p>
                             </div>
                             <div class="bio-row">
                                 <p><span>Mobile </span>: (12) 03 4567890</p>
@@ -81,62 +81,25 @@
                 </section>
                 <section>
                     <div class="row">
-                        <div class="col-lg-6">
-                            <div class="panel">
-                                <div class="panel-body">
-                                    <div class="bio-chart">
-                                        <input class="knob" data-width="100" data-height="100" data-displayPrevious=true  data-thickness=".2" value="35" data-fgColor="#e06b7d" data-bgColor="#e8e8e8">
-                                    </div>
-                                    <div class="bio-desk">
-                                        <h4 class="red">Envato Website</h4>
-                                        <p>Started : 15 July</p>
-                                        <p>Deadline : 15 August</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="panel">
-                                <div class="panel-body">
-                                    <div class="bio-chart">
-                                        <input class="knob" data-width="100" data-height="100" data-displayPrevious=true  data-thickness=".2" value="63" data-fgColor="#4CC5CD" data-bgColor="#e8e8e8">
-                                    </div>
-                                    <div class="bio-desk">
-                                        <h4 class="terques">ThemeForest CMS </h4>
-                                        <p>Started : 15 July</p>
-                                        <p>Deadline : 15 August</p>
+                       
+                            @foreach ($member->projects as $project)
+                             <div class="col-lg-6">
+                                <div class="panel">
+                                    <div class="panel-body">
+                                        <div class="bio-chart">
+                                            <input class="knob" data-width="100" data-height="100" data-displayPrevious=true  data-thickness=".2" value="35" data-fgColor="#e06b7d" data-bgColor="#e8e8e8">
+                                        </div>
+                                        <div class="bio-desk">
+                                            <h4 class="red">{{$project->name}}</h4>
+                                            <p>Started : 15 July</p>
+                                            <p>Deadline : 15 August</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="panel">
-                                <div class="panel-body">
-                                    <div class="bio-chart">
-                                        <input class="knob" data-width="100" data-height="100" data-displayPrevious=true  data-thickness=".2" value="75" data-fgColor="#96be4b" data-bgColor="#e8e8e8">
-                                    </div>
-                                    <div class="bio-desk">
-                                        <h4 class="green">VectorLab Portfolio</h4>
-                                        <p>Started : 15 July</p>
-                                        <p>Deadline : 15 August</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="panel">
-                                <div class="panel-body">
-                                    <div class="bio-chart">
-                                        <input class="knob" data-width="100" data-height="100" data-displayPrevious=true  data-thickness=".2" value="50" data-fgColor="#cba4db" data-bgColor="#e8e8e8">
-                                    </div>
-                                    <div class="bio-desk">
-                                        <h4 class="purple">Adobe Muse Template</h4>
-                                        <p>Started : 15 July</p>
-                                        <p>Deadline : 15 August</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            @endforeach
+                            
+                      
                     </div>
                 </section>
             </aside>

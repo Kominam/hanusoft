@@ -8,6 +8,8 @@ use App\Http\Requests;
 
 use App\Post;
 
+use Auth;
+
 use App\Repositories\Contracts\PostRepositoryInterface;
 
 class PostController extends Controller
@@ -57,5 +59,10 @@ class PostController extends Controller
      public function filterByCategory($id) {
         $posts = $this->postRepository->filterByCategory($id);
         return view('frontend.pages.posts', ['posts' => $posts]);
+     }
+
+     public function showYourPost() {
+      $posts_of_cur_user = Auth::user()->posts()->paginate(5);
+      return view('backend.pages.your-post', ['posts_of_cur_user' => $posts_of_cur_user]);
      }
 }
