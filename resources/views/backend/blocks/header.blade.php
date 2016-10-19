@@ -278,7 +278,7 @@
                     </a>
                     <ul class="sub">
                         <li><a  href="{{ route('showPostForm') }}"><i class="icon-edit"></i>Write post</a></li>
-                        <li><a  href="#"><i class="icon-book"></i>Your post</a></li>
+                        <li><a  href="{{ route('your-post') }}"><i class="icon-book"></i>Your post</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">

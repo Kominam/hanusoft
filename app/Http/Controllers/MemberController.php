@@ -8,6 +8,8 @@ use App\Http\Requests;
 
 use App\User;
 
+use Auth;
+
 use App\Repositories\Contracts\MemberRepositoryInterface;
 
 class MemberController extends Controller
@@ -27,5 +29,20 @@ class MemberController extends Controller
     public function show($id) {
         $member = $this->memberRepository->find($id);
         return view('frontend.pages.member_detail',['member' =>$member]);
+    }
+    public function profile() {
+        $member = $this->memberRepository->find(Auth::user()->id);
+        return view('backend.pages.profile',['member' =>$member]);
+    }
+    public function recent_activity() {
+        $member = $this->memberRepository->find(Auth::user()->id);
+        return view('backend.pages.profile-activity',['member' =>$member]);
+    }
+    public function showEditProfile() {
+        $id = Auth::user()->id;
+        return view('backend.pages.profile-edit', ['id'=>$id]);
+    }
+    public function editProfile(Request $request, $id) {
+        $this->memberRepository->update($request, $id);
     }
 }

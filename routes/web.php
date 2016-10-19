@@ -83,18 +83,12 @@
 			Route::post('/write-post', ['as' => 'writePost', 'uses'=>'PostController@add']);
 			Route::get('/edit-post/{id}', ['as' => 'get.edit.post', 'uses'=>'PostController@showEditForm']);
 			Route::post('/edit-post/{id}', ['as' => 'post.edit.post', 'uses'=>'PostController@edit']);
+			Route::get('/your-post', ['as' => 'your-post', 'uses'=>'PostController@showYourPost']);
 			Route::get('/create-project', ['as' => 'create-project','uses'=>'ProjectController@showAddForm']);
 			Route::post('/create-project', ['as' => 'createProject','uses'=>'ProjectController@add']);
-			Route::get('/profile', ['as' => 'profile', function(){
-					return view('backend.pages.profile');
-				}]);
-
-			Route::get('/profile-edit', ['as' => 'profile-edit', function(){
-					return view('backend.pages.profile-edit');
-				}]);
-			Route::get('/profile-activity', ['as' => 'profile-activity', function(){
-					return view('backend.pages.profile-activity');
-				}]);
+			Route::get('/profile', ['as' => 'profile', 'uses'=> 'MemberController@profile']);
+			Route::get('/profile-edit', ['as' => 'profile-edit', 'uses' => 'MemberController@showEditProfile']);
+			Route::get('/profile-activity', ['as' => 'profile-activity', 'uses' => 'MemberController@recent_activity']);
 		});
 	});
 	
