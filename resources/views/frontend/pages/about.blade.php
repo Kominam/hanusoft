@@ -48,7 +48,7 @@
                 <p>Curabitur pellentesque neque eget diam posuere porta. Quisque ut nulla at nunc vehicula lacinia. Proin adipiscing porta tellus, ut feugiat nibh adipiscing <span class="alternative-font">metus</span> sit amet. In eu justo a felis faucibus ornare vel id metus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In eu libero ligula. Fusce eget metus lorem, ac viverra leo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In eu libero ligula. Fusce eget metus lorem, ac viverra leo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In eu libero ligula.</p>
             </div>
             <div class="col-md-4">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/xskh9NG64PQ" frameborder="0" allowfullscreen></iframe>
+                {{-- <iframe width="560" height="315" src="https://www.youtube.com/embed/xskh9NG64PQ" frameborder="0" allowfullscreen></iframe> --}}
             </div>
         </div>
         <hr class="tall">
@@ -62,7 +62,7 @@
                 <ul class="history">
                     <li data-appear-animation="fadeInUp">
                         <div class="thumb">
-                            <img src="img/office-4.jpg" alt="" />
+                            <img src="{{url('frontend/img/office-4.jpg')}}" alt="" />
                         </div>
                         <div class="featured-box">
                             <div class="box-content">
@@ -73,7 +73,7 @@
                     </li>
                     <li data-appear-animation="fadeInUp">
                         <div class="thumb">
-                            <img src="img/office-3.jpg" alt="" />
+                            <img src="{{url('frontend/img/office-3.jpg')}}" alt="" />
                         </div>
                         <div class="featured-box">
                             <div class="box-content">
@@ -84,7 +84,7 @@
                     </li>
                     <li data-appear-animation="fadeInUp">
                         <div class="thumb">
-                            <img src="img/office-2.jpg" alt="" />
+                            <img src="{{url('frontend/img/office-2.jpg')}}" alt="" />
                         </div>
                         <div class="featured-box">
                             <div class="box-content">

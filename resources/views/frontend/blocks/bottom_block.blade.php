@@ -61,11 +61,11 @@
     <div class="footer-copyright">
         <div class="container">
             <div class="row">
-                <div class="col-md-1">
+                {{-- <div class="col-md-1">
                     <a href="{{route('index')}}" class="logo">
                     <img alt="Hanusoft Website Template" class="img-responsive" src="{{url('frontend/img/logo-footer.png')}}">
                     </a>
-                </div>
+                </div> --}}
                 <div class="col-md-7">
                     <p>© Copyright 2016. All Rights Reserved.</p>
                 </div>
