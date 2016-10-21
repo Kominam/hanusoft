@@ -28,12 +28,12 @@
             <span style="color:#F20202">trải nghiệm.</span>
             </span>
             </span>
-            </strong> 
+            </strong>
         </h2>
         <div class="row">
             <div class="col-md-10">
                 <p class="lead">
-                   
+
                    Bạn là người đam mê với Công nghệ? Bạn muốn tự tay mình tạo ra những ứng dụng hay, những website thương mại điện tử hay những game lôi cuốn người dùng.Bạn đang băn khoăn không biết làm cách nào để có thể nâng cao, rèn luyện kĩ năng của bản thân đồng thời có cơ hội theo đuổi đam mê của chính mình.Vậy còn chần chừ gì nữa, hãy tham gia ngay với chúng tôi, Hanusoft sẽ đồng hành cùng bạn!
                 </p>
             </div>
