@@ -33,29 +33,6 @@ class ProjectImageTableSeeder extends Seeder
              array('project_id'=>5, 'img_name' =>'project-6.jpg','created_at' => Carbon::now(),'updated_at' => Carbon::now()),
           	 array('project_id'=>5, 'img_name' =>'project-7.jpg','created_at' => Carbon::now(),'updated_at' => Carbon::now()),
 
-             array('project_id'=>6, 'img_name' =>'project-6.jpg','created_at' => Carbon::now(),'updated_at' => Carbon::now()),
-             array('project_id'=>6, 'img_name' =>'project-7.jpg','created_at' => Carbon::now(),'updated_at' => Carbon::now()),
-          	 array('project_id'=>6, 'img_name' =>'project-2.jpg','created_at' => Carbon::now(),'updated_at' => Carbon::now()),
-
-
-             array('project_id'=>7, 'img_name' =>'project-7.jpg','created_at' => Carbon::now(),'updated_at' => Carbon::now()),
-             array('project_id'=>7, 'img_name' =>'project-3.jpg','created_at' => Carbon::now(),'updated_at' => Carbon::now()),
-          	 array('project_id'=>7, 'img_name' =>'project-4.jpg','created_at' => Carbon::now(),'updated_at' => Carbon::now()),
-
-
-          	 array('project_id'=>8, 'img_name' =>'project.jpg','created_at' => Carbon::now(),'updated_at' => Carbon::now()),
-             array('project_id'=>8, 'img_name' =>'project-7.jpg','created_at' => Carbon::now(),'updated_at' => Carbon::now()),
-          	 array('project_id'=>8, 'img_name' =>'project-1.jpg','created_at' => Carbon::now(),'updated_at' => Carbon::now()),
-
-
-             array('project_id'=>9, 'img_name' =>'project-3.jpg','created_at' => Carbon::now(),'updated_at' => Carbon::now()),
-             array('project_id'=>9, 'img_name' =>'project-2.jpg','created_at' => Carbon::now(),'updated_at' => Carbon::now()),
-          	 array('project_id'=>9, 'img_name' =>'project-5.jpg','created_at' => Carbon::now(),'updated_at' => Carbon::now()),
-
-
-             array('project_id'=>10, 'img_name' =>'project-5.jpg','created_at' => Carbon::now(),'updated_at' => Carbon::now()),
-             array('project_id'=>10, 'img_name' =>'project-3.jpg','created_at' => Carbon::now(),'updated_at' => Carbon::now()),
-          	 array('project_id'=>10, 'img_name' =>'project-6.jpg','created_at' => Carbon::now(),'updated_at' => Carbon::now()),
 
         ]);
     }

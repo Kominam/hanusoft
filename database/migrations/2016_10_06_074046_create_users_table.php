@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('password');
             $table->string('email')->unique();
+            $table->tinyInteger('gender')->default(0);
             $table->string('address')->default('empty');
             $table->text('bio');
             $table->string('url_fb')->default('empty');

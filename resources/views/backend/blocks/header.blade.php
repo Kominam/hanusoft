@@ -5,7 +5,7 @@
             <div data-original-title="Toggle Navigation" data-placement="right" class="icon-reorder tooltips"></div>
         </div>
         <!--logo start-->
-        <a href="{{route('index')}}" class="logo" >Flat<span>lab</span></a>
+        <a href="{{route('index')}}" class="logo" >HANU<span>soft</span></a>
         <!--logo end-->
         <div class="nav notify-row" id="top_menu">
             <!--  notification start -->
@@ -219,7 +219,7 @@
                 <!-- user login dropdown start-->
                 <li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                    <img alt="" src="{{url('backend/img/avatar1_small.jpg')}}">
+                    <img alt="" src="{{url('frontend/img/team/'.Auth::user()->url_avt)}}" style="width: 28px; height: 28px">
                     <span class="username">{{Auth::user()->name}}</span>
                     <b class="caret"></b>
                     </a>

@@ -10,7 +10,7 @@
                 <section class="panel">
                     <div class="user-heading round">
                         <a href="#">
-                        <img src="{{url('backend/img/profile-avatar.jpg')}}" alt="">
+                        <img src="{{url('frontend/img/team/'.Auth::user()->url_avt)}}" alt="">
                         </a>
                         <h1>{{$member->name}}</h1>
                         <p>{{$member->email}}</p>

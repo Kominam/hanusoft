@@ -142,8 +142,8 @@
             <div class="col-md-3 col-sm-6">
               <div class="featured-box featured-box-primary">
                 <div class="box-content">
-                  <i class="icon-featured fa fa-user"></i>
-                  <h4>Loved by Customers</h4>
+                 <i class="icon-featured fa fa-html5"></i>
+                  <h4>Web Development</h4>
                   <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus.</p>
                 </div>
               </div>
@@ -151,8 +151,8 @@
             <div class="col-md-3 col-sm-6">
               <div class="featured-box featured-box-secundary">
                 <div class="box-content">
-                  <i class="icon-featured fa fa-book"></i>
-                  <h4>Well Documented</h4>
+                <i class="icon-featured fa fa-magic"></i>
+                  <h4>UI\UX Design</h4>
                   <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus.</p>
                 </div>
               </div>
@@ -160,8 +160,8 @@
             <div class="col-md-3 col-sm-6">
               <div class="featured-box featured-box-tertiary">
                 <div class="box-content">
-                  <i class="icon-featured fa fa-trophy"></i>
-                  <h4>Winner</h4>
+                  <i class="icon-featured fa fa-android"></i>
+                  <h4>Software Engineering</h4>
                   <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus.</p>
                 </div>
               </div>
@@ -169,8 +169,8 @@
             <div class="col-md-3 col-sm-6">
               <div class="featured-box featured-box-quartenary">
                 <div class="box-content">
-                  <i class="icon-featured fa fa-cogs"></i>
-                  <h4>Customizable</h4>
+                 <i class="icon-featured fa fa-check-square-o"></i>
+                  <h4>Testing</h4>
                   <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus. </p>
                 </div>
               </div>
@@ -265,7 +265,7 @@
                                 <span class="day">{{$l_post->created_at->format('d')}}</span>
                                 <span class="month">{{substr($l_post->created_at->format('F'),0,3)}}</span>
                               </div>
-                              <h4><a href="{{ route('post_detail', $l_post->id) }}">{{substr($l_post->tittle,0,50)}} [...]<a href="{{ route('post_detail', $l_post->id) }}" class="read-more">read more <i class="fa fa-angle-right"></i></a></p>
+                              <h4><a href="{{ route('post_detail', $l_post->id) }}">{{substr($l_post->tittle,0,70)}}[...] <a href="{{ route('post_detail', $l_post->id) }}" class="read-more">read more <i class="fa fa-angle-right"></i></a></p>
                             </article>
                           </div>
                          @endforeach

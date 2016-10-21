@@ -22,41 +22,8 @@
         <div class="row">
             <div class="col-md-9">
                 <div class="posts_details">
-                    {{-- <article class="post post-large">
-                        <div class="post-image">
-                            <div class="owl-carousel" data-plugin-options='{"items":1}'>
-                                <div>
-                                    <div class="img-thumbnail">
-                                        <img class="img-responsive" src="{{url('frontend/img/blog/blog-image-3.jpg')}}" alt="">
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="img-thumbnail">
-                                        <img class="{{url('frontend/img-responsive" src="img/blog/blog-image-2.jpg')}}" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="post-date">
-                            <span class="day">10</span>
-                            <span class="month">Jan</span>
-                        </div>
-                        <div class="post-content">
-                            <h2><a href="{{route('post_detail')}}">Post Format - Image Gallery</a></h2>
-                            <p>Euismod atras vulputate iltricies etri elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nunc dui, tristique in semper vel, congue sed ligula. Nam dolor ligula, faucibus id sodales in, auctor fringilla libero. Pellentesque pellentesque tempor tellus eget hendrerit. Morbi id aliquam ligula. Aliquam id dui sem. Proin rhoncus consequat nisl, eu ornare mauris tincidunt vitae. [...]</p>
-                            <div class="post-meta">
-                                <span><i class="fa fa-user"></i> By <a href="#">John Doe</a> </span>
-                                <span><i class="fa fa-tag"></i> <a href="#">Duis</a>, <a href="#">News</a> </span>
-                                <span><i class="fa fa-comments"></i> <a href="#">12 Comments</a></span>
-                                <a href="{{route('post_detail')}}" class="btn btn-xs btn-primary pull-right">Read more...</a>
-                            </div>
-                        </div>
-                    </article> --}}
                     @foreach ($posts as $post)
-                    <article class="post post-large">
-                        <div class="post-image single">
-                            <img class="img-thumbnail" src="{{url('frontend/img/blog/blog-image-2.jpg')}}" alt="">
-                        </div>
+                    <article class="post post-large" style="padding: 50px 0px 50px 0px">
                         <div class="post-date">
                             <span class="day">{{$post->created_at->format('d')}}</span>
                             <span class="month">
@@ -64,7 +31,7 @@
                         </div>
                         <div class="post-content">
                             <h2><a href="{{route('post_detail',['id'=>$post->id])}}">{{$post->tittle}}</a></h2>
-                            <p>{{substr($post->content,0,450)}}[...]</p>
+                            <p>{!!substr($post->content,0,750)!!}[...]</p>
                             <div class="post-meta">
                                 <span><i class="fa fa-user"></i> By <a href="{{ route('member_detail',$post->user->id) }}">{{$post->user->name}}</a> </span>
                                 <span><i class="fa fa-tag"></i> <a href={{route('browse-post-by-cate', $post->type->id)}}>{{$post->type->name}}</a></span>
@@ -74,63 +41,6 @@
                         </div>
                     </article>
                     @endforeach
-                   {{--  <article class="post post-large">
-                        <div class="post-video">
-                            <iframe src="http://player.vimeo.com/video/28614006?color=0088CC" width="1280" height="720" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                        </div>
-                        <div class="post-date">
-                            <span class="day">10</span>
-                            <span class="month">Jan</span>
-                        </div>
-                        <div class="post-content">
-                            <h2><a href="{{route('post_detail')}}">Post Format - Video</a></h2>
-                            <p>Euismod atras vulputate iltricies etri elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nunc dui, tristique in semper vel, congue sed ligula. Nam dolor ligula, faucibus id sodales in, auctor fringilla libero. Pellentesque pellentesque tempor tellus eget hendrerit. Morbi id aliquam ligula. Aliquam id dui sem. Proin rhoncus consequat nisl, eu ornare mauris tincidunt vitae. [...]</p>
-                            <div class="post-meta">
-                                <span><i class="fa fa-user"></i> By <a href="#">John Doe</a> </span>
-                                <span><i class="fa fa-tag"></i> <a href="#">Duis</a>, <a href="#">News</a> </span>
-                                <span><i class="fa fa-comments"></i> <a href="#">12 Comments</a></span>
-                                <a href="{{route('post_detail')}}" class="btn btn-xs btn-primary pull-right">Read more...</a>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="post post-large">
-                        <div class="post-audio">
-                            <iframe scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F67943430&amp;show_artwork=true&amp;maxwidth=132&amp;maxheight=1000"></iframe>
-                        </div>
-                        <div class="post-date">
-                            <span class="day">10</span>
-                            <span class="month">Jan</span>
-                        </div>
-                        <div class="post-content">
-                            <h2><a href="{{route('post_detail')}}">Post Format - Audio</a></h2>
-                            <p>Euismod atras vulputate iltricies etri elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nunc dui, tristique in semper vel, congue sed ligula. Nam dolor ligula, faucibus id sodales in, auctor fringilla libero. Pellentesque pellentesque tempor tellus eget hendrerit. Morbi id aliquam ligula. Aliquam id dui sem. Proin rhoncus consequat nisl, eu ornare mauris tincidunt vitae. [...]</p>
-                            <div class="post-meta">
-                                <span><i class="fa fa-user"></i> By <a href="#">John Doe</a> </span>
-                                <span><i class="fa fa-tag"></i> <a href="#">Duis</a>, <a href="#">News</a> </span>
-                                <span><i class="fa fa-comments"></i> <a href="#">12 Comments</a></span>
-                                <a href="{{route('post_detail')}}" class="btn btn-xs btn-primary pull-right">Read more...</a>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="post post-large">
-                        <div class="post-date">
-                            <span class="day">10</span>
-                            <span class="month">Jan</span>
-                        </div>
-                        <div class="post-content">
-                            <blockquote>
-                                Post Format - Blockquote - Mauris aliquet ultricies ante, non faucibus ante gravida sed. Sed ultrices pellentesque purus, vulputate volutpat ipsum hendrerit sed neque sed sapien rutrum laoreet justo ultrices. In pellentesque lorem condimentum dui morbi pulvinar dui non quam pretium ut lacinia tortor.
-                                <small>Someone famous <cite title="Source Title">Source Title</cite></small>
-                            </blockquote>
-                            <div class="post-meta">
-                                <span><i class="fa fa-user"></i> By <a href="#">John Doe</a> </span>
-                                <span><i class="fa fa-tag"></i> <a href="#">Duis</a>, <a href="#">News</a> </span>
-                                <span><i class="fa fa-comments"></i> <a href="#">12 Comments</a></span>
-                                <a href="{{route('post_detail')}}" class="btn btn-xs btn-primary pull-right">Read more...</a>
-                            </div>
-                        </div>
-                    </article> --}}
-
                     <ul class="pagination pagination-lg pull-right">
                          @if ($posts->currentPage()!==1)
                             <li><a href="{{$posts->previousPageUrl()}}">«</a></li>
@@ -220,4 +130,4 @@
         </div>
     </div>
 </div>
-@endsection()
+@endsection
