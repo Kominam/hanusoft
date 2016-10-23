@@ -83,12 +83,15 @@
 			Route::post('/write-post', ['as' => 'writePost', 'uses'=>'PostController@add']);
 			Route::get('/edit-post/{id}', ['as' => 'get.edit.post', 'uses'=>'PostController@showEditForm']);
 			Route::post('/edit-post/{id}', ['as' => 'post.edit.post', 'uses'=>'PostController@edit']);
+			Route::get('delete-post/{id}',['as' => 'delete-post', 'uses'=>'PostController@delete']);
 			Route::get('/your-post', ['as' => 'your-post', 'uses'=>'PostController@showYourPost']);
 			Route::get('/create-project', ['as' => 'create-project','uses'=>'ProjectController@showAddForm']);
 			Route::post('/create-project', ['as' => 'createProject','uses'=>'ProjectController@add']);
 			Route::get('/profile', ['as' => 'profile', 'uses'=> 'MemberController@profile']);
 			Route::get('/profile-edit', ['as' => 'profile-edit', 'uses' => 'MemberController@showEditProfile']);
 			Route::get('/profile-activity', ['as' => 'profile-activity', 'uses' => 'MemberController@recent_activity']);
+			Route::post('change-pwd', ['as' => 'change-pwd', 'uses' => 'MemberController@changePwd']);
+			Route::post('accept-invite',['as' => 'accept-invite', 'uses' => 'ProjectController@acceptInvite'] );
 		});
 	});
 	
@@ -128,6 +131,8 @@
 	Route::post('post-comment', ['as' => 'post-comment', 'uses' => 'CommentController@create']);
 
 	Route::post('post-reply-comment', ['as' => 'post-reply-comment', 'uses' => 'ReplyCommentController@create']);
+
+	Route::post('add-subcribers', ['as' => 'post-add-subcriber', 'uses' => 'SubcriberController@addNewSubcriber']);
 	
 	
 	/*Route::get('/admin', 'AdminController@index');
@@ -136,7 +141,7 @@
 	Route::get('admin/logout', 'AdminAuth\Controller@logout');
 	Route::get('/admin/register', 'AdminAuth\RegisterController@showRegistrationForm');
 	Route::post('/admin/register', ['as' => 'admin.register.post', 'uses' => 'AdminAuth\RegisterController@register']);*/
-	 Route::get('test/{id}', 'PostController@getArrCommentID');
+	 Route::get('test', 'ProjectController@invite');
 	
 	 //Social Login
     Route::get('/redirect/{provider}', 'SocialAuthController@redirect');

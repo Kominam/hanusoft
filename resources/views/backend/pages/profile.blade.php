@@ -16,8 +16,8 @@
                         <p>{{$member->email}}</p>
                     </div>
                     <ul class="nav nav-pills nav-stacked">
-                        <li class="active"><a href="profile.html"> <i class="icon-user"></i> Profile</a></li>
-                        <li><a href="profile-activity.html"> <i class="icon-calendar"></i> Recent Activity <span class="label label-danger pull-right r-activity">9</span></a></li>
+                        <li class="active"><a href="{{ route('profile') }}"> <i class="icon-user"></i> Profile</a></li>
+                        <li><a href="{{ route('profile-activity') }}"> <i class="icon-calendar"></i> Recent Activity <span class="label label-danger pull-right r-activity">9</span></a></li>
                         <li><a href="{{route('profile-edit')}}"> <i class="icon-edit"></i> Edit profile</a></li>
                     </ul>
                 </section>
@@ -53,13 +53,21 @@
                         <h1>Bio Graph</h1>
                         <div class="row">
                             <div class="bio-row">
-                                <p><span>First Name </span>: Jonathan</p>
+                                <p><span>Name </span>: {{$member->name}}</p>
                             </div>
                             <div class="bio-row">
-                                <p><span>Last Name </span>: Smith</p>
+                                <p><span>Gender </span>: 
+                                    @if($member->gender==0)
+                                        Underfined
+                                    @elseif($member->gender==1)
+                                        Male
+                                    @else
+                                        Female
+                                    @endif
+                                </p>
                             </div>
                             <div class="bio-row">
-                                <p><span>Country </span>: Australia</p>
+                                <p><span>Address </span>: {{$member->address}}</p>
                             </div>
                             <div class="bio-row">
                                 <p><span>Birthday</span>: 13 July 1983</p>
@@ -73,8 +81,8 @@
                             <div class="bio-row">
                                 <p><span>Mobile </span>: (12) 03 4567890</p>
                             </div>
-                            <div class="bio-row">
-                                <p><span>Phone </span>: 88 (02) 123456</p>
+                              <div class="bio-row">
+                                <p><span>Grade </span>: {{$member->grade->name}}</p>
                             </div>
                         </div>
                     </div>

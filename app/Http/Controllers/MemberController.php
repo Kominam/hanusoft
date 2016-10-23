@@ -10,6 +10,10 @@ use App\User;
 
 use Auth;
 
+use Notification;
+
+use App\Notifications\TestNoti;
+
 use App\Repositories\Contracts\MemberRepositoryInterface;
 
 class MemberController extends Controller
@@ -39,10 +43,13 @@ class MemberController extends Controller
         return view('backend.pages.profile-activity',['member' =>$member]);
     }
     public function showEditProfile() {
-        $id = Auth::user()->id;
-        return view('backend.pages.profile-edit', ['id'=>$id]);
+       $member = $this->memberRepository->find(Auth::user()->id);
+       return view('backend.pages.profile-edit',['member' =>$member]);
     }
     public function editProfile(Request $request, $id) {
         $this->memberRepository->update($request, $id);
+    }
+    public function changePwd(Request $request) {
+         $this->memberRepository->changePwd($request);
     }
 }

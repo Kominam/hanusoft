@@ -14,11 +14,34 @@
                         <strong>Success!</strong> You've been added to our email list.
                     </div>
                     <div class="alert alert-danger hidden" id="newsletterError"></div>
-                    <form id="newsletterForm" action="http://preview.oklerthemes.com/Hanusoft/3.7.0/php/newsletter-subscribe.php" method="POST">
+                    <form id="newsletterForm" action="#" method="POST">
                         <div class="input-group">
-                            <input class="form-control" placeholder="Email Address" name="newsletterEmail" id="newsletterEmail" type="text">
+                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                            <input class="form-control" placeholder="Email Address" name="newsletterEmail" id="newsletterEmail" type="text" required>
                             <span class="input-group-btn">
-                            <button class="btn btn-default" type="submit">Go!</button>
+                            <button class="btn btn-default" type="submit" id="subscriber">Go!</button>
+                            <script type="text/javascript">
+                                $(document).ready(function() {
+                                  $.ajaxSetup({
+                                      headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                      }
+                                    });
+                                   $('#newsletterForm').on('submit', function(e){
+                                       e.preventDefault();
+                                       var sub_email = $('#newsletterEmail').val();
+                                          $.ajax({
+                                            url:'/add-subcribers',
+                                            type: "post",
+                                            data: { '_token': $('input[name=_token]').val(), 'email': sub_email},
+                                            success: function(data) {   
+                                                 console.log(data);
+                                                 sub_email.val("");
+                                                    }          
+                                            });
+                                       });
+                                   });
+                            </script>
                             </span>
                         </div>
                     </form>

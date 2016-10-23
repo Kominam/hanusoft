@@ -5,7 +5,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+/*require('./bootstrap');*/
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -19,13 +19,13 @@ const app = new Vue({
     el: 'body'
 });*/
 
-import Echo from "laravel-echo"
+import Echo from "laravel-echo";
 
 window.Echo = new Echo({
     broadcaster: 'pusher',
     key: '29cd347d237de727387a'
-})
-Echo.private('App.User.' + userId)
+});
+Echo.private('App.User.4')
     .notification((notification) => {
         console.log(notification.type);
-    });
+});

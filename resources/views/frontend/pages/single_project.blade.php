@@ -45,7 +45,7 @@
                     <div>
                         <div class="thumbnail">
 
-                            <img alt="" class="img-responsive" src="{{url('frontend/img/projects/'. $image->img_name)}}">
+                            <img alt="" class="img-responsive" src="{{url('frontend/img/projects/'. $image->img_name)}}" style="width: 447px; height: 247px">
                         </div>
                     </div>
                     @endforeach

@@ -6,7 +6,7 @@
           <div class="slider" id="revolutionSlider" data-plugin-revolution-slider data-plugin-options='{"startheight": 677}'>
             <ul>
               <li data-transition="fade" data-slotamount="10" data-masterspeed="300">
-                <img src="{{url('frontend/img/slides/slide-bg-4.jpg')}}" data-bgfit="cover" data-bgposition="right center" data-bgrepeat="no-repeat">
+                <img src="{{url('frontend/img/slides/hs-silder1.jpg')}}" data-bgfit="cover" data-bgposition="center" data-bgrepeat="no-repeat">
 
                   <div class="tp-caption sft stb visible-lg"
                      data-x="417"

@@ -24,7 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('send:subcriber')->weekly()->sundays()->between('8:00', '20:00');
+        $schedule->command('send:subcriber')->weekly()->sundays();
     }
 
     /**

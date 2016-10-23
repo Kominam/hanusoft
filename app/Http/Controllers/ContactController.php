@@ -16,6 +16,6 @@ class ContactController extends Controller
     {
         $myEmail = 'haiwind95@gmail.com';
         Mail::to($myEmail)->send(new ContactMail($request));
-        dd("Mail Sending Successfully");
+        return back();
     }
 }

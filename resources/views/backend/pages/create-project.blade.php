@@ -45,6 +45,26 @@
                           </div>
                       </section>
                       <section class="panel">
+                        <header class="panel-heading">
+                            Invite member
+                        </header>
+                        <div class="panel-body">
+                             <div class="form-group">
+                                        <label class="col-sm-2 control-label col-sm-2">Invite memebr</label>
+                                        <div class="col-sm-10">
+                                             @foreach ($all_member as $member)
+                                           <div class="checkbox">
+                                              <label>
+                                                  <input type="checkbox" name="inviters[]" id="optionsRadios1" value="{{$member->id}}">
+                                                  {{$member->name}}
+                                              </label>
+                                          </div>
+                                        @endforeach
+                                        </div>
+                                    </div>
+                        </div>
+                      </section>
+                      <section class="panel">
                           <header class="panel-heading">
                               Content
                           </header>

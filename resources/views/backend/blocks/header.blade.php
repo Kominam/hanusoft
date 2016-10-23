@@ -158,51 +158,74 @@
                 </li>
                 <!-- inbox dropdown end -->
                 <!-- notification dropdown start-->
+                  <script src="{{url('backend/js/jquery-1.8.3.min.js')}}"></script>
                 <li id="header_notification_bar" class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                     <i class="icon-bell-alt"></i>
-                    <span class="badge bg-warning">7</span>
+                    <span class="badge bg-warning" id="num_unread_noti">{{$num_unread_noti}}</span>
                     </a>
                     <ul class="dropdown-menu extended notification">
                         <div class="notify-arrow notify-arrow-yellow"></div>
                         <li>
-                            <p class="yellow">You have 7 new notifications</p>
+                            <p class="yellow">You have {{$num_unread_noti}} new notifications</p>
                         </li>
-                        <li>
-                            <a href="#">
-                            <span class="label label-danger"><i class="icon-bolt"></i></span>
-                            Server #3 overloaded.
-                            <span class="small italic">34 mins</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                            <span class="label label-warning"><i class="icon-bell"></i></span>
-                            Server #10 not respoding.
-                            <span class="small italic">1 Hours</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                            <span class="label label-danger"><i class="icon-bolt"></i></span>
-                            Database overloaded 24%.
-                            <span class="small italic">4 hrs</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                            <span class="label label-success"><i class="icon-plus"></i></span>
-                            New user registered.
-                            <span class="small italic">Just now</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                            <span class="label label-info"><i class="icon-bullhorn"></i></span>
-                            Application error.
-                            <span class="small italic">10 mins</span>
-                            </a>
-                        </li>
+                        <input type="hidden" name="_token" value="{{csrf_token()}}" >
+                        @foreach (Auth::user()->unreadNotifications as $notification)
+                         @if($notification->type=='App\Notifications\InvitetoProject')
+                              <li id="invite{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}">
+                                <a href="#">
+                                <span class="label label-danger"><i class="icon-bolt"></i></span>
+                                 <span style="color:red;font-size:15px">Invite project</span><br>{{$notification->data['project_name']}} from {{$notification->data['leadership_name']}}
+                                 <br>
+                                <span class="small italic">{{$notification->created_at->diffForHumans()}}</span>
+                                <br>
+                                <table>
+                                    <tr>
+                                        <td><a id="accept{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}"><i class=" icon-ok" style="color:green">Accept</i></a></td>
+                                        <td><a id="decline{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}"><i class="icon-minus" style="color:red">Decline</i></a></td>
+                                        <td><a href="#hide"><i class="icon-off">Hide</i></td>
+                                    </tr>
+                                </table>
+                                </a>
+                            </li>
+                              <script type="text/javascript">
+                                    $(document).ready(function(){
+                                          $.ajaxSetup({
+                                              headers: {
+                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                              }
+                                            });
+                                          $('#header_notification_bar').click(function(event) {
+                                              /* Act on the event */
+                                                $('#num_unread_noti').text(0);
+                                          });
+                                        $('#accept{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}').click(function(){
+                                                var project_id="{{$notification->data['project_id']}}";
+                                                $.ajax({
+                                                url:'/member/accept-invite',
+                                                type: "post",
+                                                data: { '_token': $('input[name=_token]').val(), 'project_id': project_id, 'response': 'accept'},
+                                                success: function(data) {   
+                                                    $('#invite{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}').remove();
+                                                    }          
+                                                }); 
+                                            });
+                                        $('#decline{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}').click(function(){
+                                              var project_id="{{$notification->data['project_id']}}";
+                                                $.ajax({
+                                                url:'/member/accept-invite',
+                                                type: "post",
+                                                data: { '_token': $('input[name=_token]').val(), 'project_id': project_id, 'response': 'decline'},
+                                                success: function(data) { 
+                                                    console.log(data);  
+                                                    $('#invite{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}').remove();
+                                                    }          
+                                                });  
+                                            }); 
+                                    });
+                             </script>
+                        @endif
+                        @endforeach
                         <li>
                             <a href="#">See all notifications</a>
                         </li>

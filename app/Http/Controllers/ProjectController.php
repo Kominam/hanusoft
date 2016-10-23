@@ -65,4 +65,12 @@ class ProjectController extends Controller
    		$this->projectRepository->delete($id);
    	}
 
+    public function invite(Request $request) {
+      $this->projectRepository->invite($request);
+    }
+
+    public function acceptInvite(Request $request) {
+      $this->projectRepository->acceptInvite($request);
+    }
+
 }

@@ -8,17 +8,17 @@
         <div class="row">
             <aside class="profile-nav col-lg-3">
                 <section class="panel">
-                    <div class="user-heading round">
-                        <a href="#">
-                        <img src="{{url('backend/img/profile-avatar.jpg')}}" alt="">
-                        </a>
-                        <h1>Jonathan Smith</h1>
-                        <p>jsmith@flatlab.com</p>
-                    </div>
+                  <div class="user-heading round">
+                          <a href="#">
+                          <img src="{{url('frontend/img/team/'.$member->url_avt)}}" alt="">
+                          </a>
+                          <h1>{{$member->name}}</h1>
+                          <p>{{$member->email}}</p>
+                      </div>
                     <ul class="nav nav-pills nav-stacked">
-                        <li><a href="profile.html"> <i class="icon-user"></i> Profile</a></li>
-                        <li><a href="profile-activity.html"> <i class="icon-calendar"></i> Recent Activity <span class="label label-danger pull-right r-activity">9</span></a></li>
-                        <li  class="active"><a href="{{route('profile-edit')}}"> <i class="icon-edit"></i> Edit profile</a></li>
+                         <li ><a href="{{ route('profile') }}"> <i class="icon-user"></i> Profile</a></li>
+                        <li><a href="{{ route('profile-activity') }}"> <i class="icon-calendar"></i> Recent Activity <span class="label label-danger pull-right r-activity">9</span></a></li>
+                        <li class="active"><a href="{{route('profile-edit')}}"> <i class="icon-edit"></i> Edit profile</a></li>
                     </ul>
                 </section>
             </aside>
@@ -37,25 +37,19 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label  class="col-lg-2 control-label">First Name</label>
+                                <label  class="col-lg-2 control-label">Name</label>
                                 <div class="col-lg-6">
-                                    <input type="text" class="form-control" id="f-name" placeholder=" ">
+                                    <input type="text" class="form-control" id="name" placeholder=" ">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label  class="col-lg-2 control-label">Last Name</label>
+                                <label  class="col-lg-2 control-label">Address</label>
                                 <div class="col-lg-6">
-                                    <input type="text" class="form-control" id="l-name" placeholder=" ">
+                                    <input type="text" class="form-control" id="address" placeholder=" ">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label  class="col-lg-2 control-label">Country</label>
-                                <div class="col-lg-6">
-                                    <input type="text" class="form-control" id="c-name" placeholder=" ">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label  class="col-lg-2 control-label">Birthday</label>
+                                <label  class="col-lg-2 control-label">Gender</label>
                                 <div class="col-lg-6">
                                     <input type="text" class="form-control" id="b-day" placeholder=" ">
                                 </div>
@@ -67,19 +61,19 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label  class="col-lg-2 control-label">Email</label>
+                                <label  class="col-lg-2 control-label">Mobile</label>
                                 <div class="col-lg-6">
                                     <input type="text" class="form-control" id="email" placeholder=" ">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label  class="col-lg-2 control-label">Mobile</label>
+                                <label  class="col-lg-2 control-label">Grade</label>
                                 <div class="col-lg-6">
                                     <input type="text" class="form-control" id="mobile" placeholder=" ">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label  class="col-lg-2 control-label">Website URL</label>
+                                <label  class="col-lg-2 control-label">URL Facebook</label>
                                 <div class="col-lg-6">
                                     <input type="text" class="form-control" id="url" placeholder="http://www.demowebsite.com ">
                                 </div>
@@ -97,7 +91,8 @@
                     <div class="panel panel-primary">
                         <div class="panel-heading"> Sets New Password & Avatar</div>
                         <div class="panel-body">
-                            <form class="form-horizontal" role="form">
+                            <form class="form-horizontal" role="form" enctype="multipart/form-data" method="POST" action="{{ route('change-pwd') }}">
+                                <input type="hidden" name="_token" value="{{csrf_token()}}">
                                 <div class="form-group">
                                     <label  class="col-lg-2 control-label">Current Password</label>
                                     <div class="col-lg-6">
@@ -107,7 +102,7 @@
                                 <div class="form-group">
                                     <label  class="col-lg-2 control-label">New Password</label>
                                     <div class="col-lg-6">
-                                        <input type="password" class="form-control" id="n-pwd" placeholder=" ">
+                                        <input type="password" class="form-control" id="n-pwd" name="n_pwd">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -119,7 +114,7 @@
                                 <div class="form-group">
                                     <label  class="col-lg-2 control-label">Change Avatar</label>
                                     <div class="col-lg-6">
-                                        <input type="file" class="file-pos" id="exampleInputFile">
+                                        <input type="file" class="file-pos" id="exampleInputFile" name="AvtImgFile">
                                     </div>
                                 </div>
                                 <div class="form-group">

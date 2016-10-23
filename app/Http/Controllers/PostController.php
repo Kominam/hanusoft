@@ -54,6 +54,7 @@ class PostController extends Controller
 
    	public function delete($id) {
    		$this->postRepository->delete($id);
+      return redirect()->back();
    	}
 
      public function filterByCategory($id) {

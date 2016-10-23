@@ -31,7 +31,34 @@
                         <div class="classic-search">
                           <h4><a href=" {{ route('post_detail', $post->id) }}">{{$post->tittle}}</a></h4>
                           <a href=" {{ route('post_detail', $post->id) }}"> {{ route('post_detail', $post->id) }}</a>
-                          {!! substr($post->content, 0,200)!!}
+                          {!! substr($post->content, 0,200)!!}[...]
+                          <br>
+                           <a class="btn btn-info" href="{{ route('get.edit.post', $post->id) }}">
+                                  <i class="icon-edit"></i>
+                           </a>
+                           <a class="btn btn-danger" data-toggle="modal" href="#myModal{{$post->id}}">
+                                  <i class="icon-trash"></i>
+                           </a>
+                           
+                            <div class="modal fade" id="myModal{{$post->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog">
+                                      <div class="modal-content">
+                                          <div class="modal-header">
+                                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                              <h4 class="modal-title">Warning</h4>
+                                          </div>
+                                          <div class="modal-body">
+
+                                              Are you sure to delete this post?
+
+                                          </div>
+                                          <div class="modal-footer">
+                                              <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                                              <a class="btn btn-danger" href="{{ route('delete-post', $post->id) }}">Yes, I sure</a>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
                        </div>
                       @endforeach
                     
