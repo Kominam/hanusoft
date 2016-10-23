@@ -71,7 +71,7 @@
                    data-speed="500"
                    data-start="2000"
                    data-easing="easeOutExpo">The <strong>#1 Selling</strong> HTML Site Template on ThemeForest</div>
-                
+
 
               </li>
             </ul>
@@ -102,7 +102,7 @@
         <div class="container">
 
           <div class="container">
-        
+
           <div class="row center">
             <div class="col-md-12">
               <h1 class="short word-rotator-title">
@@ -123,7 +123,7 @@
               </p>
             </div>
           </div>
-        
+
         </div>
 
         </div>
@@ -246,9 +246,6 @@
         </div>
 
           <hr class="tall" />
-
-          <div class="map-section">
-          <section class="featured footer map">
             <div class="container">
               <div class="row">
                 <div class="col-md-6">
@@ -269,8 +266,8 @@
                             </article>
                           </div>
                          @endforeach
-                        </div> 
-                      @endforeach 
+                        </div>
+                      @endforeach
                       </div>
                     </div>
                   </div>
@@ -312,10 +309,8 @@
                 </div>
               </div>
             </div>
-          </section>
-        </div>
 
-          
+
         </div>
         <hr class="tall">
         <div class="container">
@@ -342,7 +337,7 @@
                     @if($key == 0)
                          <img alt="" class="img-responsive" src="{{url('frontend/img/projects/'.$image->img_name)}}">
                     @endif
-                @endforeach 
+                @endforeach
                 <span class="thumb-info-title">
                   <span class="thumb-info-inner">{{$project->name}}</span>
                   <span class="thumb-info-type">{{$project->type->name}}</span>

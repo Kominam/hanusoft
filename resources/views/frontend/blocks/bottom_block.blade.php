@@ -34,10 +34,10 @@
                                             url:'/add-subcribers',
                                             type: "post",
                                             data: { '_token': $('input[name=_token]').val(), 'email': sub_email},
-                                            success: function(data) {   
+                                            success: function(data) {
                                                  console.log(data);
                                                  sub_email.val("");
-                                                    }          
+                                                    }
                                             });
                                        });
                                    });
@@ -64,7 +64,7 @@
                             <p><i class="fa fa-phone"></i> <strong>Phone:</strong> (123) 456-7890</p>
                         </li>
                         <li>
-                            <p><i class="fa fa-envelope"></i> <strong>Email:</strong> <a href="mailto:hanusoft@gmail.com">hanusoft@gmail.com</a></p>
+                            <p><i class="fa fa-envelope"></i> <strong>Email:</strong> <a href="mailto:hanusoft.dev@gmail.com">hanusoft.dev@gmail.com</a></p>
                         </li>
                     </ul>
                 </div>
