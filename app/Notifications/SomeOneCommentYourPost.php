@@ -7,25 +7,27 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class InvitetoProject extends Notification
+class SomeOneCommentYourPost extends Notification
 {
     use Queueable;
-    public $leadership_name;
-    public $project_name;
-    public $leadership_id;
-    public $project_id;
+    public $commenter_name;
+    public $email;
+    public $comment_message;
+    public $post_id;
+    public $post_tittle;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($leadership_name, $project_name, $leadership_id, $project_id)
+    public function __construct($commenter_name, $comment_message, $email, $post_id, $post_tittle)
     {
-        $this->leadership_name = $leadership_name;
-        $this->project_name = $project_name;
-        $this->leadership_id= $leadership_id;
-        $this->project_id = $project_id;
+        $this->commenter_name =  $commenter_name;
+        $this->comment_message =$comment_message;
+        $this->email = $email;
+        $this->post_id =$post_id;
+        $this->post_tittle = $post_tittle;
     }
 
     /**
@@ -36,7 +38,7 @@ class InvitetoProject extends Notification
      */
     public function via($notifiable)
     {
-         return ['database','broadcast'];
+        return ['database','broadcast'];
     }
 
     /**
@@ -62,20 +64,11 @@ class InvitetoProject extends Notification
     public function toArray($notifiable)
     {
         return [
-            'leadership_name' => $this->leadership_name,
-            'project_name' => $this->project_name,
-            'leadership_id' => $this->leadership_id,
-            'project_id' => $this->project_id
+              'commenter_name' => $this->leadership_name,
+              'comment_message' => $this->comment_message,
+              'email' => $this->email,
+              'post_id'=> $this->post_id,
+              'post_tittle' =>$this->post_tittle,
         ];
     }
-
-    /* public function toArray($notifiable)
-    {
-        return [
-            'leadership_name' => $this->leadership_name,
-            'project_name' => $this->project_name,
-            'leadership_id' => $this->leadership_id,
-            'project_id' => $this->project_id
-        ];
-    }*/
 }

@@ -89,11 +89,22 @@ class ViewComposerServiceProvider extends ServiceProvider
             $all_member = User::where('id', '!=' , Auth::user()->id)->get();
             $view->with('all_member', $all_member);
         });
-          //Count notification
+          //Count unread notification
             View::composer(['backend.blocks.header'], function ($view) {
             $cur_mem = User::find(Auth::user()->id);
-            $num_unread_noti= $cur_mem->unreadNotifications->count();
+            $num_unread_noti= $cur_mem->unreadNotifications->where('type','=', 'App\Notifications\InvitetoProject')->count();
             $view->with('num_unread_noti', $num_unread_noti);
+        });
+            //Count unread message
+            View::composer(['backend.blocks.header'], function ($view) {
+            $cur_mem = User::find(Auth::user()->id);
+            $num_unread_mess= $cur_mem->unreadNotifications->where('type','=', 'App\Notifications\ChatProject')->count();
+            $view->with('num_unread_mess', $num_unread_mess);
+        });
+            //For project chat
+             View::composer(['backend.pages.mail'], function ($view) {
+            $belonged_projects = Auth::user()->projects;
+            $view->with('belonged_projects', $belonged_projects);
         });
        
 

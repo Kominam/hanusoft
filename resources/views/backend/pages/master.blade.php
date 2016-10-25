@@ -32,6 +32,7 @@
       <!--main content end-->
       <!--footer start-->
       @include('backend.blocks.footer')
+      <span style="display: none" id="userId">{{Auth::user()->id}}</span>
       <!--footer end-->
   </section>
     <!-- js placed at the end of the document so the pages load faster -->
@@ -46,6 +47,8 @@
 
      <!--common script for all pages-->
     <script src="{{url('backend/js/common-scripts.js')}}"></script>
+    <script type="text/javascript">
+    </script>
     <script src="{{ elixir('js/app.js') }}"></script>
 
     @yield('external_script')

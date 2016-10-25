@@ -20,6 +20,9 @@ require('laravel-elixir-vue');
 elixir(function (mix) {
     mix.browserify('app.js');
 });
+elixir(function (mix) {
+    mix.browserify('chat-project.js');
+});
 /*elixir(function(mix) {
     mix.scriptsIn('./public/frontend/js','public/js/frontend.js');
 });*/

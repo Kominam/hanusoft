@@ -96,61 +96,34 @@
                 <li id="header_inbox_bar" class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                     <i class="icon-envelope-alt"></i>
-                    <span class="badge bg-important">5</span>
+                    <span class="badge bg-important" id="badge_num_unread_mess">{{$num_unread_mess}}</span>
                     </a>
                     <ul class="dropdown-menu extended inbox">
                         <div class="notify-arrow notify-arrow-red"></div>
                         <li>
-                            <p class="red">You have 5 new messages</p>
+                            <p class="red">You have <span id="num_unread_mess">{{$num_unread_mess}}</span>new messages</p>
                         </li>
-                        <li>
-                            <a href="#">
-                            <span class="photo"><img alt="avatar" src="{{url('backend/img/avatar-mini.jpg')}}"></span>
-                            <span class="subject">
-                            <span class="from">Jonathan Smith</span>
-                            <span class="time">Just now</span>
-                            </span>
-                            <span class="message">
-                            Hello, this is an example msg.
-                            </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                            <span class="photo"><img alt="avatar" src="{{url('backend/img/avatar-mini2.jpg')}}"></span>
-                            <span class="subject">
-                            <span class="from">Jhon Doe</span>
-                            <span class="time">10 mins</span>
-                            </span>
-                            <span class="message">
-                            Hi, Jhon Doe Bhai how are you ?
-                            </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                            <span class="photo"><img alt="avatar" src="{{url('backend/img/avatar-mini3.jpg')}}"></span>
-                            <span class="subject">
-                            <span class="from">Jason Stathum</span>
-                            <span class="time">3 hrs</span>
-                            </span>
-                            <span class="message">
-                            This is awesome dashboard.
-                            </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                            <span class="photo"><img alt="avatar" src="{{url('backend/img/avatar-mini4.jpg')}}"></span>
-                            <span class="subject">
-                            <span class="from">Jondi Rose</span>
-                            <span class="time">Just now</span>
-                            </span>
-                            <span class="message">
-                            Hello, this is metrolab
-                            </span>
-                            </a>
-                        </li>
+                          @foreach (Auth::user()->unreadNotifications->take(5) as $notification)
+                             @if($notification->type=='App\Notifications\ChatProject')
+                                     <li>
+                                        <a href="{{ url('member/mail') }}">
+                                        <span class="photo"><img alt="avatar" src="{{url('frontend/img/team/'.$notification->data['member_avt'])}}"></span>
+                                        <span class="subject">
+                                        <span class="from" style="color:red">{{$notification->data['member_name']}}</span>
+                                        <span class="time">{{$notification->created_at}}</span>
+                                        </span>
+                                        <span class="message">
+                                        <strong>{{$notification->data['project_chat_name']}}</strong>
+                                        </span>
+                                         <span class="message">
+                                        {{substr($notification->data['message'], 0,50)}}...
+                                        </span>
+                                        </a>
+                                    </li>
+                             @endif
+                          @endforeach
+                       
+                        
                         <li>
                             <a href="#">See all messages</a>
                         </li>
@@ -162,15 +135,15 @@
                 <li id="header_notification_bar" class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                     <i class="icon-bell-alt"></i>
-                    <span class="badge bg-warning" id="num_unread_noti">{{$num_unread_noti}}</span>
+                    <span class="badge bg-warning" id="badge_num_unread_noti">{{$num_unread_noti}}</span>
                     </a>
                     <ul class="dropdown-menu extended notification">
                         <div class="notify-arrow notify-arrow-yellow"></div>
                         <li>
-                            <p class="yellow">You have {{$num_unread_noti}} new notifications</p>
+                            <p class="yellow">You have <span id="num_unread_noti">{{$num_unread_noti}}</span> new notifications</p>
                         </li>
                         <input type="hidden" name="_token" value="{{csrf_token()}}" >
-                        @foreach (Auth::user()->unreadNotifications as $notification)
+                        @foreach (Auth::user()->unreadNotifications->take(5) as $notification)
                          @if($notification->type=='App\Notifications\InvitetoProject')
                               <li id="invite{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}">
                                 <a href="#">
@@ -195,10 +168,8 @@
                                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                                               }
                                             });
-                                          $('#header_notification_bar').click(function(event) {
-                                              /* Act on the event */
-                                                $('#num_unread_noti').text(0);
-                                          });
+
+                                          /*$('#header_notification_bar ul').prepend('Some text');*/
                                         $('#accept{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}').click(function(){
                                                 var project_id="{{$notification->data['project_id']}}";
                                                 $.ajax({

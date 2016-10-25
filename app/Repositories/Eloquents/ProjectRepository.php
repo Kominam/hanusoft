@@ -155,6 +155,8 @@ class ProjectRepository implements ProjectRepositoryInterface
         $this->assignMember(Auth::user()->id,$project );
         /*$notification = Notifications::where('type','=','App\Notifications\InvitetoProject')->where('data["project_id"]', '=',$request->project_id)->first();
         $notification->markAsRead();*/
+        /*$spec_noti = DB::table('notifications')->where('type','=','App\Notifications\InvitetoProject')->where('notifiable_id', Auth::user()->id)->where('data["project_id"]', '=',$request->project_id)->first();
+        $spec_noti->markAsRead();*/
         return 'Assign Ok';
       }
       else if ($response=='decline') {

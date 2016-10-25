@@ -17,6 +17,8 @@ return array(
     'CreatePositionsTable' => $baseDir . '/database/migrations/2016_10_05_083518_create_positions_table.php',
     'CreatePostTypesTable' => $baseDir . '/database/migrations/2016_10_06_085514_create_post_types_table.php',
     'CreatePostsTable' => $baseDir . '/database/migrations/2016_10_06_085613_create_posts_table.php',
+    'CreateProjecChatUserTable' => $baseDir . '/database/migrations/2016_10_23_083405_create_projec_chat_user_table.php',
+    'CreateProjectChatsTable' => $baseDir . '/database/migrations/2016_10_23_083313_create_project_chats_table.php',
     'CreateProjectSkillTable' => $baseDir . '/database/migrations/2016_10_06_085043_create_project_skill_table.php',
     'CreateProjectUserTable' => $baseDir . '/database/migrations/2016_10_06_085511_create_project_user_table.php',
     'CreateProjectimagesTable' => $baseDir . '/database/migrations/2016_10_06_084814_create_projectimages_table.php',

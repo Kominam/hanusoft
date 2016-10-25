@@ -17,10 +17,6 @@
 
 	Auth::routes();
 	Route::group(['prefix' => 'member'], function () {
-		Route::get('/mail', ['as' => 'mail', function() {
-			return view('backend.pages.mail');
-		}]);
-		
 		Route::get('/form_component', ['as' => 'form_component', function() {
 			return view('backend.pages.form_component');
 		}]);
@@ -92,6 +88,11 @@
 			Route::get('/profile-activity', ['as' => 'profile-activity', 'uses' => 'MemberController@recent_activity']);
 			Route::post('change-pwd', ['as' => 'change-pwd', 'uses' => 'MemberController@changePwd']);
 			Route::post('accept-invite',['as' => 'accept-invite', 'uses' => 'ProjectController@acceptInvite'] );
+			Route::get('/mail', ['as' => 'mail', function() {
+				return view('backend.pages.mail');
+			}]);
+			Route::post('chat-project',['as' => 'chat-project', 'uses' => 'ChatController@chat']);
+			Route::post('get-chat-project-cont',['as' => 'get-chat-project-cont', 'uses' => 'ChatController@getChatContent']);
 		});
 	});
 	
