@@ -107,7 +107,6 @@ class ViewComposerServiceProvider extends ServiceProvider
             $view->with('belonged_projects', $belonged_projects);
         });
 
-
     }
 
     /**

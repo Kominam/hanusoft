@@ -122,8 +122,6 @@
                                     </li>
                              @endif
                           @endforeach
-
-
                         <li>
                             <a href="#">See all messages</a>
                         </li>
@@ -248,7 +246,7 @@
                     </a>
                     <ul class="sub">
                         @foreach (Auth::user()->projects as $project)
-                          <li><a  href="{{ route('sdv') }}"> <i class=" icon-folder-close"></i>{{$project->name}}</a></li>
+                          <li><a  href="{{ route('backend.project', $project->id) }}"> <i class=" icon-folder-close"></i>{{$project->name}}</a></li>
                         @endforeach
                          <li><a  href="{{ route('create-project') }}"> <i class="icon-plus-sign-alt"></i>Create a new project</a></li>
                     </ul>

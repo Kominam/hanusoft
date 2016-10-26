@@ -56,9 +56,6 @@
 		Route::get('/todo_list', ['as' => 'todo_list', function(){
 			return view('backend.pages.todo_list');
 		}]);
-		Route::get('/project', ['as' => 'sdv', function(){
-			return view('backend.pages.project');
-		}]);
 
 		// Login Routes...
 		Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
@@ -75,27 +72,33 @@
 		Route::group(['middleware' => ['auth']], function () {
 			Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 			Route::get('/logout', 'Auth\LoginController@logout');
+			//Post Management
 			Route::get('/write-post', ['as' => 'showPostForm','uses'=>'PostController@showAddForm']);
 			Route::post('/write-post', ['as' => 'writePost', 'uses'=>'PostController@add']);
+			Route::get('/your-post', ['as' => 'your-post', 'uses'=>'PostController@showYourPost']);
 			Route::get('/edit-post/{id}', ['as' => 'get.edit.post', 'uses'=>'PostController@showEditForm']);
 			Route::post('/edit-post/{id}', ['as' => 'post.edit.post', 'uses'=>'PostController@edit']);
 			Route::get('delete-post/{id}',['as' => 'delete-post', 'uses'=>'PostController@delete']);
-			Route::get('/your-post', ['as' => 'your-post', 'uses'=>'PostController@showYourPost']);
+			//Project Management
+			Route::get('/project/{id}', ['as' => 'backend.project', 'uses' => 'ProjectController@showForBackEnd']);
 			Route::get('/create-project', ['as' => 'create-project','uses'=>'ProjectController@showAddForm']);
 			Route::post('/create-project', ['as' => 'createProject','uses'=>'ProjectController@add']);
+					//project managerment->invite memeber
+			Route::post('invite-members',['as' => 'invite-members', 'uses' => 'ProjectController@invite'] );
+			Route::post('accept-invite',['as' => 'accept-invite', 'uses' => 'ProjectController@acceptInvite'] );
+			//Profile Management
 			Route::get('/profile', ['as' => 'profile', 'uses'=> 'MemberController@profile']);
 			Route::get('/profile-edit', ['as' => 'profile-edit', 'uses' => 'MemberController@showEditProfile']);
 			Route::get('/profile-activity', ['as' => 'profile-activity', 'uses' => 'MemberController@recent_activity']);
 			Route::post('change-pwd', ['as' => 'change-pwd', 'uses' => 'MemberController@changePwd']);
-			Route::post('accept-invite',['as' => 'accept-invite', 'uses' => 'ProjectController@acceptInvite'] );
 			Route::get('/mail', ['as' => 'mail', function() {
 				return view('backend.pages.mail');
 			}]);
+			//Chat Management
 			Route::post('chat-project',['as' => 'chat-project', 'uses' => 'ChatController@chat']);
 			Route::post('get-chat-project-cont',['as' => 'get-chat-project-cont', 'uses' => 'ChatController@getChatContent']);
 		});
 	});
-
 
 	//For guest
 	Route::get('/index', ['as' => 'index', function () {
@@ -134,8 +137,6 @@
 	Route::post('post-reply-comment', ['as' => 'post-reply-comment', 'uses' => 'ReplyCommentController@create']);
 
 	Route::post('add-subcribers', ['as' => 'post-add-subcriber', 'uses' => 'SubcriberController@addNewSubcriber']);
-
-
 	/*Route::get('/admin', 'AdminController@index');
 	Route::get('admin/login', 'AdminAuth\LoginController@showLoginForm');
 	Route::post('admin/login', 'AdminAuth\LoginController@login');
@@ -143,7 +144,6 @@
 	Route::get('/admin/register', 'AdminAuth\RegisterController@showRegistrationForm');
 	Route::post('/admin/register', ['as' => 'admin.register.post', 'uses' => 'AdminAuth\RegisterController@register']);*/
 	 Route::get('test', 'ProjectController@invite');
-
 	 //Social Login
     Route::get('/redirect/{provider}', 'SocialAuthController@redirect');
     Route::get('/callback/{provider}', 'SocialAuthController@callback');

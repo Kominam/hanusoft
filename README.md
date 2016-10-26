@@ -5,13 +5,11 @@ Hanusoft is an IT club for all student in Hanoi Universiy who have passion with 
 
 Join now !!!<br/>
 ## Usage
-
 Step 1: Clone this project by following command (or download as ZIP)<br/>
 
 ```
 git clone https://github.com/Kominam/hanusoft.git
 ```
-
 Step 2: (If composer is installed or else you need to install composer) Run
 
 ```

@@ -9,7 +9,7 @@
             <div class="col-md-3">
                 <div class="newsletter">
                     <h4>Newsletter</h4>
-                    <p>Keep up on our always evolving product features and technology. Enter your e-mail and subscribe to our newsletter.</p>
+                    <p>Keep up on our always evolving new projects or IT news. Enter your e-mail and subscribe to our newsletter.</p>
                     <div class="alert alert-success hidden" id="newsletterSuccess">
                         <strong>Success!</strong> You've been added to our email list.
                     </div>
@@ -36,6 +36,7 @@
                                             data: { '_token': $('input[name=_token]').val(), 'email': sub_email},
                                             success: function(data) {
                                                  console.log(data);
+                                                 alert('Thanks for your subcribers');
                                                  sub_email.val("");
                                                     }
                                             });
@@ -61,7 +62,7 @@
                             <p><i class="fa fa-map-marker"></i> <strong>Address:</strong> Km9 Nguyen Trai, Thanh Xuan, Ha Noi, Viet Nam</p>
                         </li>
                         <li>
-                            <p><i class="fa fa-phone"></i> <strong>Phone:</strong> (123) 456-7890</p>
+                            <p><i class="fa fa-phone"></i> <strong>Phone:</strong> (84 4)35 43 0267</p>
                         </li>
                         <li>
                             <p><i class="fa fa-envelope"></i> <strong>Email:</strong> <a href="mailto:hanusoft.dev@gmail.com">hanusoft.dev@gmail.com</a></p>

@@ -23,7 +23,7 @@ class ProjectController extends Controller
 
         return view('frontend.pages.projects' ,['projects' => $projects]);
     }
-
+    //For front-end
     public function show($id) {
        $project = $this->projectRepository->find($id);
        $related_projects = $this->projectRepository->findRelated($id,$project->type_id);
@@ -39,6 +39,12 @@ class ProjectController extends Controller
            $previous_project_id =$project->id -1;
        }
       return view('frontend.pages.single_project' ,['project' => $project, 'related_projects'=>$related_projects, 'next_project' =>$next_project_id, 'prev_project'=> $previous_project_id]);
+    }
+    //For back-end
+    public function showForBackEnd($id) {
+      $project = $this->projectRepository->find($id);
+      $can_invite_mem= $this->projectRepository->canInvinteMember($id);
+      return view('backend.pages.project', ['project' => $project, 'can_invite_mem'=> $can_invite_mem]);
     }
     //Add
     public function showAddForm() {

@@ -33,6 +33,6 @@ class MailToSubcriber extends Mailable
      */
     public function build()
     {
-            return $this->from('gemini.wind285@gmail.com','Admin')->subject('Hanusoft')->view('email.subcriber');
+            return $this->from('hanusoft.dev@gmail.com','Hanusoft')->subject('Hanusoft News')->view('email.subcriber');
     }
 }

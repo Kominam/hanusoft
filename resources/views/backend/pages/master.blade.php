@@ -47,6 +47,8 @@
 
      <!--common script for all pages-->
     <script src="{{url('backend/js/common-scripts.js')}}"></script>
+    <script type="text/javascript">
+    </script>
     <script src="{{ elixir('js/app.js') }}"></script>
 
     @yield('external_script')

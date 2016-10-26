@@ -56,7 +56,7 @@
 
               </li>
               <li data-transition="fade" data-slotamount="10" data-masterspeed="300">
-                <img src="{{url('frontend/img/slides/slide-bg-3.jpg')}}" data-bgfit="cover" data-bgposition="right center" data-bgrepeat="no-repeat">
+                <img src="{{url('frontend/img/slides/hs-silder1.jpg')}}" data-bgfit="cover" data-bgposition="right center" data-bgrepeat="no-repeat">
 
                 <div class="tp-caption featured-label sft stb"
                    data-x="center"
@@ -88,8 +88,8 @@
               </div>
               <div class="col-md-4">
                 <div class="get-started">
-                  <a href="#" class="btn btn-lg btn-primary">Get Started Now!</a>
-                  <div class="learn-more">or <a href="index-2.html">learn more.</a></div>
+                  <a href="{{ route('login') }}" class="btn btn-lg btn-primary">Get Started Now!</a>
+                  <div class="learn-more">or <a href="{{ route('about') }}">learn more.</a></div>
                 </div>
               </div>
             </div>
@@ -117,7 +117,7 @@
                 creative and fully active.
               </h1>
               <p class="featured lead">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce elementum, nulla vel pellentesque consequat, ante nulla hendrerit arcu, ac tincidunt mauris lacus sed leo. vamus suscipit molestie vestibulum.
+                Winners never quit and quitters never win
               </p>
             </div>
           </div>
@@ -142,7 +142,7 @@
                 <div class="box-content">
                  <i class="icon-featured fa fa-html5"></i>
                   <h4>Web Development</h4>
-                  <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus.</p>
+                  <p>We build, create and maintain full function of the web.</p>
                 </div>
               </div>
             </div>
@@ -150,8 +150,8 @@
               <div class="featured-box featured-box-secundary">
                 <div class="box-content">
                 <i class="icon-featured fa fa-magic"></i>
-                  <h4>UI\UX Design</h4>
-                  <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus.</p>
+                  <h4>UI/UX Design</h4>
+                  <p>Iterative process to support incremental software.</p>
                 </div>
               </div>
             </div>
@@ -159,8 +159,8 @@
               <div class="featured-box featured-box-tertiary">
                 <div class="box-content">
                   <i class="icon-featured fa fa-android"></i>
-                  <h4>Software Engineering</h4>
-                  <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus.</p>
+                  <h4>Software Engineer</h4>
+                  <p>Develope, implement and maintain system. </p>
                 </div>
               </div>
             </div>
@@ -169,7 +169,7 @@
                 <div class="box-content">
                  <i class="icon-featured fa fa-check-square-o"></i>
                   <h4>Testing</h4>
-                  <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus. </p>
+                  <p>Conduct testing of whole software to indentify errors. </p>
                 </div>
               </div>
             </div>
@@ -282,9 +282,9 @@
                           <div class="testimonial-arrow-down"></div>
                           <div class="testimonial-author">
                             <div class="img-thumbnail img-thumbnail-small">
-                              <img src="{{url('frontend/img/clients/client-1.jpg')}}" alt="">
+                              <img src="{{url('frontend/img/founder.jpg')}}" alt="" width="120px" height="120px">
                             </div>
-                            <p><strong>John Smith</strong><span>CEO & Founder - Okler</span></p>
+                            <p><strong>Trinh Bao Ngoc</strong><span>FIT-Vice</span></p>
                           </div>
                         </div>
                       </div>
@@ -296,9 +296,9 @@
                           <div class="testimonial-arrow-down"></div>
                           <div class="testimonial-author">
                             <div class="img-thumbnail img-thumbnail-small">
-                              <img src="{{url('frontend/img/clients/client-1.jpg')}}" alt="">
+                              <img src="{{url('frontend/img/founder.jpg')}}" alt="">
                             </div>
-                            <p><strong>John Smith</strong><span>CEO & Founder - Okler</span></p>
+                            <p><strong>Trinh Bao Ngoc</strong><span>FIT - Vice</span></p>
                           </div>
                         </div>
                       </div>
@@ -411,28 +411,25 @@
           <div class="row center push-top">
             <div class="owl-carousel" data-plugin-options='{"items": 6, "autoplay": true, "autoplayTimeout": 3000}'>
               <div>
-                <img class="img-responsive" src="{{url('frontend/img/logos/logo-1.png')}}" alt="">
+                <img class="img-responsive" src="{{url('frontend/img/partner/codelover.png')}}" alt="">
               </div>
               <div>
-                <img class="img-responsive" src="{{url('frontend/img/logos/logo-2.png')}}" alt="">
+                <img class="img-responsive" src="{{url('frontend/img/partner/fsoft.jpg')}}" alt="">
               </div>
               <div>
-                <img class="img-responsive" src="{{url('frontend/img/logos/logo-3.png')}}" alt="">
+                <img class="img-responsive" src="{{url('frontend/img/partner/hackademic hanoi.png')}}" alt="">
               </div>
               <div>
-                <img class="img-responsive" src="{{url('frontend/img/logos/logo-4.png')}}" alt="">
+                <img class="img-responsive" src="{{url('frontend/img/partner/ibm-logo.jpg')}}" alt="">
               </div>
               <div>
-                <img class="img-responsive" src="{{url('frontend/img/logos/logo-5.png')}}" alt="">
+                <img class="img-responsive" src="{{url('frontend/img/partner/IFS.png')}}" alt="">
               </div>
               <div>
-                <img class="img-responsive" src="{{url('frontend/img/logos/logo-6.png')}}" alt="">
+                <img class="img-responsive" src="{{url('frontend/img/partner/it japan.png')}}" alt="">
               </div>
               <div>
-                <img class="img-responsive" src="{{url('frontend/img/logos/logo-4.png')}}" alt="">
-              </div>
-              <div>
-                <img class="img-responsive" src="{{url('frontend/img/logos/logo-2.png')}}" alt="">
+                <img class="img-responsive" src="{{url('frontend/img/partner/smartosc.png')}}" alt="">
               </div>
             </div>
           </div>

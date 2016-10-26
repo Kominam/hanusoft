@@ -1,8 +1,6 @@
 <?php
 // app/Repositories/Eloquents/ProductRepository.php
-
 namespace App\Repositories\Eloquents;
-
 use App\Repositories\Contracts\ProjectRepositoryInterface;
 use App\Project;
 use App\Skill;
@@ -14,54 +12,46 @@ use App\Invitation;
 use Auth;
 use App\Notifications\InvitetoProject;
 use Notifications;
-
+use DB;
 class ProjectRepository implements ProjectRepositoryInterface
 {
-
     public function all()
     {
         return Project::all();
     }
-
     public function find($id)
     {
         return Project::find($id);
     }
-
     public function findRelated($id, $type_id) {
       return Project::where('id','!=',$id)->where('type_id','=', $type_id)->take(4)->get();
     }
-
     public function defineRequiredSkill($skills, $project) {
-    		$project->skills()->attach($skills);
-    		$project->save();
+        $project->skills()->attach($skills);
+        $project->save();
     }
-
     public function removeRequiredSkill($skills, $project) {
-    		$project->skills()->detach($skills);
-    		$project->save();
+        $project->skills()->detach($skills);
+        $project->save();
     }
-
     public function removeAllSkill() {
-    		$project->skills()->detach();
-    		$project->save();
+        $project->skills()->detach();
+        $project->save();
     }
-
     public function assignMember($users, $project) {
-    		$project->users()->attach($users);
-    		$project->save();
+        $project->users()->attach($users);
+        $project->save();
     }
     public function unassignMember($users, $project) {
-    		$project->users()->detach($users);
-    		$project->save();
+        $project->users()->detach($users);
+        $project->save();
     }
     public function removeAllRelatedMemer() {
-    		$project->users()->detach();
-    		$project->save();
+        $project->users()->detach();
+        $project->save();
     }
-
     public function create(Request $request){
-    	/* $messages = [
+      /* $messages = [
                'name.required'=>'Enter the name for this project',
                'name.unique'=>'This name is already existing',
                'description.required'=>'Enter the description for this project',
@@ -76,22 +66,22 @@ class ProjectRepository implements ProjectRepositoryInterface
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }*/
-    	 $project= new Project;
+       $project= new Project;
        $project->name = $request->name;
        $project->description = $request->description;
        if ($request->has('link_preview')) {
         $project->link_preview = $request->link_preview;
        }
 
-    	$project->type_id= $request->project_cate_id;
+      $project->type_id= $request->project_cate_id;
       $project->save();
-    	//Define skill
-    	if ($request->has('skills')) {
+      //Define skill
+      if ($request->has('skills')) {
         $this->defineRequiredSkill($request->skills, $project);
       }
 
-    	//Invite for member (if avaialble)
-    	if ($request->has('inviters')) {
+      //Invite for member (if avaialble)
+      if ($request->has('inviters')) {
               $new_invitation = Invitation::create(['leadership_id' => Auth::user()->id, 'project_id' => $project->id]);
               $new_invitation->save();
               foreach ($request->inviters as $inviter_id) {
@@ -103,10 +93,9 @@ class ProjectRepository implements ProjectRepositoryInterface
         }
       return redirect()->route('dashboard');
     }
-
     public function update(Request $request, $id){
-    	$project = Project::find($id);
-    	$messages = [
+      $project = Project::find($id);
+      $messages = [
                'name.required'=>'Enter the name for this project',
                'name.unique'=>'This name is already existing',
                'description.required'=>'Enter the description for this project',
@@ -122,30 +111,28 @@ class ProjectRepository implements ProjectRepositoryInterface
         if ($validator->fails()) {
             return redirect('/')->withErrors($validator)->withInput();
         }
-    	$project->name = $request->name;
-    	$project->description = $request->description;
-    	$project->link_preview = $request->link_preview;
-    	$project->type_id = $request->type_id;
-    	$project->save();
-
+      $project->name = $request->name;
+      $project->description = $request->description;
+      $project->link_preview = $request->link_preview;
+      $project->type_id = $request->type_id;
+      $project->save();
     }
-
     public function delete($id) {
-    	return Project::destroy($id);
+      return Project::destroy($id);
     }
     public function countAll(){
       return Project::count();
     }
-
     public function invite(Request $request) {
-        $invited_id = $request->invited_id;
-        $new_invitation = Invitation::create(['leadership_id' => $request->invitor_id, 'project_id' => $request->project_id]);
-        $new_invitation->save();
-        $inviter = User::find($invited_id);
+      $new_invitation = Invitation::firstOrCreate(['leadership_id' => Auth::user()->id, 'project_id' => $request->project_id]);
+      $new_invitation->save();
+      foreach ($request->inviters as $inviter_id) {
+        $inviter = User::find($inviter_id);
         $inviter->invitations()->attach($new_invitation->id);
         $inviter->save();
+        $inviter->notify(new InvitetoProject(Auth::user()->name,$request->project_name, Auth::user()->id, $request->project_id));
+      }
     }
-
     public function acceptInvite(Request $request) {
       $response = $request->response;
       //change the respon of invitation_user
@@ -166,5 +153,15 @@ class ProjectRepository implements ProjectRepositoryInterface
         $member->invitations()->detach($invitation->id);
         return 'decline ok';
       }
+    }
+    public function canInvinteMember($id) {
+      $project = Project:: find($id);
+      $mem_in_project = $project->users()->get()->pluck('id')->all();
+      $invitation = DB::table('invitations')->where('project_id','=', $id)->pluck('project_id')->all();
+      $total1 = array_merge($mem_in_project,$invitation);
+      $on_handle_mem_for_this_project = DB::table('invitation_user')->whereIn('invitation_id', $invitation)->pluck('user_id')->all();
+      $total= array_merge( $total1, $on_handle_mem_for_this_project);
+      $can_invite_mem = User::whereNotIn('id', $total)->get();
+      return $can_invite_mem;
     }
 }
