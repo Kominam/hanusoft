@@ -14,6 +14,7 @@ use App\Invitation;
 use Auth;
 use App\Notifications\InvitetoProject;
 use Notifications;
+use DB;
 
 class ProjectRepository implements ProjectRepositoryInterface
 {
@@ -138,12 +139,14 @@ class ProjectRepository implements ProjectRepositoryInterface
     }
 
     public function invite(Request $request) {
-        $invited_id = $request->invited_id;
-        $new_invitation = Invitation::create(['leadership_id' => $request->invitor_id, 'project_id' => $request->project_id]);
-        $new_invitation->save();
-        $inviter = User::find($invited_id);
+      $new_invitation = Invitation::firstOrCreate(['leadership_id' => Auth::user()->id, 'project_id' => $request->project_id]);
+      $new_invitation->save();
+      foreach ($request->inviters as $inviter_id) {
+        $inviter = User::find($inviter_id);
         $inviter->invitations()->attach($new_invitation->id);
         $inviter->save();
+        $inviter->notify(new InvitetoProject(Auth::user()->name,$request->project_name, Auth::user()->id, $request->project_id));
+      }
     }
 
     public function acceptInvite(Request $request) {
@@ -166,6 +169,17 @@ class ProjectRepository implements ProjectRepositoryInterface
         $member->invitations()->detach($invitation->id);
         return 'decline ok';
       }
+    }
+
+    public function canInvinteMember($id) {
+      $project = Project:: find($id);
+      $mem_in_project = $project->users()->get()->pluck('id')->all();
+      $invitation = DB::table('invitations')->where('project_id','=', $id)->pluck('project_id')->all();
+      $total1 = array_merge($mem_in_project,$invitation);
+      $on_handle_mem_for_this_project = DB::table('invitation_user')->whereIn('invitation_id', $invitation)->pluck('user_id')->all();
+      $total= array_merge( $total1, $on_handle_mem_for_this_project);
+      $can_invite_mem = User::whereNotIn('id', $total)->get();
+      return $can_invite_mem;
     }
 
 

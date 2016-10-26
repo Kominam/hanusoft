@@ -28,4 +28,8 @@ class Project extends Model
         return $this->hasMany('App\ProjectImage');
     }
 
+    public function invitation() {
+        return $this->hasOne('App\Invitation');
+    }
+
 }

@@ -14,7 +14,8 @@ class ContactController extends Controller
     
     public function contact(Request $request)
     {
-        $myEmail = 'haiwind95@gmail.com';
+
+        $myEmail = 'hanusoft.dev@gmail.com';
         Mail::to($myEmail)->send(new ContactMail($request));
         return back();
     }

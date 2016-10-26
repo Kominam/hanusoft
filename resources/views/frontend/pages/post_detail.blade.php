@@ -23,7 +23,7 @@
 <div class="col-md-9">
 <div class="blog-posts single-post">
 <article class="post post-large blog-single-post">
-    <div class="post-image">
+    <!-- <div class="post-image">
         <div class="owl-carousel" data-plugin-options='{"items":1}'>
             <div>
                 <div class="img-thumbnail">
@@ -36,7 +36,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="post-date">
         <span class="day">{{$post->created_at->format('d')}}</span>
         <span class="month"> {{substr($post->created_at->format('F'),0,3)}}</span>
@@ -65,7 +65,7 @@
             <h3><i class="fa fa-user"></i>Author</h3>
             <div class="img-thumbnail">
                 <a href="blog-post.html">
-                <img src="{{url('frontend/img/avatar.jpg')}}" alt="">
+                <img src="{{url('frontend/img/team/'.$post->user->url_avt)}}" alt="">
                 </a>
             </div>
             <p><strong class="name"><a href={{route('member_detail',$post->user->id)}}>{{$post->user->name}}</a></strong></p>
@@ -81,7 +81,7 @@
                  <li>
                     <div class="comment" id="comment{{$comment->id}}">
                         <div class="img-thumbnail">
-                            <img class="avatar" alt="" src="{{url('frontend/img/avatar-2.jpg')}}">
+                            <img class="avatar" alt="" src="{{url('frontend/img/User-Default.jpg')}}">
                         </div>
                         <div class="comment-block">
                             <div class="comment-arrow"></div>
@@ -100,7 +100,7 @@
                         <li>
                             <div class="comment">
                                 <div class="img-thumbnail">
-                                    <img class="avatar" alt="" src="{{url('frontend/img/avatar-3.jpg')}}">
+                                    <img class="avatar" alt="" src="{{url('frontend/img/User-Default.jpg')}}">
                                 </div>
                                 <div class="comment-block">
                                     <div class="comment-arrow"></div>
@@ -166,7 +166,7 @@
   //Bind a function to a Event (the full Laravel class)
   channel.bind('App\\Events\\CommentWasSent', function(comments){
    for (var property in comments) {
-        var new_cmt='<li><div class="comment"><div class="img-thumbnail"><img class="avatar" alt="" src="{{url('frontend/img/avatar.jpg')}}"></div><div class="comment-block"><div class="comment-arrow"></div><span class="comment-by"><strong>' + comments[property].name +'</strong><span class="pull-right"><span> <a href="#replycomment'+comments[property].id+'"><i class="fa fa-reply"></i> Reply</a></span></span></span><p>' + comments[property].content + '</p><span class="date pull-right">a moment ago</span></div></div></li>';
+        var new_cmt='<li><div class="comment"><div class="img-thumbnail"><img class="avatar" alt="" src="{{url('frontend/img/User-Default.jpg')}}"></div><div class="comment-block"><div class="comment-arrow"></div><span class="comment-by"><strong>' + comments[property].name +'</strong><span class="pull-right"><span> <a href="#replycomment'+comments[property].id+'"><i class="fa fa-reply"></i> Reply</a></span></span></span><p>' + comments[property].content + '</p><span class="date pull-right">a moment ago</span></div></div></li>';
         $('#cmt_area').append(new_cmt);
     }  
   });
@@ -247,7 +247,7 @@
           //Bind a function to a Event (the full Laravel class)
           channel.bind('App\\Events\\SomeOneReplyComment', function(reply_cmt){
            for (var property in reply_cmt) {
-                var new_reply_cmt='<li><div class="comment"><div class="img-thumbnail"><img class="avatar" alt="" src="{{url('frontend/img/avatar.jpg')}}"></div><div class="comment-block"><div class="comment-arrow"></div><span class="comment-by"><strong>' + reply_cmt[property].name +'</strong><span class="pull-right"><span></span></span></span><p>' + reply_cmt[property].content + '</p><span class="date pull-right">a moment ago</span></div></div></li>';
+                var new_reply_cmt='<li><div class="comment"><div class="img-thumbnail"><img class="avatar" alt="" src="{{url('frontend/img/User-Default.jpg')}}"></div><div class="comment-block"><div class="comment-arrow"></div><span class="comment-by"><strong>' + reply_cmt[property].name +'</strong><span class="pull-right"><span></span></span></span><p>' + reply_cmt[property].content + '</p><span class="date pull-right">a moment ago</span></div></div></li>';
                 $('#form_reply_comment'+ value).before(new_reply_cmt);
             }  
           });
