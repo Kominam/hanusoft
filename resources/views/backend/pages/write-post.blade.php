@@ -18,9 +18,7 @@
                             Errors
                           </div>
                           <div class="panel-body">
-                              @foreach($errors->all() as $error)
-                                        {!! $error !!}    
-                              @endforeach 
+                              <strong>Something went wrong.Check detail below</strong>
                           </div>
                         </section>
                     @endif
@@ -37,6 +35,9 @@
                                               </label>
                                               </div>
                                             @endforeach
+                                               @if ($errors->has('post_type_id'))
+                                              <span style="color: red">{{ $errors->first('post_type_id') }}</span>
+                                              @endif
                                       </div>
                                   </div>
                           </div>
@@ -51,6 +52,9 @@
                                         <label class="col-sm-2 control-label col-sm-2">Tittle</label>
                                         <div class="col-sm-10">
                                           <input type="text" class="form-control" id="" placeholder="Enter title" name="tittle" required>
+                                          @if ($errors->has('tittle'))
+                                          <span style="color: red">{{ $errors->first('tittle') }}</span>
+                                          @endif
                                         </div>
                                       
                                          </div>
@@ -58,6 +62,9 @@
                                           <label class="col-sm-2 control-label col-sm-2">Content</label>
                                           <div class="col-sm-10">
                                               <textarea class="form-control ckeditor" name="content" rows="25"></textarea>
+                                               @if ($errors->has('content'))
+                                              <span style="color: red">{{ $errors->first('content') }}</span>
+                                              @endif
                                           </div>
                                       </div>
                               </div>

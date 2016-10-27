@@ -44,7 +44,7 @@
                         </span>
                         </a>
                         <span class="thumb-info-caption">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ac ligula mi, non suscipitaccumsan.</p>
+                            <p>{{substr($member->bio, 0, 200)}} ...</p>
                             <span class="thumb-info-social-icons">
                             <a data-tooltip data-placement="bottom" target="_blank" href="{{$member->url_fb}}"><i class="fa fa-facebook"></i><span>Facebook</span></a>
                             <a data-tooltip data-placement="bottom" href="../../../www.twitter.com/index.html" data-original-title="Twitter"><i class="fa fa-twitter"></i><span>Twitter</span></a>

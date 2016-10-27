@@ -26,53 +26,53 @@ class PostRepository implements PostRepositoryInterface
         return Post::find($id);
     }
 
-    
-    public function create(Request $request){
-    	 $messages = [
+    public function validatorNew(Request $request) {
+        $messages = [
+               'post_type_id.required'=>'Choose category for this post',
                'tittle.required'=>'Enter the tittle for this post',
                'tittle.unique'=>'This tittle is already existing',
-               'content.required'=>'Enter the content for this project'
+               'content.required'=>'Enter the content for this post'
         ];
         $validator = Validator:: make($request->all(),[
+              'post_type_id' => 'required',
               'tittle'=>'required|unique:posts,tittle',
               'content'=>'required'
         ], $messages);
-        if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
-        } else {
+        return $validator; 
+    }
+
+    public function validatorUpdate(Request $request) {
+        $messages = [
+               'post_type_id.required'=>'Choose category for this post',
+               'tittle.required'=>'Enter the tittle for this post',
+               'tittle.unique'=>'This tittle is already existing',
+               'content.required'=>'Enter the content for this post',
+        ];
+        $validator = Validator:: make($request->all(),[
+              'post_type_id' => 'required',
+              'tittle'=>'required|unique:posts,tittle,'.$id,
+              'content'=>'required',
+        ], $messages);
+        return $validator; 
+    }
+
+    
+    public function create(Request $request){
             $post = new Post;
             $post->tittle = $request->tittle;
             $post->content = $request->content;
             $post->type_id = $request->post_type_id;
             $post->user_id= Auth::user()->id;
-            $post->save();
-            return redirect()->route('dashboard');
-        }
-       
+            $post->save();  
     }
 
     public function update(Request $request, $id){
-    /* $messages = [
-               'tittle.required'=>'Enter the tittle for this post',
-               'tittle.unique'=>'This tittle is already existing',
-               'content.required'=>'Enter the content for this project',
-               'img_cover.required'=>'Enter the URL demo for this project'
-        ];
-        $validator = Validator:: make($request->all(),[
-              'tittle'=>'required|unique:posts,tittle,'.$id,
-              'content'=>'required',
-              'img_cover'=>'required|file|image|mimes:jpeg,jpg',
-        ], $messages);
-        if ($validator->fails()) {
-            return redirect('/')->withErrors($validator)->withInput();
-        }*/
         $post =Post::find($id);
         $post->tittle = $request->tittle;
         $post->content = $request->content;
         $post->type_id= $request->post_type_id;
         //Save
-       $post->save();
-       return redirect()->route('dashboard');
+        $post->save();
     }
 
     public function delete($id) {

@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('gender')->default(0);
             $table->string('address')->default('empty');
             $table->text('bio');
+            $table->string('phone')->nullable()->default('empty');
+            $table->date('birthday')->nullable();
             $table->string('url_fb')->default('empty');
             $table->string('url_gmail')->default('empty');
             $table->string('url_github')->default('empty');

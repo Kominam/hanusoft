@@ -69,7 +69,7 @@
                 </a>
             </div>
             <p><strong class="name"><a href={{route('member_detail',$post->user->id)}}>{{$post->user->name}}</a></strong></p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim ornare nisi, vitae mattis nulla ante id dui. </p>
+            <p>{{$post->user->bio}}</p>
         </div>
         <div class="post-block post-comments clearfix" id="post_comment">
             <h3><i class="fa fa-comments"></i>Comments <span id="cmt_count">({{$post->comments->count()}})</span></h3>

@@ -29,6 +29,9 @@
                                               </label>
                                           </div>
                                         @endforeach
+                                          @if ($errors->has('project_cate_id'))
+                                              <span style="color: red">{{ $errors->first('project_cate_id') }}</span>
+                                          @endif
                                       </div>
                                        <label class="col-sm-2 control-label col-lg-2" for="inputSuccess">Required Skills</label>
                                         <div class="col-lg-3">
@@ -40,6 +43,9 @@
                                               </label>
                                           </div>
                                         @endforeach
+                                          @if ($errors->has('skills'))
+                                              <span style="color: red">{{ $errors->first('skills') }}</span>
+                                          @endif
                                       </div>
                                   </div>
                           </div>
@@ -75,18 +81,27 @@
                                         <div class="col-sm-10">
                                           <input type="text" class="form-control" id="" name="name" placeholder="Enter project name">
                                         </div>
+                                        @if ($errors->has('name'))
+                                              <span style="color: red">{{ $errors->first('name') }}</span>
+                                        @endif
                                     </div>
                                      <div class="form-group">
                                         <label class="col-sm-2 control-label col-sm-2">Link preview (optional)</label>
                                         <div class="col-sm-10">
-                                          <input type="text" class="form-control" id="" name="link_preview" placeholder="Enter project name">
+                                          <input type="text" class="form-control" id="" name="link_preview" value="http://">
                                         </div>
+                                         @if ($errors->has('link_preview'))
+                                              <span style="color: red">{{ $errors->first('link_preview') }}</span>
+                                        @endif
                                     </div>
                                       <div class="form-group">
                                           <label class="col-sm-2 control-label col-sm-2">Description</label>
                                           <div class="col-sm-10">
                                               <textarea class="form-control ckeditor" name="description" rows="6"></textarea>
                                           </div>
+                                           @if ($errors->has('description'))
+                                              <span style="color: red">{{ $errors->first('description') }}</span>
+                                        @endif
                                       </div>
                               </div>
                           </div>

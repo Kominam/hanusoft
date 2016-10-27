@@ -47,7 +47,7 @@ class User extends Authenticatable
     }
 
     public function invitations() {
-        return $this->belongsToMany('App\Invitation', 'invitation_user');
+        return $this->belongsToMany('App\Invitation', 'invitation_user')->withPivot('response');
     }
 
     public function project_chats() {

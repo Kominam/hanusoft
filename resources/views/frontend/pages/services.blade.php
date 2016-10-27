@@ -98,7 +98,7 @@
                         </div>
                         <div class="feature-box">
                             <div class="feature-box-icon">
-                                <i class="fa fa-google-plus"></i>
+                                <i class="fa fa-stack-overflow"></i>
                             </div>
                             <div class="feature-box-info">
                                 <h4 class="shorter">PHP</h4>

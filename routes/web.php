@@ -86,17 +86,22 @@
 					//project managerment->invite memeber
 			Route::post('invite-members',['as' => 'invite-members', 'uses' => 'ProjectController@invite'] );
 			Route::post('accept-invite',['as' => 'accept-invite', 'uses' => 'ProjectController@acceptInvite'] );
+					//project managerment-> state management
+			Route::post('add-state',['as' => 'post.add-state', 'uses' => 'StateController@create']);
 			//Profile Management
 			Route::get('/profile', ['as' => 'profile', 'uses'=> 'MemberController@profile']);
 			Route::get('/profile-edit', ['as' => 'profile-edit', 'uses' => 'MemberController@showEditProfile']);
-			Route::get('/profile-activity', ['as' => 'profile-activity', 'uses' => 'MemberController@recent_activity']);
+			Route::post('profile-edit', ['as' => 'post.profile-edit', 'uses' => 'MemberController@editProfile']);
 			Route::post('change-pwd', ['as' => 'change-pwd', 'uses' => 'MemberController@changePwd']);
+			Route::get('/profile-activity', ['as' => 'profile-activity', 'uses' => 'MemberController@recent_activity']);
 			Route::get('/mail', ['as' => 'mail', function() {
 				return view('backend.pages.mail');
 			}]);
 			//Chat Management
 			Route::post('chat-project',['as' => 'chat-project', 'uses' => 'ChatController@chat']);
 			Route::post('get-chat-project-cont',['as' => 'get-chat-project-cont', 'uses' => 'ChatController@getChatContent']);
+			//Notification Management
+			Route::post('notifications','NotificationController@delete');
 		});
 	});
 	

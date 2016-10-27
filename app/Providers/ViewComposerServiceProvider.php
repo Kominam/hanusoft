@@ -33,11 +33,11 @@ class ViewComposerServiceProvider extends ServiceProvider
             $all_post_cate = PostType::all();
             $view->with('all_post_cate', $all_post_cate);
         });
-        View::composer('frontend.pages.members', function ($view) {
+        View::composer(['frontend.pages.members', 'backend.pages.profile-edit'], function ($view) {
             $all_position = Position::all();
             $view->with('all_position', $all_position);
         });
-         View::composer('frontend.pages.members', function ($view) {
+         View::composer(['frontend.pages.members', 'backend.pages.profile-edit'], function ($view) {
             $all_grade = Grade::all();
             $view->with('all_grade', $all_grade );
         });
@@ -92,7 +92,7 @@ class ViewComposerServiceProvider extends ServiceProvider
           //Count unread notification
             View::composer(['backend.blocks.header'], function ($view) {
             $cur_mem = User::find(Auth::user()->id);
-            $num_unread_noti= $cur_mem->unreadNotifications->where('type','=', 'App\Notifications\InvitetoProject')->count();
+            $num_unread_noti= $cur_mem->unreadNotifications->where('type','!=', 'App\Notifications\ChatProject')->count();
             $view->with('num_unread_noti', $num_unread_noti);
         });
             //Count unread message

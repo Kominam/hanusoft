@@ -131,7 +131,7 @@
         <div class="container">
           <div class="row center">
             <div class="col-md-12">
-              <img src="{{url('frontend/img/dark-and-light.jpg')}}" class="img-responsive" data-appear-animation="fadeInUp" alt="dark and light" style="margin: 45px 0px -35px;">
+              <img src="{{url('frontend/img/slides/hs-slider2.jpg')}}" class="img-responsive" data-appear-animation="fadeInUp" alt="dark and light" style="margin: 45px 0px -35px;">
             </div>
           </div>
         </div>
@@ -186,7 +186,7 @@
                       </div>
                       <div class="feature-box-info">
                         <h4 class="shorter">Customer Support</h4>
-                        <p class="tall">Lorem ipsum dolor sit amet, consectetur adipiscing <span class="alternative-font">metus.</span> elit. Quisque rutrum pellentesque imperdiet.</p>
+                        <p class="tall"></p>
                       </div>
                     </div>
                     <div class="feature-box secundary">
@@ -195,47 +195,48 @@
                       </div>
                       <div class="feature-box-info">
                         <h4 class="shorter">HTML5 / CSS3 / JS</h4>
-                        <p class="tall">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rutrum pellentesque imperdiet. Nulla lacinia iaculis nulla.</p>
+                        <p class="tall"></p>
                       </div>
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="feature-box secundary">
                       <div class="feature-box-icon">
-                        <i class="fa fa-film"></i>
-                      </div>
+                                <i class="fa fa-group"></i>
+                            </div>
                       <div class="feature-box-info">
-                        <h4 class="shorter">Sliders</h4>
-                        <p class="tall">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rutrum pellentesque imperdiet. Nulla lacinia iaculis nulla.</p>
-                      </div>
+                                <h4 class="shorter">FAQ</h4>
+                                <p class="tall"></p>
+                            </div>
                     </div>
                     <div class="feature-box secundary">
                       <div class="feature-box-icon">
                         <i class="fa fa-check"></i>
                       </div>
                       <div class="feature-box-info">
-                        <h4 class="shorter">Icons</h4>
-                        <p class="tall">Lorem ipsum dolor sit amet, consectetur adipiscing <span class="alternative-font">metus.</span> elit. Quisque rutrum pellentesque imperdiet.</p>
+                        <h4 class="shorter">Social media integration</h4>
+                        <p class="tall"></p>
                       </div>
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="feature-box secundary">
                       <div class="feature-box-icon">
-                        <i class="fa fa-bars"></i>
-                      </div>
+                                <i class="fa fa-file"></i>
+                            </div>
                       <div class="feature-box-info">
-                        <h4 class="shorter">Buttons</h4>
-                        <p class="tall">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rutrum pellentesque imperdiet. Nulla lacinia iaculis nulla.</p>
-                      </div>
+                                <h4 class="shorter">Hosting</h4>
+                                <p class="tall"></p>
+                            </div>
                     </div>
                     <div class="feature-box secundary">
-                      <div class="feature-box-icon">
-                        <i class="fa fa-desktop"></i>
-                      </div>
-                      <div class="feature-box-info">
-                        <h4 class="shorter">Lightbox</h4>
-                        <p class="tall">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rutrum pellentesque imperdiet. Nulla lacinia iaculis nulla.</p>
+                       <div class="feature-box-icon">
+                                <i class="fa fa-stack-overflow"></i>
+                            </div>
+                            <div class="feature-box-info">
+                                <h4 class="shorter">PHP</h4>
+                                <p class="tall"></p>
+                            </div>
                       </div>
                     </div>
                   </div>
@@ -265,7 +266,9 @@
                                 <span class="day">{{$l_post->created_at->format('d')}}</span>
                                 <span class="month">{{substr($l_post->created_at->format('F'),0,3)}}</span>
                               </div>
-                              <h4><a href="{{ route('post_detail', $l_post->id) }}">{{substr($l_post->tittle,0,70)}}[...] <a href="{{ route('post_detail', $l_post->id) }}" class="read-more">read more <i class="fa fa-angle-right"></i></a></p>
+                              <h4><a href="{{ route('post_detail', $l_post->id) }}">{{$l_post->tittle}}</a></h4>
+                              <p><!-- {!!substr($l_post->content,0,270)!!} -->[...] <a href="{{ route('post_detail', $l_post->id) }}" class="read-more">read more <i class="fa fa-angle-right"></i></a></p>
+                              
                             </article>
                           </div>
                          @endforeach
@@ -282,7 +285,7 @@
                       <div>
                         <div class="col-md-12">
                           <blockquote class="testimonial">
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit vehicula est, in consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit vehicula est, in consequat.  Donec hendrerit vehicula est, in consequat.  Donec hendrerit vehicula est, in consequat.</p>
+                          <p>We desire to create a dynamic enviroment for all students to not only study but also experience </p>
                           </blockquote>
                           <div class="testimonial-arrow-down"></div>
                           <div class="testimonial-author">
@@ -296,7 +299,7 @@
                       <div>
                         <div class="col-md-12">
                           <blockquote class="testimonial">
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit vehicula est, in consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                          <p>We hope that Hanusoft will become an academic playground for all students who have enthusiasts of Information Technology.See you soon in Hanusoft.</p>
                           </blockquote>
                           <div class="testimonial-arrow-down"></div>
                           <div class="testimonial-author">
@@ -365,29 +368,29 @@
                   <div class="owl-carousel testimonials" data-plugin-options='{"items": 1}'>
                     <div>
                       <div class="col-md-12">
-                        <img src="{{url('frontend/img/clients/client-1.jpg')}}" class="img-responsive img-circle" alt="">
+                        <img src="{{url('frontend/img/founder.jpg')}}" class="img-responsive img-circle" alt="">
                         <blockquote class="testimonial-carousel">
                         <p>This theme is totally customizable, clean with all the options you could want. Don't want full screen layout? With one word added to the code the entire site becomes a boxed version.... The customer support is absolutely unsurpassed. Every question is answered with more help than anyone could expect for the price. Can not recommend this enough.</p>
                         </blockquote>
-                        <p class="white"><strong>John Smith</strong><br><span>CEO & Founder - Okler</span></p>
+                        <p class="white"><strong>Trinh Bao Ngoc</strong><br><span>FIT - Vice</span></p>
                       </div>
                     </div>
                     <div>
                       <div class="col-md-12">
-                        <img src="{{url('frontend/img/clients/client-1.jpg')}}" class="img-responsive img-circle" alt="">
+                        <img src="{{url('frontend/img/founder.jpg')}}" class="img-responsive img-circle" alt="">
                         <blockquote class="testimonial-carousel">
                         <p>Excellent customer support. I had a minor issue with getting the contact form to work and I was provided with a solution within 8 hours and over the weekend. </p>
                         </blockquote>
-                        <p class="white"><strong>John Smith</strong><br><span>CEO & Founder - Okler</span></p>
+                        <p class="white"><strong>Trinh Bao Ngoc</strong><br><span>FIT - Vice</span></p>
                       </div>
                     </div>
                     <div>
                       <div class="col-md-12">
-                        <img src="{{url('frontend/img/clients/client-1.jpg')}}" class="img-responsive img-circle" alt="">
+                        <img src="{{url('frontend/img/founder.jpg')}}" class="img-responsive img-circle" alt="">
                         <blockquote class="testimonial-carousel">
                         <p>Outstanding about everything : - Support is fast and perfect : I got answers to every questions I asked. - Code quality is up to date, modern, structured, clear, easy to understand. </p>
                         </blockquote>
-                        <p class="white"><strong>John Smith</strong><br><span>CEO & Founder - Okler</span></p>
+                        <p class="white"><strong>Trinh Bao Ngoc</strong><br><span>FIT - Vice</span></p>
                       </div>
                     </div>
                   </div>
@@ -405,14 +408,14 @@
                 <strong>
                   <span class="word-rotate" data-plugin-options='{"delay": 3500, "animDelay": 400}'>
                     <span class="word-rotate-items">
-                      <span>excited</span>
-                      <span>happy</span>
+                      <span style="color:red">excited</span>
+                      <span style="color: red">happy</span>
                     </span>
                   </span>
                 </strong>
-                about Hanusoft Template...
+                about Hanusoft ...
               </h2>
-              <p class="lead">13,000+ customers in more than 100 countries use Hanusoft Template.</p>
+              <p class="lead">13 members and 5 projects in current year and will countinue to increase</p>
             </div>
           </div>
           <div class="row center push-top">

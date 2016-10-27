@@ -4680,7 +4680,6 @@ window.Echo.private('App.User.' + userId).notification(function (notification) {
         $('#badge_num_unread_noti').text(new_num_unread_noti);
     }
     if (notification.type == 'App\\Notifications\\ChatProject') {
-        console.log(notification.type);
         var new_msg = '<div class="msg-time-chat"><a href="#" class="message-img"><img class="avatar" style="width:45px;height:45px" src="hanusoft.dev:8000/frontend/img/team/' + notification.member_avt + '" alt=""></a><div class="message-body msg-out"><span class="arrow"></span><div class="text"><p class="attribution"> <a href="' + notification.member_avt + '">' + notification.member_name + '</a> at a moment ago</p><p>' + notification.message + '</p></div></div></div>';
         $('#msg-cont').append(new_msg);
         var num_unread_mess = parseInt($('#num_unread_mess').text());
@@ -4688,12 +4687,25 @@ window.Echo.private('App.User.' + userId).notification(function (notification) {
         var new_num_unread_mess = num_unread_mess + temp;
         $('#num_unread_mess').text(new_num_unread_mess);
         $('#badge_num_unread_mess').text(new_num_unread_mess);
-        var new_noti_msg = '<li><a href="#"><span class="photo"><img alt="avatar" src="#"></span><span class="subject"><span class="from" style="color:red">' + notification.member_name + '</span><span class="time">moment ago</span></span><span class="message"><strong>' + notification.project_chat_name + '</strong></span><span class="message">' + notification.message + '</span></a></li>';
+        var new_noti_msg = '<li><a href="http://hanusoft.dev:8000/member/mail"><span class="photo"><img alt="avatar" src="#"></span><span class="subject"><span class="from" style="color:red">' + notification.member_name + '</span><span class="time">moment ago</span></span><span class="message"><strong>' + notification.project_chat_name + '</strong></span><span class="message">' + notification.message + '</span></a></li>';
         console.log(new_noti_msg);
         $('#header_inbox_bar ul').prepend(new_noti_msg);
         $('#header_inbox_bar li:last').remove();
 
         /*$('#header_inbox_bar li').find(' > li:nth-last-child(2)').remove();*/
+    }
+    if (notification.type == 'App\\Notifications\\AddNewState') {
+        var n_state = '<article class="timeline-item"><div class="timeline-desk"><div class="panel"><div class="panel-body"><span class="arrow"></span><span class="timeline-icon red"></span><span class="timeline-date">08:25 am</span><h1 class="red">' + notification.state_due_date + '</h1><p>' + notification.state_content + '</p></div></div></div></article>';
+        $('#timeline' + notification.project_id).prepend(n_state);
+        var new_state = '<li id="' + notification.id + '"><a href="http://hanusoft.dev:8000/member/project/' + notification.project_id + '"><span class="label label-danger"><i class="icon-bolt"></i></span>New State Added.<span class="small italic">' + notification.project_name + '</span></a></li>';
+        $('#header_notification_bar ul').prepend(new_state);
+        $('#header_notification_bar li:last').remove();
+        console.log(notification.type);
+        var num_unread_noti = parseInt($('#num_unread_noti').text());
+        var temp = parseInt(" 1 ");
+        var new_num_unread_noti = num_unread_noti + temp;
+        $('#num_unread_noti').text(new_num_unread_noti);
+        $('#badge_num_unread_noti').text(new_num_unread_noti);
     }
     console.log(notification.type);
 });

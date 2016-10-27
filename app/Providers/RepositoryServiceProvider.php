@@ -44,5 +44,9 @@ class RepositoryServiceProvider extends ServiceProvider
             'App\Repositories\Contracts\ReplyCommentRepositoryInterface',
             'App\Repositories\Eloquents\ReplyCommentRepository'
         );
+        $this->app->bind(
+            'App\Repositories\Contracts\StateRepositoryInterface',
+            'App\Repositories\Eloquents\StateRepository'
+        );
     }
 }
