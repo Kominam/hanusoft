@@ -32,15 +32,19 @@ class PostController extends Controller
       $arr_cmt_id = $this->postRepository->getArrCommentID($id);
       return view('frontend.pages.post_detail',['post'=>$post, 'arr_cmt_id' =>$arr_cmt_id]);
     }
-    //Add
+    //Add New Post
     public function showAddForm() {
     	return view('backend.pages.write-post');
     }
     public function add(Request $request) {
-         $this->postRepository->create($request);
+         $validator = $this->postRepository->validatorNew($request);
+         if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+         } else {
+             $this->postRepository->create($request);
+             return redirect()->route('your-post');
+         }
     }
-    
-
    	//EDIT
 
    	public function showEditForm($id) {
@@ -49,12 +53,18 @@ class PostController extends Controller
    	}
 
    	public function edit(Request $request, $id) {
-   		  $this->postRepository->update($request, $id);
+       $validator = $this->postRepository->validatorNew($request);
+         if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+         } else {
+            $this->postRepository->update($request, $id);
+            return redirect()->route('your-post');
+         }
    	}
 
    	public function delete($id) {
    		$this->postRepository->delete($id);
-      return redirect()->back();
+      return redirect()->route('your-post');
    	}
 
      public function filterByCategory($id) {

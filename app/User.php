@@ -34,12 +34,15 @@ class User extends Authenticatable
     public function posts() {
         return $this->hasMany('App\Post');
     }
+
     public function grade() {
         return $this->belongsTo('App\Grade');
     }
+
     public function invitations() {
-        return $this->belongsToMany('App\Invitation', 'invitation_user');
+        return $this->belongsToMany('App\Invitation', 'invitation_user')->withPivot('response');
     }
+
     public function project_chats() {
         return $this->belongsToMany('App\ProjectChat','project_chat_user', 'user_id', 'project_chat_id')->withPivot('message')->withTimestamps();
     }

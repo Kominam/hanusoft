@@ -47,7 +47,7 @@
                 </section>
                 <section class="panel">
                     <div class="bio-graph-heading">
-                        Aliquam ac magna metus. Nam sed arcu non tellus fringilla fringilla ut vel ispum. Aliquam ac magna metus.
+                       {{$member->bio}}
                     </div>
                     <div class="panel-body bio-graph-info">
                         <h1>Bio Graph</h1>
@@ -70,7 +70,7 @@
                                 <p><span>Address </span>: {{$member->address}}</p>
                             </div>
                             <div class="bio-row">
-                                <p><span>Birthday</span>: 13 July 1983</p>
+                                <p><span>Birthday</span>: {{$member->birthday}}</p>
                             </div>
                             <div class="bio-row">
                                 <p><span>Occupation </span>: {{$member->position->name}}</p>
@@ -79,7 +79,7 @@
                                 <p><span>Email </span>: {{$member->email}}</p>
                             </div>
                             <div class="bio-row">
-                                <p><span>Mobile </span>: (12) 03 4567890</p>
+                                <p><span>Mobile </span>: {{$member->phone}}</p>
                             </div>
                               <div class="bio-row">
                                 <p><span>Grade </span>: {{$member->grade->name}}</p>

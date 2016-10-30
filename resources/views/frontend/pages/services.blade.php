@@ -25,8 +25,10 @@
                 <p class="lead">
                     At Hanusoft, we are committed to providing customers with the best possible IT and systems support services that we can offer.
                     We also believe in giving clear information about each of the services we provide, as well as the standards that we aim to achieve.
+
                     Your goal - and ours - is to keep your plant running smoothly at all times. Our efforts are firmly focused on delivering what your plant needs,
                     and we cooperate closely with our customers to work out a package of services that fits perfectly.
+
                     Wherever you are in the world, our experienced team of process engineers located close to you is ready to provide you the needed support and troubleshooting.
                 </p>
             </div>
@@ -98,7 +100,7 @@
                         </div>
                         <div class="feature-box">
                             <div class="feature-box-icon">
-                                <i class="fa fa-google-plus"></i>
+                                <i class="fa fa-stack-overflow"></i>
                             </div>
                             <div class="feature-box-info">
                                 <h4 class="shorter">PHP</h4>

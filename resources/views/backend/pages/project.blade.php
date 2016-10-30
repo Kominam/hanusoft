@@ -1,11 +1,10 @@
 
-
 @extends('backend.pages.master')
 @section('external_css')
-<link href="{{url('backend/assets/font-awesome/css/font-awesome.css')}}" rel="stylesheet" />
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-<link href="{{url('backend/css/tasks.css')}}" rel="stylesheet">
-<link href="{{url('backend/assets/xchart/xcharts.css')}}" rel="stylesheet" />
+    <link href="{{url('backend/assets/font-awesome/css/font-awesome.css')}}" rel="stylesheet" />
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <link href="{{url('backend/css/tasks.css')}}" rel="stylesheet">
+    <link href="{{url('backend/assets/xchart/xcharts.css')}}" rel="stylesheet" />
 @endsection
 @section('content')
 <section class="wrapper site-min-height">
@@ -170,7 +169,8 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                     <h4 class="modal-title">Invite New members</h4>
                                 </div>
                                 <div class="modal-body">
@@ -232,7 +232,9 @@
                         <h3 class="timeline-title">Timeline</h3>
                         <p class="t-info">This is a project timeline</p>
                     </div>
-                    <div class="timeline">
+                    <div class="timeline" id="timeline{{$project->id}}">
+                        @if ($project->states->count()>0)
+                        @foreach ($project->states as $state)
                         <article class="timeline-item">
                             <div class="timeline-desk">
                                 <div class="panel">
@@ -240,86 +242,75 @@
                                         <span class="arrow"></span>
                                         <span class="timeline-icon red"></span>
                                         <span class="timeline-date">08:25 am</span>
-                                        <h1 class="red">12 July | Sunday</h1>
-                                        <p>Lorem ipsum dolor sit amet consiquest dio</p>
+                                        <h1 class="red">{{$state->due_date}}</h1>
+                                        <p>{{$state->content}}</p>
                                     </div>
                                 </div>
                             </div>
                         </article>
-                        <article class="timeline-item alt">
-                            <div class="timeline-desk">
-                                <div class="panel">
-                                    <div class="panel-body">
-                                        <span class="arrow-alt"></span>
-                                        <span class="timeline-icon green"></span>
-                                        <span class="timeline-date">10:00 am</span>
-                                        <h1 class="green">10 July | Wednesday</h1>
-                                        <p><a href="#">Jonathan Smith</a> added new milestone <span><a href="#" class="green">ERP</a></span></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                        <article class="timeline-item">
-                            <div class="timeline-desk">
-                                <div class="panel">
-                                    <div class="panel-body">
-                                        <span class="arrow"></span>
-                                        <span class="timeline-icon blue"></span>
-                                        <span class="timeline-date">11:35 am</span>
-                                        <h1 class="blue">05 July | Monday</h1>
-                                        <p><a href="#">Anjelina Joli</a> added new album <span><a href="#" class="blue">PARTY TIME</a></span></p>
-                                        <div class="album">
-                                            <a href="#">
-                                            <img alt="" src="img/sm-img-1.jpg">
-                                            </a>
-                                            <a href="#">
-                                            <img alt="" src="img/sm-img-2.jpg">
-                                            </a>
-                                            <a href="#">
-                                            <img alt="" src="img/sm-img-3.jpg">
-                                            </a>
-                                            <a href="#">
-                                            <img alt="" src="img/sm-img-1.jpg">
-                                            </a>
-                                            <a href="#">
-                                            <img alt="" src="img/sm-img-2.jpg">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                        <article class="timeline-item alt">
-                            <div class="timeline-desk">
-                                <div class="panel">
-                                    <div class="panel-body">
-                                        <span class="arrow-alt"></span>
-                                        <span class="timeline-icon purple"></span>
-                                        <span class="timeline-date">3:20 pm</span>
-                                        <h1 class="purple">29 June | Saturday</h1>
-                                        <p>Lorem ipsum dolor sit amet consiquest dio</p>
-                                        <div class="notification">
-                                            <i class=" icon-exclamation-sign"></i> New task added for <a href="#">Denial Collins</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                        <article class="timeline-item">
-                            <div class="timeline-desk">
-                                <div class="panel">
-                                    <div class="panel-body">
-                                        <span class="arrow"></span>
-                                        <span class="timeline-icon light-green"></span>
-                                        <span class="timeline-date">07:49 pm</span>
-                                        <h1 class="light-green">10 June | Friday</h1>
-                                        <p><a href="#">Jonatha Smith</a> added new milestone <span><a href="#" class="light-green">prank</a></span> Lorem ipsum dolor sit amet consiquest dio</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
+                        @endforeach
+                        @endif
                     </div>
-                    <div class="clearfix"> </div>
+                    <div class="clearfix">&nbsp;</div>
+                    <a class="btn btn-success btn-sm pull-left" href="#newstate" data-toggle="modal">+ State</a>
+                    <div class="modal fade" id="newstate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title">Add New State</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="#" method="POST">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="state_content" placeholder="Content " name="content" value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="date" class="form-control" id="state_due_date" placeholder="Due Date " name="due_date" value="">
+                                        </div>
+                                        <div class="form-group">
+                                            Status :
+                                            <select id="state_status">
+                                                <option value="on_queue">On queue</option>
+                                                <option value="done">Done</option>
+                                                <option value="over_date">Over DueDate</option>
+                                            </select>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <a class="btn btn-success" href="#addstate">Add this state</a>
+                                    <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script type="text/javascript">
+                        $(document).ready(function() {
+                          $.ajaxSetup({
+                            headers: {
+                              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                          });
+                          $('a[href="#addstate"]').click(function(){
+                              var project_id= "{{$project->id}}";
+                              var content = $('#state_content').val();
+                              var due_date = $('#state_due_date').val();
+                              var status = $('#state_status').val();
+                              $.ajax({
+                              url:'/member/add-state',
+                              type: "post",
+                              data: { '_token': $('input[name=_token]').val(), 'project_id': project_id, 'content': content, 'due_date' : due_date, 'status': status},
+                              success: function(data) {
+                                  console.log(data);
+                                  alert("add state ok");
+                              }
+                          });
+                        });
+                        });
+
+                    </script>
                 </div>
             </section>
         </div>

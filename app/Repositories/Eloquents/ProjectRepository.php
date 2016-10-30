@@ -50,38 +50,63 @@ class ProjectRepository implements ProjectRepositoryInterface
         $project->users()->detach();
         $project->save();
     }
-    public function create(Request $request){
-      /* $messages = [
+
+    public function validatorNew(Request $request) {
+        $messages = [
                'name.required'=>'Enter the name for this project',
                'name.unique'=>'This name is already existing',
                'description.required'=>'Enter the description for this project',
                'link_preview.url'=>'This link is not correct',
                'link_preview.unique'=>'This link is used for another project',
+               'skills.required' => 'Choose at lease one nesccesay skill',
+               'project_cate_id.required' => 'Choose type of this project'
         ];
         $validator = Validator:: make($request->all(),[
               'name'=>'required|unique:projects,name',
               'description'=>'required',
               'link_preview'=>'url|unique:projects,link_preview',
+              'skills' => 'required',
+              'project_cate_id' => 'required'
         ], $messages);
-        if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
-        }*/
-       $project= new Project;
+        return $validator;
+    }
+    public function validatorUpdate(Request $request) {
+        $messages = [
+               'name.required'=>'Enter the name for this project',
+               'name.unique'=>'This name is already existing',
+               'description.required'=>'Enter the description for this project',
+               'link_preview.url'=>'This link is not correct',
+               'link_preview.unique'=>'This link is used for another project',
+               'skills.required' => 'Choose at lease one nesccesay skill',
+               'type_id.required' => 'Choose type of this project'
+        ];
+        $validator = Validator:: make($request->all(),[
+              'name'=>'required|unique:projects,name,'.$id,
+              'description'=>'required',
+              'link_preview'=>'url|unique:projects,link_preview,'.$id,
+              'skills' => 'required',
+              'type_id' => 'required'
+        ], $messages);
+        return $validator;
+    }
+
+    public function create(Request $request){
+    	 $project= new Project;
        $project->name = $request->name;
        $project->description = $request->description;
        if ($request->has('link_preview')) {
         $project->link_preview = $request->link_preview;
        }
 
-      $project->type_id= $request->project_cate_id;
+    	$project->type_id= $request->project_cate_id;
       $project->save();
-      //Define skill
-      if ($request->has('skills')) {
+    	//Define skill
+    	if ($request->has('skills')) {
         $this->defineRequiredSkill($request->skills, $project);
       }
 
-      //Invite for member (if avaialble)
-      if ($request->has('inviters')) {
+    	//Invite for member (if avaialble)
+    	if ($request->has('inviters')) {
               $new_invitation = Invitation::create(['leadership_id' => Auth::user()->id, 'project_id' => $project->id]);
               $new_invitation->save();
               foreach ($request->inviters as $inviter_id) {
@@ -91,31 +116,22 @@ class ProjectRepository implements ProjectRepositoryInterface
                 $inviter->notify(new InvitetoProject(Auth::user()->name,$project->name, Auth::user()->id, $project->id));
               }
         }
-      return redirect()->route('dashboard');
-    }
-    public function update(Request $request, $id){
-      $project = Project::find($id);
-      $messages = [
-               'name.required'=>'Enter the name for this project',
-               'name.unique'=>'This name is already existing',
-               'description.required'=>'Enter the description for this project',
-               'link_preview.required'=>'Enter the URL demo for this project',
-               'link_preview.url'=>'This link is not correct',
-               'link_preview.unique'=>'This link is used for another project'
-        ];
-        $validator = Validator:: make($request->all(),[
-              'name'=>'required|unique:projects,name,'.$id,
-              'description'=>'required',
-              'link_preview'=>'required|url|unique:projects,link_preview,'.$id,
-        ], $messages);
-        if ($validator->fails()) {
-            return redirect('/')->withErrors($validator)->withInput();
-        }
-      $project->name = $request->name;
-      $project->description = $request->description;
-      $project->link_preview = $request->link_preview;
-      $project->type_id = $request->type_id;
+      //Attach the leadership who have create project
+      $this->assignMember(Auth::user()->id,$project);
       $project->save();
+      //Return
+      return $project;
+    }
+
+    public function update(Request $request, $id){
+    	$project = Project::find($id);
+    	$project->name = $request->name;
+    	$project->description = $request->description;
+    	$project->link_preview = $request->link_preview;
+    	$project->type_id = $request->type_id;
+    	$project->save();
+      return $project;
+
     }
     public function delete($id) {
       return Project::destroy($id);
@@ -133,25 +149,45 @@ class ProjectRepository implements ProjectRepositoryInterface
         $inviter->notify(new InvitetoProject(Auth::user()->name,$request->project_name, Auth::user()->id, $request->project_id));
       }
     }
-    public function acceptInvite(Request $request) {
+
+    public function handleInvitation(Request $request) {
+      //response = 0 -> on queue
+      //response =1 -> accpet
+      //reposnse =2 -> decline
       $response = $request->response;
+      $user = Auth::user();
+      $invitation = Invitation::where('project_id','=', $request->project_id)->first();
+      $project = Project::find($request->project_id);
       //change the respon of invitation_user
       if ($response=='accept') {
+        //Change response to 1
+        $user->invitations()->updateExistingPivot($invitation->id,['response'=>1]);
         //assgin member to project
-        $project = Project::find($request->project_id);
         $this->assignMember(Auth::user()->id,$project );
-        /*$notification = Notifications::where('type','=','App\Notifications\InvitetoProject')->where('data["project_id"]', '=',$request->project_id)->first();
-        $notification->markAsRead();*/
-        /*$spec_noti = DB::table('notifications')->where('type','=','App\Notifications\InvitetoProject')->where('notifiable_id', Auth::user()->id)->where('data["project_id"]', '=',$request->project_id)->first();
-        $spec_noti->markAsRead();*/
+        //Mark as read
+        $notification = $user->notifications()->where('id',$request->noti_id)->first();
+        if ($notification)
+        {
+            $notification->markAsRead();
+        }
         return 'Assign Ok';
-      }
-      else if ($response=='decline') {
-        //delte invitation
-        $member= User::find(Auth::user()->id);
-        $invitation = Invitation::where('project_id','=', $request->project_id)->first();
-        $member->invitations()->detach($invitation->id);
+        } else if ($response=='decline') {
+        //Change response in invitation_user
+        $user->invitations()->updateExistingPivot($invitation->id,['response'=>2]);
+        //Mark as read
+        $notification = $user->notifications()->where('id',$request->noti_id)->first();
+        if ($notification)
+        {
+            $notification->markAsRead();
+        }
         return 'decline ok';
+        } else if ($response=='hide') {
+        //Mark as read
+        $notification = $user->notifications()->where('id',$request->noti_id)->first();
+        if ($notification)
+        {
+            $notification->markAsRead();
+        }
       }
     }
     public function canInvinteMember($id) {

@@ -1,4 +1,6 @@
 <section id="container" class="">
+ <script src="{{url('backend/js/jquery-1.8.3.min.js')}}"></script>
+  <input type="hidden" name="_token" value="{{csrf_token()}}" >
     <!--header start-->
     <header class="header white-bg">
         <div class="sidebar-toggle-box">
@@ -98,14 +100,15 @@
                     <i class="icon-envelope-alt"></i>
                     <span class="badge bg-important" id="badge_num_unread_mess">{{$num_unread_mess}}</span>
                     </a>
-                    <ul class="dropdown-menu extended inbox">
+                    <ul class="dropdown-menu extended inbox" id="inbox">
                         <div class="notify-arrow notify-arrow-red"></div>
                         <li>
                             <p class="red">You have <span id="num_unread_mess">{{$num_unread_mess}}</span>new messages</p>
                         </li>
                           @foreach (Auth::user()->unreadNotifications->take(5) as $notification)
                              @if($notification->type=='App\Notifications\ChatProject')
-                                     <li>
+
+                                     <li id="{{$notification->id}}">
                                         <a href="{{ url('member/mail') }}">
                                         <span class="photo"><img alt="avatar" src="{{url('frontend/img/team/'.$notification->data['member_avt'])}}"></span>
                                         <span class="subject">
@@ -121,6 +124,30 @@
                                         </a>
                                     </li>
                              @endif
+                             <script type="text/javascript">
+                              $(document).ready(function() {
+                                 var num_unread_mess= parseInt($('#num_unread_mess').text());
+                                 var temp= parseInt(" 1 ");
+                                    $("#inbox").on("click", "#{{$notification->id}}", function(event){
+                                        var noti_id = "{{$notification->id}}";
+                                         $.ajaxSetup({
+                                              headers: {
+                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                              }
+                                            });
+                                          $.ajax({
+                                                url:'/member/notifications',
+                                                type: "post",
+                                                data: { '_token': $('input[name=_token]').val(), 'noti_id': noti_id},
+                                                success: function(data) {
+                                                    var new_num_unread_mess = num_unread_mess - temp;
+                                                    $('#num_unread_mess').text(new_num_unread_mess);
+                                                    $('#badge_num_unread_mess').text(new_num_unread_mess);
+                                                    }
+                                                });
+                                    });
+                                 });
+                             </script>
                           @endforeach
                         <li>
                             <a href="#">See all messages</a>
@@ -135,16 +162,17 @@
                     <i class="icon-bell-alt"></i>
                     <span class="badge bg-warning" id="badge_num_unread_noti">{{$num_unread_noti}}</span>
                     </a>
-                    <ul class="dropdown-menu extended notification">
+                    <ul class="dropdown-menu extended notification" id="noti">
                         <div class="notify-arrow notify-arrow-yellow"></div>
                         <li>
                             <p class="yellow">You have <span id="num_unread_noti">{{$num_unread_noti}}</span> new notifications</p>
                         </li>
-                        <input type="hidden" name="_token" value="{{csrf_token()}}" >
+
                         @foreach (Auth::user()->unreadNotifications->take(5) as $notification)
                          @if($notification->type=='App\Notifications\InvitetoProject')
                               <li id="invite{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}">
                                 <a href="#">
+                                <span style="display: none" id="noti_id">{{$notification->id}}</span>
                                 <span class="label label-danger"><i class="icon-bolt"></i></span>
                                  <span style="color:red;font-size:15px">Invite project</span><br>{{$notification->data['project_name']}} from {{$notification->data['leadership_name']}}
                                  <br>
@@ -154,7 +182,7 @@
                                     <tr>
                                         <td><a id="accept{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}"><i class=" icon-ok" style="color:green">Accept</i></a></td>
                                         <td><a id="decline{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}"><i class="icon-minus" style="color:red">Decline</i></a></td>
-                                        <td><a href="#hide"><i class="icon-off">Hide</i></td>
+                                        <td><a id="hide{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}"><i class="icon-off">Hide</i></td>
                                     </tr>
                                 </table>
                                 </a>
@@ -168,14 +196,22 @@
                                             });
 
                                           /*$('#header_notification_bar ul').prepend('Some text');*/
+                                        var notification_id = $('#noti_id').text();
+                                        var num_unread_noti= parseInt($('#num_unread_noti').text());
+                                        var temp= parseInt(" 1 ");
                                         $('#accept{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}').click(function(){
                                                 var project_id="{{$notification->data['project_id']}}";
                                                 $.ajax({
                                                 url:'/member/accept-invite',
                                                 type: "post",
-                                                data: { '_token': $('input[name=_token]').val(), 'project_id': project_id, 'response': 'accept'},
+
+                                                data: { '_token': $('input[name=_token]').val(), 'project_id': project_id, 'response': 'accept', 'noti_id': notification_id},
                                                 success: function(data) {
+                                                    alert("Accept success");
                                                     $('#invite{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}').remove();
+                                                     var new_num_unread_noti = num_unread_noti - temp;
+                                                    $('#num_unread_noti').text(new_num_unread_noti);
+                                                    $('#badge_num_unread_noti').text(new_num_unread_noti);
                                                     }
                                                 });
                                             });
@@ -184,14 +220,58 @@
                                                 $.ajax({
                                                 url:'/member/accept-invite',
                                                 type: "post",
-                                                data: { '_token': $('input[name=_token]').val(), 'project_id': project_id, 'response': 'decline'},
+                                                data: { '_token': $('input[name=_token]').val(), 'project_id': project_id, 'response': 'decline','noti_id': notification_id},
                                                 success: function(data) {
-                                                    console.log(data);
+                                                     alert("Decline success");
                                                     $('#invite{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}').remove();
+                                                     var new_num_unread_noti = num_unread_noti - temp;
+                                                    $('#num_unread_noti').text(new_num_unread_noti);
+                                                    $('#badge_num_unread_noti').text(new_num_unread_noti);
+                                                    }
+                                                });
+                                            });
+                                        $('#hide{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}').click(function(){
+                                              var project_id="{{$notification->data['project_id']}}";
+                                                $.ajax({
+                                                url:'/member/accept-invite',
+                                                type: "post",
+                                                data: { '_token': $('input[name=_token]').val(), 'project_id': project_id, 'response': 'hide',  'noti_id': notification_id},
+                                                success: function(data) {
+                                                     alert("Hide success");
+                                                    $('#invite{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}').remove();
+                                                     var new_num_unread_noti = num_unread_noti - temp;
+                                                    $('#num_unread_noti').text(new_num_unread_noti);
+                                                    $('#badge_num_unread_noti').text(new_num_unread_noti);
                                                     }
                                                 });
                                             });
                                     });
+                             </script>
+                        @elseif($notification->type=='App\Notifications\AddNewState')
+                            <li id="{{$notification->id}}"><a href="{{ route('backend.project', $notification->data['project_id']) }}"><span class="label label-danger"><i class="icon-bolt"></i></span>New State Added.<span class="small italic">{{$notification->data['project_name']}}</span></a></li>'
+                             <script type="text/javascript">
+                              $(document).ready(function() {
+                                 var num_unread_noti= parseInt($('#num_unread_noti').text());
+                                 var temp= parseInt(" 1 ");
+                                    $("#noti").on("click", "#{{$notification->id}}", function(event){
+                                        var noti_id = "{{$notification->id}}";
+                                         $.ajaxSetup({
+                                              headers: {
+                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                              }
+                                            });
+                                          $.ajax({
+                                                url:'/member/notifications',
+                                                type: "post",
+                                                data: { '_token': $('input[name=_token]').val(), 'noti_id': noti_id},
+                                                success: function(data) {
+                                                    var new_num_unread_noti = num_unread_noti - temp;
+                                                    $('#num_unread_noti').text(new_num_unread_noti);
+                                                    $('#badge_num_unread_noti').text(new_num_unread_noti);
+                                                    }
+                                                });
+                                    });
+                                 });
                              </script>
                         @endif
                         @endforeach

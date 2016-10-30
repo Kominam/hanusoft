@@ -32,4 +32,7 @@ class Project extends Model
         return $this->hasOne('App\Invitation');
     }
 
+    public function states() {
+        return $this->hasMany('App\State');
+    }
 }
