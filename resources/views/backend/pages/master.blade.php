@@ -14,6 +14,7 @@
     <!-- Bootstrap core CSS -->
     <link href="{{url('backend/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{url('backend/css/bootstrap-reset.css')}}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{url('backend/assets/gritter/css/jquery.gritter.css')}}" />
     <!--external css-->
     @yield('external_css')
     <!-- Custom styles for this template -->
@@ -36,7 +37,7 @@
       <!--footer end-->
   </section>
     <!-- js placed at the end of the document so the pages load faster -->
-    <script src="{{url('backend/js/jquery.js')}}"></script>
+    <!--   <script src="{{url('backend/js/jquery.js')}}"></script> -->
     <script src="{{url('backend/js/bootstrap.min.js')}}"></script>
     <script class="include" type="text/javascript" src="{{url('backend/js/jquery.dcjqaccordion.2.7.js')}}"></script>
     <script src="{{url('backend/js/jquery.scrollTo.min.js')}}"></script>
@@ -50,6 +51,8 @@
     <script type="text/javascript">
     </script>
     <script src="{{ elixir('js/app.js') }}"></script>
+    <script type="text/javascript" src="{{url('backend/assets/gritter/js/jquery.gritter.js')}}"></script>
+    
 
     @yield('external_script')
   </body>

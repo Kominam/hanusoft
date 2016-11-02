@@ -179,10 +179,10 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
-        Mews\Captcha\CaptchaServiceProvider::class,
         App\Providers\ViewComposerServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Mews\Captcha\CaptchaServiceProvider::class,
 
     ],
 
@@ -231,9 +231,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
-        'Captcha' => Mews\Captcha\Facades\Captcha::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Captcha' => Mews\Captcha\Facades\Captcha::class,
 
     ],
 

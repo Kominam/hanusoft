@@ -12,6 +12,7 @@ use Validator;
 use Event;
 use Auth;
 use App\Notifications\AddNewState;
+use App\Notifications\DeleteState;
 use Notifications;
 
 class StateRepository implements StateRepositoryInterface
@@ -28,7 +29,9 @@ class StateRepository implements StateRepositoryInterface
       $state->save();
       $project=Project::find($request->project_id);
       foreach ($project->users as $mem_in_project) {
-        $mem_in_project->notify(new AddNewState($project->id, $project->name, $state->content, $state->due_date, $state->status, Auth::user()->id, Auth::user()->name));
+        if (Auth::user()->id != $mem_in_project->id) {
+           $mem_in_project->notify(new AddNewState($project->id, $project->name, $state->content, $state->due_date, $state->status, Auth::user()->id, Auth::user()->name));
+        }
       }
       return $state;
     }
@@ -43,9 +46,16 @@ class StateRepository implements StateRepositoryInterface
       return $state;
     }
 
-   
+  
     public function delete($id) {
-      return State::destroy($id);
+      $state = State::findOrFail($id);
+      $project = $state->project;
+      foreach ($project->users as $mem_in_project) {
+        if (Auth::user()->id != $mem_in_project->id) {
+           $mem_in_project->notify(new DeleteState($project->id, $project->name,$state->id, $state->content, Auth::user()->id, Auth::user()->name));
+        }
+      }
+      $state->delete();
     }
 
 

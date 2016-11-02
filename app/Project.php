@@ -36,4 +36,8 @@ class Project extends Model
         return $this->hasMany('App\State');
     }
 
+    public function todo_items() {
+        return $this->hasMany('App\TodoItem');
+    }
+
 }

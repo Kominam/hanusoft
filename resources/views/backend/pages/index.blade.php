@@ -40,51 +40,60 @@
 @endsection
 @section('content')
 <section class="wrapper">
+@if (empty(Auth::user()->grade->name) || empty(Auth::user()->position->name))
+    <div class="row">
+        <div class="col-lg-12 col-sm-12 alert alert-danger">
+            <a href="{{ route('profile-edit') }}" style="text-decoration:none;color: inherit;"><i class="icon-warning-sign"></i> You must update some important information right now </a>
+        </div>
+    </div>
+@endif
     <!--state overview start-->
     <div class="row state-overview">
         <div class="col-lg-3 col-sm-6">
             <section class="panel">
                 <div class="symbol terques">
-                    <i class="icon-user"></i>
+                    <i class="icon-folder-open"></i>
                 </div>
                 <div class="value">
                     <h1 class="count">
+                    <span id="num_project" style="display: none">{{Auth::user()->projects->count()}}</span>
                         0
                     </h1>
-                    <p>New Users</p>
-                </div>
-            </section>
-        </div>
-        <div class="col-lg-3 col-sm-6">
-            <section class="panel">
-                <div class="symbol red">
-                    <i class="icon-tags"></i>
-                </div>
-                <div class="value">
-                    <h1 class=" count2">
-                        0
-                    </h1>
-                    <p>Sales</p>
-                </div>
-            </section>
-        </div>
-        <div class="col-lg-3 col-sm-6">
-            <section class="panel">
-                <div class="symbol yellow">
-                    <i class="icon-shopping-cart"></i>
-                </div>
-                <div class="value">
-                    <h1 class=" count3">
-                        0
-                    </h1>
-                    <p>New Order</p>
+                    <p>Projects</p>
                 </div>
             </section>
         </div>
         <div class="col-lg-3 col-sm-6">
             <section class="panel">
                 <div class="symbol blue">
-                    <i class="icon-bar-chart"></i>
+                    <i class="icon-tasks"></i>
+                </div>
+                <div class="value">
+                    <h1 class=" count2">
+                    <span id="num_post" style="display: none">{{Auth::user()->posts->count()}}</span>
+                        0
+                    </h1>
+                    <p>Posts</p>
+                </div>
+            </section>
+        </div>
+        <div class="col-lg-3 col-sm-6">
+            <section class="panel">
+                <div class="symbol yellow">
+                    <i class="icon-envelope"></i>
+                </div>
+                <div class="value">
+                    <h1 class=" count3">
+                        0
+                    </h1>
+                    <p>Messages</p>
+                </div>
+            </section>
+        </div>
+        <div class="col-lg-3 col-sm-6">
+            <section class="panel">
+                <div class="symbol red">
+                    <i class="icon-bell-alt"></i>
                 </div>
                 <div class="value">
                     <h1 class=" count4">
@@ -211,11 +220,11 @@
             <section class="panel">
                 <div class="panel-body">
                     <a href="#" class="task-thumb">
-                    <img src="img/avatar1.jpg" alt="">
+                    <img src="{{url('frontend/img/team/'.Auth::user()->url_avt)}}" alt="" width="90px" height="83px">
                     </a>
                     <div class="task-thumb-details">
-                        <h1><a href="#">Anjelina Joli</a></h1>
-                        <p>Senior Architect</p>
+                        <h1><a href="{{ route('profile')}}">{{Auth::user()->name}}</a></h1>
+                        <p>{{Auth::user()->grade ? Auth::user()->grade->name : 'Undefined'}} - {{Auth::user()->position ? Auth::user()->position->name : 'Undefined'}}</p>
                     </div>
                 </div>
                 <table class="table table-hover personal-task">
@@ -259,7 +268,7 @@
                 <div class="panel-body progress-panel">
                     <div class="task-progress">
                         <h1>Work Progress</h1>
-                        <p>Anjelina Joli</p>
+                        <p>{{Auth::user()->name}}</p>
                     </div>
                     <div class="task-option">
                         <select class="styled">
@@ -373,7 +382,7 @@
                                 </div>
                             </div>
                         </article>
-                        <article class="timeline-item">
+                        <article class="timeline-item alt">
                             <div class="timeline-desk">
                                 <div class="panel">
                                     <div class="panel-body">
@@ -518,29 +527,11 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    <ul class="ft-link">
+                    <ul class="ft-link" style="text-align: center;">
                         <li class="active">
                             <a href="javascript:;">
                             <i class="icon-reorder"></i>
-                            Sales
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                            <i class=" icon-calendar-empty"></i>
-                            promo
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                            <i class=" icon-camera"></i>
-                            photo
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                            <i class=" icon-circle"></i>
-                            other
+                            Todays Quote
                             </a>
                         </li>
                     </ul>

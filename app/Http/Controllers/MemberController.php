@@ -61,9 +61,12 @@ class MemberController extends Controller
          $validator = $this->memberRepository->validatorChangePwd($request);
          if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
-         } else {
+         } else if (!$this->memberRepository->checkCurrentPassword($request->currentPassword, Auth::user())) {
+            return back()->with('wrong_current_pass', 'This current password is not mactch.');
+         }
+          else {
              $this->memberRepository->changePwd($request);
-             return redirect()->route('profile');
+             return redirect()->route('profile')->with('change_profile','OK');
          }
     }
 }

@@ -97,7 +97,7 @@
                                     type: "post",
                                     data: { '_token': $('input[name=_token]').val(), 'project_chat_name': "{{$project_chat->name}}"},
                                     success: function(data) {   
-                                            $('#msg-cont').empty();
+                                           $('#msg-cont').empty();
                                            $('#msg-cont').prepend(data);
 
                                 }          
@@ -150,24 +150,30 @@
                                       </div>
                                   </div>
                                   <script type="text/javascript">
-                                      $(document).ready(function() {
-                                         $.ajaxSetup({
-                                          headers: {
-                                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                          }
-                                        });
-                                        $('#sendMsg').click(function() {
-                                              var project_chat_name = $('#project_chat_name').find('p').text();
-                                              var message= $('#message').val();
-                                               $.ajax({
-                                                    url:'/member/chat-project',
-                                                    type: "post",
-                                                    data: { '_token': $('input[name=_token]').val(), 'project_chat_name': project_chat_name, 'message': message},
-                                                    success: function(data) {   
-                                                }          
-                                            });
-                                        })
-                                      });
+                                       $(document).ready(function() {
+     $.ajaxSetup({
+       headers: {
+       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+       }
+     });
+   $('#sendMsg').click(function() {
+     $('#sendMsg').text('Waitting');
+     var project_chat_name = $('#project_chat_name').find('p').text();
+     var message= $('#message').val();
+     var sender_name ="{{Auth::user()->name}}";
+     $.ajax({
+       url:'/member/chat-project',
+       type: "post",
+       data: { '_token': $('input[name=_token]').val(), 'project_chat_name': project_chat_name, 'message': message},
+       success: function(data) {
+       $('#sendMsg').text('Send');
+       $('#message').val("");
+       var new_msg = '<div class="msg-time-chat"><a href="#" class="message-img"><img class="avatar" style="width:45px;height:45px" src="#" alt=""></a><div class="message-body msg-out"><span class="arrow"></span><div class="text"><p class="attribution"> <a href="">'+sender_name+'</a> at a moment ago</p><p>'+ message+'</p></div></div></div>';
+       $('#msg-cont').append(new_msg);
+       }          
+     });
+   })
+});
                                   </script>
 
                               </div>

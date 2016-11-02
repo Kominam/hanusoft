@@ -33,7 +33,7 @@ var Gritter = function () {
 
     });
 
-    $('#add-regular').click(function(){
+
 
         $.gritter.add({
             // (string | mandatory) the heading of the notification
@@ -50,7 +50,7 @@ var Gritter = function () {
 
         return false;
 
-    });
+
 
     $('#add-max').click(function(){
 

@@ -92,7 +92,7 @@ class ViewComposerServiceProvider extends ServiceProvider
           //Count unread notification
             View::composer(['backend.blocks.header'], function ($view) {
             $cur_mem = User::find(Auth::user()->id);
-            $num_unread_noti= $cur_mem->unreadNotifications->where('type','!=', 'App\Notifications\ChatProject')->count();
+            $num_unread_noti= $cur_mem->unreadNotifications()->whereNotIn('type',['App\Notifications\ChatProject', 'App\Notifications\AssignNewTask','App\Notifications\UpdateTask', 'App\Notifications\DeleteTask','App\Notifications\AddNewState', 'App\Notifications\DeleteState'])->count();
             $view->with('num_unread_noti', $num_unread_noti);
         });
             //Count unread message
@@ -105,6 +105,12 @@ class ViewComposerServiceProvider extends ServiceProvider
              View::composer(['backend.pages.mail'], function ($view) {
             $belonged_projects = Auth::user()->projects;
             $view->with('belonged_projects', $belonged_projects);
+        });
+              //Count unread task
+           View::composer(['backend.blocks.header'], function ($view) {
+            $cur_mem = User::find(Auth::user()->id);
+            $num_unread_task= $cur_mem->unreadNotifications->where('type','=', 'App\Notifications\AssignNewTask')->count();
+            $view->with('num_unread_task', $num_unread_task);
         });
        
 

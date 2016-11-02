@@ -53,6 +53,8 @@ class User extends Authenticatable
     public function project_chats() {
         return $this->belongsToMany('App\ProjectChat','project_chat_user', 'user_id', 'project_chat_id')->withPivot('message')->withTimestamps();
     }
-    
 
+    public function todo_items() {
+        return $this->belongsToMany('App\TodoItem','todo_item_user', 'user_id', 'todo_item_id')->withPivot('status')->withTimestamps();
+    }
 }

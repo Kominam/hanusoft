@@ -76,6 +76,7 @@ class MemberRepository implements MemberRepositoryInterface
         $user->url_github = $request->url_github;
         $user->save();
     }
+   
     public function validatorChangePwd(Request $request) {
           $messages = [
                'newPass.required'=>'Enter your new password',
@@ -90,12 +91,13 @@ class MemberRepository implements MemberRepositoryInterface
         ], $messages);
         return $validator;
     }
+    public function checkCurrentPassword($currentPassword, $member) {
+        return (Hash::check($currentPassword, $member->password));
+    }
     public function changePwd(Request $request) {
         $member = Auth::user();
-        if (Hash::check($request->currentPassword, $member->password)) {
-            $member->password = bcrypt($request->newPass);
-            $member->save();
-        }
+        $member->password = bcrypt($request->newPass);
+        $member->save();
         if ($request->hasFile('AvtImgFile')) {
             if ($request->file('AvtImgFile')->isValid()) {
                 $avtImg = $request->file('AvtImgFile');

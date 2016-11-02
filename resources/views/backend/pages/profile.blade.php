@@ -73,7 +73,7 @@
                                 <p><span>Birthday</span>: {{$member->birthday}}</p>
                             </div>
                             <div class="bio-row">
-                                <p><span>Occupation </span>: {{$member->position->name}}</p>
+                                <p><span>Occupation </span>: {{$member->position ? $member->position->name : 'Undefined'}}</p>
                             </div>
                             <div class="bio-row">
                                 <p><span>Email </span>: {{$member->email}}</p>
@@ -82,7 +82,7 @@
                                 <p><span>Mobile </span>: {{$member->phone}}</p>
                             </div>
                               <div class="bio-row">
-                                <p><span>Grade </span>: {{$member->grade->name}}</p>
+                                <p><span>Grade </span>: {{$member->grade ? $member->grade->name: 'Undefined'}}</p>
                             </div>
                         </div>
                     </div>

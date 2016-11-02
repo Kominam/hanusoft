@@ -64,7 +64,10 @@
                                 <div class="col-lg-6">
                                    <select class="form-control m-bot15" name="position_id">
                                       @foreach ($all_position as $position)
-                                          <option value="{{$position->id}}" {{($position->id === $member->position->id) ? 'selected="selected"' : ''}}
+                                          <option value="{{$position->id}}"
+                                            @if ($member->position)
+                                              {{($position->id === $member->position->id) ? 'selected="selected"' : ''}}
+                                            @endif
                                           >{{$position->name}}</option>
                                       @endforeach
                                     </select>
@@ -73,7 +76,7 @@
                             <div class="form-group">
                                 <label  class="col-lg-2 control-label">Mobile</label>
                                 <div class="col-lg-6">
-                                    <input type="text" class="form-control" id="email" placeholder=" " name="phone" value={{$member->email}}>
+                                    <input type="text" class="form-control" id="email" placeholder=" " name="phone" value={{$member->phone}}>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -81,7 +84,11 @@
                                 <div class="col-lg-6">
                                     <select class="form-control m-bot15" name="grade_id">
                                         @foreach ($all_grade as $grade)
-                                            <option value="{{$grade->id}}" {{($grade->id === $member->grade->id) ? 'selected="selected"' : ''}}>{{$grade->name}}</option>
+                                            <option value="{{$grade->id}}" 
+                                            @if ($member->grade)
+                                               {{($grade->id === $member->grade->id) ? 'selected="selected"' : ''}}
+                                            @endif
+                                            >{{$grade->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -122,8 +129,13 @@
                                 <div class="form-group">
                                     <label  class="col-lg-2 control-label">Current Password</label>
                                     <div class="col-lg-6">
-                                        <input type="password" class="form-control" id="c-pwd" placeholder=" " name="currentPassword">
+                                        <input type="password" class="form-control" id="c-pwd" placeholder=" " name="currentPassword">   
                                     </div>
+                                    @if (session('wrong_current_pass'))
+                                        <span style="color: red">
+                                            {{ session('wrong_current_pass') }}
+                                       </span>
+                                    @endif
                                 </div>
                                 <div class="form-group">
                                     <label  class="col-lg-2 control-label">New Password</label>

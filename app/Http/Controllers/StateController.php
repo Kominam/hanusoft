@@ -20,4 +20,7 @@ class StateController extends Controller
     	$new_state = $this->stateRepository->create($request);
     	return response()->json($new_state);
     }
+    public function delete($state_id) {
+    	$this->stateRepository->delete($state_id);
+    }
 }

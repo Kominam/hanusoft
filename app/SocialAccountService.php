@@ -19,7 +19,6 @@ class SocialAccountService
         if ($account) {
             return $account->user;
         } else {
-
             $account = new SocialAccount([
                 'provider_user_id' => $providerUser->getId(),
                 'provider' => $providerName
@@ -33,14 +32,14 @@ class SocialAccountService
                     'email' => $providerUser->getEmail(),
                     'name' => $providerUser->getName(),
                     'password' => 'SocialUsers'.date('YYmmddHHiiss').rand(6,11),
-                    'position_id' =>1,
                     'bio'=>'empty'
                 ]);
             }
 
             $account->user()->associate($user);
             $account->save();
-
+            $user->url_avt= $providerUser->getAvatar();
+            $user->save();
             return $user;
 
         }

@@ -48,5 +48,9 @@ class RepositoryServiceProvider extends ServiceProvider
             'App\Repositories\Contracts\StateRepositoryInterface',
             'App\Repositories\Eloquents\StateRepository'
         );
+        $this->app->bind(
+            'App\Repositories\Contracts\TodoItemRepositoryInterface',
+            'App\Repositories\Eloquents\TodoItemRepository'
+        );
     }
 }

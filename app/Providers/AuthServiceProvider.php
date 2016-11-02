@@ -36,20 +36,25 @@ class AuthServiceProvider extends ServiceProvider
             return $user->id == $post->user_id;
         });
         Gate::define('subcribe-project', function ($user, $project) {
-            foreach ($user->projects() as $your_project) {
-               if ($your_project->id == $project->id) {
-                return true;
-                break;
-               }
+            $collection = collect([]);
+            foreach ($user->projects as $your_project) {
+                $collection->push($your_project->id);
             }
-            return false;
+            return $collection->contains($project->id);
         });
         Gate::define('manage-project', function ($user, $project) {
-            if ($user->position->name =='Leadership') {
-                return true;
-            } else {
-                return false;
+            $collection = collect([]);
+            foreach ($user->projects as $your_project) {
+                $collection->push($your_project->id);
             }
+            return ($collection->contains($project->id) && $user->position->name =='Leadership');
+        });
+        Gate::define('mark-task-done', function ($user, $task) {
+            $collection = collect([]);
+            foreach ($user->todo_items as $todo_item) {
+                $collection->push($todo_item->id);
+            }
+            return $collection->contains($task->id);
         }); 
     }
 }

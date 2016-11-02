@@ -13,81 +13,46 @@
             <!--  notification start -->
             <ul class="nav top-menu">
                 <!-- settings start -->
-                <li class="dropdown">
+                <li class="dropdown" id="header_task_bar">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                     <i class="icon-tasks"></i>
-                    <span class="badge bg-success">6</span>
+                    <span class="badge bg-success" id="badge_num_unread_task">{{$num_unread_task}}</span>
                     </a>
                     <ul class="dropdown-menu extended tasks-bar">
                         <div class="notify-arrow notify-arrow-green"></div>
                         <li>
-                            <p class="green">You have 6 pending tasks</p>
+                            <p class="green">You have <span id="num_unread_task">{{$num_unread_task}}</span> pending tasks</p>
                         </li>
-                        <li>
-                            <a href="#">
-                                <div class="task-info">
-                                    <div class="desc">Dashboard v1.3</div>
-                                    <div class="percent">40%</div>
-                                </div>
-                                <div class="progress progress-striped">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                        <span class="sr-only">40% Complete (success)</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="task-info">
-                                    <div class="desc">Database Update</div>
-                                    <div class="percent">60%</div>
-                                </div>
-                                <div class="progress progress-striped">
-                                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                        <span class="sr-only">60% Complete (warning)</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="task-info">
-                                    <div class="desc">Iphone Development</div>
-                                    <div class="percent">87%</div>
-                                </div>
-                                <div class="progress progress-striped">
-                                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 87%">
-                                        <span class="sr-only">87% Complete</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="task-info">
-                                    <div class="desc">Mobile App</div>
-                                    <div class="percent">33%</div>
-                                </div>
-                                <div class="progress progress-striped">
-                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 33%">
-                                        <span class="sr-only">33% Complete (danger)</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="task-info">
-                                    <div class="desc">Dashboard v1.3</div>
-                                    <div class="percent">45%</div>
-                                </div>
-                                <div class="progress progress-striped active">
-                                    <div class="progress-bar"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
-                                        <span class="sr-only">45% Complete</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
+                        @foreach (Auth::user()->unreadNotifications->take(5) as $notification)
+                             @if($notification->type=='App\Notifications\AssignNewTask')
+                                 <li id="{{$notification->id}}">
+                                    <a href="{{ route('backend.project',$notification->data['project_id'] ) }}">
+                                        <div class="task-info">
+                                            <div class="desc">{{$notification->data['project_name']}}</div>
+                                            <div class="desc">{{$notification->data['todo_content']}}</div>
+                                        </div>
+                                    </a>
+                                </li>
+                             @elseif($notification->type=='App\Notifications\DeleteTask')
+                                  <li id="{{$notification->id}}">
+                                    <a href="{{ route('backend.project',$notification->data['project_id'] ) }}">
+                                        <div class="task-info">
+                                            <div class="desc">{{$notification->data['project_name']}}</div>
+                                            <div class="desc">Task #{{$notification->data['todo_id']}} was deleted</div>
+                                        </div>
+                                    </a>
+                                </li>
+                            @elseif($notification->type=='App\Notifications\UpdateTask')
+                                  <li id="{{$notification->id}}">
+                                    <a href="{{ route('backend.project',$notification->data['project_id'] ) }}">
+                                        <div class="task-info">
+                                            <div class="desc">{{$notification->data['project_name']}}</div>
+                                            <div class="desc">Task #{{$notification->data['todo_id']}} was updated</div>
+                                        </div>
+                                    </a>
+                                </li>
+                             @endif
+                        @endforeach 
                         <li class="external">
                             <a href="#">See All Tasks</a>
                         </li>
@@ -102,10 +67,10 @@
                     </a>
                     <ul class="dropdown-menu extended inbox" id="inbox">
                         <div class="notify-arrow notify-arrow-red"></div>
-                        <li>
+                        <li id="frist_li_inbox">
                             <p class="red">You have <span id="num_unread_mess">{{$num_unread_mess}}</span>new messages</p>
                         </li>
-                          @foreach (Auth::user()->unreadNotifications->take(5) as $notification)
+                          @foreach(Auth::user()->unreadNotifications->take(5) as $notification)
                              @if($notification->type=='App\Notifications\ChatProject')
                                      <li id="{{$notification->id}}">
                                         <a href="{{ url('member/mail') }}">
@@ -123,33 +88,13 @@
                                         </a>
                                     </li>
                              @endif
+                             <script src="{{ url('backend/js/handle-num-mess.js') }}"></script>
                              <script type="text/javascript">
-                              $(document).ready(function() {
-                                 var num_unread_mess= parseInt($('#num_unread_mess').text());
-                                 var temp= parseInt(" 1 ");
-                                    $("#inbox").on("click", "#{{$notification->id}}", function(event){
-                                        var noti_id = "{{$notification->id}}";
-                                         $.ajaxSetup({
-                                              headers: {
-                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                              }
-                                            });
-                                          $.ajax({
-                                                url:'/member/notifications',
-                                                type: "post",
-                                                data: { '_token': $('input[name=_token]').val(), 'noti_id': noti_id},
-                                                success: function(data) {   
-                                                    var new_num_unread_mess = num_unread_mess - temp;
-                                                    $('#num_unread_mess').text(new_num_unread_mess);
-                                                    $('#badge_num_unread_mess').text(new_num_unread_mess);
-                                                    }          
-                                                });
-                                    });
-                                 });
+                                handle_mess("{{$notification->id}}");
                              </script>
                           @endforeach
                         <li>
-                            <a href="#">See all messages</a>
+                            <a href="{{ route('all_message_noti') }}">See all messages</a>
                         </li>
                     </ul>
                 </li>
@@ -186,91 +131,18 @@
                                 </table>
                                 </a>
                             </li>
+                            <script src="{{ url('backend/js/handle_invite_project.js') }}"></script>
                               <script type="text/javascript">
-                                    $(document).ready(function(){
-                                          $.ajaxSetup({
-                                              headers: {
-                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                              }
-                                            });
-
-                                          /*$('#header_notification_bar ul').prepend('Some text');*/
-                                        var notification_id = $('#noti_id').text();
-                                        var num_unread_noti= parseInt($('#num_unread_noti').text());
-                                        var temp= parseInt(" 1 ");
-                                        $('#accept{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}').click(function(){
-                                                var project_id="{{$notification->data['project_id']}}";
-                                                $.ajax({
-                                                url:'/member/accept-invite',
-                                                type: "post",
-                                                data: { '_token': $('input[name=_token]').val(), 'project_id': project_id, 'response': 'accept', 'noti_id': notification_id},
-                                                success: function(data) {
-                                                    alert("Accept success");   
-                                                    $('#invite{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}').remove();
-                                                     var new_num_unread_noti = num_unread_noti - temp;
-                                                    $('#num_unread_noti').text(new_num_unread_noti);
-                                                    $('#badge_num_unread_noti').text(new_num_unread_noti);
-                                                    }          
-                                                });
-                                            });
-                                        $('#decline{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}').click(function(){
-                                              var project_id="{{$notification->data['project_id']}}";
-                                                $.ajax({
-                                                url:'/member/accept-invite',
-                                                type: "post",
-                                                data: { '_token': $('input[name=_token]').val(), 'project_id': project_id, 'response': 'decline','noti_id': notification_id},
-                                                success: function(data) { 
-                                                     alert("Decline success");  
-                                                    $('#invite{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}').remove();
-                                                     var new_num_unread_noti = num_unread_noti - temp;
-                                                    $('#num_unread_noti').text(new_num_unread_noti);
-                                                    $('#badge_num_unread_noti').text(new_num_unread_noti);
-                                                    }          
-                                                });  
-                                            });
-                                        $('#hide{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}').click(function(){
-                                              var project_id="{{$notification->data['project_id']}}";
-                                                $.ajax({
-                                                url:'/member/accept-invite',
-                                                type: "post",
-                                                data: { '_token': $('input[name=_token]').val(), 'project_id': project_id, 'response': 'hide',  'noti_id': notification_id},
-                                                success: function(data) {
-                                                     alert("Hide success");
-                                                    $('#invite{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}').remove();  
-                                                     var new_num_unread_noti = num_unread_noti - temp;
-                                                    $('#num_unread_noti').text(new_num_unread_noti);
-                                                    $('#badge_num_unread_noti').text(new_num_unread_noti);
-                                                    }          
-                                                });  
-                                            }); 
-                                    });
+                                  handle_inite_project("{{$notification->data['leadership_id']}}","{{$notification->data['project_id']}}");
                              </script>
                         @elseif($notification->type=='App\Notifications\AddNewState')
                             <li id="{{$notification->id}}"><a href="{{ route('backend.project', $notification->data['project_id']) }}"><span class="label label-danger"><i class="icon-bolt"></i></span>New State Added.<span class="small italic">{{$notification->data['project_name']}}</span></a></li>'
+                               <script src="{{ url('backend/js/handle_state_noti.js') }}"></script>
                              <script type="text/javascript">
-                              $(document).ready(function() {
-                                 var num_unread_noti= parseInt($('#num_unread_noti').text());
-                                 var temp= parseInt(" 1 ");
-                                    $("#noti").on("click", "#{{$notification->id}}", function(event){
-                                        var noti_id = "{{$notification->id}}";
-                                         $.ajaxSetup({
-                                              headers: {
-                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                              }
-                                            });
-                                          $.ajax({
-                                                url:'/member/notifications',
-                                                type: "post",
-                                                data: { '_token': $('input[name=_token]').val(), 'noti_id': noti_id},
-                                                success: function(data) {   
-                                                    var new_num_unread_noti = num_unread_noti - temp;
-                                                    $('#num_unread_noti').text(new_num_unread_noti);
-                                                    $('#badge_num_unread_noti').text(new_num_unread_noti);
-                                                    }          
-                                                });
-                                    });
-                                 });
+                                    handle_state("{{$notification->id}}");
                              </script>
+                        @elseif($notification->type=='App\Notifications\DeleteState')
+                         <li id="{{$notification->id}}"><a href="{{ route('backend.project', $notification->data['project_id']) }}"><span class="label label-danger"><i class="icon-bolt"></i></span> State #{{$notification->data['state_id']}} Removed.<span class="small italic">{{$notification->data['project_name']}}</span></a></li>'
                         @endif
                         @endforeach
                         <li>
@@ -338,7 +210,7 @@
                         <li><a  href="{{route('profile')}}"> <i class=" icon-info"></i>Your profile</a></li>
                          <li><a  href="{{route('profile-edit')}}"><i class="icon-edit"></i>Edit profile</a></li>
                         <li><a  href="{{route('profile-activity')}}"><i class="icon-calendar"></i>Activity</a></li>
-                        <li><a href="{{route('mail')}}"><i class="icon-envelope"></i>Inbox</a></li>
+                        <li><a href="{{route('mail')}}"><i class="icon-envelope"></i><span>Inbox</span></a></li>
                     </ul>
                 </li>
                   <li class="sub-menu">

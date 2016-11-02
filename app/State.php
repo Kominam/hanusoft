@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Carbon\Carbon;
+
 use Illuminate\Database\Eloquent\Model;
 
 class State extends Model
@@ -13,4 +15,9 @@ class State extends Model
     public function project() {
     	return $this->belongsTo('App\Project');
     }
+
+    public function displayDueDate()
+	{
+    	return Carbon::createFromFormat('Y-m-d', $this->due_date)->toFormattedDateString();
+	}
 }

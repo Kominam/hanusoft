@@ -18,8 +18,8 @@ function countUp(count)
         }
     }, int_speed);
 }
-
-countUp(495);
+var num_project = parseInt($('#num_project').text());
+countUp(num_project);
 
 function countUp2(count)
 {
@@ -41,8 +41,9 @@ function countUp2(count)
         }
     }, int_speed);
 }
+var num_post = parseInt($('#num_post').text());
 
-countUp2(947);
+countUp2(num_post);
 
 function countUp3(count)
 {
@@ -64,8 +65,9 @@ function countUp3(count)
         }
     }, int_speed);
 }
+var num_unread_mess = parseInt($('#badge_num_unread_mess').text());
 
-countUp3(328);
+countUp3(num_unread_mess);
 
 function countUp4(count)
 {
@@ -87,5 +89,6 @@ function countUp4(count)
         }
     }, int_speed);
 }
+var num_unread_noti = parseInt($('#badge_num_unread_noti').text());
 
-countUp4(10328);
+countUp4(num_unread_noti);

@@ -88,6 +88,11 @@
 			Route::post('accept-invite',['as' => 'accept-invite', 'uses' => 'ProjectController@acceptInvite'] );
 					//project managerment-> state management
 			Route::post('add-state',['as' => 'post.add-state', 'uses' => 'StateController@create']);
+			Route::get('delete-state/{state_id}',['as' => 'delete-state', 'uses' => 'StateController@delete']);
+					//project managerment-> task management
+			Route::post('add-task',['as' => 'post.add-task', 'uses' => 'TodoItemController@create']);
+			Route::post('update-task',['as' => 'post.update-task', 'uses' => 'TodoItemController@update']);
+			Route::get('delete-task/{task_id}',['as' => 'delete-task', 'uses' => 'TodoItemController@delete']);
 			//Profile Management
 			Route::get('/profile', ['as' => 'profile', 'uses'=> 'MemberController@profile']);
 			Route::get('/profile-edit', ['as' => 'profile-edit', 'uses' => 'MemberController@showEditProfile']);
@@ -102,6 +107,8 @@
 			Route::post('get-chat-project-cont',['as' => 'get-chat-project-cont', 'uses' => 'ChatController@getChatContent']);
 			//Notification Management
 			Route::post('notifications','NotificationController@delete');
+			Route::get('all_message_noti','NotificationController@getAllMessageNoti')->name('all_message_noti');
+			Route::get('noti/MarkRead/{notification_id}','NotificationController@markRead')->name('markRead');
 		});
 	});
 	
