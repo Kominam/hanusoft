@@ -51,9 +51,9 @@
                         <i class="icon-facebook"></i>
                         Facebook
                         </a>
-                        <a href="{{ url('/redirect/github') }}" class="twitter">
-                        <i class="icon-twitter"></i>
-                        Twitter
+                        <a href="{{ url('/redirect/github') }}" class="github">
+                        <i class="icon-github"></i>
+                        Github
                         </a>
                     </div>
                     <div class="registration">

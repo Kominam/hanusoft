@@ -3,7 +3,6 @@
        var num_unread_mess= parseInt($('#num_unread_mess').text());
        var temp= parseInt(" 1 "); 
          $("#inbox").on("click", "#"+ noti_id, function(){
-          alert("Clicked");
                $.ajaxSetup({
                     headers: {
                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -17,6 +16,7 @@
                           var new_num_unread_mess = num_unread_mess - temp;
                           $('#num_unread_mess').text(new_num_unread_mess);
                           $('#badge_num_unread_mess').text(new_num_unread_mess);
+                          window.location.href = "http://hanusoft.dev:8000/member/mail";
                           }          
                       });
           });

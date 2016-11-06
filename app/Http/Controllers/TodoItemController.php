@@ -27,5 +27,8 @@ class TodoItemController extends Controller
     public function delete($id) {
         $this->todoItemRepository->delete($id);
     }
+    public function markAsDone($id) {
+        $this->todoItemRepository->markAsDone($id);
+    }
 }
 

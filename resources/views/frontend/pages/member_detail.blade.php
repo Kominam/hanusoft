@@ -42,8 +42,8 @@
                 <h4>{{$member->position->name}}</h4>
                 <span class="thumb-info-social-icons">
                 <a data-tooltip data-placement="bottom" target="_blank" href="{{$member->url_fb}}" data-original-title="Facebook"><i class="fa fa-facebook"></i><span>Facebook</span></a>
-                <a data-tooltip data-placement="bottom" href="{{$member->url_fb}}" data-original-title="Twitter"><i class="fa fa-twitter"></i><span>Twitter</span></a>
-                <a data-tooltip data-placement="bottom" href="{{$member->url_fb}}" data-original-title="Linkedin"><i class="fa fa-linkedin"></i><span>Linkedin</span></a>
+                <a data-tooltip data-placement="bottom" href="{{$member->url_gmail}}" data-original-title="Gmail"><i class="fa fa-envelope"></i><span>Gmail</span></a>
+                <a data-tooltip data-placement="bottom" href="{{$member->url_github}}" data-original-title="Github"><i class="fa fa-github"></i><span>Github</span></a>
                 </span>
                 <p>{{$member->bio}}</p>
                 <ul class="list icons list-unstyled">
@@ -55,11 +55,15 @@
         </div>
         <hr class="tall" />
         <div class="row center">
-       
+             @php
+                function rand_color() {
+                    return sprintf('#%06X', mt_rand(0, 0xFFFFFF));
+                }
+            @endphp
             @foreach ($member->skills as $skill)
                  <div class="col-md-3">
                 <div class="circular-bar">
-                    <div class="circular-bar-chart" data-percent="{{$skill->pivot->level}}" data-plugin-options='{"barColor": "#E36159", "delay":300}'>
+                    <div class="circular-bar-chart" data-percent="{{$skill->pivot->level}}" data-plugin-options='{"barColor": "{{rand_color()}}", "delay":300}'>
                         <strong>{{$skill->name}}</strong>
                         <label><span class="percent">{{$skill->pivot->level}}</span>%</label>
                     </div>

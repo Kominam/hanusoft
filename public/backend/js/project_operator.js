@@ -19,8 +19,8 @@ $(document).ready(function() {
       url:'/member/add-task',
       type: "post",
       data: { '_token': $('input[name=_token]').val(), 'project_id': project_id, 'content': content, 'due_date' : due_date, 'assigned_members':assigned_mem_list},
-      success: function(data) {  
-          var new_task ='<li><div class="task-checkbox"><input type="checkbox" class="list-child" value=""/></div><div class="task-title"><span class="task-title-sp">'+content+'</span><span class="badge badge-sm label-success">2 Days</span><div class="pull-right hidden-phone"><button class="btn btn-success btn-xs"><i class="icon-ok"></i></button><button class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button><button class="btn btn-danger btn-xs"><i class="icon-trash "></i></button></div></div></li>';
+      success: function(data) {
+          var new_task ='<li><div class="task-checkbox"><input type="checkbox" class="list-child" value=""/></div><div class="task-title"><span class="task-title-sp">'+content+'</span><span class="badge badge-sm label-success">2 Days</span> <span class="badge badge-sm label-primary">On queue</span><div class="pull-right hidden-phone"><button class="btn btn-success btn-xs"></i></button><button class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button><button class="btn btn-danger btn-xs"><i class="icon-trash "></i></button></div></div></li>';
           $('#task_list ul').append(new_task);
           alert("add task ok");
       }
@@ -52,7 +52,7 @@ $(document).ready(function() {
       type: "post",
       data: { '_token': $('input[name=_token]').val(), 'project_id': project_id, 'content': content, 'due_date' : due_date, 'status': status},
       success: function(data) {  
-        var n_state= '<article class="timeline-item"><div class="timeline-desk"><div class="panel"><div class="panel-body"><span class="arrow"></span><span class="timeline-icon red"></span><span class="timeline-date">08:25 am</span><h1 class="red">'+ data.due_date+'</h1><p>'+ data.content+'</p></div></div></div></article>';
+        var n_state= '<article class="timeline-item"><div class="timeline-desk"><div class="panel"><div class="panel-body"><span class="arrow"></span><span class="timeline-icon blue"></span><span class="timeline-date">08:25 am</span><h1 class="blue">'+ data.due_date+'</h1><p>'+ data.content+'</p></div></div></div></article>';
          $('#timeline' + project_id).prepend(n_state);
          alert("add state ok");
       }

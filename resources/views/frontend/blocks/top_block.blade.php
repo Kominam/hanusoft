@@ -37,8 +37,8 @@
         <div class="container">
             <ul class="social-icons">
                 <li class="facebook"><a href="../../../www.facebook.com/index.html" target="_blank" title="Facebook">Facebook</a></li>
-                <li class="twitter"><a href="../../../www.twitter.com/index.html" target="_blank" title="Twitter">Twitter</a></li>
-                <li class="linkedin"><a href="../../../www.linkedin.com/index.html" target="_blank" title="Linkedin">Linkedin</a></li>
+                <li class="googleplus"><a href="../../../www.twitter.com/index.html" target="_blank" title="Twitter">Gmail</a></li>
+                <li class="github"><a href="../../../www.linkedin.com/index.html" target="_blank" title="Linkedin">Github</a></li>
             </ul>
             <nav class="nav-main mega-menu">
                 <ul class="nav nav-pills nav-main" id="mainMenu">

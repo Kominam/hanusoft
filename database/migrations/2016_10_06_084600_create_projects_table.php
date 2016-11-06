@@ -18,9 +18,13 @@ class CreateProjectsTable extends Migration
             $table->string('name')->unique();
             $table->string('link_preview');
             $table->text('description');
-            $table->timestamps();
             $table->integer('type_id')->unsigned();
             $table->foreign('type_id')->references('id')->on('projecttypes')->onDelete('cascade');
+            $table->date('start_date');
+            $table->date('plan_end_date');
+            $table->date('actual_end_date')->nullable();
+            $table->string('link_github');
+            $table->timestamps();         
         });
     }
 

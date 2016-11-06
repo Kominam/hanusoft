@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Carbon\Carbon;
+
 class Project extends Model
 {
     //
@@ -38,6 +40,15 @@ class Project extends Model
 
     public function todo_items() {
         return $this->hasMany('App\TodoItem');
+    }
+    public function displayStartDate() {
+        return Carbon::createFromFormat('Y-m-d', $this->start_date)->toFormattedDateString();
+    }
+    public function displayPlanEndDate() {
+        return Carbon::createFromFormat('Y-m-d', $this->plan_end_date)->toFormattedDateString();
+    }
+    public function displayActualEndDate() {
+        return Carbon::createFromFormat('Y-m-d', $this->actual_end_date)->toFormattedDateString();
     }
 
 }

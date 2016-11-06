@@ -10,6 +10,7 @@
 @section('content')
 <script src="{{ url('backend/js/update-todo_item.js') }}"></script>
 <script src="{{ url('backend/js/delete-task.js') }}"></script>
+<script src="{{ url('backend/js/mark_task_as_done.js') }}"></script>
 <span id="project_id" style="display: none">{{$project->id}}</span>
 <span id="project_name" style="display: none">{{$project->name}}</span>
 <section class="wrapper site-min-height">
@@ -19,6 +20,13 @@
       <section class="panel tasks-widget">
          <header class="panel-heading">
             Todo list
+            <!-- <div class="option pull-right" style="display: inline; height: 10px">
+              <select style="display: inline;">
+                <option value="">Done</option>
+                <option>Over DueDate</option>
+                <option>Pending</option>
+              </select>
+                      </div> -->
          </header>
          <div class="panel-body">
             <div class="task-content" id="task_list">
@@ -26,18 +34,52 @@
                   @foreach ($project->todo_items as $todo_item)
                   <li id="displayTask{{$todo_item->id}}">
                      <div class="task-checkbox">
-                        <input type="checkbox" class="list-child" value=""  />
+                       @foreach ($todo_item->users as $todo_stt)
+                          @if ($loop->first)
+                              @if ($todo_stt->pivot->status=='Done')
+                                <input type="checkbox" class="list-child" value=""  / checked="checked" disabled>
+                              @else
+                               <input type="checkbox" class="list-child" value=""  / disabled>
+                             @endif
+                          @endif
+                        @endforeach
+                             
+                        
                      </div>
                      <div class="task-title">
-                        <span class="task-title-sp">{{$todo_item->content}}</span>
-                        <span class="badge badge-sm label-success">2 Days</span>
+                        <span class="task-title-sp">
+                        # {{$todo_item->id}}
+                        @foreach ($todo_item->users as $mem)
+                          <h5>{{$mem->name}}</h5>
+                        @endforeach
+                        {{$todo_item->content}}</span>
+                        <span class="badge badge-sm label-success">{{$todo_item->displayDueDate()}}</span>
+                        @foreach ($todo_item->users as $todo_stt)
+                          @if ($loop->first)
+                              @if ($todo_stt->pivot->status=='Done')
+                                <span class="badge badge-sm label-success">Done</span>
+                              @elseif ($todo_stt->pivot->status=='On queue')
+                                <span class="badge badge-sm label-primary">              On queue</span>
+                             @elseif ($todo_stt->pivot->status=='Over DueDate')
+                                  <span class="badge badge-sm label-danger">             Over DueDate</span>
+                             @endif
+                          @endif
+                        @endforeach
                         <div class="pull-right hidden-phone">
                            @can('mark-task-done', $todo_item)
-                              <button class="btn btn-success btn-xs"><i class="icon-ok"></i></button>
+                            @foreach ($todo_item->users as $todo_stt)
+                          @if ($loop->first)
+                              @if ($todo_stt->pivot->status=='On queue'|| $todo_stt->pivot->status=='Over DueDate' )
+                                 <a class="btn btn-success btn-xs" id="btn_mark_todo_as_done{{$todo_item->id}}"><i class="icon-ok"></i></a>
+                              <script type="text/javascript">
+                                markAsDone({{$todo_item->id}});
+                              </script>
+                             
+                             @endif
+                          @endif
+                        @endforeach
+                             
                            @endcan
-                            @cannot('mark-task-done', $todo_item)
-                             cannot
-                           @endcannot
                            @can('manage-project', $project)
                                 <a class="btn btn-primary btn-xs" data-toggle="modal" href="#todo{{$todo_item->id}}"><i class="icon-pencil"></i></a>
                                 <div class="modal fade" id="todo{{$todo_item->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
@@ -51,11 +93,26 @@
                                               <form action="#" method="POST" accept-charset="utf-8">
                                           <input type="hidden" name="_token" value="{{csrf_token()}}">
                                           <div class="form-group">
-                                             <input type="text" class="form-control" id="todo_content_update{{$todo_item->id}}" placeholder="Content of task" name="todo_content_update" value="{{$todo_item->content}}">
+                                             <input type="text" class="form-control" id="todo_content_update{{$todo_item->id}}" placeholder="Content of task" value="{{$todo_item->content}}">
                                           </div>
                                           <div class="form-group">
-                                             <input type="date" class="form-control" id="todo_due_date_update{{$todo_item->id}}" placeholder="YYYY-MM-DD" name="todo_due_date_update" value="{{$todo_item->due_date}}">
+                                             <input type="date" class="form-control" id="todo_due_date_update{{$todo_item->id}}" placeholder="YYYY-MM-DD" value="{{$todo_item->due_date}}">
                                           </div>
+                                            @foreach ($project->users as $cam)
+                                          <div class="checkbox">
+                                             <label>
+                                             @foreach ($todo_item->users as $cur_user)
+                                               @if($cam->id == $cur_user->id)
+                                                <input type="checkbox" class="new_assign" name="new_assign[]" id="bsds" value={{$cam->id}} checked>
+                                              @else
+                                                 <input type="checkbox" class="new_assign" name="new_assign[]" id="bsds" value={{$cam->id}}>
+                                                @endif
+                                             @endforeach
+                                            
+                                             {{$cam->name}}
+                                             </label>
+                                          </div>
+                                          @endforeach
                                        </form>
                                           </div>
                                           <div class="modal-footer">

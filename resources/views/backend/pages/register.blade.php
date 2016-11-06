@@ -32,23 +32,29 @@
              </div>         
           @endif
           <input type="text" class="form-control" name="address" placeholder="Address" autofocus value="{{ old('address')}}">
-
-          <!-- <input type="text" class="form-control" placeholder="Email" autofocus>
-          <input type="text" class="form-control" placeholder="City/Town" autofocus> -->
-          <!-- <div class="radios">
-            <label class="label_radio col-lg-6 col-sm-6" for="radio-01">
-            <input name="sample-radio" id="radio-01" value="1" type="radio" checked /> Male
-            </label>
-            <label class="label_radio col-lg-6 col-sm-6" for="radio-02">
-            <input name="sample-radio" id="radio-02" value="1" type="radio" /> Female
-            </label>
-          </div> -->
-
           <select class="form-control input-sm m-bot15" name="position_id">
           @foreach ($all_position as $position)
              <option value="{{$position->id}}">{{$position->name}}</option>
           @endforeach
           </select>
+          <select class="form-control input-sm m-bot15" name="grade_id">
+          @foreach ($all_grade as $grade)
+             <option value="{{$grade->id}}">{{$grade->name}}</option>
+          @endforeach
+          </select>
+            <div class="radios">
+            <label class="label_radio col-lg-6 col-sm-6" for="radio-01">
+            <input name="gender" id="radio-01" value="1" type="radio" checked /> Male
+            </label>
+            <label class="label_radio col-lg-6 col-sm-6" for="radio-02">
+            <input name="gender" id="radio-02" value="1" type="radio" /> Female
+            </label>
+            @if ($errors->has('gender'))
+             <div class="alert alert-danger">
+                {{ $errors->first('gender') }}
+             </div>         
+          @endif
+          </div>
           <p> Enter your account details below</p>
           <input type="text" class="form-control" placeholder="Email" autofocus name="email" value="{{ old('email')}}">
             @if ($errors->has('email'))

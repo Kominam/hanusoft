@@ -37,7 +37,7 @@ class ViewComposerServiceProvider extends ServiceProvider
             $all_position = Position::all();
             $view->with('all_position', $all_position);
         });
-         View::composer(['frontend.pages.members', 'backend.pages.profile-edit'], function ($view) {
+         View::composer(['frontend.pages.members', 'backend.pages.profile-edit', 'backend.pages.register'], function ($view) {
             $all_grade = Grade::all();
             $view->with('all_grade', $all_grade );
         });
@@ -90,13 +90,13 @@ class ViewComposerServiceProvider extends ServiceProvider
             $view->with('all_member', $all_member);
         });
           //Count unread notification
-            View::composer(['backend.blocks.header'], function ($view) {
+            View::composer(['backend.blocks.header','backend.pages.index'], function ($view) {
             $cur_mem = User::find(Auth::user()->id);
-            $num_unread_noti= $cur_mem->unreadNotifications()->whereNotIn('type',['App\Notifications\ChatProject', 'App\Notifications\AssignNewTask','App\Notifications\UpdateTask', 'App\Notifications\DeleteTask','App\Notifications\AddNewState', 'App\Notifications\DeleteState'])->count();
+            $num_unread_noti= $cur_mem->unreadNotifications()->whereIn('type',['App\Notifications\InvitetoProject', 'App\Notifications\AddNewState','App\Notifications\DeleteState'])->count();
             $view->with('num_unread_noti', $num_unread_noti);
         });
             //Count unread message
-            View::composer(['backend.blocks.header'], function ($view) {
+            View::composer(['backend.blocks.header','backend.pages.index'], function ($view) {
             $cur_mem = User::find(Auth::user()->id);
             $num_unread_mess= $cur_mem->unreadNotifications->where('type','=', 'App\Notifications\ChatProject')->count();
             $view->with('num_unread_mess', $num_unread_mess);
@@ -107,9 +107,9 @@ class ViewComposerServiceProvider extends ServiceProvider
             $view->with('belonged_projects', $belonged_projects);
         });
               //Count unread task
-           View::composer(['backend.blocks.header'], function ($view) {
+           View::composer(['backend.blocks.header','backend.pages.index'], function ($view) {
             $cur_mem = User::find(Auth::user()->id);
-            $num_unread_task= $cur_mem->unreadNotifications->where('type','=', 'App\Notifications\AssignNewTask')->count();
+            $num_unread_task= $cur_mem->unreadNotifications->whereIn('type',['App\Notifications\AssignNewTask','App\Notifications\DeleteTask','App\Notifications\UpdateTask','App\Notifications\MarkTaskDone'])->count();
             $view->with('num_unread_task', $num_unread_task);
         });
        

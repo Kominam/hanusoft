@@ -93,6 +93,7 @@
 			Route::post('add-task',['as' => 'post.add-task', 'uses' => 'TodoItemController@create']);
 			Route::post('update-task',['as' => 'post.update-task', 'uses' => 'TodoItemController@update']);
 			Route::get('delete-task/{task_id}',['as' => 'delete-task', 'uses' => 'TodoItemController@delete']);
+			Route::get('mark-task-as-done/{task_id}',['as' => 'mark-task-as-done', 'uses' => 'TodoItemController@markAsDone']);
 			//Profile Management
 			Route::get('/profile', ['as' => 'profile', 'uses'=> 'MemberController@profile']);
 			Route::get('/profile-edit', ['as' => 'profile-edit', 'uses' => 'MemberController@showEditProfile']);
@@ -108,6 +109,8 @@
 			//Notification Management
 			Route::post('notifications','NotificationController@delete');
 			Route::get('all_message_noti','NotificationController@getAllMessageNoti')->name('all_message_noti');
+			Route::get('all_task_noti','NotificationController@getAllTaskNoti')->name('all_task_noti');
+			Route::get('all_important_noti','NotificationController@getAllImportanNoti')->name('all_important_noti');
 			Route::get('noti/MarkRead/{notification_id}','NotificationController@markRead')->name('markRead');
 		});
 	});

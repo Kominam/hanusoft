@@ -89,18 +89,23 @@
                 </section>
                 <section>
                     <div class="row">
-                       
+                       @php
+                        function rand_color() {
+                            return sprintf('#%06X', mt_rand(0, 0xFFFFFF));
+                        }
+                       @endphp
                             @foreach ($member->projects as $project)
                              <div class="col-lg-6">
                                 <div class="panel">
                                     <div class="panel-body">
                                         <div class="bio-chart">
-                                            <input class="knob" data-width="100" data-height="100" data-displayPrevious=true  data-thickness=".2" value="35" data-fgColor="#e06b7d" data-bgColor="#e8e8e8">
+                                            <input class="knob" data-width="100" data-height="100" data-displayPrevious=true  data-thickness=".2" value="35" data-fgColor="{{rand_color()}}" data-bgColor="#e8e8e8">
                                         </div>
                                         <div class="bio-desk">
                                             <h4 class="red">{{$project->name}}</h4>
-                                            <p>Started : 15 July</p>
-                                            <p>Deadline : 15 August</p>
+                                            <p>Started : {{$project->displayStartDate()}}</p>
+                                            <p>Deadline : {{$project->displayPlanEndDate()}}</p>
+                                            <p>Actual: {{$project->displayActualEndDate()}}</p>
                                         </div>
                                     </div>
                                 </div>

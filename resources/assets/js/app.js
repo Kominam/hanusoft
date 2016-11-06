@@ -26,6 +26,11 @@ window.Echo = new Echo({
     key: '29cd347d237de727387a'
 });
 var userId = $('#userId').text();
+ $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
 window.Echo.private('App.User.'+ userId)
     .notification((notification) => {
     	if (notification.type =='App\\Notifications\\InvitetoProject') {
@@ -37,18 +42,78 @@ window.Echo.private('App.User.'+ userId)
             var new_num_unread_noti = num_unread_noti + temp;
             $('#num_unread_noti').text(new_num_unread_noti);
             $('#badge_num_unread_noti').text(new_num_unread_noti);
+            $('#accept' + notification.leadership_id+ notification.project_id).click(function(){
+                $.ajax({
+                url:'/member/accept-invite',
+                type: "post",
+                data: { '_token': $('input[name=_token]').val(), 'project_id':  notification.project_id, 'response': 'accept', 'noti_id':  notification.id},
+                success: function(data) {
+                    alert("Accept success");   
+                    $('#invite'+ notification.leadership_id+ notification.project_id).remove();
+                     var new_num_unread_noti = num_unread_noti - temp;
+                    $('#num_unread_noti').text(new_num_unread_noti);
+                    $('#badge_num_unread_noti').text(new_num_unread_noti);
+                     window.location.href = "http://hanusoft.dev:8000/member/project/"+notification.project_id;
+                    }          
+                });
+            });
+          $('#decline'+ notification.leadership_id+ notification.project_id).click(function(){
+                  $.ajax({
+                  url:'/member/accept-invite',
+                  type: "post",
+                  data: { '_token': $('input[name=_token]').val(), 'project_id':  notification.project_id, 'response': 'decline','noti_id':  notification.id},
+                  success: function(data) { 
+                       alert("Decline success");  
+                      $('#invite'+ notification.leadership_id+ notification.project_id).remove();
+                       var new_num_unread_noti = num_unread_noti - temp;
+                      $('#num_unread_noti').text(new_num_unread_noti);
+                      $('#badge_num_unread_noti').text(new_num_unread_noti);
+                      }          
+                  });  
+              });
+          $('#hide'+ notification.leadership_id+ notification.project_id).click(function(){
+                  $.ajax({
+                  url:'/member/accept-invite',
+                  type: "post",
+                  data: { '_token': $('input[name=_token]').val(), 'project_id':  notification.project_id, 'response': 'hide',  'noti_id':  notification.id},
+                  success: function(data) {
+                       alert("Hide success");
+                      $('#invite'+ notification.leadership_id+ notification.project_id).remove();  
+                       var new_num_unread_noti = num_unread_noti - temp;
+                      $('#num_unread_noti').text(new_num_unread_noti);
+                      $('#badge_num_unread_noti').text(new_num_unread_noti);
+                      }          
+                  });  
+              }); 
     	}
         if (notification.type=='App\\Notifications\\ChatProject') {
-            var new_msg = '<div class="msg-time-chat"><a href="#" class="message-img"><img class="avatar" style="width:45px;height:45px" src="hanusoft.dev:8000/frontend/img/team/'+notification.member_avt+'" alt=""></a><div class="message-body msg-out"><span class="arrow"></span><div class="text"><p class="attribution"> <a href="'+ notification.member_avt+'">'+ notification.member_name+'</a> at a moment ago</p><p>'+ notification.message+'</p></div></div></div>';
+            var $img = $('<img class="avatar" style="width:45px;height:45px" src="http://hanusoft.dev:8000/frontend/img/team/'+notification.member_avt+'" />').on('load', function(){
+                console.log('loaded');
+            });
+            var temp = $('<a href="#" class="message-img"></a>').append($img);
+            var temp2 = $('<div class="msg-time-chat"></div>').append(temp);
+            var new_msg = temp2.append('<div class="message-body msg-out"><span class="arrow"></span><div class="text"><p class="attribution"> <a href="'+ notification.member_avt+'">'+ notification.member_name+'</a> at a moment ago</p><p>'+ notification.message+'</p></div></div>');
             $('#msg-cont').append(new_msg);
             var num_unread_mess= parseInt($('#num_unread_mess').text());
             var temp= parseInt(" 1 ");
             var new_num_unread_mess = num_unread_mess + temp;
             $('#num_unread_mess').text(new_num_unread_mess);
             $('#badge_num_unread_mess').text(new_num_unread_mess);
-            var new_noti_msg = '<li id="'+ notification.id+'"><a href="http://hanusoft.dev:8000/member/mail"><span class="photo"><img alt="avatar" src="#"></span><span class="subject"><span class="from" style="color:red">'+ notification.member_name +'</span><span class="time">moment ago</span></span><span class="message"><strong>'+ notification.project_chat_name+'</strong></span><span class="message">'+ notification.message+'</span></a></li>';
-            console.log(new_noti_msg);
+            var new_noti_msg = '<li id="'+ notification.id+'"><a href="#"><span class="photo"><img alt="avatar" src="http://hanusoft.dev:8000/frontend/img/team/'+ notification.member_avt+'"></span><span class="subject"><span class="from" style="color:red">'+ notification.member_name +'</span><span class="time">moment ago</span></span><span class="message"><strong>'+ notification.project_chat_name+'</strong></span><span class="message">'+ notification.message+'</span></a></li>';
             $('#header_inbox_bar li:first').after(new_noti_msg);
+            $("#inbox").on("click", "#"+ notification.id, function(){
+                $.ajax({
+                      url:'/member/notifications',
+                      type: "post",
+                      data: { '_token': $('input[name=_token]').val(), 'noti_id': notification.id},
+                      success: function(data) {   
+                          var new_num_unread_mess = num_unread_mess - temp;
+                          $('#num_unread_mess').text(new_num_unread_mess);
+                          $('#badge_num_unread_mess').text(new_num_unread_mess);
+                          window.location.href = "http://hanusoft.dev:8000/member/mail";
+                          }          
+                      });
+          });
             $('#header_inbox_bar li:nth-child(4)').remove();
         }
         if (notification.type=='App\\Notifications\\AddNewState') {
@@ -62,6 +127,18 @@ window.Echo.private('App.User.'+ userId)
             var new_num_unread_noti = num_unread_noti + temp;
             $('#num_unread_noti').text(new_num_unread_noti);
             $('#badge_num_unread_noti').text(new_num_unread_noti);
+            $("#noti").on("click", "#"+notification.id, function(event){
+                $.ajax({
+                      url:'/member/notifications',
+                      type: "post",
+                      data: { '_token': $('input[name=_token]').val(), 'noti_id': notification.id},
+                      success: function(data) {   
+                          var new_num_unread_noti = num_unread_noti - temp;
+                          $('#num_unread_noti').text(new_num_unread_noti);
+                          $('#badge_num_unread_noti').text(new_num_unread_noti);
+                          }          
+                      });
+            });
         }
         if (notification.type=='App\\Notifications\\DeleteState') {
             $('#state' + notification.state_id).remove();
@@ -73,6 +150,18 @@ window.Echo.private('App.User.'+ userId)
             var new_num_unread_noti = num_unread_noti + temp;
             $('#num_unread_noti').text(new_num_unread_noti);
             $('#badge_num_unread_noti').text(new_num_unread_noti);
+            $("#noti").on("click", "#"+notification.id, function(event){
+                $.ajax({
+                      url:'/member/notifications',
+                      type: "post",
+                      data: { '_token': $('input[name=_token]').val(), 'noti_id': notification.id},
+                      success: function(data) {   
+                          var new_num_unread_noti = num_unread_noti - temp;
+                          $('#num_unread_noti').text(new_num_unread_noti);
+                          $('#badge_num_unread_noti').text(new_num_unread_noti);
+                          }          
+                      });
+            });
         }
          if (notification.type=='App\\Notifications\\AssignNewTask') {
             var new_task = '<li id="'+notification.id+'"><a href="http://hanusoft.dev:8000/member/project/'+ notification.project_id+'"><div class="task-info"><div class="desc">'+notification.project_name+'</div><div class="desc">'+notification.todo_content+'</div></div></a></li>';
@@ -86,6 +175,18 @@ window.Echo.private('App.User.'+ userId)
             var new_num_unread_task = num_unread_task + temp;
             $('#num_unread_task').text(new_num_unread_task);
             $('#badge_num_unread_task').text(new_num_unread_task);
+            $("#task_disp").on("click", "#"+notification.id, function(event){
+                $.ajax({
+                      url:'/member/notifications',
+                      type: "post",
+                      data: { '_token': $('input[name=_token]').val(), 'noti_id': notification.id},
+                      success: function(data) {   
+                          var new_num_unread_task = num_unread_task - temp;
+                          $('#num_unread_task').text(new_num_unread_task);
+                          $('#badge_num_unread_task').text(new_num_unread_taski);
+                          }          
+                      });
+          });
         }
          if (notification.type=='App\\Notifications\\DeleteTask') {
             var new_task = '<li id="'+notification.id+'"><a href="http://hanusoft.dev:8000/member/project/'+ notification.project_id+'"><div class="task-info"><div class="desc">'+notification.project_name+'</div><div class="desc">Your Task #'+notification.todo_id+'was remove</div></div></a></li>';
@@ -97,6 +198,40 @@ window.Echo.private('App.User.'+ userId)
             var new_num_unread_task = num_unread_task + temp;
             $('#num_unread_task').text(new_num_unread_task);
             $('#badge_num_unread_task').text(new_num_unread_task);
+            $("#task_disp").on("click", "#"+notification.id, function(event){
+                $.ajax({
+                      url:'/member/notifications',
+                      type: "post",
+                      data: { '_token': $('input[name=_token]').val(), 'noti_id': notification.id},
+                      success: function(data) {   
+                          var new_num_unread_task = num_unread_task - temp;
+                          $('#num_unread_task').text(new_num_unread_task);
+                          $('#badge_num_unread_task').text(new_num_unread_taski);
+                          }          
+                      });
+          });
+        }
+         if (notification.type=='App\\Notifications\\MarkTaskDone') {
+            var new_task = '<li id="'+notification.id+'"><a href="http://hanusoft.dev:8000/member/project/'+ notification.project_id+'"><div class="task-info"><div class="desc">'+notification.project_name+'</div><div class="desc">Your Task #'+notification.todo_id+':'+notification.todo_content+'was mark done by'+ notification.marker_name+'</div></div></a></li>';
+            $('#header_task_bar li:first').after(new_task);
+            $('#header_task_bar li:nth-child(4)').remove();
+            var num_unread_task= parseInt($('#num_unread_task').text());
+            var temp= parseInt(" 1 ");
+            var new_num_unread_task = num_unread_task + temp;
+            $('#num_unread_task').text(new_num_unread_task);
+            $('#badge_num_unread_task').text(new_num_unread_task);
+            $("#task_disp").on("click", "#"+notification.id, function(event){
+                $.ajax({
+                      url:'/member/notifications',
+                      type: "post",
+                      data: { '_token': $('input[name=_token]').val(), 'noti_id': notification.id},
+                      success: function(data) {   
+                          var new_num_unread_task = num_unread_task - temp;
+                          $('#num_unread_task').text(new_num_unread_task);
+                          $('#badge_num_unread_task').text(new_num_unread_taski);
+                          }          
+                      });
+          });
         }
          console.log(notification.type);
 });

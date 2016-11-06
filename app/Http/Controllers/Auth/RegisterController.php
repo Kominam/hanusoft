@@ -83,11 +83,17 @@ class RegisterController extends Controller
                'password.required'=>'Please enter the password',
                'password.min'=>'The length of password must greater than 6',
                'password.confirmed'=>'Please re-type password',
+               'position_id.required' => 'Please choose your positioon',
+               'grade_id.required' => 'Please choose your grade',
+               'gender.required' => 'Please choose your gender',
                ];
                $validator = Validator:: make($request->all(),[
                'name' => 'required|max:255',
                'email' => 'required|email|max:255|unique:users',
                'password' => 'required|min:6|confirmed',
+               'position_id' =>'required',
+               'grade_id' => 'required',
+               'gender' => 'required'
                ], $messages);
                if ($validator->fails()) {
                return redirect()->route('register')->withErrors($validator)->withInput();
@@ -96,13 +102,11 @@ class RegisterController extends Controller
                    $user->name = $request->name;
                    $user->email= $request->email;
                    $user->password = bcrypt($request->password);
-                   if ($request->has('position_id')) {
-                      $user->position_id=$request->position_id;
-                   }
-                   if ($request->has('grade_id')) {
-                      $user->grade_id=$request->grade_id;
-                   }
+                   $user->gender = $request->gender;
+                   $user->position_id=$request->position_id;
+                   $user->grade_id=$request->grade_id;
                    $user->bio='empty';
+                   $user->url_avt = 'user_default.png';
                    $user->save();
                    return redirect()->route('dashboard');
                }        

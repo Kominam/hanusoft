@@ -75,8 +75,8 @@
                 <div class="social-icons">
                     <ul class="social-icons">
                         <li class="facebook"><a href="../../../www.facebook.com/index.html" target="_blank" data-placement="bottom" data-tooltip title="Facebook">Facebook</a></li>
-                        <li class="twitter"><a href="../../../www.twitter.com/index.html" target="_blank" data-placement="bottom" data-tooltip title="Twitter">Twitter</a></li>
-                        <li class="linkedin"><a href="../../../www.linkedin.com/index.html" target="_blank" data-placement="bottom" data-tooltip title="Linkedin">Linkedin</a></li>
+                        <li class="googleplus"><a href="../../../www.twitter.com/index.html" target="_blank" data-placement="bottom" data-tooltip title="Twitter">Gmail</a></li>
+                        <li class="github"><a href="../../../www.linkedin.com/index.html" target="_blank" data-placement="bottom" data-tooltip title="Linkedin">Github</a></li>
                     </ul>
                 </div>
             </div>

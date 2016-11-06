@@ -161,6 +161,7 @@
      var project_chat_name = $('#project_chat_name').find('p').text();
      var message= $('#message').val();
      var sender_name ="{{Auth::user()->name}}";
+     var member_avt = "{{Auth::user()->url_avt}}";
      $.ajax({
        url:'/member/chat-project',
        type: "post",
@@ -168,7 +169,11 @@
        success: function(data) {
        $('#sendMsg').text('Send');
        $('#message').val("");
-       var new_msg = '<div class="msg-time-chat"><a href="#" class="message-img"><img class="avatar" style="width:45px;height:45px" src="#" alt=""></a><div class="message-body msg-out"><span class="arrow"></span><div class="text"><p class="attribution"> <a href="">'+sender_name+'</a> at a moment ago</p><p>'+ message+'</p></div></div></div>';
+       var $img = $('<img class="avatar" style="width:45px;height:45px" src="http://hanusoft.dev:8000/frontend/img/team/'+member_avt+'" />').on('load', function(){
+            });
+            var temp = $('<a href="#" class="message-img"></a>').append($img);
+            var temp2 = $('<div class="msg-time-chat"></div>').append(temp);
+            var new_msg = temp2.append('<div class="message-body msg-out"><span class="arrow"></span><div class="text"><p class="attribution"> <a href="'+ member_avt+'">You</a> at a moment ago</p><p>'+ message+'</p></div></div>');
        $('#msg-cont').append(new_msg);
        }          
      });

@@ -14,6 +14,7 @@ use Auth;
 use App\Notifications\AssignNewTask;
 use App\Notifications\UpdateTask;
 use App\Notifications\DeleteTask;
+use App\Notifications\MarkTaskDone;
 use Notifications;
 use App\User;
 
@@ -46,10 +47,17 @@ class TodoItemRepository implements TodoItemRepositoryInterface
       $todo_item->due_date = $request->due_date;
       $todo_item->project_id = $request->project_id;
       $todo_item->save();
-      /*foreach ($assigned_members as $assigned_member) {
-        $assigned_member->todo_items()->attach($todo_item->id,['status' => 'On queue']);
-        notfiy
-        $mem_in_project->notify(new AddNewState($project->id, $project->name, $state->content, $state->due_date, $state->status, Auth::user()->id, Auth::user()->name));
+      /*$initial_collection = collect([]);
+      foreach ($todo_item->users as $intial_mem) {
+        $initial_collection->push($intial_mem->id);
+      }
+      $diff = $initial_collection->diff($request->new_assigned_members);
+      foreach ($diff->all() as $elem) {
+        if ($initial_collection->contains($elem)) {
+          $todo_item->users()->detach($elem);
+        } else {
+           $todo_item->users()->attach($elem);
+        }
       }*/
        foreach ($todo_item->users as $belonged_member) {
             $belonged_member->notify(new UpdateTask($project->id, $project->name, $todo_item->id, $todo_item->content, $todo_item->due_date, $todo_item->status, Auth::user()->id, Auth::user()->name));
@@ -67,6 +75,27 @@ class TodoItemRepository implements TodoItemRepositoryInterface
           }
       }
       return TodoItem::destroy($id);
+    }
+
+    public function markAsDone($id) {
+      $todo_item = TodoItem::find($id);
+      $project = $todo_item->project;
+      foreach ($todo_item->users as $belonged_member) {
+           $todo_item->users()->updateExistingPivot($belonged_member->id,['status'=>'Done']);
+      }
+      $todo_item->save();
+      //send notfication to your partner
+     foreach ($todo_item->users as $belonged_member) {
+      if ($belonged_member->id != Auth::user()->id) {
+         $belonged_member->notify(new MarkTaskDone($project->id, $project->name, $todo_item->id, $todo_item->content, $todo_item->due_date,Auth::user()->id, Auth::user()->name));
+        }
+      }
+      //send notfication to leadership of this project
+      foreach ($project->users as $mem_in_project) {
+         if ($mem_in_project->position->name == 'Leadership') {
+         $mem_in_project->notify(new MarkTaskDone($project->id, $project->name, $todo_item->id, $todo_item->content, $todo_item->due_date,Auth::user()->id, Auth::user()->name));
+        }
+      } 
     }
 
 

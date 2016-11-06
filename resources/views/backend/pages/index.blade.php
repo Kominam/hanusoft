@@ -248,14 +248,14 @@
                                 <i class="icon-envelope"></i>
                             </td>
                             <td>Inbox</td>
-                            <td> 45</td>
+                            <td> {{$num_unread_mess}}</td>
                         </tr>
                         <tr>
                             <td>
                                 <i class=" icon-bell-alt"></i>
                             </td>
                             <td>New Notification</td>
-                            <td> 09</td>
+                            <td> {{$num_unread_noti}}</td>
                         </tr>
                     </tbody>
                 </table>

@@ -155,9 +155,9 @@ a, a:hover, a:focus {
     float:left;
 }
 
-.login-social-link a.twitter {
-    background: #44ccfe;
-    box-shadow: 0 4px #2bb4e8;
+.login-social-link a.github {
+    background: #1A2326;
+    box-shadow: 0 4px #241E1E;
     float:left;
 }
 
