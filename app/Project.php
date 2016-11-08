@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 use Carbon\Carbon;
 
+use DB;
+
 class Project extends Model
 {
     //
@@ -50,5 +52,15 @@ class Project extends Model
     public function displayActualEndDate() {
         return Carbon::createFromFormat('Y-m-d', $this->actual_end_date)->toFormattedDateString();
     }
-
+    public function displayCurPercentageCompleted() {
+        $total = $this->todo_items()->count();
+        $todo_items = $this->todo_items->pluck('id')->all();
+        if($total!=0) {
+            $completed = DB::table('todo_item_user')->whereIn('todo_item_id', $todo_items)->where('status','Done')->count();
+            $CurPercentageCompleted = ($completed/$total)*100;
+            return $CurPercentageCompleted.'%';
+        } else {
+            return "N/A";
+        }       
+    }
 }

@@ -85,6 +85,25 @@
                                               <span style="color: red">{{ $errors->first('name') }}</span>
                                         @endif
                                     </div>
+                                      <div class="form-group">
+                                        <label class="col-sm-2 control-label col-sm-2">Start Date</label>
+                                        <div class="col-sm-10">
+                                          <input type="date" class="form-control" id="" name="start_date" placeholder="YYYY-MM-DD">
+                                        </div> 
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label col-sm-2">Plan  End Date</label>
+                                        <div class="col-sm-10">
+                                          <input type="date" class="form-control" id="" name="plan_end_date" placeholder="YYYY-MM-DD">
+                                        </div> 
+                                    </div>
+                                      <div class="form-group">
+                                        <label class="col-sm-2 control-label col-sm-2">Link Github</label>
+                                        <div class="col-sm-10">
+                                          <input type="text" class="form-control" id="" name="link_github" value="http://">
+                                        </div>
+                                         
+                                    </div>
                                      <div class="form-group">
                                         <label class="col-sm-2 control-label col-sm-2">Link preview (optional)</label>
                                         <div class="col-sm-10">

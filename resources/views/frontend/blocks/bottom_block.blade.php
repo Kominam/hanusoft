@@ -74,9 +74,9 @@
                 <h4>Follow Us</h4>
                 <div class="social-icons">
                     <ul class="social-icons">
-                        <li class="facebook"><a href="../../../www.facebook.com/index.html" target="_blank" data-placement="bottom" data-tooltip title="Facebook">Facebook</a></li>
-                        <li class="googleplus"><a href="../../../www.twitter.com/index.html" target="_blank" data-placement="bottom" data-tooltip title="Twitter">Gmail</a></li>
-                        <li class="github"><a href="../../../www.linkedin.com/index.html" target="_blank" data-placement="bottom" data-tooltip title="Linkedin">Github</a></li>
+                        <li class="facebook"><a href="https://www.facebook.com/groups/1598773820362830/?fref=ts" target="_blank" data-placement="bottom" data-tooltip title="Facebook">Facebook</a></li>
+                        <li class="googleplus"><a href="https://plus.google.com/u/3/108878251893660650893" target="_blank" data-placement="bottom" data-tooltip title="Google Plus">Gmail</a></li>
+                        <li class="github"><a href="https://github.com/Hanusoft" target="_blank" data-placement="bottom" data-tooltip title="Linkedin">Github</a></li>
                     </ul>
                 </div>
             </div>

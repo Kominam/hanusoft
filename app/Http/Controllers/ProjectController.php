@@ -76,6 +76,7 @@ class ProjectController extends Controller
     //Delete
    	public function delete($id) {
    		$this->projectRepository->delete($id);
+      return redirect()->route('dashboard');
    	}
 
     public function invite(Request $request) {

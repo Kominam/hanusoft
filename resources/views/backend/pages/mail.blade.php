@@ -169,7 +169,7 @@
        success: function(data) {
        $('#sendMsg').text('Send');
        $('#message').val("");
-       var $img = $('<img class="avatar" style="width:45px;height:45px" src="http://hanusoft.dev:8000/frontend/img/team/'+member_avt+'" />').on('load', function(){
+       var $img = $('<img class="avatar" style="width:45px;height:45px" src="http://hanusoft.dev/frontend/img/team/'+member_avt+'" />').on('load', function(){
             });
             var temp = $('<a href="#" class="message-img"></a>').append($img);
             var temp2 = $('<div class="msg-time-chat"></div>').append(temp);

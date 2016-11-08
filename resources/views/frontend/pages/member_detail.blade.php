@@ -125,7 +125,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h3 class="short">My <strong>Work</strong></h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> -->
             </div>
             <ul class="portfolio-list">
             @foreach($member->projects as $project)

@@ -83,6 +83,7 @@
 			Route::get('/project/{id}', ['as' => 'backend.project', 'uses' => 'ProjectController@showForBackEnd']);
 			Route::get('/create-project', ['as' => 'create-project','uses'=>'ProjectController@showAddForm']);
 			Route::post('/create-project', ['as' => 'createProject','uses'=>'ProjectController@add']);
+			Route::get('/delete-project/{id}',['as' => 'delete-project','uses'=>'ProjectController@delete']);
 					//project managerment->invite memeber
 			Route::post('invite-members',['as' => 'invite-members', 'uses' => 'ProjectController@invite'] );
 			Route::post('accept-invite',['as' => 'accept-invite', 'uses' => 'ProjectController@acceptInvite'] );

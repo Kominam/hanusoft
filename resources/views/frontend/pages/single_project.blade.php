@@ -81,10 +81,10 @@
                             @endforeach
                         </ul>
                     </li>
-                    <li>
-                        <p><strong>Client:</strong></p>
-                        <p>Okler Themes</p>
-                    </li>
+                  <!--   <li>
+                      <p><strong>Client:</strong></p>
+                      <p>Okler Themes</p>
+                  </li> -->
                 </ul>
             </div>
         </div>

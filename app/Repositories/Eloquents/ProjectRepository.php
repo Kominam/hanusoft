@@ -104,6 +104,9 @@ class ProjectRepository implements ProjectRepositoryInterface
     	 $project= new Project;
        $project->name = $request->name;
        $project->description = $request->description;
+       $project->start_date = $request->start_date;
+       $project->plan_end_date = $request->plan_end_date;
+       $project->link_github = $request->link_github;
        if ($request->has('link_preview')) {
         $project->link_preview = $request->link_preview;
        }
@@ -213,6 +216,5 @@ class ProjectRepository implements ProjectRepositoryInterface
       $can_invite_mem = User::whereNotIn('id', $total)->get();
       return $can_invite_mem;
     }
-
 
 }
