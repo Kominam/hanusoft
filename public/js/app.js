@@ -4684,7 +4684,7 @@ window.Echo.private('App.User.' + userId).notification(function (notification) {
         $('#badge_num_unread_noti').text(new_num_unread_noti);
         $('#accept' + notification.leadership_id + notification.project_id).click(function () {
             $.ajax({
-                url: '/member/accept-invite',
+                url: '/my/invitation/handle',
                 type: "post",
                 data: { '_token': $('input[name=_token]').val(), 'project_id': notification.project_id, 'response': 'accept', 'noti_id': notification.id },
                 success: function success(data) {
@@ -4693,13 +4693,13 @@ window.Echo.private('App.User.' + userId).notification(function (notification) {
                     var new_num_unread_noti = num_unread_noti - temp;
                     $('#num_unread_noti').text(new_num_unread_noti);
                     $('#badge_num_unread_noti').text(new_num_unread_noti);
-                    window.location.href = "http://hanusoft.dev/member/project/" + notification.project_id;
+                    window.location.href = "http://hanusoft.dev/my/project/" + notification.project_id;
                 }
             });
         });
         $('#decline' + notification.leadership_id + notification.project_id).click(function () {
             $.ajax({
-                url: '/member/accept-invite',
+                url: '/my/invitation/handle',
                 type: "post",
                 data: { '_token': $('input[name=_token]').val(), 'project_id': notification.project_id, 'response': 'decline', 'noti_id': notification.id },
                 success: function success(data) {
@@ -4713,7 +4713,7 @@ window.Echo.private('App.User.' + userId).notification(function (notification) {
         });
         $('#hide' + notification.leadership_id + notification.project_id).click(function () {
             $.ajax({
-                url: '/member/accept-invite',
+                url: '/my/invitation/handle',
                 type: "post",
                 data: { '_token': $('input[name=_token]').val(), 'project_id': notification.project_id, 'response': 'hide', 'noti_id': notification.id },
                 success: function success(data) {
@@ -4743,14 +4743,14 @@ window.Echo.private('App.User.' + userId).notification(function (notification) {
         $('#header_inbox_bar li:first').after(new_noti_msg);
         $("#inbox").on("click", "#" + notification.id, function () {
             $.ajax({
-                url: '/member/notifications',
+                url: '/my/notifications',
                 type: "post",
                 data: { '_token': $('input[name=_token]').val(), 'noti_id': notification.id },
                 success: function success(data) {
                     var new_num_unread_mess = num_unread_mess - temp;
                     $('#num_unread_mess').text(new_num_unread_mess);
                     $('#badge_num_unread_mess').text(new_num_unread_mess);
-                    window.location.href = "http://hanusoft.dev/member/mail";
+                    window.location.href = "http://hanusoft.dev/my/profile/inbox";
                 }
             });
         });
@@ -4759,7 +4759,7 @@ window.Echo.private('App.User.' + userId).notification(function (notification) {
     if (notification.type == 'App\\Notifications\\AddNewState') {
         var n_state = '<article class="timeline-item"><div class="timeline-desk"><div class="panel"><div class="panel-body"><span class="arrow"></span><span class="timeline-icon red"></span><span class="timeline-date">08:25 am</span><h1 class="red">' + notification.state_due_date + '</h1><p>' + notification.state_content + '</p></div></div></div></article>';
         $('#timeline' + notification.project_id).prepend(n_state);
-        var new_state = '<li id="' + notification.id + '"><a href="http://hanusoft.dev/member/project/' + notification.project_id + '"><span class="label label-danger"><i class="icon-bolt"></i></span>New State Added.<span class="small italic">' + notification.project_name + '</span></a></li>';
+        var new_state = '<li id="' + notification.id + '"><a href="http://hanusoft.dev/my/project/' + notification.project_id + '"><span class="label label-danger"><i class="icon-bolt"></i></span>New State Added.<span class="small italic">' + notification.project_name + '</span></a></li>';
         $('#header_notification_bar li:first').after(new_state);
         $('#header_notification_bar li:nth-child(4)').remove();
         var num_unread_noti = parseInt($('#num_unread_noti').text());
@@ -4769,7 +4769,7 @@ window.Echo.private('App.User.' + userId).notification(function (notification) {
         $('#badge_num_unread_noti').text(new_num_unread_noti);
         $("#noti").on("click", "#" + notification.id, function (event) {
             $.ajax({
-                url: '/member/notifications',
+                url: '/my/notifications',
                 type: "post",
                 data: { '_token': $('input[name=_token]').val(), 'noti_id': notification.id },
                 success: function success(data) {
@@ -4782,7 +4782,7 @@ window.Echo.private('App.User.' + userId).notification(function (notification) {
     }
     if (notification.type == 'App\\Notifications\\DeleteState') {
         $('#state' + notification.state_id).remove();
-        var new_state = '<li id="' + notification.id + '"><a href="http://hanusoft.dev/member/project/' + notification.project_id + '"><span class="label label-danger"><i class="icon-bolt"></i></span>State #' + notification.state_id + 'removed .<span class="small italic">' + notification.project_name + '</span></a></li>';
+        var new_state = '<li id="' + notification.id + '"><a href="http://hanusoft.dev/my/project/' + notification.project_id + '"><span class="label label-danger"><i class="icon-bolt"></i></span>State #' + notification.state_id + 'removed .<span class="small italic">' + notification.project_name + '</span></a></li>';
         $('#header_notification_bar li:first').after(new_state);
         $('#header_notification_bar li:nth-child(4)').remove();
         var num_unread_noti = parseInt($('#num_unread_noti').text());
@@ -4792,7 +4792,7 @@ window.Echo.private('App.User.' + userId).notification(function (notification) {
         $('#badge_num_unread_noti').text(new_num_unread_noti);
         $("#noti").on("click", "#" + notification.id, function (event) {
             $.ajax({
-                url: '/member/notifications',
+                url: '/my/notifications',
                 type: "post",
                 data: { '_token': $('input[name=_token]').val(), 'noti_id': notification.id },
                 success: function success(data) {
@@ -4804,7 +4804,7 @@ window.Echo.private('App.User.' + userId).notification(function (notification) {
         });
     }
     if (notification.type == 'App\\Notifications\\AssignNewTask') {
-        var new_task = '<li id="' + notification.id + '"><a href="http://hanusoft.dev/member/project/' + notification.project_id + '"><div class="task-info"><div class="desc">' + notification.project_name + '</div><div class="desc">' + notification.todo_content + '</div></div></a></li>';
+        var new_task = '<li id="' + notification.id + '"><a href="http://hanusoft.dev/my/project/' + notification.project_id + '"><div class="task-info"><div class="desc">' + notification.project_name + '</div><div class="desc">' + notification.todo_content + '</div></div></a></li>';
         $('#header_task_bar li:first').after(new_task);
         $('#header_task_bar li:nth-child(4)').remove();
         var new_task = '<li><div class="task-checkbox"><input type="checkbox" class="list-child" value=""/></div><div class="task-title"><span class="task-title-sp">' + notification.todo_content + '</span><span class="badge badge-sm label-success">2 Days</span><div class="pull-right hidden-phone"><button class="btn btn-success btn-xs"><i class="icon-ok"></i></button><button class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button><button class="btn btn-danger btn-xs"><i class="icon-trash "></i></button></div></div></li>';
@@ -4817,7 +4817,7 @@ window.Echo.private('App.User.' + userId).notification(function (notification) {
         $('#badge_num_unread_task').text(new_num_unread_task);
         $("#task_disp").on("click", "#" + notification.id, function (event) {
             $.ajax({
-                url: '/member/notifications',
+                url: '/my/notifications',
                 type: "post",
                 data: { '_token': $('input[name=_token]').val(), 'noti_id': notification.id },
                 success: function success(data) {
@@ -4829,7 +4829,7 @@ window.Echo.private('App.User.' + userId).notification(function (notification) {
         });
     }
     if (notification.type == 'App\\Notifications\\DeleteTask') {
-        var new_task = '<li id="' + notification.id + '"><a href="http://hanusoft.dev/member/project/' + notification.project_id + '"><div class="task-info"><div class="desc">' + notification.project_name + '</div><div class="desc">Your Task #' + notification.todo_id + 'was remove</div></div></a></li>';
+        var new_task = '<li id="' + notification.id + '"><a href="http://hanusoft.dev/my/project/' + notification.project_id + '"><div class="task-info"><div class="desc">' + notification.project_name + '</div><div class="desc">Your Task #' + notification.todo_id + 'was remove</div></div></a></li>';
         $('#header_task_bar li:first').after(new_task);
         $('#header_task_bar li:nth-child(4)').remove();
         var num_unread_task = parseInt($('#num_unread_task').text());
@@ -4840,7 +4840,7 @@ window.Echo.private('App.User.' + userId).notification(function (notification) {
         $('#badge_num_unread_task').text(new_num_unread_task);
         $("#task_disp").on("click", "#" + notification.id, function (event) {
             $.ajax({
-                url: '/member/notifications',
+                url: '/my/notifications',
                 type: "post",
                 data: { '_token': $('input[name=_token]').val(), 'noti_id': notification.id },
                 success: function success(data) {
@@ -4852,7 +4852,7 @@ window.Echo.private('App.User.' + userId).notification(function (notification) {
         });
     }
     if (notification.type == 'App\\Notifications\\MarkTaskDone') {
-        var new_task = '<li id="' + notification.id + '"><a href="http://hanusoft.dev/member/project/' + notification.project_id + '"><div class="task-info"><div class="desc">' + notification.project_name + '</div><div class="desc">Your Task #' + notification.todo_id + ':' + notification.todo_content + 'was mark done by' + notification.marker_name + '</div></div></a></li>';
+        var new_task = '<li id="' + notification.id + '"><a href="http://hanusoft.dev/my/project/' + notification.project_id + '"><div class="task-info"><div class="desc">' + notification.project_name + '</div><div class="desc">Your Task #' + notification.todo_id + ':' + notification.todo_content + 'was mark done by' + notification.marker_name + '</div></div></a></li>';
         $('#header_task_bar li:first').after(new_task);
         $('#header_task_bar li:nth-child(4)').remove();
         var num_unread_task = parseInt($('#num_unread_task').text());
@@ -4862,7 +4862,7 @@ window.Echo.private('App.User.' + userId).notification(function (notification) {
         $('#badge_num_unread_task').text(new_num_unread_task);
         $("#task_disp").on("click", "#" + notification.id, function (event) {
             $.ajax({
-                url: '/member/notifications',
+                url: '/my/notifications',
                 type: "post",
                 data: { '_token': $('input[name=_token]').val(), 'noti_id': notification.id },
                 success: function success(data) {

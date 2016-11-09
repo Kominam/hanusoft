@@ -14,7 +14,7 @@
               @can('create-project')
                  <div class="row">
                   <div class="col-lg-12">
-                  <form class="form-horizontal tasi-form" method="POST" action="{{ route('createProject') }}"> 
+                  <form class="form-horizontal tasi-form" method="POST" action="{{ route('project.store') }}"> 
                       <section class="panel">
                           <div class="panel-body">
                               <input type="hidden" name="_token" value="{{csrf_token()}}">

@@ -38,7 +38,7 @@
                 </p>
             </div>
             <div class="col-md-2">
-                <a href="{{ route('login') }}" class="btn btn-lg btn-primary push-top">Join with us !!!</a>
+                <a href="{{ route('login.showLoginForm') }}" class="btn btn-lg btn-primary push-top">Join with us !!!</a>
             </div>
         </div>
         <hr class="tall">

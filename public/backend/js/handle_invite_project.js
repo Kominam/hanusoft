@@ -12,7 +12,7 @@ function handle_inite_project(leadership_id, project_id) {
     var temp= parseInt(" 1 ");
     $('#accept' +leadership_id+project_id).click(function(){
             $.ajax({
-            url:'/member/accept-invite',
+            url:'/my/invitation/handle',
             type: "post",
             data: { '_token': $('input[name=_token]').val(), 'project_id': project_id, 'response': 'accept', 'noti_id': notification_id},
             success: function(data) {
@@ -26,7 +26,7 @@ function handle_inite_project(leadership_id, project_id) {
         });
     $('#decline'+leadership_id+project_id).click(function(){
             $.ajax({
-            url:'/member/accept-invite',
+            url:'/my/invitation/handle',
             type: "post",
             data: { '_token': $('input[name=_token]').val(), 'project_id': project_id, 'response': 'decline','noti_id': notification_id},
             success: function(data) { 
@@ -40,7 +40,7 @@ function handle_inite_project(leadership_id, project_id) {
         });
     $('#hide'+leadership_id+project_id).click(function(){
             $.ajax({
-            url:'/member/accept-invite',
+            url:'/my/invitation/handle',
             type: "post",
             data: { '_token': $('input[name=_token]').val(), 'project_id': project_id, 'response': 'hide',  'noti_id': notification_id},
             success: function(data) {

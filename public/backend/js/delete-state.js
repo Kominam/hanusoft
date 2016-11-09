@@ -7,7 +7,7 @@ function deleteState(state_id) {
         });
       $('a[href="#deletestate'+state_id+'"]').click(function(){
           $.ajax({
-              url:'/member/delete-state/'+ state_id,
+              url:'/my/state/delete/'+ state_id,
               type: "get",
               success: function(data) {  
                 $('#state'+state_id).remove();

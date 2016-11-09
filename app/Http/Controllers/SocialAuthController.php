@@ -23,6 +23,6 @@ class SocialAuthController extends Controller
 
         auth()->login($user);
 
-        return redirect()->to('/member/dashboard');
+        return redirect()->route('dashboard');
     }
 }

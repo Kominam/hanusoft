@@ -17,7 +17,7 @@
                   <div class="panel-body">
                       @foreach ($all_mess_noti as $mess)
                        <div class="classic-search">
-                         <h4><a href="{{ url('member/mail') }}">{{ $mess->data['project_chat_name'] }}</a></h4>
+                         <h4><a href="{{ route('profile.inbox') }}">{{ $mess->data['project_chat_name'] }}</a></h4>
                          From: <a href="#"> {{ $mess->data['member_name'] }}</a><br>
 
                          Meessage: {!! $mess->data['message']!!}

@@ -208,7 +208,8 @@ class ProjectRepository implements ProjectRepositoryInterface
 
     public function canInvinteMember($id) {
       $project = Project:: find($id);
-      $mem_in_project = $project->users()->get()->pluck('id')->all();
+      $temp = $project->users;
+      $mem_in_project= $temp->pluck('id')->all();
       $invitation = DB::table('invitations')->where('project_id','=', $id)->pluck('project_id')->all();
       $total1 = array_merge($mem_in_project,$invitation);
       $on_handle_mem_for_this_project = DB::table('invitation_user')->whereIn('invitation_id', $invitation)->pluck('user_id')->all();
@@ -216,5 +217,4 @@ class ProjectRepository implements ProjectRepositoryInterface
       $can_invite_mem = User::whereNotIn('id', $total)->get();
       return $can_invite_mem;
     }
-
 }

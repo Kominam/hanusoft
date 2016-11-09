@@ -21,7 +21,7 @@
     </head>
     <body class="login-body">
         <div class="container">
-            <form class="form-signin" method="POST" action="{{ url('/member/login') }}" >
+            <form class="form-signin" method="POST" action="{{ route('login') }}" >
                 <h2 class="form-signin-heading">sign in now</h2>
                 <div class="login-wrap">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">

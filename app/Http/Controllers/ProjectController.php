@@ -56,7 +56,7 @@ class ProjectController extends Controller
             return back()->withErrors($validator)->withInput();
          } else {
              $new_project = $this->projectRepository->create($request);
-             return redirect()->route('backend.project', $new_project->id);
+             return redirect()->route('project.show', $new_project->id);
          }  
     	
     }
@@ -83,7 +83,7 @@ class ProjectController extends Controller
       $this->projectRepository->invite($request);
     }
 
-    public function acceptInvite(Request $request) {
+    public function handleInvitation(Request $request) {
       $this->projectRepository->handleInvitation($request);
     }
 

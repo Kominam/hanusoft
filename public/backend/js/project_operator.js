@@ -16,7 +16,7 @@ $(document).ready(function() {
           assigned_mem_list.push($(this).val());
           });
       $.ajax({
-      url:'/member/add-task',
+      url:'/my/task/create',
       type: "post",
       data: { '_token': $('input[name=_token]').val(), 'project_id': project_id, 'content': content, 'due_date' : due_date, 'assigned_members':assigned_mem_list},
       success: function(data) {
@@ -34,7 +34,7 @@ $(document).ready(function() {
         });
       console.log(inviter_list);
        $.ajax({
-          url:'/member/invite-members',
+          url:'/my/invitation/create',
           type: "post",
           data: { '_token': $('input[name=_token]').val(), 'project_id': project_id, 'project_name': project_name, 'inviters' : inviter_list},
           success: function(data) {  
@@ -48,7 +48,7 @@ $(document).ready(function() {
       var due_date = $('#state_due_date').val();
       var status = $('#state_status').val();
       $.ajax({
-      url:'/member/add-state',
+      url:'/my/state/create',
       type: "post",
       data: { '_token': $('input[name=_token]').val(), 'project_id': project_id, 'content': content, 'due_date' : due_date, 'status': status},
       success: function(data) {  

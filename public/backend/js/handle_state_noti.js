@@ -9,7 +9,7 @@ function handle_state(noti_id) {
                     }
                   });
                 $.ajax({
-                      url:'/member/notifications',
+                      url:'/my/notifications',
                       type: "post",
                       data: { '_token': $('input[name=_token]').val(), 'noti_id': noti_id},
                       success: function(data) {   

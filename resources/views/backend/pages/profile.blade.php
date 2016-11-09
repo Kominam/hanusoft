@@ -16,9 +16,9 @@
                         <p>{{$member->email}}</p>
                     </div>
                     <ul class="nav nav-pills nav-stacked">
-                        <li class="active"><a href="{{ route('profile') }}"> <i class="icon-user"></i> Profile</a></li>
-                        <li><a href="{{ route('profile-activity') }}"> <i class="icon-calendar"></i> Recent Activity <span class="label label-danger pull-right r-activity">9</span></a></li>
-                        <li><a href="{{route('profile-edit')}}"> <i class="icon-edit"></i> Edit profile</a></li>
+                        <li class="active"><a href="{{ route('profile.show') }}"> <i class="icon-user"></i> Profile</a></li>
+                        <li><a href="{{ route('profile.activity') }}"> <i class="icon-calendar"></i> Recent Activity <span class="label label-danger pull-right r-activity">9</span></a></li>
+                        <li><a href="{{route('profile.edit')}}"> <i class="icon-edit"></i> Edit profile</a></li>
                     </ul>
                 </section>
             </aside>

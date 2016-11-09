@@ -54,7 +54,7 @@ class MemberController extends Controller
             return back()->withErrors($validator)->withInput();
          } else {
              $this->memberRepository->update($request);
-             return redirect()->route("profile");
+             return redirect()->route("profile.show");
          }   
     }
     public function changePwd(Request $request) {
@@ -66,7 +66,7 @@ class MemberController extends Controller
          }
           else {
              $this->memberRepository->changePwd($request);
-             return redirect()->route('profile')->with('change_profile','OK');
+             return redirect()->route('profile.show')->with('change_profile','OK');
          }
     }
 }

@@ -17,7 +17,7 @@
                   <div class="panel-body">
                       @foreach ($all_task_noti as $task)
                        <div class="classic-search">
-                         <h4><a href="{{ route('backend.project', $task->data['project_id']) }}">{{ $task->data['project_name'] }}</a></h4>
+                         <h4><a href="{{ route('project.show', $task->data['project_id']) }}">{{ $task->data['project_name'] }}</a></h4>
                           @if ($task->type=='App\Notifications\AssignNewTask')
                             By: <a href="#"> {{ $task->data['leadership_name'] }}</a><br>
                             <strong><span class="label label-info"><i class="icon-bolt"></i></span>You are assinged new task: </strong> 

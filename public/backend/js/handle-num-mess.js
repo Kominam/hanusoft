@@ -9,14 +9,14 @@
                     }
                   });
                 $.ajax({
-                      url:'/member/notifications',
+                      url:'/my/notifications',
                       type: "post",
                       data: { '_token': $('input[name=_token]').val(), 'noti_id': noti_id},
                       success: function(data) {   
                           var new_num_unread_mess = num_unread_mess - temp;
                           $('#num_unread_mess').text(new_num_unread_mess);
                           $('#badge_num_unread_mess').text(new_num_unread_mess);
-                          window.location.href = "http://hanusoft.dev/member/mail";
+                          window.location.href = "http://hanusoft.dev/my/profile/inbox ";
                           }          
                       });
           });

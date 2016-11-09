@@ -27,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/member/dashboard';
+    protected $redirectTo = '/my';
 
     /**
      * Create a new controller instance.
@@ -43,6 +43,6 @@ class LoginController extends Controller
     }
     protected function logout() {
         Auth::logout();
-        return redirect()->route('login');
+        return redirect()->route('login.showLoginForm');
     }
 }

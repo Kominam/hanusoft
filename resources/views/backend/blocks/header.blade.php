@@ -12,7 +12,7 @@
             <div data-original-title="Toggle Navigation" data-placement="right" class="icon-reorder tooltips"></div>
         </div>
         <!--logo start-->
-        <a href="{{route('index')}}" class="logo" >HANU<span>soft</span></a>
+        <a href="{{route('dashboard')}}" class="logo" >HANU<span>soft</span></a>
         <!--logo end-->
         <div class="nav notify-row" id="top_menu">
             <!--  notification start -->
@@ -31,7 +31,7 @@
                         @foreach (Auth::user()->unreadNotifications->whereIn('type',['App\Notifications\AssignNewTask','App\Notifications\DeleteTask','App\Notifications\UpdateTask','App\Notifications\MarkTaskDone'])->take(5) as $notification)
                              @if($notification->type=='App\Notifications\AssignNewTask')
                                  <li id="{{$notification->id}}">
-                                    <a href="{{ route('backend.project',$notification->data['project_id'] ) }}">
+                                    <a href="{{ route('project.show',$notification->data['project_id'] ) }}">
                                         <div class="task-info">
                                             <div class="desc">{{$notification->data['project_name']}}</div>
                                             <div class="desc"><span><i class="icon-plus" style="color:green"></i></span>New task for you: {{$notification->data['todo_content']}}</div>
@@ -40,7 +40,7 @@
                                 </li>
                              @elseif($notification->type=='App\Notifications\DeleteTask')
                                   <li id="{{$notification->id}}">
-                                    <a href="{{ route('backend.project',$notification->data['project_id'] ) }}">
+                                    <a href="{{ route('project.show',$notification->data['project_id'] ) }}">
                                         <div class="task-info">
                                             <div class="desc">{{$notification->data['project_name']}}</div>
                                             <div class="desc"><span><i class="icon-trash" style="color:red"></i></span> Task #{{$notification->data['todo_id']}} was deleted</div>
@@ -49,7 +49,7 @@
                                 </li>
                             @elseif($notification->type=='App\Notifications\UpdateTask')
                                   <li id="{{$notification->id}}">
-                                    <a href="{{ route('backend.project',$notification->data['project_id'] ) }}">
+                                    <a href="{{ route('project.show',$notification->data['project_id'] ) }}">
                                         <div class="task-info">
                                             <div class="desc">{{$notification->data['project_name']}}</div>
                                             <div class="desc"><span><i class="icon-refresh" style="color:blue"></i></span> Task #{{$notification->data['todo_id']}} was updated</div>
@@ -58,7 +58,7 @@
                                 </li>
                             @elseif($notification->type=='App\Notifications\MarkTaskDone')
                                   <li id="{{$notification->id}}">
-                                    <a href="{{ route('backend.project',$notification->data['project_id'] ) }}">
+                                    <a href="{{ route('project.show',$notification->data['project_id'] ) }}">
                                         <div class="task-info">
                                             <div class="desc">{{$notification->data['project_name']}}</div>
                                             <div class="desc"><span><i class="icon-check" style="color:green"></i></span> Task #{{$notification->data['todo_id']}}: {{$notification->data['todo_content']}}<br> was marked as done<br> by {{$notification->data['marker_name']}}</div>
@@ -151,12 +151,12 @@
                                   handle_inite_project("{{$notification->data['leadership_id']}}","{{$notification->data['project_id']}}");
                              </script>
                         @elseif($notification->type=='App\Notifications\AddNewState')
-                            <li id="{{$notification->id}}"><a href="{{ route('backend.project', $notification->data['project_id']) }}"><span class="label label-primary"><i class="icon-plus"></i></span>New State Added.<span class="small italic">{{$notification->data['project_name']}}</span></a></li>'
+                            <li id="{{$notification->id}}"><a href="{{ route('project.show', $notification->data['project_id']) }}"><span class="label label-primary"><i class="icon-plus"></i></span>New State Added.<span class="small italic">{{$notification->data['project_name']}}</span></a></li>'
                              <script type="text/javascript">
                                     handle_state("{{$notification->id}}");
                              </script>
                         @elseif($notification->type=='App\Notifications\DeleteState')
-                         <li id="{{$notification->id}}"><a href="{{ route('backend.project', $notification->data['project_id']) }}"><span class="label label-danger"><i class="icon-trash"></i></span> State #{{$notification->data['state_id']}} Removed.<span class="small italic">{{$notification->data['project_name']}}</span></a></li>'
+                         <li id="{{$notification->id}}"><a href="{{ route('project.show', $notification->data['project_id']) }}"><span class="label label-danger"><i class="icon-trash"></i></span> State #{{$notification->data['state_id']}} Removed.<span class="small italic">{{$notification->data['project_name']}}</span></a></li>'
                         @endif
                         @endforeach
                         <li>
@@ -181,10 +181,10 @@
                     </a>
                     <ul class="dropdown-menu extended logout">
                         <div class="log-arrow-up"></div>
-                        <li><a href="{{route('profile')}}"><i class=" icon-suitcase"></i>Profile</a></li>
+                        <li><a href="{{route('profile.show')}}"><i class=" icon-suitcase"></i>Profile</a></li>
                         <li><a href="#"><i class="icon-cog"></i> Settings</a></li>
                         <li><a href="{{ route('all_important_noti') }}"><i class="icon-bell-alt"></i> Notification</a></li>
-                        <li><a href="{{ url('member/logout') }}"><i class="icon-key"></i> Log Out</a></li>
+                        <li><a href="{{ route('logout') }}"><i class="icon-key"></i> Log Out</a></li>
                     </ul>
                 </li>
                 <!-- user login dropdown end -->
@@ -210,9 +210,9 @@
                     </a>
                     <ul class="sub">
                         @foreach (Auth::user()->projects as $project)
-                          <li><a  href="{{ route('backend.project', $project->id) }}"> <i class=" icon-folder-close"></i>{{$project->name}}</a></li>
+                          <li><a  href="{{ route('project.show', $project->id) }}"> <i class=" icon-folder-close"></i>{{$project->name}}</a></li>
                         @endforeach
-                         <li><a  href="{{ route('create-project') }}"> <i class="icon-plus-sign-alt"></i>Create a new project</a></li>
+                         <li><a  href="{{ route('project.create') }}"> <i class="icon-plus-sign-alt"></i>Create a new project</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -221,10 +221,10 @@
                     <span>Profile</span>
                     </a>
                     <ul class="sub">
-                        <li><a  href="{{route('profile')}}"> <i class=" icon-info"></i>Your profile</a></li>
-                         <li><a  href="{{route('profile-edit')}}"><i class="icon-edit"></i>Edit profile</a></li>
-                        <li><a  href="{{route('profile-activity')}}"><i class="icon-calendar"></i>Activity</a></li>
-                        <li><a href="{{route('mail')}}"><i class="icon-envelope"></i><span>Inbox</span></a></li>
+                        <li><a  href="{{route('profile.show')}}"> <i class=" icon-info"></i>Your profile</a></li>
+                         <li><a  href="{{route('profile.edit')}}"><i class="icon-edit"></i>Edit profile</a></li>
+                        <li><a  href="{{route('profile.activity')}}"><i class="icon-calendar"></i>Activity</a></li>
+                        <li><a href="{{route('profile.inbox')}}"><i class="icon-envelope"></i><span>Inbox</span></a></li>
                     </ul>
                 </li>
                   <li class="sub-menu">
@@ -233,8 +233,8 @@
                     <span>Post</span>
                     </a>
                     <ul class="sub">
-                        <li><a  href="{{ route('showPostForm') }}"><i class="icon-edit"></i>Write post</a></li>
-                        <li><a  href="{{ route('your-post') }}"><i class="icon-book"></i>Your post</a></li>
+                        <li><a  href="{{ route('post.create') }}"><i class="icon-edit"></i>Write post</a></li>
+                        <li><a  href="{{ route('post.your-post') }}"><i class="icon-book"></i>Your post</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">

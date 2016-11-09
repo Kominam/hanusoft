@@ -42,7 +42,7 @@ class PostController extends Controller
             return back()->withErrors($validator)->withInput();
          } else {
              $this->postRepository->create($request);
-             return redirect()->route('your-post');
+             return redirect()->route('post.your-post');
          }  
     }
    	//EDIT
@@ -58,13 +58,13 @@ class PostController extends Controller
             return back()->withErrors($validator)->withInput();
          } else {
             $this->postRepository->update($request, $id);
-            return redirect()->route('your-post');
+            return redirect()->route('post.your-post');
          }
    	}
 
    	public function delete($id) {
    		$this->postRepository->delete($id);
-      return redirect()->route('your-post');
+      return redirect()->route('post.your-post');
    	}
 
      public function filterByCategory($id) {

@@ -16,9 +16,9 @@
                           <p>{{$member->email}}</p>
                       </div>
                     <ul class="nav nav-pills nav-stacked">
-                         <li ><a href="{{ route('profile') }}"> <i class="icon-user"></i> Profile</a></li>
-                        <li><a href="{{ route('profile-activity') }}"> <i class="icon-calendar"></i> Recent Activity <span class="label label-danger pull-right r-activity">9</span></a></li>
-                        <li class="active"><a href="{{route('profile-edit')}}"> <i class="icon-edit"></i> Edit profile</a></li>
+                         <li ><a href="{{ route('profile.show') }}"> <i class="icon-user"></i> Profile</a></li>
+                        <li><a href="{{ route('profile.activity') }}"> <i class="icon-calendar"></i> Recent Activity <span class="label label-danger pull-right r-activity">9</span></a></li>
+                        <li class="active"><a href="{{route('profile.edit')}}"> <i class="icon-edit"></i> Edit profile</a></li>
                     </ul>
                 </section>
             </aside>
@@ -29,7 +29,7 @@
                     </div>
                     <div class="panel-body bio-graph-info">
                         <h1> Profile Info</h1>
-                        <form class="form-horizontal" role="form" action="{{ route('post.profile-edit') }}" method="POST">
+                        <form class="form-horizontal" role="form" action="{{ route('profile.update') }}" method="POST">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             <div class="form-group">
                                 <label  class="col-lg-2 control-label">About Me</label>
@@ -124,7 +124,7 @@
                     <div class="panel panel-primary">
                         <div class="panel-heading"> Sets New Password & Avatar</div>
                         <div class="panel-body">
-                            <form class="form-horizontal" role="form" enctype="multipart/form-data" method="POST" action="{{ route('change-pwd') }}">
+                            <form class="form-horizontal" role="form" enctype="multipart/form-data" method="POST" action="{{ route('profile.changePassword') }}">
                                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                                 <div class="form-group">
                                     <label  class="col-lg-2 control-label">Current Password</label>

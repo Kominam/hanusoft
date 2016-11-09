@@ -15,7 +15,7 @@ function updateTodo_item(todo_id) {
        $('a[href="#updatetask'+todo_id+'"]').click(function(){
                alert(content + due_date);
           $.ajax({
-              url:'/member/update-task/',
+              url:'/my/task/update',
               type: "post",
               data : {'_token': $('input[name=_token]').val(),'id': todo_id, 'content' : content, 'due_date': due_date, 'project_id': project_id, 'new_assigned_members': ass_list},
               success: function(data) {  

@@ -10,7 +10,7 @@
               <!-- page start-->
               <div class="row">
                   <div class="col-lg-12">
-                  <form class="form-horizontal tasi-form" method="post" action="{{ route('writePost') }}">
+                  <form class="form-horizontal tasi-form" method="post" action="{{ route('post.store') }}">
                   <input type="hidden" name="_token" value="{{csrf_token()}}">
                     @if (count($errors) >0)
                         <section class="panel">

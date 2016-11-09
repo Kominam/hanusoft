@@ -33,7 +33,7 @@
                           <a href=" {{ route('post_detail', $post->id) }}"> {{ route('post_detail', $post->id) }}</a>
                           {!! substr($post->content, 0,200)!!}[...]
                           <br>
-                           <a class="btn btn-info" href="{{ route('get.edit.post', $post->id) }}">
+                           <a class="btn btn-info" href="{{ route('post.edit', $post->id) }}">
                                   <i class="icon-edit"></i>
                            </a>
                            <a class="btn btn-danger" data-toggle="modal" href="#myModal{{$post->id}}">
@@ -54,7 +54,7 @@
                                           </div>
                                           <div class="modal-footer">
                                               <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-                                              <a class="btn btn-danger" href="{{ route('delete-post', $post->id) }}">Yes, I sure</a>
+                                              <a class="btn btn-danger" href="{{ route('post.destroy', $post->id) }}">Yes, I sure</a>
                                           </div>
                                       </div>
                                   </div>

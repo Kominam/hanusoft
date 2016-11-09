@@ -43,7 +43,7 @@
 @if (empty(Auth::user()->grade->name) || empty(Auth::user()->position->name))
     <div class="row">
         <div class="col-lg-12 col-sm-12 alert alert-danger">
-            <a href="{{ route('profile-edit') }}" style="text-decoration:none;color: inherit;"><i class="icon-warning-sign"></i> You must update some important information right now </a>
+            <a href="{{ route('profile.edit') }}" style="text-decoration:none;color: inherit;"><i class="icon-warning-sign"></i> You must update some important information right now </a>
         </div>
     </div>
 @endif
@@ -114,7 +114,7 @@
                     <img src="{{url('frontend/img/team/'.Auth::user()->url_avt)}}" alt="" width="90px" height="83px">
                     </a>
                     <div class="task-thumb-details">
-                        <h1><a href="{{ route('profile')}}">{{Auth::user()->name}}</a></h1>
+                        <h1><a href="{{ route('profile.show')}}">{{Auth::user()->name}}</a></h1>
                         <p>{{Auth::user()->grade ? Auth::user()->grade->name : 'Undefined'}} - {{Auth::user()->position ? Auth::user()->position->name : 'Undefined'}}</p>
                     </div>
                 </div>

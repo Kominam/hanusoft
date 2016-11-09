@@ -8,7 +8,7 @@ function markAsDone(task_id) {
     });
     $('#btn_mark_todo_as_done'+task_id).click(function(){
         $.ajax({
-        url:'/member/mark-task-as-done/'+task_id,
+        url:'/my/task/mark-as-done/'+task_id,
         type: "get",
         success: function(data) {  
             alert("This task is mark as done");

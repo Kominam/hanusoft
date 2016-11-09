@@ -332,7 +332,7 @@
                                        });
                                      $('a[href="#deletestate{{$state->id}}"]').click(function(){
                                          $.ajax({
-                                             url:'/member/delete-state/'+ "{{$state->id}}",
+                                             url:'/my/state/delete/'+ "{{$state->id}}",
                                              type: "get",
                                              success: function(data) {  
                                                $('#state{{$state->id}}').remove();
@@ -443,7 +443,7 @@
                             $(document).ready(function() {
                                $('#delete_project_name').keyup(function() {
                                   if ($(this).val()=="{{$project->name}}") {
-                                    $('#link-delete').append('<a href="http://hanusoft.dev/member/delete-project/'+{{$project->id}} +'" class="btn btn-danger">Delete this project</a>');
+                                    $('#link-delete').append('<a href="http://hanusoft.dev/my/project/delete/'+{{$project->id}} +'" class="btn btn-danger">Delete this project</a>');
                                   }
                                });
                            });

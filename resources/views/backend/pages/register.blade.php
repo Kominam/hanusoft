@@ -80,7 +80,7 @@
           <button class="btn btn-lg btn-login btn-block" type="submit">Submit</button>
           <div class="registration">
             Already Registered.
-            <a class="" href="{{ route('login') }}">
+            <a class="" href="{{ route('login.showLoginForm') }}">
             Login
             </a>
           </div>

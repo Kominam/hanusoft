@@ -16,50 +16,10 @@
 	});
 
 	Auth::routes();
-	Route::group(['prefix' => 'member'], function () {
-		Route::get('/form_component', ['as' => 'form_component', function() {
-			return view('backend.pages.form_component');
-		}]);
-		
-		Route::get('/form_wizard', ['as' => 'form_wizard', function() {
-			return view('backend.pages.form_wizard');
-		}]);
-		
-		Route::get('/form_validation', ['as' => 'form_validation', function() {
-			return view('backend.pages.form_validation');
-		}]);
-		
-		Route::get('/basic_table', ['as' => 'basic_table', function() {
-			return view('backend.pages.basic_table');
-		}]);
-
-		Route::get('/dynamic_table', ['as' => 'dynamic_table', function() {
-			return view('backend.pages.dynamic_table');
-		}]);
-
-		Route::get('/advanced_table', ['as' => 'advanced_table', function() {
-			return view('backend.pages.advanced_table');
-		}]);
-
-		Route::get('/editable_table', ['as' => 'editable_table', function() {
-			return view('backend.pages.editable_table');
-		}]);
-		
-		Route::get('/morris', ['as' => 'morris', function() {
-			return view('backend.pages.morris');
-		}]);
-		
-		Route::get('/xchart', ['as' => 'xchart', function() {
-			return view('backend.pages.xchart');
-		}]);
-
-		Route::get('/todo_list', ['as' => 'todo_list', function(){
-			return view('backend.pages.todo_list');
-		}]);
-
+	Route::group(['prefix' => 'my'], function () {
 		// Login Routes...
-		Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
-		Route::post('/login', 'Auth\LoginController@login');
+		Route::get('login', ['as' => 'login.showLoginForm', 'uses' => 'Auth\LoginController@showLoginForm']);
+		Route::post('/login', 'Auth\LoginController@login')->name('login');
 		// Registration Routes...
 		Route::get('register', ['as' => 'register', 'uses' => 'Auth\RegisterController@showRegistrationForm']);
 		Route::post('register', ['as' => 'register.post', 'uses' => 'Auth\RegisterController@register']);
@@ -70,49 +30,69 @@
     	Route::get('password/reset/{token}', ['as' => 'password.reset.token', 'uses' => 'Auth\ResetPasswordController@showResetForm']);
     	Route::post('password/reset', ['as' => 'password.reset.post', 'uses' => 'Auth\ResetPasswordController@reset']);
 		Route::group(['middleware' => ['auth']], function () {
-			Route::get('/dashboard', 'HomeController@index')->name('dashboard');
-			Route::get('/logout', 'Auth\LoginController@logout');
+			Route::get('/', 'HomeController@index')->name('dashboard');
+			Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 			//Post Management
-			Route::get('/write-post', ['as' => 'showPostForm','uses'=>'PostController@showAddForm']);
-			Route::post('/write-post', ['as' => 'writePost', 'uses'=>'PostController@add']);
-			Route::get('/your-post', ['as' => 'your-post', 'uses'=>'PostController@showYourPost']);
-			Route::get('/edit-post/{id}', ['as' => 'get.edit.post', 'uses'=>'PostController@showEditForm']);
-			Route::post('/edit-post/{id}', ['as' => 'post.edit.post', 'uses'=>'PostController@edit']);
-			Route::get('delete-post/{id}',['as' => 'delete-post', 'uses'=>'PostController@delete']);
+			Route::group(['prefix' => 'post'], function () {
+				Route::get('/', ['as' => 'post.your-post', 'uses'=>'PostController@showYourPost']);
+				Route::get('/write', ['as' => 'post.create','uses'=>'PostController@showAddForm']);
+				Route::post('/write', ['as' => 'post.store', 'uses'=>'PostController@add']);			
+				Route::get('/edit/{id}', ['as' => 'post.edit', 'uses'=>'PostController@showEditForm']);
+				Route::post('/edit/{id}', ['as' => 'post.update', 'uses'=>'PostController@edit']);
+				Route::get('/delete/{id}',['as' => 'post.destroy', 'uses'=>'PostController@delete']);
+			});
 			//Project Management
-			Route::get('/project/{id}', ['as' => 'backend.project', 'uses' => 'ProjectController@showForBackEnd']);
-			Route::get('/create-project', ['as' => 'create-project','uses'=>'ProjectController@showAddForm']);
-			Route::post('/create-project', ['as' => 'createProject','uses'=>'ProjectController@add']);
-			Route::get('/delete-project/{id}',['as' => 'delete-project','uses'=>'ProjectController@delete']);
+			Route::group(['prefix' => 'project'], function () {
+				Route::get('/{id}', ['as' => 'project.show', 'uses' => 'ProjectController@showForBackEnd']);
+				Route::get('/op/create', ['as' => 'project.create','uses'=>'ProjectController@showAddForm']);
+				Route::post('/op/store', ['as' => 'project.store','uses'=>'ProjectController@add']);
+				Route::get('/delete/{id}',['as' => 'project.destroy','uses'=>'ProjectController@delete']);
+			});
 					//project managerment->invite memeber
-			Route::post('invite-members',['as' => 'invite-members', 'uses' => 'ProjectController@invite'] );
-			Route::post('accept-invite',['as' => 'accept-invite', 'uses' => 'ProjectController@acceptInvite'] );
+			Route::group(['prefix' => 'invitation'], function () {
+				Route::post('/create',['as' => 'invitation.create', 'uses' => 'ProjectController@invite'] );
+				Route::post('/handle',['as' => 'invitation.handle', 'uses' => 'ProjectController@handleInvitation'] );
+			});
+			
 					//project managerment-> state management
-			Route::post('add-state',['as' => 'post.add-state', 'uses' => 'StateController@create']);
-			Route::get('delete-state/{state_id}',['as' => 'delete-state', 'uses' => 'StateController@delete']);
-					//project managerment-> task management
-			Route::post('add-task',['as' => 'post.add-task', 'uses' => 'TodoItemController@create']);
-			Route::post('update-task',['as' => 'post.update-task', 'uses' => 'TodoItemController@update']);
-			Route::get('delete-task/{task_id}',['as' => 'delete-task', 'uses' => 'TodoItemController@delete']);
-			Route::get('mark-task-as-done/{task_id}',['as' => 'mark-task-as-done', 'uses' => 'TodoItemController@markAsDone']);
+			Route::group(['prefix' => 'state'], function () {
+				Route::post('create',['as' => 'state.store', 'uses' => 'StateController@create']);
+				Route::get('delete/{state_id}',['as' => 'state.destroy', 'uses' => 'StateController@delete']);
+			});
+				//project managerment-> task management
+			Route::group(['prefix' => 'task'], function () {
+				Route::post('create',['as' => 'task.store', 'uses' => 'TodoItemController@create']);
+				Route::post('update',['as' => 'task.update', 'uses' => 'TodoItemController@update']);
+				Route::get('delete/{task_id}',['as' => 'task.destroy', 'uses' => 'TodoItemController@delete']);
+				Route::get('mark-as-done/{task_id}',['as' => 'task.markAsDone', 'uses' => 'TodoItemController@markAsDone']);
+			});
+	
 			//Profile Management
-			Route::get('/profile', ['as' => 'profile', 'uses'=> 'MemberController@profile']);
-			Route::get('/profile-edit', ['as' => 'profile-edit', 'uses' => 'MemberController@showEditProfile']);
-			Route::post('profile-edit', ['as' => 'post.profile-edit', 'uses' => 'MemberController@editProfile']);
-			Route::post('change-pwd', ['as' => 'change-pwd', 'uses' => 'MemberController@changePwd']);
-			Route::get('/profile-activity', ['as' => 'profile-activity', 'uses' => 'MemberController@recent_activity']);
-			Route::get('/mail', ['as' => 'mail', function() {
-				return view('backend.pages.mail');
-			}]);
+			Route::group(['prefix' => 'profile'], function () {
+				Route::get('/', ['as' => 'profile.show', 'uses'=> 'MemberController@profile']);
+				Route::get('/edit', ['as' => 'profile.edit', 'uses' => 'MemberController@showEditProfile']);
+				Route::post('/edit', ['as' => 'profile.update', 'uses' => 'MemberController@editProfile']);
+				Route::post('/change-password', ['as' => 'profile.changePassword', 'uses' => 'MemberController@changePwd']);
+				Route::get('/activity', ['as' => 'profile.activity', 'uses' => 'MemberController@recent_activity']);
+				Route::get('/inbox', ['as' => 'profile.inbox', function() {
+					return view('backend.pages.mail');
+				}]);
+			});
 			//Chat Management
-			Route::post('chat-project',['as' => 'chat-project', 'uses' => 'ChatController@chat']);
-			Route::post('get-chat-project-cont',['as' => 'get-chat-project-cont', 'uses' => 'ChatController@getChatContent']);
+			Route::group(['prefix' => 'chat'], function () {
+				Route::post('/create',['as' => 'chat.store', 'uses' => 'ChatController@chat']);
+				Route::post('/get-content',['as' => 'chat.getContent', 'uses' => 'ChatController@getChatContent']);
+			});
+
+			
 			//Notification Management
 			Route::post('notifications','NotificationController@delete');
-			Route::get('all_message_noti','NotificationController@getAllMessageNoti')->name('all_message_noti');
-			Route::get('all_task_noti','NotificationController@getAllTaskNoti')->name('all_task_noti');
-			Route::get('all_important_noti','NotificationController@getAllImportanNoti')->name('all_important_noti');
-			Route::get('noti/MarkRead/{notification_id}','NotificationController@markRead')->name('markRead');
+			Route::group(['prefix' => 'notification'], function () {
+				Route::get('/message','NotificationController@getAllMessageNoti')->name('all_message_noti');
+				Route::get('/task','NotificationController@getAllTaskNoti')->name('all_task_noti');
+				Route::get('/notification','NotificationController@getAllImportanNoti')->name('all_important_noti');
+				Route::get('/MarkRead/{notification_id}','NotificationController@markRead')->name('markRead');
+			});
 		});
 	});
 	
@@ -162,7 +142,9 @@
 	Route::get('admin/logout', 'AdminAuth\Controller@logout');
 	Route::get('/admin/register', 'AdminAuth\RegisterController@showRegistrationForm');
 	Route::post('/admin/register', ['as' => 'admin.register.post', 'uses' => 'AdminAuth\RegisterController@register']);*/
-	 Route::get('test', 'ProjectController@invite');
+	 Route::get('test', function() {
+	 	return view('backend.pages.create-project');
+	 });
 	
 	 //Social Login
     Route::get('/redirect/{provider}', 'SocialAuthController@redirect');

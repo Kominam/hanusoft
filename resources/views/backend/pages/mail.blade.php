@@ -93,7 +93,7 @@
                             $('a[href="#{{$project_chat->name}}"]').click(function(){
                                 $('#project_chat_name').find('p').text($(this).text());
                                   $.ajax({
-                                    url:'/member/get-chat-project-cont',
+                                    url:'/my/chat/get-content',
                                     type: "post",
                                     data: { '_token': $('input[name=_token]').val(), 'project_chat_name': "{{$project_chat->name}}"},
                                     success: function(data) {   
@@ -163,7 +163,7 @@
      var sender_name ="{{Auth::user()->name}}";
      var member_avt = "{{Auth::user()->url_avt}}";
      $.ajax({
-       url:'/member/chat-project',
+       url:'/my/chat/create',
        type: "post",
        data: { '_token': $('input[name=_token]').val(), 'project_chat_name': project_chat_name, 'message': message},
        success: function(data) {
