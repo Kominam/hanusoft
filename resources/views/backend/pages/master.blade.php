@@ -20,6 +20,8 @@
     <!-- Custom styles for this template -->
     <link href="{{url('backend/css/style.css')}}" rel="stylesheet">
     <link href="{{url('backend/css/style-responsive.css')}}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ elixir('css/sweetalert.css') }}">
+    <link href="http://rawgit.com/saribe/toastr8/master/dist/css/toastr8.min.css" rel="stylesheet"/>
   </head>
   <body>
   @include('backend.blocks.header')
@@ -50,6 +52,8 @@
     <script src="{{url('backend/js/common-scripts.js')}}"></script>
     <script type="text/javascript">
     </script>
+    <script src="http://rawgit.com/saribe/toastr8/master/dist/js/toastr8.min.js"></script>
+    <script src="{{ elixir('js/sweetalert.js') }}"></script>
     <script src="{{ elixir('js/app.js') }}"></script>
     <script type="text/javascript" src="{{url('backend/assets/gritter/js/jquery.gritter.js')}}"></script>
     

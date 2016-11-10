@@ -27,27 +27,27 @@
                 
                 <h3>#3 &ndash; <a class="external" href="https://symfony.com/" rel="nofollow">Symfony2</a></h3>
                 
-                <p><img alt="" src="http://hanusoft.dev:8000/upload/images/symfony_black_logo-e1454358538345.png" style="width: 378px; height: 130px;" /></p>
+                <p><img alt="" src="http://hanusoft.dev/upload/images/symfony_black_logo-e1454358538345.png" style="width: 378px; height: 130px;" /></p>
                 
                 <p>At number 3, Symfony is one of the most popular PHP frameworks in 2016. &nbsp;Symfony was created in 2005 by the Symfony Project and is a free framework, released under the MIT license. Symphone is powerful framework providing an impressive collection of decoupled and reusable components. This framework has a massive community of followers and is used by notable applications such as Drupal, phpBB, and eZ Publish.</p>
                 
                 <h3>#2 &ndash; <a class="external" href="https://www.codeigniter.com/" rel="nofollow">CodeIgnitor</a></h3>
                 
-                <p><img alt="" src="http://hanusoft.dev:8000/upload/images/codeigniter_logo-e1454358509607.png" style="width: 352px; height: 150px;" /></p>
+                <p><img alt="" src="http://hanusoft.dev/upload/images/codeigniter_logo-e1454358509607.png" style="width: 352px; height: 150px;" /></p>
                 
                 <p>CodeIgniter, the second most popular PHP framework of 2016,&nbsp;&nbsp;is an open source, agile web development PHP framework. &nbsp;Known for its tiny footprint and super fast performance, CodeIgniter also provides developers with a&nbsp;simple and elegant toolkit&nbsp;to easily develop powerful web-based applications</p>
                 
                 <h3>#1 &ndash; <a class="external" href="https://laravel.com/" rel="nofollow">Laravel</a></h3>
                 
-                <p><img alt="" src="http://hanusoft.dev:8000/upload/images/laravel-logo-e1454359445592.png" style="width: 320px; height: 120px;" /></p>
+                <p><img alt="" src="http://hanusoft.dev/upload/images/laravel-logo-e1454359445592.png" style="width: 320px; height: 120px;" /></p>
                 
                 <p>And the most popular PHP framework in 2016 (so far) is &nbsp;Laravel. Laravel has been the most popular for some time and does not seem to be fading anytime soon. Like the other 2, Laravel is a free, opensource, and powerful web application framework for PHP. Since its initial release in 2011,&nbsp;this framework has become one of the best modern PHP frameworks around, and is highly regarded by industry experts and developers. The&nbsp;Laravel framework is focused on &nbsp;elegance, simplicity, and readability.</p>
                 
                 <h3>Summary</h3>
                 
                 <p>Of course there are other PHP frameworks out there that may be a better fit for you, such as&nbsp;&nbsp;<a class="external" href="https://nette.org/en/" rel="nofollow" title="Nette Framework">Nette</a>, <a class="mw-redirect external" href="http://www.yiiframework.com/" rel="nofollow" title="Yii2">Yii2</a>&nbsp;, and <a class="external" href="http://framework.zend.com/" rel="nofollow">Zend</a>. Every developers has to do their own research and experimentation to determine the perfect fit for them. But for now, you know, in general, &nbsp;the Top 3 PHP Frameworks in 2016. Hope this will make your research and decision a little easier.</p>
-                ', 'user_id' =>4,'type_id'=>1, 'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
-                array('tittle'=>'7 New Programming Languages To Learn in 2016','content' =>'<p><img alt="" src="http://hanusoft.dev:8000/upload/images/person-apple-laptop-notebook-large.jpg" style="width: 720px; height: 480px;" /></p>
+                ','slug'=>'top-3-php-frameworks-in-2016','user_id' =>4,'type_id'=>1, 'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+                array('tittle'=>'7 New Programming Languages To Learn in 2016','content' =>'<p><img alt="" src="http://hanusoft.dev/upload/images/person-apple-laptop-notebook-large.jpg" style="width: 720px; height: 480px;" /></p>
                 
                 <p><span style="font-weight: 400;">Programmers have always known that</span><a href="http://www.codingdojo.com/blog/8-most-in-demand-programming-languages-of-2015/"><span style="font-weight: 400;"> new programming languages</span></a><span style="font-weight: 400;"> need to be learned to keep their skills marketable in the workplace. That trend is not only continuing &ndash; it seems to be increasing due to the rate of change taking place in the technology sector. &nbsp;</span></p>
                 
@@ -86,14 +86,14 @@
                 <p><span style="font-weight: 400;">Given that Google Go has garnered such unprecedented success, the other language from Google &ndash; </span><a href="https://www.dartlang.org/"><span style="font-weight: 400;">Google Dart</span></a><span style="font-weight: 400;"> &ndash; has been in its shadows for the past 7-8 months. However, now that app development is gaining pace, people are realising how useful Dart can be in implementing high performance architecture and performing modern app development. Unveiled as a substitute for Javascript for browser apps, Dart is finally realising its true potential and is expected to continue its rise in the coming years.</span></p>
                 
                 <p>What other languages are worth keeping an eye out for in the year ahead? Drop a line in the comments section!</p>
-                ', 'user_id' =>5,'type_id'=>1, 'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+                ','slug'=>'7-new-programming-languages-to-learn-in-2016','user_id' =>5,'type_id'=>1, 'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
                 array('tittle'=>'The 2016 Top Programming Languages','content' =>'<p>Welcome to <em>IEEE Spectrum</em>&rsquo;s <a href="http://spectrum.ieee.org/static/interactive-the-top-programming-languages-2016">third interactive ranking</a> of the most popular programming languages. As it&rsquo;s impossible to look over the shoulder of every programmer, <em>Spectrum</em> uses various metrics as proxies for gauging the current use of a language. Working with data journalist <a href="http://www.nickdiakopoulos.com/">Nick Diakopoulos,</a> from 10 online sources we&rsquo;ve chosen 12 metrics, each one of which gives insight along a different axis of popularity. Combining the metrics produces a single ranking.</p>
                 
                 <p>Because each of you may value different things&mdash;What&rsquo;s hot with the folks in open source? What are employers demanding?&mdash;<em>Spectrum</em>&rsquo;s <a href="http://spectrum.ieee.org/static/interactive-the-top-programming-languages-2016">Interactive Top Programming Languages</a> lets you adjust the weight of each metric in contributing to the ranking. You also have the option to filter the results: for example, looking only at languages used in embedded systems or mobile applications. You can customize each weighting yourself or use one of our presets.</p>
                 
                 <p>The default preset is intended to echo the interests of the average IEEE member. So what are <em>Spectrum</em>&rsquo;s Top Ten Languages for 2016?</p>
                 
-                <p><img alt="" src="http://hanusoft.dev:8000/upload/images/Mjc5MjI0Ng.png" style="width: 636px; height: 369px;" /></p>
+                <p><img alt="" src="http://hanusoft.dev/upload/images/Mjc5MjI0Ng.png" style="width: 636px; height: 369px;" /></p>
                 
                 <p>After two years in second place, <a href="http://www.c-faq.com/">C</a> has finally edged out <a href="https://www.oracle.com/java/index.html">Java</a> for the top spot. Staying in the top five, <a href="https://www.python.org/">Python</a> has swapped places with <a href="https://isocpp.org/">C++</a> to take the No. 3 position, and <a href="https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx">C#</a> has fallen out of the top five to be replaced with <a href="https://www.r-project.org/about.html">R.</a> R is following its momentum from previous years, as part of a positive trend in general for modern big-data languages that <span>Diakopoulos</span> <a href="http://spectrum.ieee.org/computing/software/top-programming-languages-trends-the-rise-of-big-data">analyses in more detail here</a>.</p>
                 
@@ -106,10 +106,10 @@
                 <p>Other notable changes include <a href="http://www.ladder-logic.com/hello-world/">Ladder Logic,</a> rising five positions to 34th place. Ladder Logic is used in programmable logic controllers, especially those used in factories. Although manufacturing may seem like a narrow niche for a language, its relative popularity indicates just how big that niche really is. <a href="https://www.w3.org/html/">HTML</a> also continues to be popular, rising to 16th place, despite the horror of some previous users of the Top Programming Languages that it&rsquo;s included at all (for the record, we take a pragmatic approach and define a programming language as a distinct syntax that is used to give a computer instructions, even if those&nbsp;are just instructions on how data should be structured; Turing completeness is not required).</p>
                 
                 <p>On the losing side, perhaps the most surprising is that Shell programming&mdash;a catchall term for the creation of scripts of the sort beloved by system administrators, using shells such as <a href="https://www.gnu.org/software/bash/">bash</a>&mdash;has declined in popularity, falling seven positions to 19th place. This may reflect the development of more sophisticated systems to manage cloud-based data centers, but we&rsquo;ll have to wait to see if the trend continues next year or if this is just a statistical fluke.</p>
-                ', 'user_id' =>1,'type_id'=>1, 'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+                ', 'slug'=>'the-2016-top-programming-languages','user_id' =>1,'type_id'=>1, 'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
                 array('tittle'=>'Top Programming Languages Used in Web Development','content' =>'<p>With the popularity and advancements in web technology, it is imperative for every business to have a website and one which is highly functional and visually attractive. The process through which a good website, mobile apps or other similar platforms are created is known as web development. One of the most integral aspects of web development is web programming that is achieved with the help of programming languages. Web development languages are the platforms through which instructions are communicated to a machine and actions are pursued.</p>
                 
-                <p><img alt="" src="http://hanusoft.dev:8000/upload/images/502-Top-Programming-Languages-used-in-Web-Development.png" style="width: 740px; height: 487px;" /></p>
+                <p><img alt="" src="http://hanusoft.dev/upload/images/502-Top-Programming-Languages-used-in-Web-Development.png" style="width: 740px; height: 487px;" /></p>
                 
                 <p>n this article, we shall learn more about 1) <strong>web development and programming languages</strong> as well as 2) focus on the <strong>most popular programming languages</strong> in the world.</p>
                 
@@ -275,7 +275,7 @@
                 </ul>
                 
                 <p>&nbsp;</p>
-                ', 'user_id' =>2,'type_id'=>1, 'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+                ','slug'=>'top-programming-languages-used-in-web-development','user_id' =>2,'type_id'=>1, 'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
                 array('tittle'=>'SEO Basics: 8 Essentials When Optimizing Your Site','content' =>'<p>Basic search engine optimization (<a href="https://searchenginewatch.com/category/seo/">SEO</a>) is fundamental. And essential. SEO will help you position your website properly to be found at the most critical points in the buying process or when people need your site.</p>
                 
                 <p>What are search engines looking for? How can you build your website in a way that will please both your visitors/customers, as well as Google, Bing, and other search engines? Most importantly, how can SEO help your web presence become more profitable?</p>
@@ -297,7 +297,7 @@
                 
                 <h3>1. Your Website is Like a Cake</h3>
                 
-                <p><img alt="" src="http://hanusoft.dev:8000/upload/images/think-of-your-site-like-a-cake.png" style="width: 600px; height: 368px;" /></p>
+                <p><img alt="" src="http://hanusoft.dev/upload/images/think-of-your-site-like-a-cake.png" style="width: 600px; height: 368px;" /></p>
                 
                 <p>Your links, paid search, and social media acts as the icing, but your content, information architecture, content management system, and infrastructure act as the sugar and makes the cake. Without it, your cake is tasteless, boring, and gets thrown in the trash.</p>
                 
@@ -332,10 +332,10 @@
                 <li>What are your goals?</li>
                 <li>Do you know your assets and liabilities?</li>
                 </ul>
-                ', 'user_id' =>3,'type_id'=>1, 'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+                ','slug'=>'seo-basics-8-essentials-when-optimizing-your-site', 'user_id' =>3,'type_id'=>1, 'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
                 array('tittle'=>'Class aptent taciti sociosqu ad litora torquent 12','content' =>'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur lectus lacus, rutrum sit amet placerat et, bibendum nec mauris. Duis molestie, purus eget placerat viverra, nisi odio gravida sapien, congue tincidunt nisl ante nec tellus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sagittis, massa fringilla consequat blandit, mauris ligula porta nisi, non tristique enim sapien vel nisl. Suspendisse vestibulum lobortis dapibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent nec tempus nibh. Donec mollis commodo metus et fringilla. Etiam venenatis, diam id adipiscing convallis, nisi eros lobortis tellus, feugiat adipiscing ante ante sit amet dolor. Vestibulum vehicula scelerisque facilisis. Sed faucibus placerat bibendum. Maecenas sollicitudin commodo justo, quis hendrerit leo consequat ac. Proin sit amet risus sapien, eget interdum dui. Proin justo sapien, varius sit amet hendrerit id, egestas quis mauris.Ut ac elit non mi pharetra dictum nec quis nibh. Pellentesque ut fringilla elit. Aliquam non ipsum id leo eleifend sagittis id a lorem. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam massa mauris, viverra et rhoncus a, feugiat ut sem. Quisque ultricies diam tempus quam molestie vitae sodales dolor sagittis. Praesent commodo sodales purus. Maecenas scelerisque ligula vitae leo adipiscing a facilisis nisl ullamcorper. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;Curabitur non erat quam, id volutpat leo. Nullam pretium gravida urna et interdum. Suspendisse in dui tellus. Cras luctus nisl vel risus adipiscing aliquet. Phasellus convallis lorem dui. Quisque hendrerit, lectus ut accumsan gravida, leo tellus porttitor mi, ac mattis eros nunc vel enim. Nulla facilisi. Nam non nulla sed nibh sodales auctor eget non augue. Pellentesque sollicitudin consectetur mauris, eu mattis mi dictum ac. Etiam et sapien eu nisl dapibus fermentum et nec tortor.
                 Curabitur nec nulla lectus, non hendrerit lorem. Quisque lorem risus, porttitor eget fringilla non, vehicula sed tortor. Proin enim quam, vulputate at lobortis quis, condimentum at justo. Phasellus nec nisi justo. Ut luctus sagittis nulla at dapibus. Aliquam ullamcorper commodo elit, quis ornare eros consectetur a. Curabitur nulla dui, fermentum sed dapibus at, adipiscing eget nisi. Aenean iaculis vehicula imperdiet. Donec suscipit leo sed metus vestibulum pulvinar. Phasellus bibendum magna nec tellus fringilla faucibus. Phasellus mollis scelerisque volutpat. Ut sed molestie turpis. Phasellus ultrices suscipit tellus, ac vehicula ligula condimentum et.
-                Aenean metus nibh, molestie at consectetur nec, molestie sed nulla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nec euismod urna. Donec gravida pharetra ipsum, non volutpat ipsum sagittis a. Phasellus ut convallis ipsum. Sed nec dui orci, nec hendrerit massa. Curabitur at risus suscipit massa varius accumsan. Proin eu nisi id velit ultrices viverra nec condimentum magna. Ut porta orci quis nulla aliquam at dictum mi viverra. Maecenas ultricies elit in tortor scelerisque facilisis. Mauris vehicula porttitor lacus, vel pretium est semper non. Ut accumsan rhoncus metus non pharetra. Quisque luctus blandit nisi, id tempus tellus pulvinar eu. Nam ornare laoreet mi a molestie. Donec sodales scelerisque congue.', 'user_id' =>6,'type_id'=>2, 'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
+                Aenean metus nibh, molestie at consectetur nec, molestie sed nulla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nec euismod urna. Donec gravida pharetra ipsum, non volutpat ipsum sagittis a. Phasellus ut convallis ipsum. Sed nec dui orci, nec hendrerit massa. Curabitur at risus suscipit massa varius accumsan. Proin eu nisi id velit ultrices viverra nec condimentum magna. Ut porta orci quis nulla aliquam at dictum mi viverra. Maecenas ultricies elit in tortor scelerisque facilisis. Mauris vehicula porttitor lacus, vel pretium est semper non. Ut accumsan rhoncus metus non pharetra. Quisque luctus blandit nisi, id tempus tellus pulvinar eu. Nam ornare laoreet mi a molestie. Donec sodales scelerisque congue.','slug'=>'class-aptent-taciti-sociosqu-ad-litora-torquent-12', 'user_id' =>6,'type_id'=>2, 'created_at' => Carbon::now(),'updated_at' => Carbon::now()),
                 ]);
                 
                 }

@@ -12,6 +12,7 @@ class AssignNewTask extends Notification
     use Queueable;
     public $project_id;
     public $project_name;
+    public $project_slug;
     public $todo_content;
     public $todo_due_date;
     public $todo_status;
@@ -23,10 +24,11 @@ class AssignNewTask extends Notification
      *
      * @return void
      */
-     public function __construct($project_id, $project_name, $todo_content, $todo_due_date, $todo_status, $leadership_id, $leadership_name)
+     public function __construct($project_id, $project_name,$project_slug,$todo_content, $todo_due_date, $todo_status, $leadership_id, $leadership_name)
     {
         $this->project_id = $project_id;
         $this->project_name = $project_name;
+        $this->project_slug = $project_slug;
         $this->todo_content = $todo_content;
         $this->todo_due_date = $todo_due_date;
         $this->todo_status = $todo_status;
@@ -70,6 +72,7 @@ class AssignNewTask extends Notification
         return [
             'project_id' => $this->project_id,
             'project_name' => $this->project_name,
+            'project_slug' =>$this->project_slug,
             'todo_content' => $this->todo_content,
             'todo_due_date' => $this->todo_due_date,
             'todo_status' => $this->todo_status,

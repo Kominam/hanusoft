@@ -4,10 +4,24 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Cviebrock\EloquentSluggable\Sluggable;
+
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use Sluggable;
+    use SluggableScopeHelpers;
+
+     public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 
     /**
      * The attributes that are mass assignable.

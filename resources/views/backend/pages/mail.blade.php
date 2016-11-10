@@ -11,7 +11,7 @@
             <aside class="sm-side">
                 <div class="user-head">
                     <a href="javascript:;" class="inbox-avatar">
-                    <img src="{{url('frontend/img/team/'.Auth::user()->url_avt)}}" alt="" style="width: 60px;height: 64px">
+                    <img src="{{url(Auth::user()->url_avt)}}" alt="" style="width: 60px;height: 64px">
                     </a>
                     <div class="user-name">
                         <h5><a href="#">{{Auth::user()->name}}</a></h5>
@@ -169,7 +169,7 @@
        success: function(data) {
        $('#sendMsg').text('Send');
        $('#message').val("");
-       var $img = $('<img class="avatar" style="width:45px;height:45px" src="http://hanusoft.dev/frontend/img/team/'+member_avt+'" />').on('load', function(){
+       var $img = $('<img class="avatar" style="width:45px;height:45px" src="http://hanusoft.dev/'+member_avt+'" />').on('load', function(){
             });
             var temp = $('<a href="#" class="message-img"></a>').append($img);
             var temp2 = $('<div class="msg-time-chat"></div>').append(temp);

@@ -106,7 +106,7 @@ class RegisterController extends Controller
                    $user->position_id=$request->position_id;
                    $user->grade_id=$request->grade_id;
                    $user->bio='empty';
-                   $user->url_avt = 'user_default.png';
+                   $user->url_avt = 'frontend/img/team/user_default.png';
                    $user->save();
                    return redirect()->route('dashboard');
                }        

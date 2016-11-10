@@ -30,13 +30,13 @@
                             {{substr($post->created_at->format('F'),0,3)}}</span>
                         </div>
                         <div class="post-content">
-                            <h2><a href="{{route('post_detail',['id'=>$post->id])}}">{{$post->tittle}}</a></h2>
+                            <h2><a href="{{route('post_detail',['slug'=>$post->slug])}}">{{$post->tittle}}</a></h2>
                             <p>{!!substr($post->content,0,750)!!}[...]</p>
                             <div class="post-meta">
-                                <span><i class="fa fa-user"></i> By <a href="{{ route('member_detail',$post->user->id) }}">{{$post->user->name}}</a> </span>
-                                <span><i class="fa fa-tag"></i> <a href={{route('browse-post-by-cate', $post->type->id)}}>{{$post->type->name}}</a></span>
+                                <span><i class="fa fa-user"></i> By <a href="{{ route('member_detail',$post->user->slug) }}">{{$post->user->name}}</a> </span>
+                                <span><i class="fa fa-tag"></i> <a href={{route('browse-post-by-cate', $post->type->slug)}}>{{$post->type->name}}</a></span>
                                 <span><i class="fa fa-comments"></i> <a href="#">{{$post->comments->count()}} Comments</a></span>
-                                <a href="{{route('post_detail',['id'=>$post->id])}}" class="btn btn-xs btn-primary pull-right">Read more...</a>
+                                <a href="{{route('post_detail',['slug'=>$post->slug])}}" class="btn btn-xs btn-primary pull-right">Read more...</a>
                             </div>
                         </div>
                     </article>
@@ -69,7 +69,7 @@
                     <h4>Categories</h4>
                     <ul class="nav nav-list primary push-bottom">
                     @foreach ($all_post_cate as $post_cate)
-                        <li><a href="{{route('browse-post-by-cate', $post_cate->id)}}">{{$post_cate->name}}</a></li>
+                        <li><a href="{{route('browse-post-by-cate', $post_cate->slug)}}">{{$post_cate->name}}</a></li>
                     @endforeach
                     </ul>
                     <div class="tabs">
@@ -84,13 +84,13 @@
                                     <li>
                                         <div class="post-image">
                                             <div class="img-thumbnail">
-                                                <a href="{{route('post_detail', $ppost->id)}}">
+                                                <a href="{{route('post_detail', $ppost->slug)}}">
                                                 <img src="{{url('frontend/img/blog/blog-thumb-1.jpg')}}" alt="">
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="post-info">
-                                            <a href="{{route('post_detail', $ppost->id)}}">{{$ppost->tittle}}</a>
+                                            <a href="{{route('post_detail', $ppost->slug)}}">{{$ppost->tittle}}</a>
                                             <div class="post-meta">
                                                 {{$ppost->created_at->toFormattedDateString()}}
                                             </div>
@@ -105,13 +105,13 @@
                                     <li>
                                         <div class="post-image">
                                             <div class="img-thumbnail">
-                                                <a href="{{route('post_detail', $rpost->id)}}">
+                                                <a href="{{route('post_detail', $rpost->slug)}}">
                                                 <img src="{{url('frontend/img/blog/blog-thumb-2.jpg')}}" alt="">
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="post-info">
-                                           <a href="{{route('post_detail', $rpost->id)}}">{{$rpost->tittle}}</a>
+                                           <a href="{{route('post_detail', $rpost->slug)}}">{{$rpost->tittle}}</a>
                                             <div class="post-meta">
                                                  {{$rpost->created_at->toFormattedDateString()}}
                                             </div>

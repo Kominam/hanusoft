@@ -22,7 +22,7 @@
         <div class="row">
             <div class="col-md-4">
             <div class="thumbnail">
-                            <img alt="" height="300" class="img-responsive" src="{{url('frontend/img/team/'.$member->url_avt)}}">
+                            <img alt="" height="300" class="img-responsive" src="{{url($member->url_avt)}}">
                         </div>
                {{--  <div class="owl-carousel" data-plugin-options='{"items": 1}'>
                     <div>

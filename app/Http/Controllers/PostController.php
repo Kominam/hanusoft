@@ -27,9 +27,9 @@ class PostController extends Controller
        return view('frontend.pages.posts', ['posts' => $posts]);
     }
 
-    public function show($id) {
-      $post = $this->postRepository->find($id);
-      $arr_cmt_id = $this->postRepository->getArrCommentID($id);
+    public function show($slugString) {
+      $post = $this->postRepository->find($slugString);
+      $arr_cmt_id = $this->postRepository->getArrCommentID($slugString);
       return view('frontend.pages.post_detail',['post'=>$post, 'arr_cmt_id' =>$arr_cmt_id]);
     }
     //Add New Post
@@ -47,17 +47,17 @@ class PostController extends Controller
     }
    	//EDIT
 
-   	public function showEditForm($id) {
-   		$post = Post:: find($id);
-   		return view ('backend.pages.edit-post', compact('post','id'));
+   	public function showEditForm($slug) {
+   		$post = Post::findBySlugOrFail($slug);
+   		return view ('backend.pages.edit-post', compact('post','slug'));
    	}
 
-   	public function edit(Request $request, $id) {
+   	public function edit(Request $request, $slug) {
        $validator = $this->postRepository->validatorNew($request);
          if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
          } else {
-            $this->postRepository->update($request, $id);
+            $this->postRepository->update($request, $slug);
             return redirect()->route('post.your-post');
          }
    	}
@@ -67,8 +67,8 @@ class PostController extends Controller
       return redirect()->route('post.your-post');
    	}
 
-     public function filterByCategory($id) {
-        $posts = $this->postRepository->filterByCategory($id);
+     public function filterByCategory($slugCategory) {
+        $posts = $this->postRepository->filterByCategory($slugCategory);
         return view('frontend.pages.posts', ['posts' => $posts]);
      }
 

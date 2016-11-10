@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Validator;
 use Auth;
+use App\PostType;
 
 class PostRepository implements PostRepositoryInterface
 {
@@ -21,9 +22,9 @@ class PostRepository implements PostRepositoryInterface
         return Post::paginate(5);
     }
 
-    public function find($id)
+    public function find($slugString)
     {
-        return Post::find($id);
+        return Post::findBySlugOrFail($slugString);
     }
 
     public function validatorNew(Request $request) {
@@ -66,8 +67,8 @@ class PostRepository implements PostRepositoryInterface
             $post->save();  
     }
 
-    public function update(Request $request, $id){
-        $post =Post::find($id);
+    public function update(Request $request, $slug){
+        $post = Post::findBySlugOrFail($slug);
         $post->tittle = $request->tittle;
         $post->content = $request->content;
         $post->type_id= $request->post_type_id;
@@ -79,12 +80,14 @@ class PostRepository implements PostRepositoryInterface
     	return Post::destroy($id);
     }
 
-    public function filterByCategory($id){
-      return Post::where('type_id', '=', $id)->paginate(5);
+    public function filterByCategory($slugCategory){
+      $post_type = PostType::findBySlugOrFail($slugCategory);
+      return Post::where('type_id', '=', $post_type->id)->paginate(5);
     }
 
-    public function getArrCommentID($id)  {
-      $arr_cmt_id = Comment::where('post_id','=',$id)->pluck('id')->toArray();
+    public function getArrCommentID($slugString)  {
+      $post = Post::findBySlugOrFail($slugString);
+      $arr_cmt_id = Comment::where('post_id','=',$post->id)->pluck('id')->toArray();
       return $arr_cmt_id;
     }
 

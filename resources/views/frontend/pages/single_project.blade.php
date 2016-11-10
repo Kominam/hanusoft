@@ -97,7 +97,7 @@
             @foreach($related_projects as $related_project)
                 <li class="col-md-3 col-xs-6">
                     <div class="portfolio-item thumbnail">
-                        <a href={{route('single_project',['id'=> $related_project->id])}} class="thumb-info">
+                        <a href={{route('single_project',['slug'=> $related_project->slug])}} class="thumb-info">
                          @foreach ($related_project->images as $key=>$image)
                     @if($key == 0)
                          <img alt="" class="img-responsive" src="{{url('frontend/img/projects/'.$image->img_name)}}">
@@ -122,7 +122,7 @@
     <div class="container">
         <div class="row">
             <div class="center">
-                <h3>Hanusoft is <strong>everything</strong> you need to create an <strong>awesome</strong> website! <a href="http://themeforest.net/item/Hanusoft-responsive-html5-template/4106987" target="_blank" class="btn btn-lg btn-primary" data-appear-animation="bounceIn">Buy Now!</a> <span class="arrow hlb hidden-xs hidden-sm hidden-md" data-appear-animation="rotateInUpLeft" style="top: -22px;"></span></h3>
+                <h3>Hanusoft is <strong>everything</strong> you need to create an <strong>awesome</strong> website! <a href="{{route('login.showLoginForm')}}" target="_blank" class="btn btn-lg btn-primary" data-appear-animation="bounceIn">Join Now!</a> <span class="arrow hlb hidden-xs hidden-sm hidden-md" data-appear-animation="rotateInUpLeft" style="top: -22px;"></span></h3>
             </div>
         </div>
     </div>

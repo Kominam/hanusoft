@@ -43,7 +43,7 @@ class ChatController extends Controller
 			}	
     	else if ($project_chat->users->count()>0) {
     		foreach ($project_chat->users as $msg) {
-    			$img = url('frontend/img/team/'.$msg->url_avt);
+    			$img = url($msg->url_avt);
     		    $new_msg = '<div class="msg-time-chat"><a href="#" class="message-img"><img class="avatar" style="width:45px;height:45px" src="'.$img.'" alt=""></a><div class="message-body msg-out"><span class="arrow"></span><div class="text"><p class="attribution"> <a href="#">'.$msg->name.'</a> at '.$msg->pivot->created_at.'</p><p>'.$msg->pivot->message.'</p></div></div></div>';
     		$cont .=$new_msg;
     		}

@@ -24,6 +24,7 @@ class CreateProjectsTable extends Migration
             $table->date('plan_end_date');
             $table->date('actual_end_date')->nullable();
             $table->string('link_github');
+            $table->string('slug')->nullable();
             $table->timestamps();         
         });
     }

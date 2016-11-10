@@ -30,7 +30,7 @@ class StateRepository implements StateRepositoryInterface
       $project=Project::find($request->project_id);
       foreach ($project->users as $mem_in_project) {
         if (Auth::user()->id != $mem_in_project->id) {
-           $mem_in_project->notify(new AddNewState($project->id, $project->name, $state->content, $state->due_date, $state->status, Auth::user()->id, Auth::user()->name));
+           $mem_in_project->notify(new AddNewState($project->id, $project->name, $project->slug, $state->content, $state->due_date, $state->status, Auth::user()->id, Auth::user()->name));
         }
       }
       return $state;
@@ -52,7 +52,7 @@ class StateRepository implements StateRepositoryInterface
       $project = $state->project;
       foreach ($project->users as $mem_in_project) {
         if (Auth::user()->id != $mem_in_project->id) {
-           $mem_in_project->notify(new DeleteState($project->id, $project->name,$state->id, $state->content, Auth::user()->id, Auth::user()->name));
+           $mem_in_project->notify(new DeleteState($project->id, $project->name,$project->slug,$state->id, $state->content, Auth::user()->id, Auth::user()->name));
         }
       }
       $state->delete();

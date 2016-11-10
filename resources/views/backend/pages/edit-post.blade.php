@@ -14,7 +14,7 @@
               @can('update-post', $post)
                     <div class="row">
                   <div class="col-lg-12">
-                  <form class="form-horizontal tasi-form" method="post" action="{{ route('post.update', $post->id) }}">
+                  <form class="form-horizontal tasi-form" method="post" action="{{ route('post.update', $post->slug) }}">
                   <input type="hidden" name="_token" value="{{csrf_token()}}">
                     @if (count($errors) >0)
                         <section class="panel">

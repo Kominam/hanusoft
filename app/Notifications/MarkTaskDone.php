@@ -14,6 +14,7 @@ class MarkTaskDone extends Notification
     use Queueable;
     public $project_id;
     public $project_name;
+    public $project_slug;
     public $todo_id;
     public $todo_content;
     public $todo_due_date;
@@ -26,10 +27,11 @@ class MarkTaskDone extends Notification
      *
      * @return void
      */
-    public function __construct($project_id, $project_name, $todo_id, $todo_content, $todo_due_date, $maker_id, $maker_name)
+    public function __construct($project_id, $project_name,$project_slug,$todo_id, $todo_content, $todo_due_date, $maker_id, $maker_name)
     {
         $this->project_id = $project_id;
         $this->project_name = $project_name;
+        $this->project_slug = $project_slug;
         $this->todo_id = $todo_id;
         $this->todo_content = $todo_content;
         $this->todo_due_date = $todo_due_date;
@@ -74,6 +76,7 @@ class MarkTaskDone extends Notification
         return [
             'project_id' => $this->project_id,
             'project_name' => $this->project_name,
+            'project_slug' =>$this->project_slug,
             'todo_id' => $this->todo_id,
             'todo_content' =>$this->todo_content,
             'todo_due_date' => $this->todo_due_date,

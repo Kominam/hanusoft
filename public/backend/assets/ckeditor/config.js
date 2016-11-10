@@ -28,16 +28,16 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// Remove some buttons, provided by the standard plugins, which we don't
 	// need to have in the Standard(s) toolbar.
-		config.filebrowserBrowseUrl = 'http://hanusoft.dev:8000/backend/assets/ckfinder/ckfinder.html';
+		config.filebrowserBrowseUrl = 'http://hanusoft.dev/backend/assets/ckfinder/ckfinder.html';
 
-        config.filebrowserImageBrowseUrl = 'http://hanusoft.dev:8000/backend/assets/ckfinder/ckfinder.html?type=Images';
+        config.filebrowserImageBrowseUrl = 'http://hanusoft.dev/backend/assets/ckfinder/ckfinder.html?type=Images';
 
-        config.filebrowserFlashBrowseUrl = 'http://hanusoft.dev:8000/backend/assets/ckfinder/ckfinder.html?type=Flash';
+        config.filebrowserFlashBrowseUrl = 'http://hanusoft.dev/backend/assets/ckfinder/ckfinder.html?type=Flash';
 
-        config.filebrowserUploadUrl = 'http://hanusoft.dev:8000/backend/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files';
+        config.filebrowserUploadUrl = 'http://hanusoft.dev/backend/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files';
 
-        config.filebrowserImageUploadUrl = 'http://hanusoft.dev:8000/backend/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images';
+        config.filebrowserImageUploadUrl = 'http://hanusoft.dev/backend/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images';
 
-        config.filebrowserFlashUploadUrl = 'http://hanusoft.dev:8000/backend/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash';
+        config.filebrowserFlashUploadUrl = 'http://hanusoft.dev/backend/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash';
 
 };

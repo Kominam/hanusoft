@@ -28,6 +28,10 @@ class MemberRepository implements MemberRepositoryInterface
         return User::find($id);
     }
 
+    public function findBySlug($slug) {
+        return User::findBySlugOrFail($slug);
+    }
+
     public function defineSkill($skills, $user) {
     		$user->skills()->attach($skills);
     		$user->save();
@@ -104,7 +108,7 @@ class MemberRepository implements MemberRepositoryInterface
                 $filename  =  time().$avtImg->getClientOriginalName().'.' . $avtImg->getClientOriginalExtension();
                 $path = public_path('frontend/img/team/' . $filename);
                 Image::make($avtImg->getRealPath())->resize(585, 585)->save($path);
-                $member->url_avt = $filename;
+                $member->url_avt = 'frontend/img/team/'.$filename;
                 $member->save();
             }
         }

@@ -205,7 +205,7 @@
             <div class="row">
                @foreach ($chunk as $member)
                <div class="col-md-2" style="text-align: center;">
-                  <img src="{{url('frontend/img/team/'.$member->url_avt)}}" height="55px" width="55px" style="border-radius: 50%;">
+                  <img src="{{url($member->url_avt)}}" height="55px" width="55px" style="border-radius: 50%;">
                   @if (Auth::user()->name== $member->name)
                   <strong>You</strong>
                   @else

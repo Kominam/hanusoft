@@ -32,8 +32,8 @@ class MemberController extends Controller
 
         return view('frontend.pages.members',['members' =>$members]);
     }
-    public function show($id) {
-        $member = $this->memberRepository->find($id);
+    public function show($slug) {
+        $member = $this->memberRepository->findBySlug($slug);
         return view('frontend.pages.member_detail',['member' =>$member]);
     }
     public function profile() {

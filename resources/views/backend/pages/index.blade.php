@@ -111,7 +111,7 @@
             <section class="panel">
                 <div class="panel-body">
                     <a href="#" class="task-thumb">
-                    <img src="{{url('frontend/img/team/'.Auth::user()->url_avt)}}" alt="" width="90px" height="83px">
+                    <img src="{{url(Auth::user()->url_avt)}}" alt="" width="90px" height="83px">
                     </a>
                     <div class="task-thumb-details">
                         <h1><a href="{{ route('profile.show')}}">{{Auth::user()->name}}</a></h1>

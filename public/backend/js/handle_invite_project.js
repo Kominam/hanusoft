@@ -16,7 +16,13 @@ function handle_inite_project(leadership_id, project_id) {
             type: "post",
             data: { '_token': $('input[name=_token]').val(), 'project_id': project_id, 'response': 'accept', 'noti_id': notification_id},
             success: function(data) {
-                alert("Accept success");   
+                swal({
+                    title: "Success!",
+                    text: "You joined this project!",
+                    type: "success",
+                    timer: 1000,
+                    confirmButtonText: "OK"
+                });   
                 $('#invite'+leadership_id+project_id).remove();
                  var new_num_unread_noti = num_unread_noti - temp;
                 $('#num_unread_noti').text(new_num_unread_noti);

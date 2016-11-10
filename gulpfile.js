@@ -20,9 +20,9 @@ require('laravel-elixir-vue');
 elixir(function (mix) {
     mix.browserify('app.js');
 });
-elixir(function (mix) {
-    mix.browserify('chat-project.js');
+elixir(function(mix) {
+    mix.styles('././bower_components/sweetalert/dist/sweetalert.css','public/css/sweetalert.css');
 });
-/*elixir(function(mix) {
-    mix.scriptsIn('./public/frontend/js','public/js/frontend.js');
-});*/
+elixir(function(mix) {
+    mix.scripts('././bower_components/sweetalert/dist/sweetalert.min.js','public/js/sweetalert.js');
+});

@@ -10,8 +10,13 @@ function deleteTask(task_id) {
               url:'/my/task/delete/'+ task_id,
               type: "get",
               success: function(data) {
-                alert("delete task ok");
                 $('#displayTask'+task_id).remove();
+                swal({
+                  title: "Success!",
+                  text: "This task was deleted!",
+                  type: "success",
+                  confirmButtonText: "OK"
+                });
               }
             });
   });

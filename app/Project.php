@@ -8,14 +8,28 @@ use Carbon\Carbon;
 
 use DB;
 
+use Cviebrock\EloquentSluggable\Sluggable;
+
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
+
 class Project extends Model
 {
-    //
+    use Sluggable;
+    use SluggableScopeHelpers;
     //
     protected $table="projects";
     protected $fillable =['name', 'description', 'link_preview'];
     protected $guarded = ['id', 'type_id'];
     public $timestamp =true;
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 
     public function type() {
         return $this->belongsTo('App\ProjectType');

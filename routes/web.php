@@ -25,7 +25,7 @@
 		Route::post('register', ['as' => 'register.post', 'uses' => 'Auth\RegisterController@register']);
 
 		// Password Reset Routes...
-    	Route::get('password/reset', ['as' => 'password.reset', 'uses' => 'Auth\ForgotPasswordController@showLinkRequestForm']);
+	Route::get('password/reset', ['as' => 'password.reset', 'uses' => 'Auth\ForgotPasswordController@showLinkRequestForm']);
     	Route::post('password/email', ['as' => 'password.email', 'uses' => 'Auth\ForgotPasswordController@sendResetLinkEmail']);
     	Route::get('password/reset/{token}', ['as' => 'password.reset.token', 'uses' => 'Auth\ResetPasswordController@showResetForm']);
     	Route::post('password/reset', ['as' => 'password.reset.post', 'uses' => 'Auth\ResetPasswordController@reset']);
@@ -37,13 +37,13 @@
 				Route::get('/', ['as' => 'post.your-post', 'uses'=>'PostController@showYourPost']);
 				Route::get('/write', ['as' => 'post.create','uses'=>'PostController@showAddForm']);
 				Route::post('/write', ['as' => 'post.store', 'uses'=>'PostController@add']);			
-				Route::get('/edit/{id}', ['as' => 'post.edit', 'uses'=>'PostController@showEditForm']);
-				Route::post('/edit/{id}', ['as' => 'post.update', 'uses'=>'PostController@edit']);
+				Route::get('/edit/{slug}', ['as' => 'post.edit', 'uses'=>'PostController@showEditForm']);
+				Route::post('/edit/{slug}', ['as' => 'post.update', 'uses'=>'PostController@edit']);
 				Route::get('/delete/{id}',['as' => 'post.destroy', 'uses'=>'PostController@delete']);
 			});
 			//Project Management
 			Route::group(['prefix' => 'project'], function () {
-				Route::get('/{id}', ['as' => 'project.show', 'uses' => 'ProjectController@showForBackEnd']);
+				Route::get('/{slug}', ['as' => 'project.show', 'uses' => 'ProjectController@showForBackEnd']);
 				Route::get('/op/create', ['as' => 'project.create','uses'=>'ProjectController@showAddForm']);
 				Route::post('/op/store', ['as' => 'project.store','uses'=>'ProjectController@add']);
 				Route::get('/delete/{id}',['as' => 'project.destroy','uses'=>'ProjectController@delete']);
@@ -118,21 +118,18 @@
 	
 	Route::get('/members', ['as' => 'members', 'uses' => 'MemberController@index']);
 	
-	Route::get('/member_detail/{id}', ['as' => 'member_detail', 'uses' => 'MemberController@show']);
+	Route::get('/members/{slug}', ['as' => 'member_detail', 'uses' => 'MemberController@show']);
 	
 	Route::get('/posts', ['as' => 'posts','uses' => 'PostController@index']);
 	
-	Route::get('/post_detail/{id}', ['as' => 'post_detail','uses' => 'PostController@show' ]);
-	Route::get('/projects', ['as' => 'projects', 'uses' => 'ProjectController@index']);
-	
-	Route::get('/single_project/{id}', ['as' => 'single_project','uses' => 'ProjectController@show']);
-	
-	Route::get('post/by-category/{id}', ['as' => 'browse-post-by-cate','uses' => 'PostController@filterByCategory']);
-	
+	Route::get('/posts/{slug}', ['as' => 'post_detail','uses' => 'PostController@show']);
+	Route::get('posts/category/{slug}', ['as' => 'browse-post-by-cate','uses' => 'PostController@filterByCategory']);
 	Route::post('post-comment', ['as' => 'post-comment', 'uses' => 'CommentController@create']);
-
 	Route::post('post-reply-comment', ['as' => 'post-reply-comment', 'uses' => 'ReplyCommentController@create']);
 
+	Route::get('/projects', ['as' => 'projects', 'uses' => 'ProjectController@index']);	
+	Route::get('/projects/{slug}', ['as' => 'single_project','uses' => 'ProjectController@show']);
+	
 	Route::post('add-subcribers', ['as' => 'post-add-subcriber', 'uses' => 'SubcriberController@addNewSubcriber']);
 	
 	

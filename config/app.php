@@ -183,6 +183,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class,
+        Cviebrock\EloquentSluggable\ServiceProvider::class,
 
     ],
 

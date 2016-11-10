@@ -1,5 +1,3 @@
-
-
 <footer id="footer">
     <div class="container">
         <div class="row">
@@ -35,10 +33,13 @@
                                             type: "post",
                                             data: { '_token': $('input[name=_token]').val(), 'email': sub_email},
                                             success: function(data) {   
-                                                 console.log(data);
-                                                 alert('Thanks for your subcribers');
-                                                 sub_email.val("");
-                                                    }          
+                                                swal({
+                                                  title: "Thanks you!",
+                                                  text: "You are subcribe us via email!",
+                                                  type: "success",
+                                                  confirmButtonText: "OK"
+                                                });
+                                            }         
                                             });
                                        });
                                    });

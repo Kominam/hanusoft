@@ -37,6 +37,9 @@
 
     <!-- Head Libs -->
     <script src="{{url('frontend/vendor/modernizr/modernizr.js')}}"></script>
+
+    <link rel="stylesheet" href="{{ elixir('css/sweetalert.css') }}">
+    <script src="{{ elixir('js/sweetalert.js') }}"></script>
     
   </head>
   <body>

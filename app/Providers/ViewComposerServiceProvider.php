@@ -76,7 +76,7 @@ class ViewComposerServiceProvider extends ServiceProvider
             $view->with('all_position', $all_position);
         });
          //For create project
-         View::composer(['backend.pages.create-project'], function ($view) {
+         View::composer(['backend.pages.create-project', 'frontend.pages.projects'], function ($view) {
             $all_project_cate = ProjectType::all();
             $view->with('all_project_cate', $all_project_cate);
         });

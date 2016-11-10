@@ -21,11 +21,10 @@
     <div class="sort-source-wrapper">
         <div class="container">
             <ul class="nav nav-pills sort-source secundary pull-right" data-sort-id="portfolio" data-option-key="filter">
-                <li data-option-value="*" class="active"><a href="#">Show All</a></li>
-                <li data-option-value=".Website"><a href="#">Websites</a></li>
-                <li data-option-value=".Application"><a href="#">Applications</a></li>
-                <li data-option-value=".Brand"><a href="#">Brands</a></li>
-                 <li data-option-value=".Logo"><a href="#">Logos</a></li>
+            <li data-option-value="*" class="active"><a href="#">Show All</a></li>
+            @foreach ($all_project_cate as $cate)
+                <li data-option-value=".{{$cate->name}}"><a href="#">{{$cate->name}}</a></li>
+            @endforeach
             </ul>
         </div>
     </div>
@@ -33,7 +32,7 @@
         @foreach($projects as $project)
         <li class="isotope-item {{$project->type->name}}">
             <div class="portfolio-item img-thumbnail">
-                <a href="{{route('single_project', ['id'=> $project->id])}}" class="thumb-info secundary">
+                <a href="{{route('single_project', ['slug'=> $project->slug])}}" class="thumb-info secundary">
                 @foreach ($project->images as $key=>$image)
                     @if($key == 0)
                          <img alt="" class="img-responsive" src="{{url('frontend/img/projects/'.$image->img_name)}}" style="width: 447px; height: 247px">

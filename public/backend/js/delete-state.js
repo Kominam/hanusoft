@@ -11,7 +11,12 @@ function deleteState(state_id) {
               type: "get",
               success: function(data) {  
                 $('#state'+state_id).remove();
-                 alert("delete state ok");
+                  swal({
+                    title: "Success!",
+                    text: "This state was deleted!",
+                    type: "success",
+                    confirmButtonText: "OK"
+                  });
               }
             });
   });

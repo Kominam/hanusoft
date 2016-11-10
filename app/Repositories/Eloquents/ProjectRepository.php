@@ -29,8 +29,12 @@ class ProjectRepository implements ProjectRepositoryInterface
         return Project::find($id);
     }
 
+    public function findBySlug($slug) {
+      return Project::findBySlugOrFail($slug);
+    }
+
     public function findRelated($id, $type_id) {
-      return Project::where('id','!=',$id)->where('type_id','=', $type_id)->take(4)->get();
+      return Project::where('id','!=',$id)->where('type_id','=', $type_id)->get();
     }
 
     public function defineRequiredSkill($skills, $project) {
@@ -126,7 +130,7 @@ class ProjectRepository implements ProjectRepositoryInterface
                 $inviter = User::find($inviter_id);
                 $inviter->invitations()->attach($new_invitation->id);
                 $inviter->save();
-                $inviter->notify(new InvitetoProject(Auth::user()->name,$project->name, Auth::user()->id, $project->id));
+                $inviter->notify(new InvitetoProject(Auth::user()->name,$project->name,$project->slug, Auth::user()->id, $project->id));
               }
         }
       //Attach the leadership who have create project
@@ -157,11 +161,12 @@ class ProjectRepository implements ProjectRepositoryInterface
     public function invite(Request $request) {
       $new_invitation = Invitation::firstOrCreate(['leadership_id' => Auth::user()->id, 'project_id' => $request->project_id]);
       $new_invitation->save();
+      $project=Project::find($request->project_id);
       foreach ($request->inviters as $inviter_id) {
         $inviter = User::find($inviter_id);
         $inviter->invitations()->attach($new_invitation->id);
         $inviter->save();
-        $inviter->notify(new InvitetoProject(Auth::user()->name,$request->project_name, Auth::user()->id, $request->project_id));
+        $inviter->notify(new InvitetoProject(Auth::user()->name,$request->project_name,$project->slug, Auth::user()->id, $request->project_id));
       }
     }
 

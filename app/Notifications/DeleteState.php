@@ -12,6 +12,7 @@ class DeleteState extends Notification
     use Queueable;
     public $project_id;
     public $project_name;
+    public $project_slug;
     public $state_id;
     public $state_content;
     public $leadership_id;
@@ -22,10 +23,11 @@ class DeleteState extends Notification
      *
      * @return void
      */
-    public function __construct($project_id, $project_name, $state_id, $state_content,$leadership_id, $leadership_name)
+    public function __construct($project_id, $project_name, $project_slug, $state_id, $state_content,$leadership_id, $leadership_name)
     {
         $this->project_id = $project_id;
         $this->project_name = $project_name;
+        $this->project_slug = $project_slug;
         $this->state_id = $state_id;
         $this->state_content = $state_content;
         $this->leadership_id = $leadership_id;
@@ -68,6 +70,7 @@ class DeleteState extends Notification
         return [
             'project_id' => $this->project_id,
             'project_name' => $this->project_name,
+            'project_slug' =>$this->project_slug,
             'state_id' => $this->state_id,
             'state_content' => $this->state_content,
             'leadership_id' => $this->leadership_id,

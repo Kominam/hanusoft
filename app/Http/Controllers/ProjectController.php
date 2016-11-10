@@ -24,26 +24,34 @@ class ProjectController extends Controller
         return view('frontend.pages.projects' ,['projects' => $projects]);
     }
     //For front-end
-    public function show($id) {
-       $project = $this->projectRepository->find($id);
-       $related_projects = $this->projectRepository->findRelated($id,$project->type_id);
+    public function show($slug) {
+       $project = $this->projectRepository->findBySlug($slug);
+       $related_projects = $this->projectRepository->findRelated($project->id,$project->type_id);
        $num_project = $this->projectRepository->countAll();
        if ($project->id===1) {
           $next_project_id = $project->id +1;
-          $previous_project_id = "#";
+          $next_project= $this->projectRepository->find($next_project_id);
+          $next_project_slug = $next_project->slug;
+          $previous_project_slug = "#";
        } else if($project->id===$num_project){
-           $next_project_id ="#";
+           $next_project_slug ="#";
            $previous_project_id =$project->id -1;
+           $previous_project = $this->projectRepository->find($previous_project_id);
+           $previous_project_slug = $previous_project->slug;
        } else {
-          $next_project_id = $project->id +1;
-           $previous_project_id =$project->id -1;
+            $next_project_id = $project->id +1;
+            $next_project= $this->projectRepository->find($next_project_id);
+            $next_project_slug = $next_project->slug;
+            $previous_project_id =$project->id -1;
+            $previous_project = $this->projectRepository->find($previous_project_id);
+            $previous_project_slug = $previous_project->slug;
        }
-      return view('frontend.pages.single_project' ,['project' => $project, 'related_projects'=>$related_projects, 'next_project' =>$next_project_id, 'prev_project'=> $previous_project_id]);
+      return view('frontend.pages.single_project' ,['project' => $project, 'related_projects'=>$related_projects, 'next_project' =>$next_project_slug, 'prev_project'=> $previous_project_slug]);
     }
     //For back-end
-    public function showForBackEnd($id) {
-      $project = $this->projectRepository->find($id);
-      $can_invite_mem= $this->projectRepository->canInvinteMember($id);
+    public function showForBackEnd($slug) {
+      $project = $this->projectRepository->findBySlug($slug);
+      $can_invite_mem= $this->projectRepository->canInvinteMember($project->id);
       return view('backend.pages.project', ['project' => $project, 'can_invite_mem'=> $can_invite_mem]);
     }
     //Add
@@ -56,7 +64,7 @@ class ProjectController extends Controller
             return back()->withErrors($validator)->withInput();
          } else {
              $new_project = $this->projectRepository->create($request);
-             return redirect()->route('project.show', $new_project->id);
+             return redirect()->route('project.show', $new_project->slug);
          }  
     	
     }

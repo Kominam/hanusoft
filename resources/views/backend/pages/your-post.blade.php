@@ -20,7 +20,7 @@
                               <label class="col-lg-1 col-sm-1 control-label">Search</label>
                               <div class="col-lg-8 col-sm-8">
                                   <input type="text" class="form-control input-xxlarge">
-                                  <p class="help-block">About 5,880,000 results (0.23 seconds) </p>
+                                 <!--  <p class="help-block">About 5,880,000 results (0.23 seconds) </p> -->
                               </div>
                               <div class="col-lg-2">
                                   <button class="btn " type="submit">SEARCH</button>
@@ -29,11 +29,11 @@
                       </form>
                       @foreach ($posts_of_cur_user as $post)
                         <div class="classic-search">
-                          <h4><a href=" {{ route('post_detail', $post->id) }}">{{$post->tittle}}</a></h4>
-                          <a href=" {{ route('post_detail', $post->id) }}"> {{ route('post_detail', $post->id) }}</a>
+                          <h4><a href=" {{ route('post_detail', $post->slug) }}" target="_blank">{{$post->tittle}}</a></h4>
+                          <a href=" {{ route('post_detail', $post->slug) }}" target="_blank"> {{ route('post_detail', $post->slug) }}</a>
                           {!! substr($post->content, 0,200)!!}[...]
                           <br>
-                           <a class="btn btn-info" href="{{ route('post.edit', $post->id) }}">
+                           <a class="btn btn-info" href="{{ route('post.edit', $post->slug) }}">
                                   <i class="icon-edit"></i>
                            </a>
                            <a class="btn btn-danger" data-toggle="modal" href="#myModal{{$post->id}}">

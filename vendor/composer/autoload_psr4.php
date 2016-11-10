@@ -46,6 +46,8 @@ return array(
     'Doctrine\\Instantiator\\' => array($vendorDir . '/doctrine/instantiator/src/Doctrine/Instantiator'),
     'DeepCopy\\' => array($vendorDir . '/myclabs/deep-copy/src/DeepCopy'),
     'DaveJamesMiller\\Breadcrumbs\\' => array($vendorDir . '/davejamesmiller/laravel-breadcrumbs/src'),
+    'Cviebrock\\EloquentSluggable\\' => array($vendorDir . '/cviebrock/eloquent-sluggable/src'),
+    'Cocur\\Slugify\\' => array($vendorDir . '/cocur/slugify/src'),
     'ClassPreloader\\' => array($vendorDir . '/classpreloader/classpreloader/src'),
     'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
     'App\\' => array($baseDir . '/app'),

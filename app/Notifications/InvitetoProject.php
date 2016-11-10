@@ -12,6 +12,7 @@ class InvitetoProject extends Notification
     use Queueable;
     public $leadership_name;
     public $project_name;
+    public $project_slug;
     public $leadership_id;
     public $project_id;
 
@@ -20,10 +21,11 @@ class InvitetoProject extends Notification
      *
      * @return void
      */
-    public function __construct($leadership_name, $project_name, $leadership_id, $project_id)
+    public function __construct($leadership_name, $project_name,$project_slug, $leadership_id, $project_id)
     {
         $this->leadership_name = $leadership_name;
         $this->project_name = $project_name;
+        $this->project_slug = $project_slug;
         $this->leadership_id= $leadership_id;
         $this->project_id = $project_id;
     }
@@ -64,6 +66,7 @@ class InvitetoProject extends Notification
         return [
             'leadership_name' => $this->leadership_name,
             'project_name' => $this->project_name,
+            'project_slug' =>$this->project_slug,
             'leadership_id' => $this->leadership_id,
             'project_id' => $this->project_id
         ];
