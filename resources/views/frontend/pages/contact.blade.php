@@ -56,23 +56,16 @@
                             </div>
                         </div>
                     </div>
-                   <!--  <div class="row">
-                       <div class="col-md-12">
-                           <label>Human Verification *</label>
-                       </div>
-                   </div> -->
-                   <!--  <div class="row">
-                       <div class="form-group">
-                           <div class="col-md-4">
-                               <div class="captcha form-control">
-                                   {!!Captcha::img()!!}
-                               </div>
-                           </div>
-                           <div class="col-md-8">
-                               <input type="text" value="" maxlength="6" data-msg-captcha="Wrong verification code." data-msg-required="Please enter the verification code." placeholder="Type the verification code." class="form-control input-lg captcha-input" name="captcha" id="captcha" required>
-                           </div>
-                       </div>
-                   </div> -->
+                  <div class="row">
+                      <div class="col-md-12">
+                          <label>Human Verification *</label>
+                      </div>
+                  </div> 
+                    <div class="row">
+                          <div class="col-md-8">  
+                                 {!! app('captcha')->display(); !!}
+                          </div>    
+                  </div> 
                     <div class="row">
                         <div class="col-md-12">
                             <hr>

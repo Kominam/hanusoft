@@ -39,6 +39,14 @@
                                                   type: "success",
                                                   confirmButtonText: "OK"
                                                 });
+                                            },
+                                            error: function(jqXHR, textStatus, errorThrown) {
+                                                 swal({
+                                                  title: "Whoops!",
+                                                  text: "Sorry, something went wrong!",
+                                                  type: "error",
+                                                  confirmButtonText: "OK"
+                                                });
                                             }         
                                             });
                                        });

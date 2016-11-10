@@ -11,8 +11,8 @@
         "pusher/pusher-php-server": "^2.6",
         "laravel/socialite": "^2.0",
         "intervention/image": "^2.3",
-        "mews/captcha": "^2.1",
-        "cviebrock/eloquent-sluggable": "^4.1"
+        "cviebrock/eloquent-sluggable": "^4.1",
+        "anhskohbo/no-captcha": "^2.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

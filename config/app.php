@@ -182,8 +182,8 @@ return [
         App\Providers\ViewComposerServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        Mews\Captcha\CaptchaServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
+        Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
 
     ],
 
@@ -234,7 +234,6 @@ return [
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Image' => Intervention\Image\Facades\Image::class,
-        'Captcha' => Mews\Captcha\Facades\Captcha::class,
 
     ],
 

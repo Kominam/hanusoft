@@ -6,6 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Anhskohbo\\NoCaptcha\\Facades\\NoCaptcha' => $vendorDir . '/anhskohbo/no-captcha/src/Facades/NoCaptcha.php',
+    'Anhskohbo\\NoCaptcha\\NoCaptcha' => $vendorDir . '/anhskohbo/no-captcha/src/NoCaptcha.php',
+    'Anhskohbo\\NoCaptcha\\NoCaptchaServiceProvider' => $vendorDir . '/anhskohbo/no-captcha/src/NoCaptchaServiceProvider.php',
     'App\\Admin' => $baseDir . '/app/Admin.php',
     'App\\Comment' => $baseDir . '/app/Comment.php',
     'App\\Console\\Commands\\SentMailToSubcriber' => $baseDir . '/app/Console/Commands/SentMailToSubcriber.php',
@@ -199,6 +202,7 @@ return array(
     'DeepCopy\\Reflection\\ReflectionHelper' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/Reflection/ReflectionHelper.php',
     'DeepCopy\\TypeFilter\\ReplaceFilter' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/TypeFilter/ReplaceFilter.php',
     'DeepCopy\\TypeFilter\\ShallowCopyFilter' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/TypeFilter/ShallowCopyFilter.php',
+    'DeepCopy\\TypeFilter\\Spl\\SplDoublyLinkedList' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/TypeFilter/Spl/SplDoublyLinkedList.php',
     'DeepCopy\\TypeFilter\\TypeFilter' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/TypeFilter/TypeFilter.php',
     'DeepCopy\\TypeMatcher\\TypeMatcher' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/TypeMatcher/TypeMatcher.php',
     'Doctrine\\Common\\Inflector\\Inflector' => $vendorDir . '/doctrine/inflector/lib/Doctrine/Common/Inflector/Inflector.php',
@@ -1584,11 +1588,6 @@ return array(
     'MemberProjectTableSeeder' => $baseDir . '/database/seeds/MemberProjectTableSeeder.php',
     'MemberSkillTableSeeder' => $baseDir . '/database/seeds/MemberSkillTableSeeder.php',
     'MemberTableSeeder' => $baseDir . '/database/seeds/MemberTableSeeder.php',
-    'Mews\\Captcha\\Captcha' => $vendorDir . '/mews/captcha/src/Captcha.php',
-    'Mews\\Captcha\\CaptchaController' => $vendorDir . '/mews/captcha/src/CaptchaController.php',
-    'Mews\\Captcha\\CaptchaServiceProvider' => $vendorDir . '/mews/captcha/src/CaptchaServiceProvider.php',
-    'Mews\\Captcha\\Facades\\Captcha' => $vendorDir . '/mews/captcha/src/Facades/Captcha.php',
-    'Mews\\Captcha\\LumenCaptchaController' => $vendorDir . '/mews/captcha/src/LumenCaptchaController.php',
     'Mockery' => $vendorDir . '/mockery/mockery/library/Mockery.php',
     'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegration' => $vendorDir . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegration.php',
     'Mockery\\Adapter\\Phpunit\\MockeryTestCase' => $vendorDir . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryTestCase.php',

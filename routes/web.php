@@ -132,17 +132,6 @@
 	
 	Route::post('add-subcribers', ['as' => 'post-add-subcriber', 'uses' => 'SubcriberController@addNewSubcriber']);
 	
-	
-	/*Route::get('/admin', 'AdminController@index');
-	Route::get('admin/login', 'AdminAuth\LoginController@showLoginForm');
-	Route::post('admin/login', 'AdminAuth\LoginController@login');
-	Route::get('admin/logout', 'AdminAuth\Controller@logout');
-	Route::get('/admin/register', 'AdminAuth\RegisterController@showRegistrationForm');
-	Route::post('/admin/register', ['as' => 'admin.register.post', 'uses' => 'AdminAuth\RegisterController@register']);*/
-	 Route::get('test', function() {
-	 	return view('backend.pages.create-project');
-	 });
-	
 	 //Social Login
     Route::get('/redirect/{provider}', 'SocialAuthController@redirect');
     Route::get('/callback/{provider}', 'SocialAuthController@callback');
