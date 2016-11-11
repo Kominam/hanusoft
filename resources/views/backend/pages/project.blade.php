@@ -78,49 +78,42 @@
                            @endforeach
                            @endcan
                            @can('manage-project', $project)
-                           <a class="btn btn-primary btn-xs" data-toggle="modal" href="#todo{{$todo_item->id}}"><i class="icon-pencil"></i></a>
-                           <div class="modal fade" id="todo{{$todo_item->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-                              <div class="modal-dialog">
-                                 <div class="modal-content">
-                                    <div class="modal-header">
-                                       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                       <h4 class="modal-title">Edit Todo Item #{{$todo_item->id}}</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                       <form action="#" method="POST">
-                                          <input type="hidden" name="_token" value="{{csrf_token()}}">
-                                          <div class="form-group">
-                                             <input type="text" class="form-control" id="update_todo_content{{$todo_item->id}}" placeholder="Content of task" name="update_todo_content{{$todo_item->id}}" >
-                                          </div>
-                                          <div class="form-group">
-                                             <input type="date" class="form-control" id="update_todo_due_date{{$todo_item->id}}" placeholder="YYYY-MM-DD" name="update_todo_due_date{{$todo_item->id}}">
-                                          </div>
-                                          @foreach ($project->users as $cam)
-                                          <div class="checkbox">
-                                             <label>
-                                             @foreach ($todo_item->users as $cur_user)
-                                             @if($cam->id == $cur_user->id)
-                                             <input type="checkbox" class="new_assign" name="new_assign[]" id="bsds" value={{$cam->id}} checked>
-                                             @else
-                                             <input type="checkbox" class="new_assign" name="new_assign[]" id="bsds" value={{$cam->id}}>
-                                             @endif
-                                             @endforeach
-                                             {{$cam->name}}
-                                             </label>
-                                          </div>
-                                          @endforeach
-                                       </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                       <a class="btn btn-success" href="#updatetask{{$todo_item->id}}">Save changes</a>
-                                       <script type="text/javascript">
-                                          updateTodo_item("{{$todo_item->id}}");
-                                       </script>
-                                       <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-                                    </div>
-                                 </div>
+                           <a class="btn btn-primary btn-xs" data-toggle="modal" href="#updatetodo{{$todo_item->id}}"><i class="icon-pencil"></i></a>
+                           <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="updatetodo{{$todo_item->id}}" class="modal fade">
+                      <div class="modal-dialog">
+                          <div class="modal-content">
+                              <div class="modal-header">
+                                  <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                                  <h4 class="modal-title">Edit This Task</h4>
                               </div>
-                           </div>
+                              <div class="modal-body">
+                                  <form role="form" id="updateTaskForm{{$todo_item->id}}" method="PUT" action="#">
+                                      <div class="form-group">
+                                          <label for="UpdateTaskContent{{$todo_item->id}}">Content</label>
+                                            <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                          <input type="text" class="form-control" id="update_task_content{{$todo_item->id}}" value="{{$todo_item->content}}">
+                                      </div>
+                                      <div class="form-group">
+                                          <label for="UpdateTaskDueDate{{$todo_item->id}}">DueDate</label>
+                                          <input type="date" class="form-control" id="update_task_due_date{{$todo_item->id}}" value="{{$todo_item->due_date}}">
+                                      </div>
+                                      <div class="form-group">
+                                          <label for="UpdateTaskStatus">Status</label>
+                                          <select id="update_task_status{{$todo_item->id}}">
+                                             <option value="on_queue">On queue</option>
+                                             <option value="done">Done</option>
+                                             <option value="over_date">Over DueDate</option>
+                                          </select>
+                                      </div>
+                                      <button type="submit" class="btn btn-default">Submit</button>
+                                      <script type="text/javascript">
+                                         update_task({{$todo_item->id}});
+                                      </script>
+                                  </form>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
                            <a class="btn btn-danger btn-xs" data-toggle="modal" href="#deletetodo{{$todo_item->id}}"><i class="icon-trash "></i></a>
                            <div class="modal fade" id="deletetodo{{$todo_item->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                               <div class="modal-dialog">

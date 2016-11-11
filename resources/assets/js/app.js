@@ -210,6 +210,29 @@ window.Echo.private('App.User.'+ userId)
                       });
           });
         }
+        if (notification.type=='App\\Notifications\\UpdateTask') {
+            var new_task = '<li id="'+notification.id+'"><a href="http://hanusoft.dev/my/project/'+ notification.project_slug+'"><div class="task-info"><div class="desc">'+notification.project_name+'</div><div class="desc">Your Task #'+notification.todo_id+'was updated</div></div></a></li>';
+            $('#header_task_bar li:first').after(new_task);
+            $('#header_task_bar li:nth-child(4)').remove();
+            var num_unread_task= parseInt($('#num_unread_task').text());
+            var temp= parseInt(" 1 ");
+            $('#displayTask'+notification.todo_id).remove();
+            var new_num_unread_task = num_unread_task + temp;
+            $('#num_unread_task').text(new_num_unread_task);
+            $('#badge_num_unread_task').text(new_num_unread_task);
+            $("#task_disp").on("click", "#"+notification.id, function(event){
+                $.ajax({
+                      url:'/my/notifications',
+                      type: "post",
+                      data: { '_token': $('input[name=_token]').val(), 'noti_id': notification.id},
+                      success: function(data) {   
+                          var new_num_unread_task = num_unread_task - temp;
+                          $('#num_unread_task').text(new_num_unread_task);
+                          $('#badge_num_unread_task').text(new_num_unread_taski);
+                          }          
+                      });
+          });
+        }
          if (notification.type=='App\\Notifications\\DeleteTask') {
             var new_task = '<li id="'+notification.id+'"><a href="http://hanusoft.dev/my/project/'+ notification.project_slug+'"><div class="task-info"><div class="desc">'+notification.project_name+'</div><div class="desc">Your Task #'+notification.todo_id+'was remove</div></div></a></li>';
             $('#header_task_bar li:first').after(new_task);

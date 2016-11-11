@@ -128,7 +128,7 @@
                             <p class="yellow">You have <span id="num_unread_noti">{{$num_unread_noti}}</span> new notifications</p>
                         </li>
                        
-                        @foreach (Auth::user()->unreadNotifications->whereIn('type',['App\Notifications\InvitetoProject', 'App\Notifications\AddNewState','App\Notifications\DeleteState'])->take(5) as $notification)
+                        @foreach (Auth::user()->unreadNotifications->whereIn('type',['App\Notifications\InvitetoProject', 'App\Notifications\AddNewState','App\Notifications\UpdateState','App\Notifications\DeleteState'])->take(5) as $notification)
                          @if($notification->type=='App\Notifications\InvitetoProject')
                               <li id="invite{{$notification->data['leadership_id']}}{{$notification->data['project_id']}}">
                                 <a href="#">
@@ -152,12 +152,16 @@
                              </script>
                         @elseif($notification->type=='App\Notifications\AddNewState')
                             <li id="{{$notification->id}}"><a href="{{ route('project.show', $notification->data['project_slug']) }}"><span class="label label-primary"><i class="icon-plus"></i></span>New State Added.<span class="small italic">{{$notification->data['project_name']}}</span></a></li>'
-                             <script type="text/javascript">
-                                    handle_state("{{$notification->id}}");
-                             </script>
+                             
+                          @elseif($notification->type=='App\Notifications\UpdateState')
+                         <li id="{{$notification->id}}"><a href="{{ route('project.show', $notification->data['project_slug']) }}"><span class="label label-danger"><i class="icon-trash"></i></span> State #{{$notification->data['state_id']}} Updated.<span class="small italic">{{$notification->data['project_name']}}</span></a></li>'
+
                         @elseif($notification->type=='App\Notifications\DeleteState')
                          <li id="{{$notification->id}}"><a href="{{ route('project.show', $notification->data['project_slug']) }}"><span class="label label-danger"><i class="icon-trash"></i></span> State #{{$notification->data['state_id']}} Removed.<span class="small italic">{{$notification->data['project_name']}}</span></a></li>'
                         @endif
+                        <script type="text/javascript">
+                                    handle_state("{{$notification->id}}");
+                             </script>
                         @endforeach
                         <li>
                             <a href="{{ route('all_important_noti') }}">See all notifications</a>

@@ -20,8 +20,8 @@ class TodoItemController extends Controller
     	$new_todo_item = $this->todoItemRepository->create($request);
     	return response()->json($new_todo_item);
     }
-     public function update(Request $request) {
-    	$updated = $this->todoItemRepository->update($request);
+     public function update(Request $request, $id) {
+    	$updated = $this->todoItemRepository->update($request, $id);
     	return response()->json($updated);
     }
     public function delete($id) {

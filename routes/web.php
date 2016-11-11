@@ -63,7 +63,7 @@
 				//project managerment-> task management
 			Route::group(['prefix' => 'task'], function () {
 				Route::post('create',['as' => 'task.store', 'uses' => 'TodoItemController@create']);
-				Route::post('update',['as' => 'task.update', 'uses' => 'TodoItemController@update']);
+				Route::put('update/{task_id}',['as' => 'task.update', 'uses' => 'TodoItemController@update']);
 				Route::get('delete/{task_id}',['as' => 'task.destroy', 'uses' => 'TodoItemController@delete']);
 				Route::get('mark-as-done/{task_id}',['as' => 'task.markAsDone', 'uses' => 'TodoItemController@markAsDone']);
 			});

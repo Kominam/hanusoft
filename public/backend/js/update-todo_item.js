@@ -1,28 +1,38 @@
-function updateTodo_item(todo_id) {
+function update_task(task_id) {
   $(document).ready(function() {
-       $.ajaxSetup({
-          headers: {
+    $('#updateTaskForm'+ task_id).on('submit', function(e){
+        var new_content = $('#update_task_content'+ task_id).val();
+        var new_duedate = $('#update_task_due_date'+ task_id).val();
+        var new_status = $('#update_task_status'+ task_id).find(":selected").text();
+        alert(new_content + new_duedate + new_status);
+         $.ajaxSetup({
+            headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+          url:"/my/task/update/" + task_id,
+          type: "put",
+          data : {'_token': $('input[name=_token]').val(), 'content' : new_content, 'due_date': new_duedate,'status': new_status},
+          success: function(data) {
+            swal({
+            title: "Success!",
+            text: "This task was updated!",
+            type: "success",
+            timer:2000,
+            confirmButtonText: "OK"
+            });
+            location.reload();
+          },
+          error: function (xhr, ajaxOptions, thrownError) {
+            swal({
+                title: "Whoops!",
+                text: "Sorry, something went wrong!",
+                type: "error",
+                confirmButtonText: "OK"
+              });
           }
         });
-       var project_id = $('#project_id').text();
-       var content = $("#update_todo_content"+todo_id).val();
-       var due_date = $("#update_todo_due_date"+todo_id).val();
-       var ass_list = [];
-      $('input:checkbox:checked.new_assign').map(function(){
-        ass_list.push($(this).val());
-        });
-       $('a[href="#updatetask'+todo_id+'"]').click(function(){
-               alert(content + due_date);
-          $.ajax({
-              url:'/my/task/update',
-              type: "post",
-              data : {'_token': $('input[name=_token]').val(),'id': todo_id, 'content' : content, 'due_date': due_date, 'project_id': project_id, 'new_assigned_members': ass_list},
-              success: function(data) {  
-                alert('Success');
-                console.log(data);
-              }
-            });
+    });
   });
- });
 }

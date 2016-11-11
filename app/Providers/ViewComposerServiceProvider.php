@@ -92,7 +92,7 @@ class ViewComposerServiceProvider extends ServiceProvider
           //Count unread notification
             View::composer(['backend.blocks.header','backend.pages.index'], function ($view) {
             $cur_mem = User::find(Auth::user()->id);
-            $num_unread_noti= $cur_mem->unreadNotifications()->whereIn('type',['App\Notifications\InvitetoProject', 'App\Notifications\AddNewState','App\Notifications\DeleteState'])->count();
+            $num_unread_noti= $cur_mem->unreadNotifications()->whereIn('type',['App\Notifications\InvitetoProject', 'App\Notifications\AddNewState','App\Notifications\UpdateState','App\Notifications\DeleteState'])->count();
             $view->with('num_unread_noti', $num_unread_noti);
         });
             //Count unread message

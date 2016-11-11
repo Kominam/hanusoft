@@ -40,12 +40,11 @@ class TodoItemRepository implements TodoItemRepositoryInterface
       return $todo_item;
     }
 
-    public function update(Request $request) {
-      $todo_item = TodoItem::find($request->id);
+    public function update(Request $request,$id) {
+      $todo_item = TodoItem::find($id);
       $project = $todo_item->project;
       $todo_item->content = $request->content;
       $todo_item->due_date = $request->due_date;
-      $todo_item->project_id = $request->project_id;
       $todo_item->save();
       /*$initial_collection = collect([]);
       foreach ($todo_item->users as $intial_mem) {
