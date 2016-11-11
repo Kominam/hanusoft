@@ -1,5 +1,3 @@
-
-
 @extends('backend.pages.master')
 @section('external_css')
 <link href="{{url('backend/assets/font-awesome/css/font-awesome.css')}}" rel="stylesheet" />
@@ -9,6 +7,7 @@
 @endsection
 @section('content')
 <script src="{{ url('backend/js/update-todo_item.js') }}"></script>
+<script src="{{ url('backend/js/delete-state.js') }}"></script>
 <script src="{{ url('backend/js/delete-task.js') }}"></script>
 <script src="{{ url('backend/js/mark_task_as_done.js') }}"></script>
 <span id="project_id" style="display: none">{{$project->id}}</span>
@@ -21,12 +20,12 @@
          <header class="panel-heading">
             Todo list
             <!-- <div class="option pull-right" style="display: inline; height: 10px">
-              <select style="display: inline;">
-                <option value="">Done</option>
-                <option>Over DueDate</option>
-                <option>Pending</option>
-              </select>
-                      </div> -->
+               <select style="display: inline;">
+                 <option value="">Done</option>
+                 <option>Over DueDate</option>
+                 <option>Pending</option>
+               </select>
+                       </div> -->
          </header>
          <div class="panel-body">
             <div class="task-content" id="task_list">
@@ -34,120 +33,114 @@
                   @foreach ($project->todo_items as $todo_item)
                   <li id="displayTask{{$todo_item->id}}">
                      <div class="task-checkbox">
-                       @foreach ($todo_item->users as $todo_stt)
-                          @if ($loop->first)
-                              @if ($todo_stt->pivot->status=='Done')
-                                <input type="checkbox" class="list-child" value=""  / checked="checked" disabled>
-                              @else
-                               <input type="checkbox" class="list-child" value=""  / disabled>
-                             @endif
-                          @endif
+                        @foreach ($todo_item->users as $todo_stt)
+                        @if ($loop->first)
+                        @if ($todo_stt->pivot->status=='Done')
+                        <input type="checkbox" class="list-child" value=""  / checked="checked" disabled>
+                        @else
+                        <input type="checkbox" class="list-child" value=""  / disabled>
+                        @endif
+                        @endif
                         @endforeach
-                             
-                        
                      </div>
                      <div class="task-title">
                         <span class="task-title-sp">
-                        # {{$todo_item->id}}
-                        @foreach ($todo_item->users as $mem)
-                          <h5>{{$mem->name}}</h5>
-                        @endforeach
-                        {{$todo_item->content}}</span>
+                           # {{$todo_item->id}}
+                           @foreach ($todo_item->users as $mem)
+                           <h5>{{$mem->name}}</h5>
+                           @endforeach
+                           {{$todo_item->content}}
+                        </span>
                         <span class="badge badge-sm label-success">{{$todo_item->displayDueDate()}}</span>
                         @foreach ($todo_item->users as $todo_stt)
-                          @if ($loop->first)
-                              @if ($todo_stt->pivot->status=='Done')
-                                <span class="badge badge-sm label-success">Done</span>
-                              @elseif ($todo_stt->pivot->status=='On queue')
-                                <span class="badge badge-sm label-primary">              On queue</span>
-                             @elseif ($todo_stt->pivot->status=='Over DueDate')
-                                  <span class="badge badge-sm label-danger">             Over DueDate</span>
-                             @endif
-                          @endif
+                        @if ($loop->first)
+                        @if ($todo_stt->pivot->status=='Done')
+                        <span class="badge badge-sm label-success">Done</span>
+                        @elseif ($todo_stt->pivot->status=='On queue')
+                        <span class="badge badge-sm label-primary">              On queue</span>
+                        @elseif ($todo_stt->pivot->status=='Over DueDate')
+                        <span class="badge badge-sm label-danger">             Over DueDate</span>
+                        @endif
+                        @endif
                         @endforeach
                         <div class="pull-right hidden-phone">
                            @can('mark-task-done', $todo_item)
-                            @foreach ($todo_item->users as $todo_stt)
-                          @if ($loop->first)
-                              @if ($todo_stt->pivot->status=='On queue'|| $todo_stt->pivot->status=='Over DueDate' )
-                                 <a class="btn btn-success btn-xs" id="btn_mark_todo_as_done{{$todo_item->id}}"><i class="icon-ok"></i></a>
-                              <script type="text/javascript">
-                                markAsDone({{$todo_item->id}});
-                              </script>
-                             
-                             @endif
-                          @endif
-                        @endforeach
-                             
+                           @foreach ($todo_item->users as $todo_stt)
+                           @if ($loop->first)
+                           @if ($todo_stt->pivot->status=='On queue'|| $todo_stt->pivot->status=='Over DueDate' )
+                           <a class="btn btn-success btn-xs" id="btn_mark_todo_as_done{{$todo_item->id}}"><i class="icon-ok"></i></a>
+                           <script type="text/javascript">
+                              markAsDone({{$todo_item->id}});
+                           </script>
+                           @endif
+                           @endif
+                           @endforeach
                            @endcan
                            @can('manage-project', $project)
-                                <a class="btn btn-primary btn-xs" data-toggle="modal" href="#todo{{$todo_item->id}}"><i class="icon-pencil"></i></a>
-                                <div class="modal fade" id="todo{{$todo_item->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-                                  <div class="modal-dialog">
-                                      <div class="modal-content">
-                                          <div class="modal-header">
-                                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                              <h4 class="modal-title">Edit Todo Item #{{$todo_item->id}}</h4>
-                                          </div>
-                                          <div class="modal-body">
-                                              <form action="#" method="POST" accept-charset="utf-8">
+                           <a class="btn btn-primary btn-xs" data-toggle="modal" href="#todo{{$todo_item->id}}"><i class="icon-pencil"></i></a>
+                           <div class="modal fade" id="todo{{$todo_item->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                              <div class="modal-dialog">
+                                 <div class="modal-content">
+                                    <div class="modal-header">
+                                       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                       <h4 class="modal-title">Edit Todo Item #{{$todo_item->id}}</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                       <form action="#" method="POST">
                                           <input type="hidden" name="_token" value="{{csrf_token()}}">
                                           <div class="form-group">
-                                             <input type="text" class="form-control" id="todo_content_update{{$todo_item->id}}" placeholder="Content of task" value="{{$todo_item->content}}">
+                                             <input type="text" class="form-control" id="update_todo_content{{$todo_item->id}}" placeholder="Content of task" name="update_todo_content{{$todo_item->id}}" >
                                           </div>
                                           <div class="form-group">
-                                             <input type="date" class="form-control" id="todo_due_date_update{{$todo_item->id}}" placeholder="YYYY-MM-DD" value="{{$todo_item->due_date}}">
+                                             <input type="date" class="form-control" id="update_todo_due_date{{$todo_item->id}}" placeholder="YYYY-MM-DD" name="update_todo_due_date{{$todo_item->id}}">
                                           </div>
-                                            @foreach ($project->users as $cam)
+                                          @foreach ($project->users as $cam)
                                           <div class="checkbox">
                                              <label>
                                              @foreach ($todo_item->users as $cur_user)
-                                               @if($cam->id == $cur_user->id)
-                                                <input type="checkbox" class="new_assign" name="new_assign[]" id="bsds" value={{$cam->id}} checked>
-                                              @else
-                                                 <input type="checkbox" class="new_assign" name="new_assign[]" id="bsds" value={{$cam->id}}>
-                                                @endif
+                                             @if($cam->id == $cur_user->id)
+                                             <input type="checkbox" class="new_assign" name="new_assign[]" id="bsds" value={{$cam->id}} checked>
+                                             @else
+                                             <input type="checkbox" class="new_assign" name="new_assign[]" id="bsds" value={{$cam->id}}>
+                                             @endif
                                              @endforeach
-                                            
                                              {{$cam->name}}
                                              </label>
                                           </div>
                                           @endforeach
                                        </form>
-                                          </div>
-                                          <div class="modal-footer">
-                                             <a class="btn btn-success" href="#updatetask{{$todo_item->id}}">Save changes</a>
-                                              
-                                               <script type="text/javascript">
-                                                  updateTodo_item({{$todo_item->id}});
-                                               </script>
-                                              <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-                                          </div>
-                                      </div>
-                                  </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                       <a class="btn btn-success" href="#updatetask{{$todo_item->id}}">Save changes</a>
+                                       <script type="text/javascript">
+                                          updateTodo_item("{{$todo_item->id}}");
+                                       </script>
+                                       <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                                    </div>
+                                 </div>
                               </div>
-                                <a class="btn btn-danger btn-xs" data-toggle="modal" href="#deletetodo{{$todo_item->id}}"><i class="icon-trash "></i></a>
-                                 <div class="modal fade" id="deletetodo{{$todo_item->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-                                  <div class="modal-dialog">
-                                      <div class="modal-content">
-                                          <div class="modal-header">
-                                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                              <h4 class="modal-title">Delete Todo Item #{{$todo_item->id}}</h4>
-                                          </div>
-                                          <div class="modal-body">
-                                              Are you sure to delete this task?
-                                          </div>
-                                          <div class="modal-footer">
-                                             <a class="btn btn-danger" href="#deletetask{{$todo_item->id}}">Yes, I sure</a>
-                                              
-                                               <script type="text/javascript">
-                                                  deleteTask({{$todo_item->id}});
-                                               </script>
-                                              <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-                                          </div>
-                                      </div>
-                                  </div>
+                           </div>
+                           <a class="btn btn-danger btn-xs" data-toggle="modal" href="#deletetodo{{$todo_item->id}}"><i class="icon-trash "></i></a>
+                           <div class="modal fade" id="deletetodo{{$todo_item->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                              <div class="modal-dialog">
+                                 <div class="modal-content">
+                                    <div class="modal-header">
+                                       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                       <h4 class="modal-title">Delete Todo Item #{{$todo_item->id}}</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                       Are you sure to delete this task?
+                                    </div>
+                                    <div class="modal-footer">
+                                       <a class="btn btn-danger" href="#deletetask{{$todo_item->id}}">Yes, I sure</a>
+                                       <script type="text/javascript">
+                                          deleteTask({{$todo_item->id}});
+                                       </script>
+                                       <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                                    </div>
+                                 </div>
                               </div>
+                           </div>
                            @endcan
                         </div>
                      </div>
@@ -257,21 +250,24 @@
                   <h3 class="timeline-title">Timeline</h3>
                   <p class="t-info">This is a project timeline</p>
                   <table >
-                    <tr>
-                      <td><div style="height: 15px; width: 15px; background: #A8D76F; border-radius: 50%"></div></td>
-                      <td>Done</td>
-
-                    </tr>
-                    <tr>
-                      <td><div style="height: 15px; width: 15px; background: #EF6F66; border-radius: 50%"></div></td>
-                      <td>Over Date</td>
-
-                    </tr>
-                    <tr>
-                      <td><div style="height: 15px; width: 15px; background: #56C9F5; border-radius: 50%"></div></td>
-                      <td>Pending</td>
-
-                    </tr>
+                     <tr>
+                        <td>
+                           <div style="height: 15px; width: 15px; background: #A8D76F; border-radius: 50%"></div>
+                        </td>
+                        <td>Done</td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <div style="height: 15px; width: 15px; background: #EF6F66; border-radius: 50%"></div>
+                        </td>
+                        <td>Over Date</td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <div style="height: 15px; width: 15px; background: #56C9F5; border-radius: 50%"></div>
+                        </td>
+                        <td>Pending</td>
+                     </tr>
                   </table>
                </div>
                <div class="timeline" id="timeline{{$project->id}}">
@@ -284,21 +280,21 @@
                            <div class="panel-body">
                               <span class="arrow{{($count%2==0) ? '' : '-alt'}}"></span>
                               @if($state->status =="on_queue")
-                                <span class="timeline-icon blue"></span>
+                              <span class="timeline-icon blue"></span>
                               @elseif($state->status =="done")
-                                <span class="timeline-icon light-green"></span>
+                              <span class="timeline-icon light-green"></span>
                               @else
-                                <span class="timeline-icon red"></span>
+                              <span class="timeline-icon red"></span>
                               @endif
                               <span class="timeline-date">08:25 am</span>
-                               @if($state->status =="on_queue")
-                                 <h1 class="blue">
+                              @if($state->status =="on_queue")
+                              <h1 class="blue">
                               @elseif($state->status =="done")
-                                <h1 class="light-green">
+                              <h1 class="light-green">
                               @else
-                                <h1 class="red"> 
-                              @endif
-                              {{$state->displayDueDate()}}<span>
+                              <h1 class="red"> 
+                                 @endif
+                                 {{$state->displayDueDate()}}<span>
                                  @can('manage-project', $project)
                                  <a class="btn btn-default btn-sm pull-right" href="#delete{{$state->id}}" data-toggle="modal"><i class="icon-trash"></i></a>
                                  @endcan
@@ -324,29 +320,7 @@
                            <div class="modal-footer">
                               <a class="btn btn-danger" href="#deletestate{{$state->id}}">Yes, delete this</a>
                               <script type="text/javascript">
-                                 $(document).ready(function() {
-                                      $.ajaxSetup({
-                                         headers: {
-                                           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                         }
-                                       });
-                                     $('a[href="#deletestate{{$state->id}}"]').click(function(){
-                                         $.ajax({
-                                             url:'/my/state/delete/'+ "{{$state->id}}",
-                                             type: "get",
-                                             success: function(data) {  
-                                               $('#state{{$state->id}}').remove();
-                                               swal({
-                                                  title: "Success!",
-                                                  text: "Delete successful!",
-                                                  type: "success",
-                                                  timer: 1500,
-                                                  confirmButtonText: "OK"
-                                                });
-                                                   }
-                                           });
-                                 });
-                                 });
+                                 deleteState({{$state->id}});  
                               </script>
                               <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
                            </div>
@@ -406,63 +380,59 @@
    </section>
    @can('manage-project', $project)
    <section class="panel">
-    <header class="panel-heading">
-      <div class="alert alert-danger">
-      Danger Zone
-      </div>
-    </header>
-    <div class="panel-body">
-      <div class="row">
-        <div class="col-md-8">
-          <p>Delete this project</p>
-          <p>Once you delete a repository, there is no going back. Please be certain</p>
-        </div>
-        <div class="col-md-4 pull-right">
-           <a class="btn btn-danger" data-toggle="modal" href="#deleteProject">
-              Delete this project
-            </a>
-            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="deleteProject" class="modal fade">
-              <div class="modal-dialog">
-                  <div class="modal-content">
-                      <div class="modal-header">
-                          <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                          <h4 class="modal-title">Form Tittle</h4>
-                      </div>
-                      <div class="modal-body">
-                        <p>This action CANNOT be undone. This will permanently delete the {{$project->name}}, tasks, timelines, and remove all collaborator associations.</p>
-
-                        <p>Please type in the name of the project to confirm.</p>
-                          <form class="form-horizontal" role="form" method="" action="post">
+      <header class="panel-heading">
+         <div class="alert alert-danger">
+            Danger Zone
+         </div>
+      </header>
+      <div class="panel-body">
+         <div class="row">
+            <div class="col-md-8">
+               <p>Delete this project</p>
+               <p>Once you delete a repository, there is no going back. Please be certain</p>
+            </div>
+            <div class="col-md-4 pull-right">
+               <a class="btn btn-danger" data-toggle="modal" href="#deleteProject">
+               Delete this project
+               </a>
+               <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="deleteProject" class="modal fade">
+                  <div class="modal-dialog">
+                     <div class="modal-content">
+                        <div class="modal-header">
+                           <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                           <h4 class="modal-title">Form Tittle</h4>
+                        </div>
+                        <div class="modal-body">
+                           <p>This action CANNOT be undone. This will permanently delete the {{$project->name}}, tasks, timelines, and remove all collaborator associations.</p>
+                           <p>Please type in the name of the project to confirm.</p>
+                           <form class="form-horizontal" role="form" method="" action="post">
                               <div class="form-group">
-                                  <div class="col-lg-12">
-                                  <input type="hidden" name="_token" value="{{ csrf_token()}}">
-                                      <input type="text" class="form-control" id="delete_project_name" placeholder="Name of this project" name="project_name">
-                                  </div>
-                              </div>                             
-                              <div class="form-group">
-                                  <div class="col-lg-10" id="link-delete">
-                                    
-                                  </div>
+                                 <div class="col-lg-12">
+                                    <input type="hidden" name="_token" value="{{ csrf_token()}}">
+                                    <input type="text" class="form-control" id="delete_project_name" placeholder="Name of this project" name="project_name">
+                                 </div>
                               </div>
-                          </form>
-                          <script type="text/javascript">
-                            $(document).ready(function() {
-                               $('#delete_project_name').keyup(function() {
-                                  if ($(this).val()=="{{$project->name}}") {
-                                    $('#link-delete').append('<a href="http://hanusoft.dev/my/project/delete/'+{{$project->id}} +'" class="btn btn-danger">Delete this project</a>');
-                                  }
-                               });
-                           });
-                          </script>
-
-                      </div>
-
+                              <div class="form-group">
+                                 <div class="col-lg-10" id="link-delete">
+                                 </div>
+                              </div>
+                           </form>
+                           <script type="text/javascript">
+                              $(document).ready(function() {
+                                 $('#delete_project_name').keyup(function() {
+                                    if ($(this).val()=="{{$project->name}}") {
+                                      $('#link-delete').append('<a href="http://hanusoft.dev/my/project/delete/'+{{$project->id}} +'" class="btn btn-danger">Delete this project</a>');
+                                    }
+                                 });
+                              });
+                           </script>
+                        </div>
+                     </div>
                   </div>
-              </div>
-          </div>
-        </div>
+               </div>
+            </div>
+         </div>
       </div>
-    </div>
    </section>
    @endcan
    @endcan
@@ -535,4 +505,3 @@
 <script src="{{url('backend/js/jquery-1.8.3.min.js')}}"></script>
 <script class="include" type="text/javascript" src="{{url('backend/js/jquery.dcjqaccordion.2.7.js')}}"></script>
 @endsection
-

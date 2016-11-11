@@ -40,6 +40,12 @@ class MemberController extends Controller
         $member = $this->memberRepository->find(Auth::user()->id);
         return view('backend.pages.profile',['member' =>$member]);
     }
+
+    public function showProfileForOther($slug) {
+        $member = $this->memberRepository->findBySlug($slug);
+        return view('backend.pages.profileForOther',['member' =>$member]);
+    }
+
     public function recent_activity() {
         $member = $this->memberRepository->find(Auth::user()->id);
         return view('backend.pages.profile-activity',['member' =>$member]);

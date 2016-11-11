@@ -78,6 +78,10 @@
 					return view('backend.pages.mail');
 				}]);
 			});
+			//Friends Management
+			Route::group(['prefix' => 'friends'], function () {
+				Route::get('/{slug}', ['as' => 'friends.profile', 'uses' => 'MemberController@showProfileForOther']);
+			});
 			//Chat Management
 			Route::group(['prefix' => 'chat'], function () {
 				Route::post('/create',['as' => 'chat.store', 'uses' => 'ChatController@chat']);

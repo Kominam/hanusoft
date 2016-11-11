@@ -5,10 +5,10 @@ function updateTodo_item(todo_id) {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           }
         });
-       var project_id= $('#project_id').text();
-       var content = $('#todo_content_update'+todo_id).val();
-       var due_date = $('#todo_due_date_update'+todo_id).val();
-        var ass_list = [];
+       var project_id = $('#project_id').text();
+       var content = $("#update_todo_content"+todo_id).val();
+       var due_date = $("#update_todo_due_date"+todo_id).val();
+       var ass_list = [];
       $('input:checkbox:checked.new_assign').map(function(){
         ass_list.push($(this).val());
         });

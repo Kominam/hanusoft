@@ -239,15 +239,14 @@
                 </li>
                 <li class="sub-menu">
                     <a href="javascript:;">
-                    <i class="icon-gear (alias)"></i>
+                    <i class="icon-group"></i>
                     <span>Friends</span>
                     </a>
-                    <!-- <ul class="sub">
-                        <li><a  href="#">Basic Table</a></li>
-                        <li><a  href="#">Dynamic Table</a></li>
-                        <li><a  href="#">Advanced Table</a></li>
-                        <li><a  href="#">Editable Table</a></li>
-                    </ul> -->
+                    <ul class="sub">
+                    @foreach ($all_member as $friend)
+                        <li><a  href="{{ route('friends.profile', $friend->slug) }}">{{$friend->name}}</a></li>
+                    @endforeach
+                    </ul>
                 </li>
                 <li class="sub-menu">
                     <a href="javascript:;">

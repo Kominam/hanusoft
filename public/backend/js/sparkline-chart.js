@@ -56,9 +56,9 @@ var Script = function () {
         width: '100',
         height: '100',
         borderColor: '#00bf00',
-        sliceColors: ['#41CAC0', '#A8D76F', '#F8D347', '#EF6F66']
-//        tooltipFormat: '<span style="display:block; padding:0px 10px 12px 0px;">' +
-//            '<span style="color: {{color}}">&#9679;</span> {{offset:names}} ({{percent.1}}%)</span>'
+        sliceColors: ['#41CAC0', '#A8D76F', '#F8D347', '#EF6F66'],
+       tooltipFormat: '<span style="display:block; padding:0px 10px 12px 0px;">' +
+           '<span style="color: {{color}}">&#9679;</span> {{offset:names}} ({{percent.1}}%)</span>'
     });
 
     //work progress bar

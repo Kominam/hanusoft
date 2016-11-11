@@ -85,7 +85,7 @@ class ViewComposerServiceProvider extends ServiceProvider
             $view->with('all_skill', $all_skill);
         });
 
-          View::composer(['backend.pages.create-project'], function ($view) {
+          View::composer(['backend.pages.create-project','backend.blocks.header'], function ($view) {
             $all_member = User::where('id', '!=' , Auth::user()->id)->get();
             $view->with('all_member', $all_member);
         });
@@ -125,8 +125,7 @@ class ViewComposerServiceProvider extends ServiceProvider
             $cur_mem = User::find(Auth::user()->id);
             $num_pending_task= $cur_mem->todo_items()->wherePivot('status','On queue')->count();
             $view->with('num_pending_task', $num_pending_task);
-        });
-       
+        });  
 
     }
 

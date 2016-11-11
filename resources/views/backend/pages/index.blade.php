@@ -297,7 +297,7 @@
                             </div>
                         </div>
                         <footer class="pie-foot">
-                            Free: 260GB
+                           {{App\User::all()->count()}} projects
                         </footer>
                     </section>
                     <!--pie chart start-->
@@ -307,21 +307,21 @@
                     <section class="panel">
                         <div class="follower">
                             <div class="panel-body">
-                                <h4>Jonathan Smith</h4>
+                                <h4>Hanusoft</h4>
                                 <div class="follow-ava">
-                                    <img src="img/follower-avatar.jpg" alt="">
+                                    <img src="{{url('frontend/img/logo.png')}}" alt="">
                                 </div>
                             </div>
                         </div>
                         <footer class="follower-foot">
                             <ul>
                                 <li>
-                                    <h5>2789</h5>
-                                    <p>Follower</p>
+                                    <h5>{{App\Project::all()->count()}}</h5>
+                                    <p>Projects</p>
                                 </li>
                                 <li>
-                                    <h5>270</h5>
-                                    <p>Following</p>
+                                    <h5>{{App\User::all()->count()}}</h5>
+                                    <p>Friends</p>
                                 </li>
                             </ul>
                         </footer>
