@@ -1,5 +1,15 @@
 @extends('frontend.pages.master')
 @section('content')
+    @if (session('status'))
+       <script type="text/javascript">
+            swal({
+              title: "Thanks you!",
+              text: "Your feedback was sent successful!",
+              type: "success",
+              confirmButtonText: "OK"
+            });
+       </script>
+    @endif
 <div class="body">
 <div role="main" class="main">
 

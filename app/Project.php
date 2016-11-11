@@ -64,7 +64,11 @@ class Project extends Model
         return Carbon::createFromFormat('Y-m-d', $this->plan_end_date)->toFormattedDateString();
     }
     public function displayActualEndDate() {
-        return Carbon::createFromFormat('Y-m-d', $this->actual_end_date)->toFormattedDateString();
+        if ($this->actual_end_date) {
+             return Carbon::createFromFormat('Y-m-d', $this->actual_end_date)->toFormattedDateString();
+        }
+        else
+            return "N/A";
     }
     public function displayCurPercentageCompleted() {
         $total = $this->todo_items()->count();

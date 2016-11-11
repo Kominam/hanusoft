@@ -336,8 +336,14 @@
                                              type: "get",
                                              success: function(data) {  
                                                $('#state{{$state->id}}').remove();
-                                                alert("delete state ok");
-                                             }
+                                               swal({
+                                                  title: "Success!",
+                                                  text: "Delete successful!",
+                                                  type: "success",
+                                                  timer: 1500,
+                                                  confirmButtonText: "OK"
+                                                });
+                                                   }
                                            });
                                  });
                                  });

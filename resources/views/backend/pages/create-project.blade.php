@@ -12,6 +12,16 @@
                 <h3>Sorry you have not permission to create project</h3>
               @endcannot
               @can('create-project')
+                 @if (count($errors) >0)
+                    <script type="text/javascript">
+                       swal({
+                          title: "Whoops!",
+                          text: "Sorry, something went wrong!",
+                          type: "error",
+                          confirmButtonText: "OK"
+                        });
+                    </script>
+                  @endif
                  <div class="row">
                   <div class="col-lg-12">
                   <form class="form-horizontal tasi-form" method="POST" action="{{ route('project.store') }}"> 

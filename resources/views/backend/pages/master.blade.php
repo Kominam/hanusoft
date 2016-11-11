@@ -25,6 +25,7 @@
   </head>
   <body>
   @include('backend.blocks.header')
+  <script src="{{ elixir('js/sweetalert.js') }}"></script>
   <section id="container" class="">
       <!--main content start-->
       <section id="main-content">         
@@ -50,10 +51,7 @@
 
      <!--common script for all pages-->
     <script src="{{url('backend/js/common-scripts.js')}}"></script>
-    <script type="text/javascript">
-    </script>
     <script src="http://rawgit.com/saribe/toastr8/master/dist/js/toastr8.min.js"></script>
-    <script src="{{ elixir('js/sweetalert.js') }}"></script>
     <script src="{{ elixir('js/app.js') }}"></script>
     <script type="text/javascript" src="{{url('backend/assets/gritter/js/jquery.gritter.js')}}"></script>
     

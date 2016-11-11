@@ -41,11 +41,15 @@
 @section('content')
 <section class="wrapper">
 @if (empty(Auth::user()->grade->name) || empty(Auth::user()->position->name))
-    <div class="row">
-        <div class="col-lg-12 col-sm-12 alert alert-danger">
-            <a href="{{ route('profile.edit') }}" style="text-decoration:none;color: inherit;"><i class="icon-warning-sign"></i> You must update some important information right now </a>
-        </div>
-    </div>
+    <script type="text/javascript">
+        swal({
+          title: "Warning!",
+          text: 'You must update some important information right now in <a class="btn btn-warning" href="http://hanusoft.dev/my/profile/edit">here</a>',
+          type: "warning",
+          showConfirmButton: false,
+          html: true
+        });
+    </script>
 @endif
     <!--state overview start-->
     <div class="row state-overview">
@@ -124,15 +128,15 @@
                             <td>
                                 <i class=" icon-tasks"></i>
                             </td>
-                            <td>New Task Issued</td>
-                            <td> 02</td>
+                            <td>New Task Assigned</td>
+                            <td> {{$num_new_assigned_task}}</td>
                         </tr>
                         <tr>
                             <td>
                                 <i class="icon-warning-sign"></i>
                             </td>
                             <td>Task Pending</td>
-                            <td> 14</td>
+                            <td> {{$num_pending_task}}</td>
                         </tr>
                         <tr>
                             <td>

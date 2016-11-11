@@ -42,7 +42,7 @@ class PostController extends Controller
             return back()->withErrors($validator)->withInput();
          } else {
              $this->postRepository->create($request);
-             return redirect()->route('post.your-post');
+             return redirect()->route('post.your-post')->with('statusCreate','success');
          }  
     }
    	//EDIT
@@ -58,13 +58,13 @@ class PostController extends Controller
             return back()->withErrors($validator)->withInput();
          } else {
             $this->postRepository->update($request, $slug);
-            return redirect()->route('post.your-post');
+            return redirect()->route('post.your-post')->with('statusEdit','success');
          }
    	}
 
    	public function delete($id) {
    		$this->postRepository->delete($id);
-      return redirect()->route('post.your-post');
+      return redirect()->route('post.your-post')->with('statusDelete','success');
    	}
 
      public function filterByCategory($slugCategory) {

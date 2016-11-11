@@ -17,6 +17,6 @@ class ContactController extends Controller
 
         $myEmail = 'hanusoft.dev@gmail.com';
         Mail::to($myEmail)->send(new ContactMail($request));
-        return back();
+        return back()->with('status','successful');
     }
 }

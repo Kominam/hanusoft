@@ -112,6 +112,20 @@ class ViewComposerServiceProvider extends ServiceProvider
             $num_unread_task= $cur_mem->unreadNotifications->whereIn('type',['App\Notifications\AssignNewTask','App\Notifications\DeleteTask','App\Notifications\UpdateTask','App\Notifications\MarkTaskDone'])->count();
             $view->with('num_unread_task', $num_unread_task);
         });
+
+            //Count new assinged task task
+           View::composer(['backend.pages.index'], function ($view) {
+            $cur_mem = User::find(Auth::user()->id);
+            $num_new_assigned_task= $cur_mem->unreadNotifications->whereIn('type',['App\Notifications\AssignNewTask'])->count();
+            $view->with('num_new_assigned_task', $num_new_assigned_task);
+        });
+
+            //Count pending task
+           View::composer(['backend.pages.index'], function ($view) {
+            $cur_mem = User::find(Auth::user()->id);
+            $num_pending_task= $cur_mem->todo_items()->wherePivot('status','On queue')->count();
+            $view->with('num_pending_task', $num_pending_task);
+        });
        
 
     }

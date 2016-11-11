@@ -13,14 +13,14 @@
                   <form class="form-horizontal tasi-form" method="post" action="{{ route('post.store') }}">
                   <input type="hidden" name="_token" value="{{csrf_token()}}">
                     @if (count($errors) >0)
-                        <section class="panel">
-                          <div class="panel-heading">
-                            Errors
-                          </div>
-                          <div class="panel-body">
-                              <strong>Something went wrong.Check detail below</strong>
-                          </div>
-                        </section>
+                    <script type="text/javascript">
+                       swal({
+                          title: "Whoops!",
+                          text: "Sorry, something went wrong!",
+                          type: "error",
+                          confirmButtonText: "OK"
+                        });
+                    </script>
                     @endif
                       <section class="panel">
                           <div class="panel-body">  

@@ -8,6 +8,37 @@
    
 @endsection
 @section('content')
+    @if (session('statusCreate'))
+       <script type="text/javascript">
+            swal({
+              title: "Succesful!",
+              text: "Create post successful!",
+              type: "success",
+              confirmButtonText: "OK"
+            });
+       </script>
+    @endif
+    @if (session('statusEdit'))
+       <script type="text/javascript">
+            swal({
+              title: "Succesful!",
+              text: "Edit post successful!",
+              type: "success",
+              confirmButtonText: "OK"
+            });
+       </script>
+    @endif
+    @if (session('statusDelete'))
+       <script type="text/javascript">
+            swal({
+              title: "Succesful!",
+              text: "Delete post successful!",
+              type: "success",
+              timer: 1500,
+              confirmButtonText: "OK"
+            });
+       </script>
+    @endif
     <section class="wrapper">
               <!-- page start-->
               <section class="panel">

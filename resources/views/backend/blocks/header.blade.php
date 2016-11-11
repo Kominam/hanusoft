@@ -240,6 +240,18 @@
                 <li class="sub-menu">
                     <a href="javascript:;">
                     <i class="icon-gear (alias)"></i>
+                    <span>Friends</span>
+                    </a>
+                    <!-- <ul class="sub">
+                        <li><a  href="#">Basic Table</a></li>
+                        <li><a  href="#">Dynamic Table</a></li>
+                        <li><a  href="#">Advanced Table</a></li>
+                        <li><a  href="#">Editable Table</a></li>
+                    </ul> -->
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                    <i class="icon-gear (alias)"></i>
                     <span>Setting</span>
                     </a>
                     <!-- <ul class="sub">
