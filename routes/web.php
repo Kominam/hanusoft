@@ -58,6 +58,7 @@
 			Route::group(['prefix' => 'state'], function () {
 				Route::post('create',['as' => 'state.store', 'uses' => 'StateController@create']);
 				Route::get('delete/{state_id}',['as' => 'state.destroy', 'uses' => 'StateController@delete']);
+				Route::put('update/{state_id}',['as' => 'state.update', 'uses' => 'StateController@update']);
 			});
 				//project managerment-> task management
 			Route::group(['prefix' => 'task'], function () {

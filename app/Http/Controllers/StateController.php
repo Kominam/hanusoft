@@ -23,4 +23,8 @@ class StateController extends Controller
     public function delete($state_id) {
     	$this->stateRepository->delete($state_id);
     }
+
+    public function update(Request $request, $id) {
+        $this->stateRepository->update($request, $id);
+    }
 }
