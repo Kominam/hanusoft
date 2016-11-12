@@ -297,7 +297,7 @@
                             </div>
                         </div>
                         <footer class="pie-foot">
-                           {{App\User::all()->count()}} projects
+                           {{App\Project::all()->count()}} projects
                         </footer>
                     </section>
                     <!--pie chart start-->

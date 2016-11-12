@@ -57,6 +57,11 @@ class Project extends Model
     public function todo_items() {
         return $this->hasMany('App\TodoItem');
     }
+
+    public function project_resources() {
+        return $this->hasMany('App\ProjectResource');
+    }
+
     public function displayStartDate() {
         return Carbon::createFromFormat('Y-m-d', $this->start_date)->toFormattedDateString();
     }

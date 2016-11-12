@@ -34,7 +34,7 @@
                             <div class="form-group">
                                 <label  class="col-lg-2 control-label">About Me</label>
                                 <div class="col-lg-10">
-                                    <textarea name="" id="" class="form-control" cols="30" rows="10"></textarea>
+                                    <textarea name="bio" id="" class="form-control" cols="30" rows="10"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -53,10 +53,16 @@
                                 <label  class="col-lg-2 control-label">Gender</label>
                                 <div class="col-lg-6">
                                     <select class="form-control m-bot15" name="gender">
-                                       <option value="0">Undefined</option>
-                                       <option value="1">Male</option>
-                                       <option value="2">Female</option>
+                                       <option value="0" {{($member->gender=0)? 'selected' : ''}}>Undefined</option>
+                                       <option value="1" {{($member->gender=1)? 'selected' : ''}}>Male</option>
+                                       <option value="2" {{($member->gender=2)? 'selected' : ''}}>Female</option>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label  class="col-lg-2 control-label">Birthday</label>
+                                <div class="col-lg-6">
+                                    <input type="date" class="form-control" id="birthday" placeholder=" " name="birthday" value="{{$member->birthday}}">
                                 </div>
                             </div>
                             <div class="form-group">

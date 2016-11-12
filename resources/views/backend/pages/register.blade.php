@@ -25,13 +25,14 @@
         <h2 class="form-signin-heading">registration now</h2>
         <div class="login-wrap">
           <p>Enter your personal details below</p>
-          <input type="text" class="form-control" name="name" placeholder="Full Name" autofocus value="{{ old('name')}}">
+          <input type="text" class="form-control" name="name" placeholder="Full Name" autofocus value="{{ old('name')}}" required>
           @if ($errors->has('name'))
              <div class="alert alert-danger">
                 {{ $errors->first('name') }}
              </div>         
           @endif
-          <input type="text" class="form-control" name="address" placeholder="Address" autofocus value="{{ old('address')}}">
+          <input type="text" class="form-control" name="address" placeholder="Address" autofocus value="{{ old('address')}}" required>
+          <input type="date" class="form-control" name="birthday" placeholder="Birthday" autofocus value="{{ old('birthday')}}" required>
           <select class="form-control input-sm m-bot15" name="position_id">
           @foreach ($all_position as $position)
              <option value="{{$position->id}}">{{$position->name}}</option>
@@ -56,19 +57,19 @@
           @endif
           </div>
           <p> Enter your account details below</p>
-          <input type="text" class="form-control" placeholder="Email" autofocus name="email" value="{{ old('email')}}">
+          <input type="text" class="form-control" placeholder="Email" autofocus name="email" value="{{ old('email')}}" required>
             @if ($errors->has('email'))
              <div class="alert alert-danger">
                 {{ $errors->first('email') }}
              </div>         
           @endif
-          <input type="password" name="password" class="form-control" placeholder="Password">
+          <input type="password" name="password" class="form-control" placeholder="Password" required>
             @if ($errors->has('password'))
              <div class="alert alert-danger">
                 {{ $errors->first('password') }}
              </div>         
           @endif
-          <input type="password" name="password_confirmation" class="form-control" placeholder="Re-type Password">
+          <input type="password" name="password_confirmation" class="form-control" placeholder="Re-type Password" required>
             @if ($errors->has('password_confirmation'))
              <div class="alert alert-danger">
                 {{ $errors->first('password_confirmation') }}

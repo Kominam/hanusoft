@@ -42,7 +42,7 @@ class ViewComposerServiceProvider extends ServiceProvider
             $view->with('all_grade', $all_grade );
         });
         //Popular posts
-        View::composer(['frontend.pages.posts', 'frontend.pages.post_detail'], function ($view) {
+        View::composer(['frontend.pages.posts', 'frontend.pages.post_detail', 'frontend.pages.search_post_result'], function ($view) {
                 $popular_posts = Post::get()->sortByDesc(function($post)
                 {
                     return $post->comments->count();
@@ -50,7 +50,7 @@ class ViewComposerServiceProvider extends ServiceProvider
             $view->with('popular_posts', $popular_posts);
         });
         //Recent posts
-        View::composer(['frontend.pages.posts', 'frontend.pages.post_detail'], function ($view) {
+        View::composer(['frontend.pages.posts', 'frontend.pages.post_detail', 'frontend.pages.search_post_result'], function ($view) {
                 $recent_posts = Post::get()->sortByDesc(function($post)
                 {
                     return $post->created_at;

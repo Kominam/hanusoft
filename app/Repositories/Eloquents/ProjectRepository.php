@@ -7,6 +7,7 @@ use App\Repositories\Contracts\ProjectRepositoryInterface;
 use App\Project;
 use App\Skill;
 use App\User;
+use App\ProjectResource;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Validator;
@@ -15,6 +16,7 @@ use Auth;
 use App\Notifications\InvitetoProject;
 use Notifications;
 use DB;
+use File;
 
 class ProjectRepository implements ProjectRepositoryInterface
 {

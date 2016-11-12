@@ -48,6 +48,12 @@
 				Route::post('/op/store', ['as' => 'project.store','uses'=>'ProjectController@add']);
 				Route::get('/delete/{id}',['as' => 'project.destroy','uses'=>'ProjectController@delete']);
 			});
+			//Project Resource Management
+			Route::group(['prefix' => 'resource'], function () {
+				Route::post('/{slug}/add', ['as' => 'resource.store','uses'=>'ProjectResourceController@addResource']);
+				Route::get('/delete/{resource_id}', ['as' => 'resource.destroy','uses'=>'ProjectResourceController@deleteResource']);
+				Route::get('/download/{fileName}', ['as' => 'resource.download', 'uses' => 'DownloadController@downloadResourceProject']);
+			});
 					//project managerment->invite memeber
 			Route::group(['prefix' => 'invitation'], function () {
 				Route::post('/create',['as' => 'invitation.create', 'uses' => 'ProjectController@invite'] );
@@ -131,6 +137,7 @@
 	Route::get('posts/category/{slug}', ['as' => 'browse-post-by-cate','uses' => 'PostController@filterByCategory']);
 	Route::post('post-comment', ['as' => 'post-comment', 'uses' => 'CommentController@create']);
 	Route::post('post-reply-comment', ['as' => 'post-reply-comment', 'uses' => 'ReplyCommentController@create']);
+	Route::post('posts/search',['as' => 'post.searchForFront', 'uses'=>'PostController@search']);
 
 	Route::get('/projects', ['as' => 'projects', 'uses' => 'ProjectController@index']);	
 	Route::get('/projects/{slug}', ['as' => 'single_project','uses' => 'ProjectController@show']);

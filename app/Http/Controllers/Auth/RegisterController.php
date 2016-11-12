@@ -101,6 +101,8 @@ class RegisterController extends Controller
                    $user = new User();
                    $user->name = $request->name;
                    $user->email= $request->email;
+                   $user->birthday = $request->birthday;
+                   $user->address = $request->address;
                    $user->password = bcrypt($request->password);
                    $user->gender = $request->gender;
                    $user->position_id=$request->position_id;

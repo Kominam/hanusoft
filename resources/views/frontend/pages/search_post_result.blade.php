@@ -19,37 +19,38 @@
         </div>
     </section>
     <div class="container">
+        <h2>We have found {{$results->count()}} result matching with your keyword</h2>
         <div class="row">
             <div class="col-md-9">
                 <div class="posts_details">
-                    @foreach ($posts as $post)
+                    @foreach ($results as $result)
                     <article class="post post-large" style="padding: 50px 0px 50px 0px">
                         <div class="post-date">
-                            <span class="day">{{$post->created_at->format('d')}}</span>
+                            <span class="day">{{$result->created_at->format('d')}}</span>
                             <span class="month">
-                            {{substr($post->created_at->format('F'),0,3)}}</span>
+                            {{substr($result->created_at->format('F'),0,3)}}</span>
                         </div>
                         <div class="post-content">
-                            <h2><a href="{{route('post_detail',['slug'=>$post->slug])}}">{{$post->tittle}}</a></h2>
-                            <p>{!!substr($post->content,0,750)!!}[...]</p>
+                            <h2><a href="{{route('post_detail',['slug'=>$result->slug])}}">{{$result->tittle}}</a></h2>
+                            <p>{!!substr($result->content,0,750)!!}[...]</p>
                             <div class="post-meta">
-                                <span><i class="fa fa-user"></i> By <a href="{{ route('member_detail',$post->user->slug) }}">{{$post->user->name}}</a> </span>
-                                <span><i class="fa fa-tag"></i> <a href={{route('browse-post-by-cate', $post->type->slug)}}>{{$post->type->name}}</a></span>
-                                <span><i class="fa fa-comments"></i> <a href="#">{{$post->comments->count()}} Comments</a></span>
-                                <a href="{{route('post_detail',['slug'=>$post->slug])}}" class="btn btn-xs btn-primary pull-right">Read more...</a>
+                                <span><i class="fa fa-user"></i> By <a href="{{ route('member_detail',$result->user->slug) }}">{{$result->user->name}}</a> </span>
+                                <span><i class="fa fa-tag"></i> <a href={{route('browse-post-by-cate', $result->type->slug)}}>{{$result->type->name}}</a></span>
+                                <span><i class="fa fa-comments"></i> <a href="#">{{$result->comments->count()}} Comments</a></span>
+                                <a href="{{route('post_detail',['result'=>$result->slug])}}" class="btn btn-xs btn-primary pull-right">Read more...</a>
                             </div>
                         </div>
                     </article>
                     @endforeach
                     <ul class="pagination pagination-lg pull-right">
-                         @if ($posts->currentPage()!==1)
-                            <li><a href="{{$posts->previousPageUrl()}}">«</a></li>
+                         @if ($results->currentPage()!==1)
+                            <li><a href="{{$results->previousPageUrl()}}">«</a></li>
                          @endif
-                         @for ($i=1; $i< $posts->lastPage()+1;$i++)
-                            <li class="{{ ($posts->currentPage()==$i) ? 'active' : '' }}"><a href="{!! $posts->url($i)!!}">{{$i}}</a></li>   
+                         @for ($i=1; $i< $results->lastPage()+1;$i++)
+                            <li class="{{ ($results->currentPage()==$i) ? 'active' : '' }}"><a href="{!! $results->url($i)!!}">{{$i}}</a></li>   
                         @endfor
-                        @if ($posts->currentPage()!== $posts->lastPage())
-                            <li><a href="{{$posts->nextPageUrl()}}">»</a></li>
+                        @if ($results->currentPage()!== $results->lastPage())
+                            <li><a href="{{$results->nextPageUrl()}}">»</a></li>
                         @endif
                        
                     </ul>

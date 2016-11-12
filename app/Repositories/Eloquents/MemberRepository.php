@@ -14,6 +14,7 @@ use Auth;
 use Image;
 use Redirect;
 use Hash;
+use File;
 
 class MemberRepository implements MemberRepositoryInterface
 {
@@ -78,6 +79,8 @@ class MemberRepository implements MemberRepositoryInterface
         $user->url_fb = $request->url_fb;
         $user->url_gmail = $request->url_gmail;
         $user->url_github = $request->url_github;
+        $user->birthday = $request->birthday;
+        $user->bio = $request->bio;
         $user->save();
     }
    
@@ -104,6 +107,9 @@ class MemberRepository implements MemberRepositoryInterface
         $member->save();
         if ($request->hasFile('AvtImgFile')) {
             if ($request->file('AvtImgFile')->isValid()) {
+                if ($member->url_avt !='frontend/img/team/user_default.png') {
+                    File::delete($member->url_avt);
+                }
                 $avtImg = $request->file('AvtImgFile');
                 $filename  =  time().$avtImg->getClientOriginalName().'.' . $avtImg->getClientOriginalExtension();
                 $path = public_path('frontend/img/team/' . $filename);

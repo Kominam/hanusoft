@@ -136,7 +136,7 @@
                               </div>
                               <div class="chat-form">
                                     <div class="input-cont ">
-                                      <input type="text" class="form-control col-lg-12" placeholder="Type a message here..." id="message">
+                                      <input type="text" class="form-control col-lg-12" placeholder="Type a message here..." id="message" required>
                                   </div>
                                   <div class="form-group">
                                       <div class="pull-right chat-features">
@@ -156,8 +156,8 @@
        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
        }
      });
-   $('#sendMsg').click(function() {
-     $('#sendMsg').text('Waitting');
+    function sendMessage() {
+      $('#sendMsg').text('Waitting');
      var project_chat_name = $('#project_chat_name').find('p').text();
      var message= $('#message').val();
      var sender_name ="{{Auth::user()->name}}";
@@ -177,7 +177,18 @@
        $('#msg-cont').append(new_msg);
        }          
      });
-   })
+    }
+   $('#sendMsg').click(function() {
+     sendMessage();
+   });
+   $('#message').keypress(function(event) {
+      var keycode = event.keyCode || event.which;
+      var message= $('#message').val();
+      if(keycode == '13' &&  message !='') {
+        sendMessage();    
+    }
+   });
+
 });
                                   </script>
 

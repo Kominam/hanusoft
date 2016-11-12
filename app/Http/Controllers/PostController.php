@@ -76,4 +76,9 @@ class PostController extends Controller
       $posts_of_cur_user = Auth::user()->posts()->paginate(5);
       return view('backend.pages.your-post', ['posts_of_cur_user' => $posts_of_cur_user]);
      }
+
+     public function search(Request $request) {
+      $results = $this->postRepository->search($request);
+      return view('frontend.pages.search_post_result',['results'=>$results]);
+     }
 }

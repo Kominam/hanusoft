@@ -71,4 +71,15 @@ class User extends Authenticatable
     public function todo_items() {
         return $this->belongsToMany('App\TodoItem','todo_item_user', 'user_id', 'todo_item_id')->withPivot('status')->withTimestamps();
     }
+
+    public function calContribute($project_id) {
+        $contribute =0;
+        $project = Project::find($project_id);
+        $total_task = $project->todo_items()->count();
+        $my_task = $this->todo_items()->wherePivot('status','done')->where('project_id', $project_id)->count();
+        if ($total_task !=0) {
+            $contribute = ($my_task/$total_task)*100;
+        }
+        return $contribute;
+    }
 }

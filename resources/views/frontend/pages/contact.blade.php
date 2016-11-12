@@ -1,11 +1,20 @@
 @extends('frontend.pages.master')
 @section('content')
-    @if (session('status'))
+    @if (session('status')=='successful')
        <script type="text/javascript">
             swal({
               title: "Thanks you!",
               text: "Your feedback was sent successful!",
               type: "success",
+              confirmButtonText: "OK"
+            });
+       </script>
+    @elseif(session('status')=='error')
+          <script type="text/javascript">
+            swal({
+              title: "Whoops!",
+              text: "Sonething went wrong.Try again!",
+              type: "error",
               confirmButtonText: "OK"
             });
        </script>

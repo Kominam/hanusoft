@@ -267,14 +267,15 @@
 </div>
 <div class="col-md-3">
 <aside class="sidebar">
-<form>
-    <div class="input-group input-group-lg">
-        <input class="form-control" placeholder="Search..." name="s" id="s" type="text">
-        <span class="input-group-btn">
-        <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-search"></i></button>
-        </span>
-    </div>
-</form>
+  <form action="{{ route('post.searchForFront') }}" method="POST">
+  {!! csrf_field() !!}
+      <div class="input-group input-group-lg">
+          <input class="form-control" placeholder="Search..." name="keyword" id="keyword" type="text" required>
+          <span class="input-group-btn">
+          <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-search"></i></button>
+          </span>
+      </div>
+  </form>
 <hr />
 <h4>Categories</h4>
 <ul class="nav nav-list primary push-bottom">

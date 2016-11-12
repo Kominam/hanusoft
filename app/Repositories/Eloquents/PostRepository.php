@@ -91,5 +91,11 @@ class PostRepository implements PostRepositoryInterface
       return $arr_cmt_id;
     }
 
+    public function search(Request $request) {
+      $keyword = $request->keyword;
+      $results = Post::where('tittle','like','%'.$keyword.'%')->orWhere('content','like','%'.$keyword.'%')->paginate(5);
+      return $results;
+    }
+
 
 }
