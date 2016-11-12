@@ -185,6 +185,28 @@ window.Echo.private('App.User.'+ userId)
                       });
             });
         }
+        if (notification.type=='App\\Notifications\\NewResourceAdded') {
+            var new_resource = '<li id="'+ notification.id+'"><a href="http://hanusoft.dev/my/project/'+ notification.project_slug+'"><span class="label label-danger"><i class="icon-bolt"></i></span>New Resource '+ notification.resource_name +'added.<span class="small italic">'+ notification.project_name+'</span></a></li>';
+            $('#header_notification_bar li:first').after(new_resource);
+            $('#header_notification_bar li:nth-child(4)').remove();
+            var num_unread_noti= parseInt($('#num_unread_noti').text());
+            var temp= parseInt(" 1 ");
+            var new_num_unread_noti = num_unread_noti + temp;
+            $('#num_unread_noti').text(new_num_unread_noti);
+            $('#badge_num_unread_noti').text(new_num_unread_noti);
+            $("#noti").on("click", "#"+notification.id, function(event){
+                $.ajax({
+                      url:'/my/notifications',
+                      type: "post",
+                      data: { '_token': $('input[name=_token]').val(), 'noti_id': notification.id},
+                      success: function(data) {   
+                          var new_num_unread_noti = num_unread_noti - temp;
+                          $('#num_unread_noti').text(new_num_unread_noti);
+                          $('#badge_num_unread_noti').text(new_num_unread_noti);
+                          }          
+                      });
+            });
+        }
          if (notification.type=='App\\Notifications\\AssignNewTask') {
             var new_task = '<li id="'+notification.id+'"><a href="http://hanusoft.dev/my/project/'+ notification.project_slug+'"><div class="task-info"><div class="desc">'+notification.project_name+'</div><div class="desc">'+notification.todo_content+'</div></div></a></li>';
             $('#header_task_bar li:first').after(new_task);

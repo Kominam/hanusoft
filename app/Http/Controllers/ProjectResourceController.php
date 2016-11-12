@@ -8,9 +8,13 @@ use App\Repositories\Contracts\ProjectRepositoryInterface;
 
 use App\ProjectResource;
 
+use App\Notifications\NewResourceAdded;
+
 use File;
 
 use Validator;
+
+use Auth;
 
 class ProjectResourceController extends Controller
 {
@@ -48,6 +52,11 @@ class ProjectResourceController extends Controller
 	       $new_resource->url= $fileName;
 	       $new_resource->project_id = $project->id;
 	       $new_resource->save();
+         foreach ($project->users as $mem_in_project) {
+          if (Auth::user()->id != $mem_in_project->id) {
+             $mem_in_project->notify(new NewResourceAdded($project->id, $project->name, $project->slug, $new_resource->name, $new_resource->description, Auth::user()->id, Auth::user()->name));
+          }
+        }
      	/*}*/
        
     }

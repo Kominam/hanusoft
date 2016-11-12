@@ -1,0 +1,203 @@
+  @extends('front-end.page.master')
+  @section('content')
+  <div class="men">
+  	<div class="container">
+  	  <div class="col-md-3 sidebar">
+  	  	<div class="block block-layered-nav">
+  		    <div class="block-title">
+  		        <strong><span>Shop By</span></strong>
+  		    </div>
+      <div class="block-content">
+       <form method="POST" id="filter" action="#">
+           <dl id="narrow-by-list">
+              <dd class="odd">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                      <input type="checkbox" name="price" value="1" id="pricebox1"> 0&nbsp;VND - 100K&nbsp;VND<br>
+                      <input type="checkbox" name="price" value="2" id="pricebox2"> 100K&nbsp;VND - 200K&nbsp;VND<br>
+                      <input type="checkbox" name="price" value="3" id="pricebox3"> 200K&nbsp;VND - 300K&nbsp;VND<br>
+                      <input type="checkbox" name="price" value="4" id="pricebox4"> 300K&nbsp;VND - 500K&nbsp;VND<br>
+                      <input type="checkbox" name="price" value="5" id="pricebox5"> 500K&nbsp;VND and above<br>
+              </dd>
+          <dt class="even">Manufacturer</dt>
+              <dd class="even">
+               @foreach($brands as $brand)
+                  <input type="checkbox" name="brand" value={{$brand->id}} id="brandbox{{$brand->id}}"> {{$brand->name}}<br>
+               @endforeach  
+              </dd>
+          <dt class="last odd">Color</dt>
+            <dd class="last odd">
+              <ol>
+                  <li> Black(0) </li>
+                  <li><a href="#">Blue</a>(2)</li>
+                  <li><a href="#">Green</a>(1)</li>
+                  <li><a href="#">Grey</a>(1)</li>
+                  <li><a href="#">Red</a>(1)</li>
+                  <li><a href="#">White</a>(1)</li>
+              </ol>
+            </dd>
+          </dl>
+          <input type="submit" value="filter" id="submit-btn" name="Filter">
+             </form>
+              </div>
+  </div>
+  <div class="block block-cart">
+          <div class="block-title">
+          <strong><span>Carrello</span></strong>
+      </div>
+      <div class="block-content">
+                          <p class="empty">You have no items in your shopping cart.</p>
+          </div>
+  </div>
+  <div class="block block-list block-compare">
+      <div class="block-title">
+          <strong><span>Compare Products                    </span></strong>
+      </div>
+      <div class="block-content">
+              <p class="empty">You have no items to compare.</p>
+          </div>
+  </div>
+  </div>
+  <div class="col-md-9" class="main-body">
+  	<div class="mens-toolbar">
+            <div class="sort">
+                 	<div class="sort-by">
+  		            <label>Sort By</label>
+  		            <select>
+  		                            <option value="">
+  		                    Popularity               </option>
+  		                            <option value="">
+  		                    Price : High to Low               </option>
+  		                            <option value="">
+  		                    Price : Low to High               </option>
+  		            </select>
+  		        </div>
+      		</div>
+  	        <div class="pager">   
+  	           <div class="limiter visible-desktop">
+  	            <label>Show</label>
+  	            <select>
+  	                            <option value="" selected="selected">
+  	                    9                </option>
+  	                            <option value="">
+  	                    15                </option>
+  	                            <option value="">
+  	                    30                </option>
+  	                        </select> per page        
+  	             </div>
+  	       		<ul class="dc_pagination dc_paginationA dc_paginationA06">
+  				    <li><a href="#" class="previous">Pages</a></li>
+              @for ($i=1; $i< $products->lastPage()+1;$i++)
+  				        <li><a href="{!! str_replace('/?', '?', $products->url($i))!!}">{{$i}}</a></li>
+              @endfor
+  			  	</ul>
+  		   		<div class="clearfix"></div>
+  	    	</div>
+       	    <div class="clearfix"></div>
+  	     </div>
+            <div class="span_2" id="result">
+             <div class="clearfix"></div>
+            </div>
+  	          <div class="span_2 original">
+  	          	@foreach($products as $item)
+  	          	 <div class="col_1_of_single1 span_1_of_single1">
+  	          	<a href="{!! URL:: route('getBuyProduct',$item->id)!!}">
+  				     <img src={{asset('/images/'.$item->image->main_img)}} class="img-responsive" alt=""/>
+  				     <h3>{!!$item->name!!}</h3>
+  				   	 <p>Duis autem vel eum iriure</p>
+  				   	 <h4>{!!$item->price!!}</h4>
+  			         </a>  
+  				  </div> 
+  				  @endforeach
+  				  <div class="clearfix"></div>
+  			   </div>
+         
+              </div>
+        </div>
+  </div>
+  @endsection
+  @section('subscript')
+      <script type="text/javascript">
+          $(document).ready(function(){
+              $.ajaxSetup({
+                    headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+              });
+            
+             var filtered_product = new Array();
+             var cate_id= "{{ $id }}";
+             var initial_num_of_brand = parseInt("{{count($brands)}}");
+             var temp = parseInt("1");
+             var num_of_brand= initial_num_of_brand+temp;
+             function filterByPrice(from, to) {
+                    $.ajax({
+                        url: '/category/'+ cate_id+ '/from/'+ from +'/to/' + to,
+                        type: "get",
+                        data: { '_token': $('input[name=_token]').val()},
+                        success: function(data){
+                          data.forEach(function(product) { 
+                            if(jQuery.inArray(product.id, filtered_product)== -1) {
+                                  filtered_product.push(product.id);
+                                     $.ajax({
+                                  url: '/load-image/' + product.id,
+                                  type: "get",
+                                 data: {'_token': $('input[name=_token]').val()},
+                                  success: function(image){
+                                    var main_img= image.main_img;
+                                      $('.original').hide("fast");
+                                    var base_url = "<?php echo URL::to('getproduct/'); ?>";
+                                    var t = '/';
+                                    var url = base_url.concat(t,product.id);
+                                    var newdiv1 = $( "<div id='col_1_of_single1 span_1_of_single1'><a href="+ url +"><img src='http://shopping.dev:8000/images/" + main_img +" ' class='img-responsive' alt=''/><h3>"+ product.name + "</h3><p>Duis autem vel eum iriure</p><h4>"+ product.price+ "</h4></a></div>");
+                                    $('#result').prepend(newdiv1);
+                                        }
+                                }); 
+                            
+                                }       
+                          });
+                        }
+                      }); 
+                  }
+            function filterByBrand() {
+                 $.ajax({
+                        url: '/category/'+ cate_id+ '/brand/'+ brand_id,
+                        type: "get",
+                        data: { '_token': $('input[name=_token]').val()},
+                        success: function(data){
+                         
+                        }
+                      }); 
+            }
+            for ( var i = 1; i < num_of_brand; ++i) {
+              console.log(i);
+               $('#brandbox'+ i).change(function() {
+                if($(this).is(":checked")) {
+                     alert("Ok");  
+                  }    
+                });
+                    
+            }
+            console.log(filtered_product);
+            $('#pricebox1').change(function() {
+                if($(this).is(":checked")) {
+                     filterByPrice(0,120000);     
+                  }    
+                });
+            $('#pricebox2').change(function() {
+                 if($(this).is(":checked")) {
+                    filterByPrice(100000,200000);   
+                  }      
+                });
+            $('#pricebox3').change(function() {
+                 if($(this).is(":checked")) {
+                    filterByPrice(200000,300000);   
+                  }          
+                });
+            $('#pricebox4').change(function() {
+                  if($(this).is(":checked")) {
+                    filterByPrice(300000,500000); 
+                  }       
+                });
+      });
+  </script>
+  @endsection 

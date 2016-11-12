@@ -1,0 +1,12 @@
+$filename = $request->file('fImage')-> getClientOriginalName();
+$request->fille('fImage)-> move('resources/upload/', $filename)
+
+{!! \Carbon\Carbon:: createFromTimeStamp(strtotime($item['create_at]))-> diffForHumans()!!}
+in hinh
+img src =" {assert('resources/upload/'.$product['fImage])}"
+mysql -u root -p
+mysql> USE your_database;
+mysql> SELECT * FROM your_table;
+create database testdb;
+sudo userdel username => del
+sudo chfn username => chane user info 

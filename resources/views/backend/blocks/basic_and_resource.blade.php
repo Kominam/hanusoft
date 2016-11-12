@@ -19,7 +19,13 @@
       <div class="panel-body">
          Below is resource for this project
          @foreach ($project->project_resources as $resource)
-           <p>{{$resource->name}} <a href="{{ route('resource.download',$resource->url) }}"> <span class="label label-primary"><i class="icon-download-alt"></i></span></a><span class="label label-danger"><a href="{{ route('resource.destroy', $resource->id) }}"><i class="icon-trash"></i></a></span></p>
+           <p>{{$resource->name}} <a href="{{ route('resource.download',$resource->url) }}"> <span class="label label-primary"><i class="icon-download-alt"></i></span></a>
+          @can('manage-project', $project)
+           <span class="label label-danger">
+           <a href="{{ route('resource.destroy', $resource->id) }}"><i class="icon-trash"></i></a>
+           </span>
+           @endcan
+           </p>
          @endforeach
          <br>
          @can('manage-project', $project)
