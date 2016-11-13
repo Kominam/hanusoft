@@ -29,19 +29,20 @@ class ProjectResourceController extends Controller
     	$messages = [
                'resource_name.required'=>'Enter the name for this resource',
                'resource_file.required' => 'Choose the file to upload',
-               'resource_file.size' => 'Max size for upload is 5MB'
+               /*'resource_file.size' => 'Max size for upload is 5MB'*/
         ];
         $validator = Validator:: make($request->all(),[
               'resource_name'=>'required',
-              'resource_file'=>'required|size:5120',
+              'resource_file'=>'required',
         ], $messages);
         return $validator;
     }
 
      public function addResource(Request $request, $slug) {
-     /*	if ($this->validatorAdd($request)) {
-     		return back()->withErrors()->withInput()->with('statusAddResource','error');
-     	} else {*/
+      $validator= $this->validatorAdd($request);
+     	if ($validator->fails()) {
+     		return back()->withErrors($validator)->withInput()->with('statusAddResource','error');
+     	} else {
      	   $project= $this->projectRepository->findBySlug($slug);
 	       $new_resource = new ProjectResource();
 	       $new_resource->name = $request->resource_name;
@@ -57,13 +58,14 @@ class ProjectResourceController extends Controller
              $mem_in_project->notify(new NewResourceAdded($project->id, $project->name, $project->slug, $new_resource->name, $new_resource->description, Auth::user()->id, Auth::user()->name));
           }
         }
-     	/*}*/
-       
+        return back()->with('statusAddResource','success');
+     	}   
     }
 
     public function deleteResource($resource_id) {
        $resource = ProjectResource::findOrFail($resource_id);
        File::delete('upload/project_resource/'.$resource->url);
        $resource->delete();
+       return back()->with('statusDeleteResource','success');
     }
 }

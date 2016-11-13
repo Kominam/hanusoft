@@ -1,3 +1,33 @@
+@if (session('statusAddResource')=='error')
+  <script type="text/javascript">
+    swal({
+      title: "Whoops!",
+      text: "Something wnet wrong.Please try again!",
+      type: "error",
+      confirmButtonText: "OK"
+    });
+  </script>
+@elseif(session('statusAddResource')=='success')
+  <script type="text/javascript">
+      swal({
+        title: "Succesful!",
+        text: "Add new resource successful!",
+        type: "success",
+        timer:2000,
+        confirmButtonText: "OK"
+      });
+ </script>
+@elseif(session('statusDeleteResource')=='success')
+  <script type="text/javascript">
+      swal({
+        title: "Succesful!",
+        text: "Delete resource successful!",
+        type: "success",
+        timer:2000,
+        confirmButtonText: "OK"
+      });
+ </script>
+@endif
 <div class="row">
       <div class="col-md-6">
          <section class="panel">

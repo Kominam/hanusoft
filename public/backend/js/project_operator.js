@@ -16,20 +16,28 @@ $(document).ready(function() {
           assigned_mem_list.push($(this).val());
           });
       $.ajax({
-      url:'/my/task/create',
-      type: "post",
-      data: { '_token': $('input[name=_token]').val(), 'project_id': project_id, 'content': content, 'due_date' : due_date, 'assigned_members':assigned_mem_list},
-      success: function(data) {
+        url:'/my/task/create',
+        type: "post",
+        data: { '_token': $('input[name=_token]').val(), 'project_id': project_id, 'content': content, 'due_date' : due_date, 'assigned_members':assigned_mem_list},
+        success: function(data) {
+             swal({
+                  title: "Success!",
+                  text: "This task is added successful!",
+                  type: "success",
+                  timer: 1000,
+                  confirmButtonText: "OK"
+              }); 
+            var new_task ='<li><div class="task-checkbox"><input type="checkbox" class="list-child" value=""/></div><div class="task-title"><span class="task-title-sp">'+content+'</span><span class="badge badge-sm label-success">2 Days</span> <span class="badge badge-sm label-primary">On queue</span><div class="pull-right hidden-phone"><button class="btn btn-success btn-xs"></i></button><button class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button><button class="btn btn-danger btn-xs"><i class="icon-trash "></i></button></div></div></li>';
+            $('#task_list ul').append(new_task);
+        },
+        error: function() {
            swal({
-                title: "Success!",
-                text: "This task is added successful!",
-                type: "success",
-                timer: 1000,
-                confirmButtonText: "OK"
-            }); 
-          var new_task ='<li><div class="task-checkbox"><input type="checkbox" class="list-child" value=""/></div><div class="task-title"><span class="task-title-sp">'+content+'</span><span class="badge badge-sm label-success">2 Days</span> <span class="badge badge-sm label-primary">On queue</span><div class="pull-right hidden-phone"><button class="btn btn-success btn-xs"></i></button><button class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button><button class="btn btn-danger btn-xs"><i class="icon-trash "></i></button></div></div></li>';
-          $('#task_list ul').append(new_task);
-      }
+            title: "Whoops!",
+            text: "Sorry, something went wrong!",
+            type: "error",
+            confirmButtonText: "OK"
+          });
+        } 
     });
   });
   //Invite memeber
@@ -51,7 +59,15 @@ $(document).ready(function() {
                 timer: 1000,
                 confirmButtonText: "OK"
             }); 
-          }
+          },
+          error: function() {
+               swal({
+                title: "Whoops!",
+                text: "Sorry, something went wrong!",
+                type: "error",
+                confirmButtonText: "OK"
+              });
+          } 
       });
     });
 //Add state
@@ -73,7 +89,15 @@ $(document).ready(function() {
         }); 
         var n_state= '<article class="timeline-item"><div class="timeline-desk"><div class="panel"><div class="panel-body"><span class="arrow"></span><span class="timeline-icon blue"></span><span class="timeline-date">08:25 am</span><h1 class="blue">'+ data.due_date+'</h1><p>'+ data.content+'</p></div></div></div></article>';
          $('#timeline' + project_id).prepend(n_state);
-      }
+      },
+      error: function() {
+           swal({
+            title: "Whoops!",
+            text: "Sorry, something went wrong!",
+            type: "error",
+            confirmButtonText: "OK"
+          });
+      } 
     });
   });
 });

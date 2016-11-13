@@ -1,6 +1,6 @@
 <section class="panel tasks-widget">
          <header class="panel-heading">
-            Todo list
+            Todo list ()
             <!-- <div class="option pull-right" style="display: inline; height: 10px">
                <select style="display: inline;">
                  <option value="">Done</option>

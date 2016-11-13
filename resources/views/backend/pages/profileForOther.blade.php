@@ -76,7 +76,7 @@
                                 <div class="panel">
                                     <div class="panel-body">
                                         <div class="bio-chart">
-                                            <input class="knob" data-width="100" data-height="100" data-displayPrevious=true  data-thickness=".2" value="35" data-fgColor="{{rand_color()}}" data-bgColor="#e8e8e8">
+                                            <input class="knob" data-width="100" data-height="100" data-displayPrevious=true  data-thickness=".2" value="{{$member->calContribute($project->id)}}" data-fgColor="{{rand_color()}}" data-bgColor="#e8e8e8">
                                         </div>
                                         <div class="bio-desk">
                                             <h4 class="red">{{$project->name}}</h4>
