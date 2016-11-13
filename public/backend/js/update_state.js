@@ -23,7 +23,7 @@ function update_state(state_id) {
             });
             location.reload();
           },
-          error: function (xhr, ajaxOptions, thrownError) {
+          error: function () {
             swal({
                 title: "Whoops!",
                 text: "Sorry, something went wrong!",

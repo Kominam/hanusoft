@@ -19,7 +19,7 @@ class PostRepository implements PostRepositoryInterface
     public function all()
     {
 
-        return Post::paginate(5);
+        return Post::orderBy('created_at','DESC')->paginate(5);
     }
 
     public function find($slugString)

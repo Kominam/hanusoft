@@ -23,7 +23,15 @@ $(document).ready(function() {
             var temp2 = $('<div class="msg-time-chat"></div>').append(temp);
             var new_msg = temp2.append('<div class="message-body msg-out"><span class="arrow"></span><div class="text"><p class="attribution"> <a href="'+ member_avt+'">You</a> at a moment ago</p><p>'+ message+'</p></div></div>');
        $('#msg-cont').append(new_msg);
-       }          
+       },
+        error: function () {
+            swal({
+                title: "Whoops!",
+                text: "Sorry, something went wrong!",
+                type: "error",
+                confirmButtonText: "OK"
+              });
+          }          
      });
     }
    $('#sendMsg').click(function() {

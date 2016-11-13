@@ -125,7 +125,7 @@
                     </div>
                     <hr />
                     <h4>About Us</h4>
-                    <p>Nulla nunc dui, tristique in semper vel, congue sed ligula. Nam dolor ligula, faucibus id sodales in, auctor fringilla libero. Nulla nunc dui, tristique in semper vel. Nam dolor ligula, faucibus id sodales in, auctor fringilla libero. </p>
+                    <p>Hanusoft is an IT club, working in Faculty of Information Technology. Taking part in Hanusoft if you have passion with programming. </p>
                 </aside>
             </div>
         </div>

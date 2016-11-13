@@ -131,7 +131,7 @@
             @foreach($member->projects as $project)
                 <li class="col-md-3">
                     <div class="portfolio-item thumbnail">
-                        <a href="{{route('single_project',['id'=>$project->id])}}" class="thumb-info">
+                        <a href="{{route('single_project',['slug'=>$project->slug])}}" class="thumb-info">
                            @foreach ($project->images as $key=>$image)
                                 @if($key == 0)
                                      <img alt="" class="img-responsive" src="{{url('frontend/img/projects/'.$image->img_name)}}">

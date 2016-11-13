@@ -24,7 +24,7 @@ function update_task(task_id) {
             });
             location.reload();
           },
-          error: function (xhr, ajaxOptions, thrownError) {
+          error: function () {
             swal({
                 title: "Whoops!",
                 text: "Sorry, something went wrong!",

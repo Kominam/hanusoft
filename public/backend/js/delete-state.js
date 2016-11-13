@@ -18,7 +18,15 @@ $(document).ready(function() {
                   timer: 1500,
                   confirmButtonText: "OK"
                 });
-                   }
+                   },
+                    error: function () {
+            swal({
+                title: "Whoops!",
+                text: "Sorry, something went wrong!",
+                type: "error",
+                confirmButtonText: "OK"
+              });
+          }
            });
  });
  });

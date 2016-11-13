@@ -99,13 +99,13 @@
             </div>
             <div class="col-md-6">
                 <h4 class="push-top">Get in <strong>touch</strong></h4>
-                <p>Hanusoft is an IT club, working in Faculty of Information Technology. Taking part in Hanusoft means that you have passion with programming. </p>
+                <p>Hanusoft is an IT club, working in Faculty of Information Technology. Taking part in Hanusoft if you have passion with programming. </p>
                 <hr />
                 <h4>The <strong>Office</strong></h4>
                 <ul class="list-unstyled">
                     <li><i class="fa fa-map-marker"></i> <strong>Address:</strong> Hanoi University Km9 Nguyen Trai, Thanh Xuan, Ha Noi</li>
                     <li><i class="fa fa-phone"></i> <strong>Phone:</strong> (123) 456-7890</li>
-                    <li><i class="fa fa-envelope"></i> <strong>Email:</strong> <a href="mailto:anusoft@gmail.com">hanusoft@gmail.com</a></li>
+                    <li><i class="fa fa-envelope"></i> <strong>Email:</strong> <a href="mailto:hanusoft.dev@gmail.com">hanusoft.dev@gmail.com</a></li>
                 </ul>
                 <hr />
                 <h4>Business <strong>Hours</strong></h4>

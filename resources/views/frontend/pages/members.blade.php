@@ -47,8 +47,8 @@
                             <p>{{substr($member->bio, 0, 200)}} ...</p>
                             <span class="thumb-info-social-icons">
                             <a data-tooltip data-placement="bottom" target="_blank" href="{{$member->url_fb}}"><i class="fa fa-facebook"></i><span>Facebook</span></a>
-                            <a data-tooltip data-placement="bottom" href="../../../www.twitter.com/index.html" data-original-title="Gmail"><i class="fa fa-envelope"></i><span>Twitter</span></a>
-                            <a data-tooltip data-placement="bottom" href="../../../www.linkedin.com/index.html" data-original-title="Github"><i class="fa fa-github"></i><span>Linkedin</span></a>
+                            <a data-tooltip data-placement="bottom" href="{{$member->url_gmail}}" data-original-title="Gmail"><i class="fa fa-envelope"></i><span>Gmail</span></a>
+                            <a data-tooltip data-placement="bottom" href="{{$member->github}}" data-original-title="Github"><i class="fa fa-github"></i><span>Github</span></a>
                             </span>
                         </span>
                     </div>
