@@ -15,6 +15,7 @@ function deleteTask(task_id) {
                   title: "Success!",
                   text: "This task was deleted!",
                   type: "success",
+                  timer:1500,
                   confirmButtonText: "OK"
                 });
               },

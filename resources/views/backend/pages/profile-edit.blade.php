@@ -3,6 +3,36 @@
     <link href="{{url('backend/assets/font-awesome/css/font-awesome.css')}}" rel="stylesheet" />
 @endsection
 @section('content')
+@if (session('statusEditBasicProfile')==='error')
+      <script type="text/javascript">
+            swal({
+              title: "Whoops!",
+              text: "Something went wrong !",
+              type: "error",
+              confirmButtonText: "OK"
+            });
+       </script>
+@endif
+@if (session('p_wrong_input'))
+      <script type="text/javascript">
+            swal({
+              title: "Whoops!",
+              text: "Something went wrong !",
+              type: "error",
+              confirmButtonText: "OK"
+            });
+       </script>
+@endif
+@if (session('wrong_current_pass'))
+      <script type="text/javascript">
+            swal({
+              title: "Whoops!",
+              text: "Something went wrong !",
+              type: "error",
+              confirmButtonText: "OK"
+            });
+       </script>
+@endif
 <section class="wrapper">
         <!-- page start-->
         <div class="row">

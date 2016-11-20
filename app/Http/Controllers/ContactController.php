@@ -18,7 +18,8 @@ class ContactController extends Controller
     	 $messages = [
                'name.required'=>'Choose category for this post',
                'email.required'=>'Enter the tittle for this post',
-               'subject.unique'=>'This tittle is already existing',
+               'email.email'=>'This email is not match anyone',
+               'subject.required'=>'This tittle is already existing',
                'message.required'=>'Enter the content for this post',
                'g-recaptcha-response.required' => 'Enter the captcha',
                'g-recaptcha-response.captcha' =>'Captcha not correct',

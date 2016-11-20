@@ -43,7 +43,7 @@
                     <a data-toggle="modal" href="#myModal"> Forgot Password?</a>
                     </span>
                     </label>
-                    <input class="btn btn-lg btn-login btn-block" type="submit">
+                    <input class="btn btn-lg btn-login btn-block" type="submit" value="login">
             </form> 
             <p>or you can sign in via social network</p>
                     <div class="login-social-link">

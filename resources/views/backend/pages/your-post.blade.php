@@ -1,6 +1,12 @@
 @extends('backend.pages.master')
 @section('external_css')
+   
    <link href="{{url('backend/assets/font-awesome/css/font-awesome.css')}}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ elixir('css/jquery-typeahead.css') }}">
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="{{ elixir('js/jquery-typeahead.js') }}"></script>
+    <script src="{{ url('backend/js/search-post.js') }}"></script>
+ 
 @endsection
 @section('external_script')
     <script src="{{url('backend/js/jquery-1.8.3.min.js')}}"></script>
@@ -8,27 +14,47 @@
    
 @endsection
 @section('content')
-    @if (session('statusCreate'))
+    @if (session('statusCreate')==='success')
        <script type="text/javascript">
             swal({
               title: "Succesful!",
               text: "Create post successful!",
               type: "success",
+              timer:2000,
+              confirmButtonText: "OK"
+            });
+       </script>
+    @elseif (session('statusCreate')==='error')
+        <script type="text/javascript">
+            swal({
+              title: "Whoops!",
+              text: "Something went wrong!",
+              type: "error",
               confirmButtonText: "OK"
             });
        </script>
     @endif
-    @if (session('statusEdit'))
+    @if (session('statusEdit')==='success')
        <script type="text/javascript">
             swal({
               title: "Succesful!",
               text: "Edit post successful!",
               type: "success",
+              timer:2000,
+              confirmButtonText: "OK"
+            });
+       </script>
+     @elseif (session('statusEdit')==='error')
+        <script type="text/javascript">
+            swal({
+              title: "Whoops!",
+              text: "Something went wrong!",
+              type: "error",
               confirmButtonText: "OK"
             });
        </script>
     @endif
-    @if (session('statusDelete'))
+    @if (session('statusDelete')==='success')
        <script type="text/javascript">
             swal({
               title: "Succesful!",
@@ -46,18 +72,24 @@
                       Search Your Post
                   </header>
                   <div class="panel-body">
-                      <form class="form-horizontal search-result">
-                          <div class="form-group">
-                              <label class="col-lg-1 col-sm-1 control-label">Search</label>
-                              <div class="col-lg-8 col-sm-8">
-                                  <input type="text" class="form-control input-xxlarge">
-                                 <!--  <p class="help-block">About 5,880,000 results (0.23 seconds) </p> -->
-                              </div>
-                              <div class="col-lg-2">
-                                  <button class="btn " type="submit">SEARCH</button>
-                              </div>
+                    <var id="result-container" class="result-container"></var>
+                  <form id="form-country_v2" name="form-country_v2">
+                      <div class="typeahead__container">
+                          <div class="typeahead__field">
+                   
+                              <span class="typeahead__query">
+                                  <input class="js-typeahead-country_v2" name="country_v2[query]" type="search" placeholder="Search" autocomplete="off">
+                              </span>
+                              <span class="typeahead__button">
+                                  <button type="submit">
+                                      <i class="typeahead__search-icon"></i>
+                                  </button>
+                              </span>
+                   
                           </div>
-                      </form>
+                      </div>
+                  </form>
+                 
                       @foreach ($posts_of_cur_user as $post)
                         <div class="classic-search">
                           <h4><a href=" {{ route('post_detail', $post->slug) }}" target="_blank">{{$post->tittle}}</a></h4>

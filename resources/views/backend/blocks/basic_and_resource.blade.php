@@ -1,4 +1,4 @@
-@if (session('statusAddResource')=='error')
+@if (session('statusAddResource')==='error')
   <script type="text/javascript">
     swal({
       title: "Whoops!",
@@ -7,7 +7,7 @@
       confirmButtonText: "OK"
     });
   </script>
-@elseif(session('statusAddResource')=='success')
+@elseif(session('statusAddResource')==='success')
   <script type="text/javascript">
       swal({
         title: "Succesful!",
@@ -17,7 +17,8 @@
         confirmButtonText: "OK"
       });
  </script>
-@elseif(session('statusDeleteResource')=='success')
+@endif
+@if(session('statusDeleteResource')==='success')
   <script type="text/javascript">
       swal({
         title: "Succesful!",
@@ -27,7 +28,7 @@
         confirmButtonText: "OK"
       });
  </script>
-@endif
+ @endif
 <div class="row">
       <div class="col-md-6">
          <section class="panel">

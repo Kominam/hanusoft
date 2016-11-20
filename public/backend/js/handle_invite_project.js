@@ -20,7 +20,7 @@ function handle_inite_project(leadership_id, project_id) {
                     title: "Success!",
                     text: "You joined this project!",
                     type: "success",
-                    timer: 1000,
+                    timer: 1500,
                     confirmButtonText: "OK"
                 });   
                 $('#invite'+leadership_id+project_id).remove();

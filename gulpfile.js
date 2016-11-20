@@ -26,3 +26,9 @@ elixir(function(mix) {
 elixir(function(mix) {
     mix.scripts('././bower_components/sweetalert/dist/sweetalert.min.js','public/js/sweetalert.js');
 });
+elixir(function(mix) {
+    mix.styles('././bower_components/jquery-typeahead/dist/jquery.typeahead.min.css','public/css/jquery-typeahead.css');
+});
+elixir(function(mix) {
+    mix.scripts('././bower_components/jquery-typeahead/dist/jquery.typeahead.min.js','public/js/jquery-typeahead.js');
+});

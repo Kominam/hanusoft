@@ -51,7 +51,6 @@
 
      <!--common script for all pages-->
     <script src="{{url('backend/js/common-scripts.js')}}"></script>
-    <script src="http://rawgit.com/saribe/toastr8/master/dist/js/toastr8.min.js"></script>
     <script src="{{ elixir('js/app.js') }}"></script>
     <script type="text/javascript" src="{{url('backend/assets/gritter/js/jquery.gritter.js')}}"></script>
     

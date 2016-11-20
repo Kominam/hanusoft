@@ -20,6 +20,7 @@ const app = new Vue({
 });*/
 
 import Echo from "laravel-echo";
+import Push from 'push.js';
 
 window.Echo = new Echo({
     broadcaster: 'pusher',
@@ -87,6 +88,28 @@ window.Echo.private('App.User.'+ userId)
               }); 
     	}
         if (notification.type=='App\\Notifications\\ChatProject') {
+          var num_unread_mess= parseInt($('#num_unread_mess').text());
+            var temp= parseInt(" 1 ");
+            var new_num_unread_mess = num_unread_mess + temp;
+            $('#num_unread_mess').text(new_num_unread_mess);
+            $('#badge_num_unread_mess').text(new_num_unread_mess);
+            Push.create("New Message to " + notification.project_chat_name, {
+                body: "From " + notification.member_name + ": " + notification.message,
+                timeout: 6000,
+                onClick: function () {
+                      $.ajax({
+                      url:'/my/notifications',
+                      type: "post",
+                      data: { '_token': $('input[name=_token]').val(), 'noti_id': notification.id},
+                      success: function(data) {   
+                          var new_num_unread_mess = num_unread_mess - temp;
+                          $('#num_unread_mess').text(new_num_unread_mess);
+                          $('#badge_num_unread_mess').text(new_num_unread_mess);
+                          window.location.href = "http://hanusoft.dev/my/profile/inbox";
+                          }          
+                      });
+                }
+            });
             var $img = $('<img class="avatar" style="width:45px;height:45px" src="http://hanusoft.dev/'+notification.member_avt+'" />').on('load', function(){
                 console.log('loaded');
             });
@@ -94,11 +117,6 @@ window.Echo.private('App.User.'+ userId)
             var temp2 = $('<div class="msg-time-chat"></div>').append(temp);
             var new_msg = temp2.append('<div class="message-body msg-out"><span class="arrow"></span><div class="text"><p class="attribution"> <a href="'+ notification.member_avt+'">'+ notification.member_name+'</a> at a moment ago</p><p>'+ notification.message+'</p></div></div>');
             $('#msg-cont').append(new_msg);
-            var num_unread_mess= parseInt($('#num_unread_mess').text());
-            var temp= parseInt(" 1 ");
-            var new_num_unread_mess = num_unread_mess + temp;
-            $('#num_unread_mess').text(new_num_unread_mess);
-            $('#badge_num_unread_mess').text(new_num_unread_mess);
             var new_noti_msg = '<li id="'+ notification.id+'"><a href="#"><span class="photo"><img alt="avatar" src="http://hanusoft.dev/'+ notification.member_avt+'"></span><span class="subject"><span class="from" style="color:red">'+ notification.member_name +'</span><span class="time">moment ago</span></span><span class="message"><strong>'+ notification.project_chat_name+'</strong></span><span class="message">'+ notification.message+'</span></a></li>';
             $('#header_inbox_bar li:first').after(new_noti_msg);
             $("#inbox").on("click", "#"+ notification.id, function(){
@@ -117,6 +135,23 @@ window.Echo.private('App.User.'+ userId)
             $('#header_inbox_bar li:nth-child(4)').remove();
         }
         if (notification.type=='App\\Notifications\\AddNewState') {
+          Push.create("Project: " + notification.project_name, {
+                body: "News state was added",
+                timeout: 6000,
+                onClick: function () {
+                    $.ajax({
+                      url:'/my/notifications',
+                      type: "post",
+                      data: { '_token': $('input[name=_token]').val(), 'noti_id': notification.id},
+                      success: function(data) {   
+                          var new_num_unread_noti = num_unread_noti - temp;
+                          $('#num_unread_noti').text(new_num_unread_noti);
+                          $('#badge_num_unread_noti').text(new_num_unread_noti);
+                          window.location.href = "http://hanusoft.dev/my/project/"+ notification.project_slug;
+                          }          
+                      });
+                }
+            });
             var n_state= '<article class="timeline-item"><div class="timeline-desk"><div class="panel"><div class="panel-body"><span class="arrow"></span><span class="timeline-icon red"></span><span class="timeline-date">08:25 am</span><h1 class="red">'+ notification.state_due_date+'</h1><p>'+ notification.state_content+'</p></div></div></div></article>';
             $('#timeline' + notification.project_id).prepend(n_state);
             var new_state = '<li id="'+ notification.id+'"><a href="http://hanusoft.dev/my/project/'+ notification.project_slug+'"><span class="label label-danger"><i class="icon-bolt"></i></span>New State Added.<span class="small italic">'+ notification.project_name+'</span></a></li>';
@@ -141,6 +176,23 @@ window.Echo.private('App.User.'+ userId)
             });
         }
         if (notification.type=='App\\Notifications\\UpdateState') {
+           Push.create("Project: " + notification.project_name, {
+                body: "A state was up-to-date",
+                timeout: 6000,
+                onClick: function () {
+                    $.ajax({
+                      url:'/my/notifications',
+                      type: "post",
+                      data: { '_token': $('input[name=_token]').val(), 'noti_id': notification.id},
+                      success: function(data) {   
+                          var new_num_unread_noti = num_unread_noti - temp;
+                          $('#num_unread_noti').text(new_num_unread_noti);
+                          $('#badge_num_unread_noti').text(new_num_unread_noti);
+                          window.location.href = "http://hanusoft.dev/my/project/"+ notification.project_slug;
+                          }          
+                      });
+                }
+            });
             var new_state = '<li id="'+ notification.id+'"><a href="http://hanusoft.dev/my/project/'+ notification.project_slug+'"><span class="label label-danger"><i class="icon-bolt"></i></span> State Updated.<span class="small italic">'+ notification.project_name+'</span></a></li>';
             $('#header_notification_bar li:first').after(new_state);
             $('#header_notification_bar li:nth-child(4)').remove();
@@ -163,6 +215,23 @@ window.Echo.private('App.User.'+ userId)
             });
         }
         if (notification.type=='App\\Notifications\\DeleteState') {
+           Push.create("Project: " + notification.project_name, {
+                body: "A state was deleted",
+                timeout: 6000,
+                onClick: function () {
+                    $.ajax({
+                      url:'/my/notifications',
+                      type: "post",
+                      data: { '_token': $('input[name=_token]').val(), 'noti_id': notification.id},
+                      success: function(data) {   
+                          var new_num_unread_noti = num_unread_noti - temp;
+                          $('#num_unread_noti').text(new_num_unread_noti);
+                          $('#badge_num_unread_noti').text(new_num_unread_noti);
+                          window.location.href = "http://hanusoft.dev/my/project/"+ notification.project_slug;
+                          }          
+                      });
+                }
+            });
             $('#state' + notification.state_id).remove();
             var new_state = '<li id="'+ notification.id+'"><a href="http://hanusoft.dev/my/project/'+ notification.project_slug+'"><span class="label label-danger"><i class="icon-bolt"></i></span>State #'+ notification.state_id+'removed .<span class="small italic">'+ notification.project_name+'</span></a></li>';
             $('#header_notification_bar li:first').after(new_state);
@@ -186,6 +255,23 @@ window.Echo.private('App.User.'+ userId)
             });
         }
         if (notification.type=='App\\Notifications\\NewResourceAdded') {
+          Push.create("Project: " + notification.project_name, {
+                body: "New resource was added",
+                timeout: 6000,
+                onClick: function () {
+                    $.ajax({
+                      url:'/my/notifications',
+                      type: "post",
+                      data: { '_token': $('input[name=_token]').val(), 'noti_id': notification.id},
+                      success: function(data) {   
+                          var new_num_unread_noti = num_unread_noti - temp;
+                          $('#num_unread_noti').text(new_num_unread_noti);
+                          $('#badge_num_unread_noti').text(new_num_unread_noti);
+                          window.location.href = "http://hanusoft.dev/my/project/"+ notification.project_slug;
+                          }          
+                      });
+                }
+            });
             var new_resource = '<li id="'+ notification.id+'"><a href="http://hanusoft.dev/my/project/'+ notification.project_slug+'"><span class="label label-danger"><i class="icon-bolt"></i></span>New Resource '+ notification.resource_name +'added.<span class="small italic">'+ notification.project_name+'</span></a></li>';
             $('#header_notification_bar li:first').after(new_resource);
             $('#header_notification_bar li:nth-child(4)').remove();
@@ -208,6 +294,23 @@ window.Echo.private('App.User.'+ userId)
             });
         }
          if (notification.type=='App\\Notifications\\AssignNewTask') {
+           Push.create("Project: " + notification.project_name, {
+                body: "New task for you",
+                timeout: 6000,
+                onClick: function () {
+                     $.ajax({
+                      url:'/my/notifications',
+                      type: "post",
+                      data: { '_token': $('input[name=_token]').val(), 'noti_id': notification.id},
+                      success: function(data) {   
+                          var new_num_unread_task = num_unread_task - temp;
+                          $('#num_unread_task').text(new_num_unread_task);
+                          $('#badge_num_unread_task').text(new_num_unread_task);
+                           window.location.href = "http://hanusoft.dev/my/project/"+ notification.project_slug;
+                          }          
+                      });
+                }
+            });
             var new_task = '<li id="'+notification.id+'"><a href="http://hanusoft.dev/my/project/'+ notification.project_slug+'"><div class="task-info"><div class="desc">'+notification.project_name+'</div><div class="desc">'+notification.todo_content+'</div></div></a></li>';
             $('#header_task_bar li:first').after(new_task);
             $('#header_task_bar li:nth-child(4)').remove();
@@ -227,12 +330,29 @@ window.Echo.private('App.User.'+ userId)
                       success: function(data) {   
                           var new_num_unread_task = num_unread_task - temp;
                           $('#num_unread_task').text(new_num_unread_task);
-                          $('#badge_num_unread_task').text(new_num_unread_taski);
+                          $('#badge_num_unread_task').text(new_num_unread_task);
                           }          
                       });
           });
         }
         if (notification.type=='App\\Notifications\\UpdateTask') {
+            Push.create("Project: " + notification.project_name, {
+                body: "Your task was updated",
+                timeout: 6000,
+                onClick: function () {
+                     $.ajax({
+                      url:'/my/notifications',
+                      type: "post",
+                      data: { '_token': $('input[name=_token]').val(), 'noti_id': notification.id},
+                      success: function(data) {   
+                          var new_num_unread_task = num_unread_task - temp;
+                          $('#num_unread_task').text(new_num_unread_task);
+                          $('#badge_num_unread_task').text(new_num_unread_task);
+                           window.location.href = "http://hanusoft.dev/my/project/"+ notification.project_slug;
+                          }          
+                      });
+                }
+            });
             var new_task = '<li id="'+notification.id+'"><a href="http://hanusoft.dev/my/project/'+ notification.project_slug+'"><div class="task-info"><div class="desc">'+notification.project_name+'</div><div class="desc">Your Task #'+notification.todo_id+'was updated</div></div></a></li>';
             $('#header_task_bar li:first').after(new_task);
             $('#header_task_bar li:nth-child(4)').remove();
@@ -250,12 +370,29 @@ window.Echo.private('App.User.'+ userId)
                       success: function(data) {   
                           var new_num_unread_task = num_unread_task - temp;
                           $('#num_unread_task').text(new_num_unread_task);
-                          $('#badge_num_unread_task').text(new_num_unread_taski);
+                          $('#badge_num_unread_task').text(new_num_unread_task);
                           }          
                       });
           });
         }
          if (notification.type=='App\\Notifications\\DeleteTask') {
+          Push.create("Project: " + notification.project_name, {
+                body: "Your task was removed",
+                timeout: 6000,
+                onClick: function () {
+                     $.ajax({
+                      url:'/my/notifications',
+                      type: "post",
+                      data: { '_token': $('input[name=_token]').val(), 'noti_id': notification.id},
+                      success: function(data) {   
+                          var new_num_unread_task = num_unread_task - temp;
+                          $('#num_unread_task').text(new_num_unread_task);
+                          $('#badge_num_unread_task').text(new_num_unread_task);
+                           window.location.href = "http://hanusoft.dev/my/project/"+ notification.project_slug;
+                          }          
+                      });
+                }
+            });
             var new_task = '<li id="'+notification.id+'"><a href="http://hanusoft.dev/my/project/'+ notification.project_slug+'"><div class="task-info"><div class="desc">'+notification.project_name+'</div><div class="desc">Your Task #'+notification.todo_id+'was remove</div></div></a></li>';
             $('#header_task_bar li:first').after(new_task);
             $('#header_task_bar li:nth-child(4)').remove();
@@ -279,6 +416,23 @@ window.Echo.private('App.User.'+ userId)
           });
         }
          if (notification.type=='App\\Notifications\\MarkTaskDone') {
+          Push.create("Project: " + notification.project_name, {
+                body: "Your task was mark as done by" + notification.marker_name,
+                timeout: 6000,
+                onClick: function () {
+                     $.ajax({
+                      url:'/my/notifications',
+                      type: "post",
+                      data: { '_token': $('input[name=_token]').val(), 'noti_id': notification.id},
+                      success: function(data) {   
+                          var new_num_unread_task = num_unread_task - temp;
+                          $('#num_unread_task').text(new_num_unread_task);
+                          $('#badge_num_unread_task').text(new_num_unread_task);
+                           window.location.href = "http://hanusoft.dev/my/project/"+ notification.project_slug;
+                          }          
+                      });
+                }
+            });
             var new_task = '<li id="'+notification.id+'"><a href="http://hanusoft.dev/my/project/'+ notification.project_slug+'"><div class="task-info"><div class="desc">'+notification.project_name+'</div><div class="desc">Your Task #'+notification.todo_id+':'+notification.todo_content+'was mark done by'+ notification.marker_name+'</div></div></a></li>';
             $('#header_task_bar li:first').after(new_task);
             $('#header_task_bar li:nth-child(4)').remove();

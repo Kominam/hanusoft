@@ -558,7 +558,539 @@ var Echo = function () {
 }();
 
 module.exports = Echo;
-},{"pusher-js":2}],2:[function(require,module,exports){
+},{"pusher-js":3}],2:[function(require,module,exports){
+/**
+ * Push
+ * =======
+ * A compact, cross-browser solution for the JavaScript Notifications API
+ *
+ * Credits
+ * -------
+ * Tsvetan Tsvetkov (ttsvetko)
+ * Alex Gibson (alexgibson)
+ *
+ * License
+ * -------
+ *
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 Tyler Nickerson
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ * @preserve
+ */
+
+(function (global, factory) {
+
+    'use strict';
+
+    /* Use AMD */
+    if (typeof define === 'function' && define.amd) {
+        define(function () {
+            return new (factory(global, global.document))();
+        });
+    }
+    /* Use CommonJS */
+    else if (typeof module !== 'undefined' && module.exports) {
+        module.exports = new (factory(global, global.document))();
+    }
+    /* Use Browser */
+    else {
+        global.Push = new (factory(global, global.document))();
+    }
+
+})(typeof window !== 'undefined' ? window : this, function (w, d) {
+
+    var Push = function () {
+
+        /**********************
+            Local Variables
+        /**********************/
+
+        var
+        self = this,
+        isUndefined   = function (obj) { return obj === undefined; },
+        isString   = function (obj) { return String(obj) === obj },
+        isFunction = function (obj) { return obj && {}.toString.call(obj) === '[object Function]'; },
+
+        /* ID to use for new notifications */
+        currentId = 0,
+
+        /* Message to show if there is no suport to Push Notifications */
+        incompatibilityErrorMessage = 'PushError: push.js is incompatible with browser.',
+
+        /* Whether Push has permission to notify */
+        hasPermission = false,
+
+        /* Map of open notifications */
+        notifications = {},
+
+        /* Testing variable for the last service worker path used */
+        lastWorkerPath = null,
+
+        /**********************
+            Helper Functions
+        /**********************/
+
+        /**
+         * Closes a notification
+         * @param {Notification} notification
+         * @return {Boolean} boolean denoting whether the operation was successful
+         */
+        closeNotification = function (id) {
+            var errored = false,
+                notification = notifications[id];
+
+            if (typeof notification !== 'undefined') {
+                /* Safari 6+, Chrome 23+ */
+                if (notification.close) {
+                    notification.close();
+                /* Legacy webkit browsers */
+                } else if (notification.cancel) {
+                    notification.cancel();
+                /* IE9+ */
+                } else if (w.external && w.external.msIsSiteMode) {
+                    w.external.msSiteModeClearIconOverlay();
+                } else {
+                    errored = true;
+                    throw new Error('Unable to close notification: unknown interface');
+                }
+
+                if (!errored) {
+                    return removeNotification(id);
+                }
+            }
+
+            return false;
+        },
+
+        /**
+         * Adds a notification to the global dictionary of notifications
+         * @param {Notification} notification
+         * @return {Integer} Dictionary key of the notification
+         */
+        addNotification = function (notification) {
+            var id = currentId;
+            notifications[id] = notification;
+            currentId++;
+            return id;
+        },
+
+        /**
+         * Removes a notification with the given ID
+         * @param  {Integer} id - Dictionary key/ID of the notification to remove
+         * @return {Boolean} boolean denoting success
+         */
+        removeNotification = function (id) {
+            var dict = {},
+                success = false,
+                key;
+            for (key in notifications) {
+                if (notifications.hasOwnProperty(key)) {
+                    if (key != id) {
+                        dict[key] = notifications[key];
+                    } else {
+                        // We're successful if we omit the given ID from the new array
+                        success = true;
+                    }
+                }
+            }
+            // Overwrite the current notifications dictionary with the filtered one
+            notifications = dict;
+            return success;
+        },
+
+        /**
+         * Callback function for the 'create' method
+         * @return {void}
+         */
+        createCallback = function (title, options) {
+            var notification,
+                wrapper,
+                id,
+                onClose;
+
+            /* Set empty settings if none are specified */
+            options = options || {};
+
+            /* Set the last service worker path for testing */
+            self.lastWorkerPath = options.serviceWorker || 'sw.js';
+
+            /* Safari 6+, Firefox 22+, Chrome 22+, Opera 25+ */
+            if (w.Notification) {
+
+                try {
+                    notification =  new w.Notification(
+                        title,
+                        {
+                            icon: (isString(options.icon) || isUndefined(options.icon)) ? options.icon : options.icon.x32,
+                            body: options.body,
+                            tag: options.tag,
+                            requireInteraction: options.requireInteraction
+                        }
+                    );
+                } catch (e) {
+                    if (w.navigator) {
+                        w.navigator.serviceWorker.register(options.serviceWorker || 'sw.js');
+                        w.navigator.serviceWorker.ready.then(function(registration) {
+                            registration.showNotification(
+                                title,
+                                {
+                                    body: options.body,
+                                    vibrate: options.vibrate,
+                                    tag: options.tag,
+                                    requireInteraction: options.requireInteraction
+                                }
+                            );
+                        });
+                    }
+                }
+
+            /* Legacy webkit browsers */
+            } else if (w.webkitNotifications) {
+
+                notification = w.webkitNotifications.createNotification(
+                    options.icon,
+                    title,
+                    options.body
+                );
+
+                notification.show();
+
+            /* Firefox Mobile */
+            } else if (navigator.mozNotification) {
+
+                notification = navigator.mozNotification.createNotification(
+                    title,
+                    options.body,
+                    options.icon
+                );
+
+                notification.show();
+
+            /* IE9+ */
+            } else if (w.external && w.external.msIsSiteMode()) {
+
+                //Clear any previous notifications
+                w.external.msSiteModeClearIconOverlay();
+                w.external.msSiteModeSetIconOverlay(
+                    ((isString(options.icon) || isUndefined(options.icon))
+                    ? options.icon
+                    : options.icon.x16), title
+                );
+                w.external.msSiteModeActivate();
+
+                notification = {};
+            } else {
+                throw new Error('Unable to create notification: unknown interface');
+            }
+
+            /* Add it to the global array */
+            id = addNotification(notification);
+
+            /* Wrapper used to get/close notification later on */
+            wrapper = {
+                get: function () {
+                    return notification;
+                },
+
+                close: function () {
+                    closeNotification(id);
+                }
+            };
+
+            /* Autoclose timeout */
+            if (options.timeout) {
+                setTimeout(function () {
+                    wrapper.close();
+                }, options.timeout);
+            }
+
+            /* Notification callbacks */
+            if (isFunction(options.onShow))
+                notification.addEventListener('show', options.onShow);
+
+            if (isFunction(options.onError))
+                notification.addEventListener('error', options.onError);
+
+            if (isFunction(options.onClick))
+                notification.addEventListener('click', options.onClick);
+
+            onClose = function () {
+                /* A bit redundant, but covers the cases when close() isn't explicitly called */
+                removeNotification(id);
+                if (isFunction(options.onClose)) {
+                    options.onClose.call(this);
+                }
+            }
+
+            notification.addEventListener('close', onClose);
+            notification.addEventListener('cancel', onClose);
+
+            /* Return the wrapper so the user can call close() */
+            return wrapper;
+        },
+
+        /**
+         * Permission types
+         * @enum {String}
+         */
+        Permission = {
+            DEFAULT: 'default',
+            GRANTED: 'granted',
+            DENIED: 'denied'
+        },
+
+        Permissions = [Permission.GRANTED, Permission.DEFAULT, Permission.DENIED];
+
+        /* Allow enums to be accessible from Push object */
+        self.Permission = Permission;
+
+        /*****************
+            Permissions
+        /*****************/
+
+        /**
+         * Requests permission for desktop notifications
+         * @param {Function} callback - Function to execute once permission is granted
+         * @return {void}
+         */
+        self.Permission.request = function (onGranted, onDenied) {
+
+            /* Return if Push not supported */
+            if (!self.isSupported) {
+                throw new Error(incompatibilityErrorMessage);
+            }
+
+            /* Default callback */
+            callback = function (result) {
+
+                switch (result) {
+
+                    case self.Permission.GRANTED:
+                        hasPermission = true;
+                        if (onGranted) onGranted();
+                        break;
+
+                    case self.Permission.DENIED:
+                        hasPermission = false;
+                        if (onDenied) onDenied();
+                        break;
+
+                }
+
+            };
+
+            /* Safari 6+, Chrome 23+ */
+            if (w.Notification && w.Notification.requestPermission) {
+                Notification.requestPermission(callback);
+            }
+            /* Legacy webkit browsers */
+            else if (w.webkitNotifications && w.webkitNotifications.checkPermission) {
+                w.webkitNotifications.requestPermission(callback);
+            } else {
+                throw new Error(incompatibilityErrorMessage);
+            }
+        };
+
+        /**
+         * Returns whether Push has been granted permission to run
+         * @return {Boolean}
+         */
+        self.Permission.has = function () {
+            return hasPermission;
+        };
+
+        /**
+         * Gets the permission level
+         * @return {Permission} The permission level
+         */
+        self.Permission.get = function () {
+
+            var permission;
+
+            /* Return if Push not supported */
+            if (!self.isSupported) { throw new Error(incompatibilityErrorMessage); }
+
+            /* Safari 6+, Chrome 23+ */
+            if (w.Notification && w.Notification.permissionLevel) {
+                permission = w.Notification.permissionLevel;
+
+            /* Legacy webkit browsers */
+            } else if (w.webkitNotifications && w.webkitNotifications.checkPermission) {
+                permission = Permissions[w.webkitNotifications.checkPermission()];
+
+            /* Firefox 23+ */
+            } else if (w.Notification && w.Notification.permission) {
+                permission = w.Notification.permission;
+
+            /* Firefox Mobile */
+            } else if (navigator.mozNotification) {
+                permission = Permissions.GRANTED;
+
+            /* IE9+ */
+            } else if (w.external && w.external.msIsSiteMode() !== undefined) {
+                permission = w.external.msIsSiteMode() ? Permission.GRANTED : Permission.DEFAULT;
+            } else {
+                throw new Error(incompatibilityErrorMessage);
+            }
+
+            return permission;
+
+        };
+
+        /*********************
+            Other Functions
+        /*********************/
+
+        /**
+         * Detects whether the user's browser supports notifications
+         * @return {Boolean}
+         */
+        self.isSupported = (function () {
+
+             var isSupported = false;
+
+             try {
+
+                 isSupported =
+
+                     /* Safari, Chrome */
+                     !!(w.Notification ||
+
+                     /* Chrome & ff-html5notifications plugin */
+                     w.webkitNotifications ||
+
+                     /* Firefox Mobile */
+                     navigator.mozNotification ||
+
+                     /* IE9+ */
+                     (w.external && w.external.msIsSiteMode() !== undefined));
+
+             } catch (e) {}
+
+             return isSupported;
+
+         })();
+
+         /**
+          * Creates and displays a new notification
+          * @param {Array} options
+          * @return {void}
+          */
+        self.create = function (title, options) {
+
+            /* Fail if the browser is not supported */
+            if (!self.isSupported) {
+                throw new Error(incompatibilityErrorMessage);
+            }
+
+            /* Fail if no or an invalid title is provided */
+            if (!isString(title)) {
+                throw new Error('PushError: Title of notification must be a string');
+            }
+
+            /* Request permission if it isn't granted */
+            if (!self.Permission.has()) {
+                return new Promise(function(resolve, reject) {
+                    self.Permission.request(function() {
+                        try {
+                            resolve(createCallback(title, options));
+                        } catch (e) {
+                            reject(e);
+                        }
+                    }, function() {
+                        reject("Permission request declined");
+                    });
+                });
+            } else {
+                return new Promise(function(resolve, reject) {
+                    try {
+                        resolve(createCallback(title, options));
+                    } catch (e) {
+                        reject(e);
+                    }
+                });
+            }
+
+        };
+
+        /**
+         * Returns the notification count
+         * @return {Integer} The notification count
+         */
+        self.count = function () {
+            var count = 0,
+                key;
+            for (key in notifications) {
+                count++;
+            }
+            return count;
+        },
+
+        /**
+         * Internal function that returns the path of the last service worker used
+         * For testing purposes only
+         * @return {String} The service worker path
+         */
+        self.__lastWorkerPath = function () {
+            return self.lastWorkerPath;
+        },
+
+        /**
+         * Closes a notification with the given tag
+         * @param {String} tag - Tag of the notification to close
+         * @return {Boolean} boolean denoting success
+         */
+        self.close = function (tag) {
+            var key;
+            for (key in notifications) {
+                notification = notifications[key];
+                /* Run only if the tags match */
+                if (notification.tag === tag) {
+                    /* Call the notification's close() method */
+                    return closeNotification(key);
+                }
+            }
+        };
+
+        /**
+         * Clears all notifications
+         * @return {void}
+         */
+        self.clear = function () {
+            var i,
+                success = true;
+            for (key in notifications) {
+                var didClose = closeNotification(key);
+                success = success && didClose;
+            }
+            return success;
+        };
+    };
+
+    return Push;
+
+});
+
+},{}],3:[function(require,module,exports){
 /*!
  * Pusher JavaScript Library v3.2.0
  * http://pusher.com/
@@ -4633,19 +5165,19 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ ])
 });
 ;
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 'use strict';
 
 var _laravelEcho = require('laravel-echo');
 
 var _laravelEcho2 = _interopRequireDefault(_laravelEcho);
 
+var _push = require('push.js');
+
+var _push2 = _interopRequireDefault(_push);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-window.Echo = new _laravelEcho2.default({
-    broadcaster: 'pusher',
-    key: '29cd347d237de727387a'
-});
 /**
  * First we will load all of this project's JavaScript dependencies which
  * include Vue and Vue Resource. This gives a great starting point for
@@ -4666,6 +5198,10 @@ const app = new Vue({
     el: 'body'
 });*/
 
+window.Echo = new _laravelEcho2.default({
+    broadcaster: 'pusher',
+    key: '29cd347d237de727387a'
+});
 var userId = $('#userId').text();
 $.ajaxSetup({
     headers: {
@@ -4727,6 +5263,28 @@ window.Echo.private('App.User.' + userId).notification(function (notification) {
         });
     }
     if (notification.type == 'App\\Notifications\\ChatProject') {
+        var num_unread_mess = parseInt($('#num_unread_mess').text());
+        var temp = parseInt(" 1 ");
+        var new_num_unread_mess = num_unread_mess + temp;
+        $('#num_unread_mess').text(new_num_unread_mess);
+        $('#badge_num_unread_mess').text(new_num_unread_mess);
+        _push2.default.create("New Message to " + notification.project_chat_name, {
+            body: "From " + notification.member_name + ": " + notification.message,
+            timeout: 6000,
+            onClick: function onClick() {
+                $.ajax({
+                    url: '/my/notifications',
+                    type: "post",
+                    data: { '_token': $('input[name=_token]').val(), 'noti_id': notification.id },
+                    success: function success(data) {
+                        var new_num_unread_mess = num_unread_mess - temp;
+                        $('#num_unread_mess').text(new_num_unread_mess);
+                        $('#badge_num_unread_mess').text(new_num_unread_mess);
+                        window.location.href = "http://hanusoft.dev/my/profile/inbox";
+                    }
+                });
+            }
+        });
         var $img = $('<img class="avatar" style="width:45px;height:45px" src="http://hanusoft.dev/' + notification.member_avt + '" />').on('load', function () {
             console.log('loaded');
         });
@@ -4734,11 +5292,6 @@ window.Echo.private('App.User.' + userId).notification(function (notification) {
         var temp2 = $('<div class="msg-time-chat"></div>').append(temp);
         var new_msg = temp2.append('<div class="message-body msg-out"><span class="arrow"></span><div class="text"><p class="attribution"> <a href="' + notification.member_avt + '">' + notification.member_name + '</a> at a moment ago</p><p>' + notification.message + '</p></div></div>');
         $('#msg-cont').append(new_msg);
-        var num_unread_mess = parseInt($('#num_unread_mess').text());
-        var temp = parseInt(" 1 ");
-        var new_num_unread_mess = num_unread_mess + temp;
-        $('#num_unread_mess').text(new_num_unread_mess);
-        $('#badge_num_unread_mess').text(new_num_unread_mess);
         var new_noti_msg = '<li id="' + notification.id + '"><a href="#"><span class="photo"><img alt="avatar" src="http://hanusoft.dev/' + notification.member_avt + '"></span><span class="subject"><span class="from" style="color:red">' + notification.member_name + '</span><span class="time">moment ago</span></span><span class="message"><strong>' + notification.project_chat_name + '</strong></span><span class="message">' + notification.message + '</span></a></li>';
         $('#header_inbox_bar li:first').after(new_noti_msg);
         $("#inbox").on("click", "#" + notification.id, function () {
@@ -4757,6 +5310,23 @@ window.Echo.private('App.User.' + userId).notification(function (notification) {
         $('#header_inbox_bar li:nth-child(4)').remove();
     }
     if (notification.type == 'App\\Notifications\\AddNewState') {
+        _push2.default.create("Project: " + notification.project_name, {
+            body: "News state was added",
+            timeout: 6000,
+            onClick: function onClick() {
+                $.ajax({
+                    url: '/my/notifications',
+                    type: "post",
+                    data: { '_token': $('input[name=_token]').val(), 'noti_id': notification.id },
+                    success: function success(data) {
+                        var new_num_unread_noti = num_unread_noti - temp;
+                        $('#num_unread_noti').text(new_num_unread_noti);
+                        $('#badge_num_unread_noti').text(new_num_unread_noti);
+                        window.location.href = "http://hanusoft.dev/my/project/" + notification.project_slug;
+                    }
+                });
+            }
+        });
         var n_state = '<article class="timeline-item"><div class="timeline-desk"><div class="panel"><div class="panel-body"><span class="arrow"></span><span class="timeline-icon red"></span><span class="timeline-date">08:25 am</span><h1 class="red">' + notification.state_due_date + '</h1><p>' + notification.state_content + '</p></div></div></div></article>';
         $('#timeline' + notification.project_id).prepend(n_state);
         var new_state = '<li id="' + notification.id + '"><a href="http://hanusoft.dev/my/project/' + notification.project_slug + '"><span class="label label-danger"><i class="icon-bolt"></i></span>New State Added.<span class="small italic">' + notification.project_name + '</span></a></li>';
@@ -4781,6 +5351,23 @@ window.Echo.private('App.User.' + userId).notification(function (notification) {
         });
     }
     if (notification.type == 'App\\Notifications\\UpdateState') {
+        _push2.default.create("Project: " + notification.project_name, {
+            body: "A state was up-to-date",
+            timeout: 6000,
+            onClick: function onClick() {
+                $.ajax({
+                    url: '/my/notifications',
+                    type: "post",
+                    data: { '_token': $('input[name=_token]').val(), 'noti_id': notification.id },
+                    success: function success(data) {
+                        var new_num_unread_noti = num_unread_noti - temp;
+                        $('#num_unread_noti').text(new_num_unread_noti);
+                        $('#badge_num_unread_noti').text(new_num_unread_noti);
+                        window.location.href = "http://hanusoft.dev/my/project/" + notification.project_slug;
+                    }
+                });
+            }
+        });
         var new_state = '<li id="' + notification.id + '"><a href="http://hanusoft.dev/my/project/' + notification.project_slug + '"><span class="label label-danger"><i class="icon-bolt"></i></span> State Updated.<span class="small italic">' + notification.project_name + '</span></a></li>';
         $('#header_notification_bar li:first').after(new_state);
         $('#header_notification_bar li:nth-child(4)').remove();
@@ -4803,6 +5390,23 @@ window.Echo.private('App.User.' + userId).notification(function (notification) {
         });
     }
     if (notification.type == 'App\\Notifications\\DeleteState') {
+        _push2.default.create("Project: " + notification.project_name, {
+            body: "A state was deleted",
+            timeout: 6000,
+            onClick: function onClick() {
+                $.ajax({
+                    url: '/my/notifications',
+                    type: "post",
+                    data: { '_token': $('input[name=_token]').val(), 'noti_id': notification.id },
+                    success: function success(data) {
+                        var new_num_unread_noti = num_unread_noti - temp;
+                        $('#num_unread_noti').text(new_num_unread_noti);
+                        $('#badge_num_unread_noti').text(new_num_unread_noti);
+                        window.location.href = "http://hanusoft.dev/my/project/" + notification.project_slug;
+                    }
+                });
+            }
+        });
         $('#state' + notification.state_id).remove();
         var new_state = '<li id="' + notification.id + '"><a href="http://hanusoft.dev/my/project/' + notification.project_slug + '"><span class="label label-danger"><i class="icon-bolt"></i></span>State #' + notification.state_id + 'removed .<span class="small italic">' + notification.project_name + '</span></a></li>';
         $('#header_notification_bar li:first').after(new_state);
@@ -4826,6 +5430,23 @@ window.Echo.private('App.User.' + userId).notification(function (notification) {
         });
     }
     if (notification.type == 'App\\Notifications\\NewResourceAdded') {
+        _push2.default.create("Project: " + notification.project_name, {
+            body: "New resource was added",
+            timeout: 6000,
+            onClick: function onClick() {
+                $.ajax({
+                    url: '/my/notifications',
+                    type: "post",
+                    data: { '_token': $('input[name=_token]').val(), 'noti_id': notification.id },
+                    success: function success(data) {
+                        var new_num_unread_noti = num_unread_noti - temp;
+                        $('#num_unread_noti').text(new_num_unread_noti);
+                        $('#badge_num_unread_noti').text(new_num_unread_noti);
+                        window.location.href = "http://hanusoft.dev/my/project/" + notification.project_slug;
+                    }
+                });
+            }
+        });
         var new_resource = '<li id="' + notification.id + '"><a href="http://hanusoft.dev/my/project/' + notification.project_slug + '"><span class="label label-danger"><i class="icon-bolt"></i></span>New Resource ' + notification.resource_name + 'added.<span class="small italic">' + notification.project_name + '</span></a></li>';
         $('#header_notification_bar li:first').after(new_resource);
         $('#header_notification_bar li:nth-child(4)').remove();
@@ -4848,6 +5469,23 @@ window.Echo.private('App.User.' + userId).notification(function (notification) {
         });
     }
     if (notification.type == 'App\\Notifications\\AssignNewTask') {
+        _push2.default.create("Project: " + notification.project_name, {
+            body: "New task for you",
+            timeout: 6000,
+            onClick: function onClick() {
+                $.ajax({
+                    url: '/my/notifications',
+                    type: "post",
+                    data: { '_token': $('input[name=_token]').val(), 'noti_id': notification.id },
+                    success: function success(data) {
+                        var new_num_unread_task = num_unread_task - temp;
+                        $('#num_unread_task').text(new_num_unread_task);
+                        $('#badge_num_unread_task').text(new_num_unread_task);
+                        window.location.href = "http://hanusoft.dev/my/project/" + notification.project_slug;
+                    }
+                });
+            }
+        });
         var new_task = '<li id="' + notification.id + '"><a href="http://hanusoft.dev/my/project/' + notification.project_slug + '"><div class="task-info"><div class="desc">' + notification.project_name + '</div><div class="desc">' + notification.todo_content + '</div></div></a></li>';
         $('#header_task_bar li:first').after(new_task);
         $('#header_task_bar li:nth-child(4)').remove();
@@ -4867,12 +5505,29 @@ window.Echo.private('App.User.' + userId).notification(function (notification) {
                 success: function success(data) {
                     var new_num_unread_task = num_unread_task - temp;
                     $('#num_unread_task').text(new_num_unread_task);
-                    $('#badge_num_unread_task').text(new_num_unread_taski);
+                    $('#badge_num_unread_task').text(new_num_unread_task);
                 }
             });
         });
     }
     if (notification.type == 'App\\Notifications\\UpdateTask') {
+        _push2.default.create("Project: " + notification.project_name, {
+            body: "Your task was updated",
+            timeout: 6000,
+            onClick: function onClick() {
+                $.ajax({
+                    url: '/my/notifications',
+                    type: "post",
+                    data: { '_token': $('input[name=_token]').val(), 'noti_id': notification.id },
+                    success: function success(data) {
+                        var new_num_unread_task = num_unread_task - temp;
+                        $('#num_unread_task').text(new_num_unread_task);
+                        $('#badge_num_unread_task').text(new_num_unread_task);
+                        window.location.href = "http://hanusoft.dev/my/project/" + notification.project_slug;
+                    }
+                });
+            }
+        });
         var new_task = '<li id="' + notification.id + '"><a href="http://hanusoft.dev/my/project/' + notification.project_slug + '"><div class="task-info"><div class="desc">' + notification.project_name + '</div><div class="desc">Your Task #' + notification.todo_id + 'was updated</div></div></a></li>';
         $('#header_task_bar li:first').after(new_task);
         $('#header_task_bar li:nth-child(4)').remove();
@@ -4890,12 +5545,29 @@ window.Echo.private('App.User.' + userId).notification(function (notification) {
                 success: function success(data) {
                     var new_num_unread_task = num_unread_task - temp;
                     $('#num_unread_task').text(new_num_unread_task);
-                    $('#badge_num_unread_task').text(new_num_unread_taski);
+                    $('#badge_num_unread_task').text(new_num_unread_task);
                 }
             });
         });
     }
     if (notification.type == 'App\\Notifications\\DeleteTask') {
+        _push2.default.create("Project: " + notification.project_name, {
+            body: "Your task was removed",
+            timeout: 6000,
+            onClick: function onClick() {
+                $.ajax({
+                    url: '/my/notifications',
+                    type: "post",
+                    data: { '_token': $('input[name=_token]').val(), 'noti_id': notification.id },
+                    success: function success(data) {
+                        var new_num_unread_task = num_unread_task - temp;
+                        $('#num_unread_task').text(new_num_unread_task);
+                        $('#badge_num_unread_task').text(new_num_unread_task);
+                        window.location.href = "http://hanusoft.dev/my/project/" + notification.project_slug;
+                    }
+                });
+            }
+        });
         var new_task = '<li id="' + notification.id + '"><a href="http://hanusoft.dev/my/project/' + notification.project_slug + '"><div class="task-info"><div class="desc">' + notification.project_name + '</div><div class="desc">Your Task #' + notification.todo_id + 'was remove</div></div></a></li>';
         $('#header_task_bar li:first').after(new_task);
         $('#header_task_bar li:nth-child(4)').remove();
@@ -4919,6 +5591,23 @@ window.Echo.private('App.User.' + userId).notification(function (notification) {
         });
     }
     if (notification.type == 'App\\Notifications\\MarkTaskDone') {
+        _push2.default.create("Project: " + notification.project_name, {
+            body: "Your task was mark as done by" + notification.marker_name,
+            timeout: 6000,
+            onClick: function onClick() {
+                $.ajax({
+                    url: '/my/notifications',
+                    type: "post",
+                    data: { '_token': $('input[name=_token]').val(), 'noti_id': notification.id },
+                    success: function success(data) {
+                        var new_num_unread_task = num_unread_task - temp;
+                        $('#num_unread_task').text(new_num_unread_task);
+                        $('#badge_num_unread_task').text(new_num_unread_task);
+                        window.location.href = "http://hanusoft.dev/my/project/" + notification.project_slug;
+                    }
+                });
+            }
+        });
         var new_task = '<li id="' + notification.id + '"><a href="http://hanusoft.dev/my/project/' + notification.project_slug + '"><div class="task-info"><div class="desc">' + notification.project_name + '</div><div class="desc">Your Task #' + notification.todo_id + ':' + notification.todo_content + 'was mark done by' + notification.marker_name + '</div></div></a></li>';
         $('#header_task_bar li:first').after(new_task);
         $('#header_task_bar li:nth-child(4)').remove();
@@ -4943,6 +5632,6 @@ window.Echo.private('App.User.' + userId).notification(function (notification) {
     console.log(notification.type);
 });
 
-},{"laravel-echo":1}]},{},[3]);
+},{"laravel-echo":1,"push.js":2}]},{},[4]);
 
 //# sourceMappingURL=app.js.map

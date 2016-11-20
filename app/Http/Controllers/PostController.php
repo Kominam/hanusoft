@@ -39,7 +39,7 @@ class PostController extends Controller
     public function add(Request $request) {
          $validator = $this->postRepository->validatorNew($request);
          if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
+            return back()->withErrors($validator)->withInput()->with('statusCreate','error');
          } else {
              $this->postRepository->create($request);
              return redirect()->route('post.your-post')->with('statusCreate','success');
@@ -55,7 +55,7 @@ class PostController extends Controller
    	public function edit(Request $request, $slug) {
        $validator = $this->postRepository->validatorNew($request);
          if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
+            return back()->withErrors($validator)->withInput()->with('statusEdit','error');
          } else {
             $this->postRepository->update($request, $slug);
             return redirect()->route('post.your-post')->with('statusEdit','success');
@@ -80,5 +80,5 @@ class PostController extends Controller
      public function search(Request $request) {
       $results = $this->postRepository->search($request);
       return view('frontend.pages.search_post_result',['results'=>$results]);
-     }
+     }    
 }

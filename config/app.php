@@ -234,6 +234,7 @@ return [
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Inspiring' => Illuminate\Foundation\Inspiring::class,
 
     ],
 

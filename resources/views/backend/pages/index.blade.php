@@ -43,11 +43,12 @@
 @if (empty(Auth::user()->grade->name) || empty(Auth::user()->position->name))
     <script type="text/javascript">
         swal({
-          title: "Warning!",
-          text: 'You must update some important information right now in <a class="btn btn-warning" href="http://hanusoft.dev/my/profile/edit">here</a>',
+          title: "Welcome to Hanusoft!",
+          text: 'First, you need update some important information right now in <a class="btn btn-warning" href="http://hanusoft.dev/my/profile/edit">here</a>',
           type: "warning",
           showConfirmButton: false,
-          html: true
+          html: true,
+          allowEscapeKey: false
         });
     </script>
 @endif
@@ -212,8 +213,8 @@
                         <div class="panel-body">
                             <h1><strong>Daily Quote</strong> <br> </h1>
                             <div class="desk yellow">
-                                <h3>Albert Einstein</h3>
-                                <p id="qoute_content">It has become appallingly obvious that our technology has exceeded our humanity</p>
+                                <h3>{{\Carbon\Carbon::now()->format('l jS  F \\, Y')}}</h3>
+                                <p id="qoute_content">{{ Inspiring::quote() }}</p>
                             </div>
                             <div class="post-btn">
                                 <a href="#nextquote">

@@ -86,7 +86,7 @@
                                         <div class="post-image">
                                             <div class="img-thumbnail">
                                                 <a href="{{route('post_detail', $ppost->slug)}}">
-                                                <img src="{{url('frontend/img/blog/blog-thumb-1.jpg')}}" alt="">
+                                                <img src="{{url($ppost->user->url_avt)}}" alt="" width="50px" height="50px">
                                                 </a>
                                             </div>
                                         </div>
@@ -107,7 +107,7 @@
                                         <div class="post-image">
                                             <div class="img-thumbnail">
                                                 <a href="{{route('post_detail', $rpost->slug)}}">
-                                                <img src="{{url('frontend/img/blog/blog-thumb-2.jpg')}}" alt="">
+                                                <img src="{{url($rpost->user->url_avt)}}" alt="" width="50px" height="50px">
                                                 </a>
                                             </div>
                                         </div>

@@ -57,16 +57,16 @@ class MemberController extends Controller
     public function editProfile(Request $request) {
          $validator = $this->memberRepository->validatorUpdate($request);
          if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
+            return back()->withErrors($validator)->withInput()->with('statusEditBasicProfile', 'error');
          } else {
              $this->memberRepository->update($request);
-             return redirect()->route("profile.show");
+             return redirect()->route("profile.show")->with('statusEditBasicProfile', 'success');
          }   
     }
     public function changePwd(Request $request) {
          $validator = $this->memberRepository->validatorChangePwd($request);
          if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
+            return back()->withErrors($validator)->withInput()->with('p_wrong_input', 'The input maybe wrong');
          } else if (!$this->memberRepository->checkCurrentPassword($request->currentPassword, Auth::user())) {
             return back()->with('wrong_current_pass', 'This current password is not mactch.');
          }

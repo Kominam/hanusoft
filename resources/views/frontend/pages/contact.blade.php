@@ -52,10 +52,20 @@
                             <div class="col-md-6">
                                 <label>Your name *</label>
                                 <input type="text" value="" data-msg-required="Please enter your name." maxlength="100" class="form-control" name="name" id="name" required>
+                                  @if ($errors->has('name'))
+                                    <span class="alert alert-danger">
+                                        {{ $errors->first('name') }}
+                                    </span>
+                                  @endif
                             </div>
                             <div class="col-md-6">
                                 <label>Your email address *</label>
                                 <input type="email" value="" data-msg-required="Please enter your email address." data-msg-email="Please enter a valid email address." maxlength="100" class="form-control" name="email" id="email" required>
+                                 @if ($errors->has('email'))
+                                    <span class="alert alert-danger">
+                                        {{ $errors->first('email') }}
+                                    </span>
+                                  @endif
                             </div>
                         </div>
                     </div>
@@ -64,6 +74,11 @@
                             <div class="col-md-12">
                                 <label>Subject *</label>
                                   <input type="text" value="" data-msg-required="Please enter your subject." maxlength="100" class="form-control" name="subject" id="subject" required>
+                                   @if ($errors->has('subject'))
+                                    <span class="alert alert-danger">
+                                       {{ $errors->first('subject') }}
+                                    </span>
+                                  @endif
                             </div>
                         </div>
                     </div>
@@ -72,6 +87,11 @@
                             <div class="col-md-12">
                                 <label>Message *</label>
                                 <textarea maxlength="5000" data-msg-required="Please enter your message." rows="10" class="form-control" name="message" id="message" required></textarea>
+                                 @if ($errors->has('message'))
+                                    <span class="alert alert-danger">
+                                       {{ $errors->first('message') }}
+                                    </span>
+                                  @endif
                             </div>
                         </div>
                     </div>
@@ -83,7 +103,12 @@
                     <div class="row">
                           <div class="col-md-8">  
                                  {!! app('captcha')->display(); !!}
-                          </div>    
+                          </div> 
+                          @if ($errors->has('g-recaptcha-response'))
+                                    <span class="alert alert-danger">
+                                        <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                                    </span>
+                                  @endif  
                   </div> 
                     <div class="row">
                         <div class="col-md-12">

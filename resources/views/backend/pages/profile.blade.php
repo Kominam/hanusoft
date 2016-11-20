@@ -3,6 +3,28 @@
      <link href="{{url('backend/assets/font-awesome/css/font-awesome.css')}}" rel="stylesheet" />
 @endsection
 @section('content')
+@if (session('statusEditBasicProfile')==='success')
+       <script type="text/javascript">
+            swal({
+              title: "Succesful!",
+              text: "Your information was up-to-date!",
+              type: "success",
+              timer:2000,
+              confirmButtonText: "OK"
+            });
+       </script>
+@endif
+@if (session('change_profile')==='OK')
+       <script type="text/javascript">
+            swal({
+              title: "Succesful!",
+              text: "Your password and avatar was up-to-date!",
+              type: "success",
+              timer:2000,
+              confirmButtonText: "OK"
+            });
+       </script>
+@endif
 <section class="wrapper">
         <!-- page start-->
         <div class="row">
