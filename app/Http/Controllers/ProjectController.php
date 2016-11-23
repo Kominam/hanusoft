@@ -52,6 +52,8 @@ class ProjectController extends Controller
     public function showForBackEnd($slug) {
       $project = $this->projectRepository->findBySlug($slug);
       $can_invite_mem= $this->projectRepository->canInvinteMember($project->id);
+      $this->projectRepository->chart($slug);
+      $this->projectRepository->CompleteChart($slug);
       return view('backend.pages.project', ['project' => $project, 'can_invite_mem'=> $can_invite_mem]);
     }
     //Add

@@ -17,6 +17,8 @@ use App\Notifications\InvitetoProject;
 use Notifications;
 use DB;
 use File;
+use Khill\Lavacharts\Lavacharts;
+use Lava;
 
 class ProjectRepository implements ProjectRepositoryInterface
 {
@@ -223,5 +225,48 @@ class ProjectRepository implements ProjectRepositoryInterface
       $total= array_merge( $total1, $on_handle_mem_for_this_project);
       $can_invite_mem = User::whereNotIn('id', $total)->get();
       return $can_invite_mem;
+    }
+
+    public function chart($slug) {
+    $project = $this->findBySlug($slug);
+    $taskchart = Lava::DataTable();
+
+    $taskchart->addStringColumn('Member')
+             ->addNumberColumn(' Done')
+             ->addNumberColumn('Not Yet');
+    foreach ($project->users as $member) {
+    $total_task = $member->todo_items->where('project_id','=', $project->id)->count();
+    $task_done =  $member->todo_items()->wherePivot('status','Done')->where('project_id','=', $project->id)->count();
+    $task_not_done = $total_task-$task_done;
+     $taskchart->addRow([$member->name,$task_done, $task_not_done]);
+    }
+    Lava::ColumnChart('TaskChart', $taskchart, [
+        'title' => 'Member Task',
+        'titleTextStyle' => [
+            'color'    => '#eb6b2c',
+            'fontSize' => 14
+        ]
+    ]);
+    }
+
+    public function CompleteChart($slug) {
+       $project = $this->findBySlug($slug);
+       $reasons = Lava::DataTable();
+
+       $total = $project->todo_items()->count();
+       $completed=0;
+       $todo_items = $project->todo_items->pluck('id')->all();
+        if($total!=0) {
+            $completed = DB::table('todo_item_user')->whereIn('todo_item_id', $todo_items)->where('status','Done')->count();
+        }
+        $not_completed = $total-$completed;
+      $reasons->addStringColumn('Reasons')
+        ->addNumberColumn('Percent')
+        ->addRow(['Completed', $completed])
+        ->addRow(['Non-completed', $not_completed]);
+
+      Lava::DonutChart('IMDB', $reasons, [
+          'title' => 'Progress'
+    ]);
     }
 }
